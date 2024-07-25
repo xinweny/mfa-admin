@@ -1,4 +1,4 @@
-namespace Mfa.Models {
+namespace Mfa.Features.Users {
     public class User {
         public int Id { get; set; }
         public required string FirstName { get; set; }
@@ -7,9 +7,9 @@ namespace Mfa.Models {
         public required string Email { get; set; }
         public string? Title { get; set; }
 
-        public Membership? Membership;
-        public ICollection<BoardMember>? BoardPositions;
-        public ICollection<Host>? Hosts;
-        public ICollection<Delegate>? Delegates;
+        public Memberships.Membership? Membership;
+        public ICollection<BoardMembers.BoardMember>? BoardPositions;
+        public ICollection<Hosts.Host>? Hosts;
+        public ICollection<Delegates.Delegate>? Delegates;
     }
 }

@@ -1,10 +1,10 @@
-namespace Mfa.Models {
+namespace Mfa.Features.BoardMembers {
     public class BoardMember {
         public int Id { get; set; }
         public int Year { get; set; }
         public BoardPositions Position { get; set; }
 
-        public required User User;
+        public required Users.User User;
     }
 
     public enum BoardPositions {
