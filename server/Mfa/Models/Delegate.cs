@@ -1,5 +1,5 @@
-namespace MfaAPI.Models {
-    public class Host {
+namespace Mfa.Models {
+    public class Delegate {
         public int Id { get; set; }
         public int Year { get; set; }
 

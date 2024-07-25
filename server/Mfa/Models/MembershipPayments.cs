@@ -1,4 +1,4 @@
-namespace MfaAPI.Models {
+namespace Mfa.Models {
     public class MembershipPayments {
         public int Id { get; set; }
         public int Year { get; set; }
