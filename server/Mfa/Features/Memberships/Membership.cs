@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 using Mfa.Features.Users;
 using Mfa.Features.MembershipPayments;
@@ -18,9 +17,4 @@ public class Membership {
     public ICollection<User> Users { get; } = [];
 
     public ICollection<MembershipPayment> Payments { get; } = [];
-}
-public enum MembershipTypes {
-    Single,
-    Family,
-    Honorary
 }

@@ -9,15 +9,14 @@ namespace Mfa.Features.Users;
 [Route("api/[controller]")]
 
 public class UsersController: ControllerBase {
-    private readonly MfaContext _context;
+    private readonly MfaDbContext _context;
 
-    public UsersController(MfaContext context) {
+    public UsersController(MfaDbContext context) {
         _context = context;
     }
 
-    [Route("/")]
-    [HttpGet]
-    public async Task<ActionResult<List<User>>> GetUsers() {
+    [HttpGet("")]
+    public async Task<ActionResult<List<User>>> GetAllAsync() {
         try {
             return Ok(await _context.Users.ToListAsync());
         } catch (Exception e) {

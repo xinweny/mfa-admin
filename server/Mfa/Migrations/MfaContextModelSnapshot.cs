@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Mfa.Migrations
 {
-    [DbContext(typeof(MfaContext))]
+    [DbContext(typeof(MfaDbContext))]
     partial class MfaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
