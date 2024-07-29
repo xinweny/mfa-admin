@@ -1,17 +1,17 @@
-namespace Mfa.Features.MembershipPayments {
-    public class MembershipPayment {
-        public int Id { get; set; }
-        public int Year { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+namespace Mfa.Features.MembershipPayments;
 
-        public double Amount { get; set; }
+public class MembershipPayment {
+    public int Id { get; set; }
+    public int Year { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
 
-        public required Memberships.Membership Membership;
-    }
+    public double Amount { get; set; }
 
-    public enum PaymentMethod {
-        EFT,
-        Cash,
-        Cheque
-    }
+    public required Memberships.Membership Membership;
+}
+
+public enum PaymentMethod {
+    EFT,
+    Cash,
+    Cheque
 }

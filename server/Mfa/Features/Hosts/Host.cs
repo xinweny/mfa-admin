@@ -1,8 +1,8 @@
-namespace Mfa.Features.Hosts {
-    public class Host {
-        public int Id { get; set; }
-        public int Year { get; set; }
+namespace Mfa.Features.Hosts;
 
-        public required Users.User User;
-    }
+public class Host {
+    public int Id { get; set; }
+    public int Year { get; set; }
+
+    public required Users.User User;
 }
