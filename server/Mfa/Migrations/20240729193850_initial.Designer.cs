@@ -11,9 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Mfa.Migrations
 {
-    [DbContext(typeof(MfaContext))]
-    [Migration("20240729193850_initial")]
-    partial class initial
+    [DbContext(typeof(MfaDbContext))]
+    [Migration("20240729193850_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
