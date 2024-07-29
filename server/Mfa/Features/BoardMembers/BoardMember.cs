@@ -22,11 +22,3 @@ public class BoardMember {
     [Required]
     public required User User;
 }
-
-public enum BoardPositions {
-    President,
-    VicePresident,
-    Secretary,
-    Treasurer,
-    BoardMember
-}
