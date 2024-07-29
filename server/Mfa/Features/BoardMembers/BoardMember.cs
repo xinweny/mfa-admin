@@ -16,10 +16,10 @@ public class BoardMember {
     public required BoardPositions Position { get; set; }
 
     [Required]
+    [ForeignKey(nameof(User))]
     public required int UserId;
 
     [Required]
-    [ForeignKey(nameof(UserId))]
     public required User User;
 }
 

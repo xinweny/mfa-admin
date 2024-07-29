@@ -15,10 +15,8 @@ public class Membership {
 
     public DateTime CreatedAt { get; set; }
 
-    [InverseProperty("Membership")]
     public ICollection<User> Users { get; } = [];
 
-    [InverseProperty("Membership")]
     public ICollection<MembershipPayment> Payments { get; } = [];
 }
 public enum MembershipTypes {

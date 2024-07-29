@@ -23,17 +23,14 @@ public class User {
 
     public string? Title { get; set; }
 
+    [ForeignKey(nameof(Membership))]
     public int? MembershipId { get; set; }
 
-    [ForeignKey(nameof(MembershipId))]
     public Membership? Membership;
 
-    [InverseProperty("User")]
     public ICollection<BoardMember>? BoardPositions;
 
-    [InverseProperty("User")]
     public ICollection<Hosts.Host>? Hosts;
 
-    [InverseProperty("User")]
     public ICollection<Delegates.Delegate>? Delegates;
 }

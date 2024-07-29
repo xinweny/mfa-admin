@@ -18,10 +18,11 @@ public class MembershipPayment {
     [Required]
     public required int Amount { get; set; }
 
+    [Required]
+    [ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
 
     [Required]
-    [ForeignKey(nameof(MembershipId))]
     public required Membership Membership;
 }
 
