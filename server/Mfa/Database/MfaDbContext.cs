@@ -9,8 +9,8 @@ using Mfa.Features.BoardMembers;
 
 namespace Mfa.Database;
 
-public class MfaContext: DbContext {
-    public MfaContext(DbContextOptions<MfaContext> options): base(options) {}
+public class MfaDbContext: DbContext {
+    public MfaDbContext(DbContextOptions<MfaDbContext> options): base(options) {}
 
     public DbSet<User> Users => Set<User>(); 
     public DbSet<Membership> Memberships => Set<Membership>();
