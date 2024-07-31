@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Mfa.Features.Users;
 using Mfa.Features.Memberships;
+using Mfa.Features.Addresses;
 using Mfa.Features.MembershipPayments;
 using Mfa.Features.Delegates;
 using Mfa.Features.Hosts;
@@ -14,6 +15,7 @@ public class MfaDbContext: DbContext {
 
     public DbSet<User> Users => Set<User>(); 
     public DbSet<Membership> Memberships => Set<Membership>();
+    public DbSet<Address> Addresses => Set<Address>();
     public DbSet<MembershipPayment> MembershipPayments => Set<MembershipPayment>();
     public DbSet<BoardMember> BoardMembers => Set<BoardMember>();
     public DbSet<Features.Hosts.Host> Hosts => Set<Features.Hosts.Host>();
