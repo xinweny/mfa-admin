@@ -20,5 +20,8 @@ public class Address {
     public required string PostalCode { get; set; }
 
     [Required]
+    public required Provinces Province { get; set; }
+
+    [Required]
     public required int MembershipId { get; set; }
 }
