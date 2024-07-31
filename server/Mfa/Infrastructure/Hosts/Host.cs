@@ -12,10 +12,8 @@ public class Host {
     [Required]
     public required int Year { get; set; }
 
-    [Required]
-    [ForeignKey(nameof(User))]
+    [Required, ForeignKey(nameof(User))]
     public required int UserId { get; set; }
-
     [Required]
-    public required User User;
+    public User? User;
 }

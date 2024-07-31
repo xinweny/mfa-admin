@@ -10,23 +10,16 @@ public class Address {
 
     [Required]
     public required string Address1 { get; set; }
-
     public string? Address2 { get; set; }
-
     public string? Address3 { get; set; }
-    
     [Required]
     public required string City { get; set; }
-
     [Required]
     public required string PostalCode { get; set; }
-
     [Required]
     public required Provinces Province { get; set; }
 
-    [Required]
-    [ForeignKey("Membership")]
+    [Required, ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
-
-    public required Membership Membership { get; set; }
+    public Membership? Membership { get; set; }
 }

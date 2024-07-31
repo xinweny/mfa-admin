@@ -3,22 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using Mfa.Infrastructure.Users;
 
-namespace Mfa.Infrastructure.BoardMembers;
+namespace Mfa.Infrastructure.BoardPositions;
 
-public class BoardMember {
+public class BoardPosition {
     [Key]
     public int Id { get; set; }
 
     [Required]
     public required int Year { get; set; }
-
     [Required]
-    public required BoardPositions Position { get; set; }
+    public required Positions Position { get; set; }
 
-    [Required]
-    [ForeignKey(nameof(User))]
+    [Required, ForeignKey(nameof(User))]
     public required int UserId;
-
     [Required]
-    public required User User;
+    public User? User;
 }

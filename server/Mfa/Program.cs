@@ -1,10 +1,15 @@
-using Mfa.Database;
 using Microsoft.EntityFrameworkCore;
+
+using Mfa.Database;
 
 namespace Mfa;
 
 public class Program {
     public static void Main(string[] args) {
+        var config = new ConfigurationBuilder()
+            .AddUserSecrets<Program>()
+            .Build();
+
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllers();

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Mfa.Infrastructure.Users;
 using Mfa.Infrastructure.MembershipPayments;
 using Mfa.Infrastructure.Addresses;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mfa.Infrastructure.Memberships;
 
@@ -12,24 +13,17 @@ public class Membership {
 
     [Required]
     public required MembershipTypes Type { get; set; }
-
-    [Required]
-    public required DateTime CreatedAt { get; set; }
-
+    public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
+    [ForeignKey(nameof(Address))]
     public int? AddressId { get; set; }
-
-    public ICollection<User> Users { get; }
-
-    public ICollection<MembershipPayment> Payments { get; }
-
     public Address? Address;
+
+    public ICollection<User>? Users { get; }
+    public ICollection<MembershipPayment>? Payments { get; }
 
     public Membership() {
         CreatedAt = new DateTime();
-
-        Users = [];
-        Payments = [];
     }
 }
