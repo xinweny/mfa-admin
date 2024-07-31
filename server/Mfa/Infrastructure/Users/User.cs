@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Memberships;
-using Mfa.Features.BoardMembers;
+using Mfa.Infrastructure.Memberships;
+using Mfa.Infrastructure.BoardMembers;
 
-namespace Mfa.Features.Users;
+namespace Mfa.Infrastructure.Users;
 
 public class User {
     [Key]

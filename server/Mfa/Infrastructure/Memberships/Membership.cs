@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
-using Mfa.Features.Users;
-using Mfa.Features.MembershipPayments;
-using Mfa.Features.Addresses;
+using Mfa.Infrastructure.Users;
+using Mfa.Infrastructure.MembershipPayments;
+using Mfa.Infrastructure.Addresses;
 
-namespace Mfa.Features.Memberships;
+namespace Mfa.Infrastructure.Memberships;
 
 public class Membership {
     [Key]

@@ -22,7 +22,7 @@ namespace Mfa.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Mfa.Features.Addresses.Address", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Addresses.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace Mfa.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Mfa.Features.BoardMembers.BoardMember", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.BoardMembers.BoardMember", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace Mfa.Migrations
                     b.ToTable("BoardMembers");
                 });
 
-            modelBuilder.Entity("Mfa.Features.Delegates.Delegate", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Delegates.Delegate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace Mfa.Migrations
                     b.ToTable("Delegates");
                 });
 
-            modelBuilder.Entity("Mfa.Features.Hosts.Host", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Hosts.Host", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace Mfa.Migrations
                     b.ToTable("Hosts");
                 });
 
-            modelBuilder.Entity("Mfa.Features.MembershipPayments.MembershipPayment", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.MembershipPayments.MembershipPayment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace Mfa.Migrations
                     b.ToTable("MembershipPayments");
                 });
 
-            modelBuilder.Entity("Mfa.Features.Memberships.Membership", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Memberships.Membership", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,7 +168,7 @@ namespace Mfa.Migrations
                     b.ToTable("Memberships");
                 });
 
-            modelBuilder.Entity("Mfa.Features.Users.User", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -207,25 +207,25 @@ namespace Mfa.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Mfa.Features.MembershipPayments.MembershipPayment", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.MembershipPayments.MembershipPayment", b =>
                 {
-                    b.HasOne("Mfa.Features.Memberships.Membership", null)
+                    b.HasOne("Mfa.Infrastructure.Memberships.Membership", null)
                         .WithMany("Payments")
                         .HasForeignKey("MembershipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Mfa.Features.Users.User", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Users.User", b =>
                 {
-                    b.HasOne("Mfa.Features.Memberships.Membership", null)
+                    b.HasOne("Mfa.Infrastructure.Memberships.Membership", null)
                         .WithMany("Users")
                         .HasForeignKey("MembershipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Mfa.Features.Memberships.Membership", b =>
+            modelBuilder.Entity("Mfa.Infrastructure.Memberships.Membership", b =>
                 {
                     b.Navigation("Payments");
 

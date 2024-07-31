@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Users;
+using Mfa.Infrastructure.Users;
 
-namespace Mfa.Features.BoardMembers;
+namespace Mfa.Infrastructure.BoardMembers;
 
 public class BoardMember {
     [Key]

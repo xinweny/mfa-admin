@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Users;
+using Mfa.Infrastructure.Users;
 
-namespace Mfa.Features.Delegates;
+namespace Mfa.Infrastructure.Hosts;
 
-public class Delegate {
+public class Host {
     [Key]
     public int Id { get; set; }
 

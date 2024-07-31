@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Memberships;
+using Mfa.Infrastructure.Memberships;
 
-namespace Mfa.Features.MembershipPayments;
+namespace Mfa.Infrastructure.MembershipPayments;
 
 public class MembershipPayment {
     [Key]
@@ -26,8 +26,3 @@ public class MembershipPayment {
     public required Membership Membership;
 }
 
-public enum PaymentMethods {
-    EFT,
-    Cash,
-    Cheque
-}

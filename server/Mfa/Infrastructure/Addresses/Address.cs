@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mfa.Features.Addresses;
+namespace Mfa.Infrastructure.Addresses;
 
 public class Address {
     [Key]
