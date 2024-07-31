@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Mfa.Infrastructure.Memberships;
 
 namespace Mfa.Infrastructure.Addresses;
 
@@ -23,5 +25,8 @@ public class Address {
     public required Provinces Province { get; set; }
 
     [Required]
+    [ForeignKey("Membership")]
     public required int MembershipId { get; set; }
+
+    public required Membership Membership { get; set; }
 }

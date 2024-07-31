@@ -16,15 +16,17 @@ public class User {
     [Required]
     public required string LastName { get; set; }
 
-    public int? PhoneNumber { get; set; }
-
     [Required]
     public required string Email { get; set; }
+
+    public int? PhoneNumber { get; set; }
 
     public string? Title { get; set; }
 
     [Required]
-    public required DateTime UpdatedAt { get; set; }
+    public required DateTime CreatedAt { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
 
     [Required]
     [ForeignKey(nameof(Membership))]
@@ -37,4 +39,8 @@ public class User {
     public ICollection<Hosts.Host>? Hosts;
 
     public ICollection<Delegates.Delegate>? Delegates;
+
+    public User() {
+        CreatedAt = new DateTime();
+    }
 }

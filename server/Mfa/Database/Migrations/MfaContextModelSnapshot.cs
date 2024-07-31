@@ -56,6 +56,8 @@ namespace Mfa.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MembershipId");
+
                     b.ToTable("Addresses");
                 });
 
@@ -176,6 +178,9 @@ namespace Mfa.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -197,7 +202,7 @@ namespace Mfa.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -205,6 +210,17 @@ namespace Mfa.Migrations
                     b.HasIndex("MembershipId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Mfa.Infrastructure.Addresses.Address", b =>
+                {
+                    b.HasOne("Mfa.Infrastructure.Memberships.Membership", "Membership")
+                        .WithMany()
+                        .HasForeignKey("MembershipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Membership");
                 });
 
             modelBuilder.Entity("Mfa.Infrastructure.MembershipPayments.MembershipPayment", b =>
