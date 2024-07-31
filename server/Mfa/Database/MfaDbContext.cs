@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 using Mfa.Infrastructure.Users;
 using Mfa.Infrastructure.Memberships;
@@ -14,13 +13,13 @@ namespace Mfa.Database;
 public class MfaDbContext: DbContext {
     public MfaDbContext(DbContextOptions<MfaDbContext> options): base(options) {}
 
-    public required DbSet<User> Users;
-    public required DbSet<Membership> Memberships;
-    public required DbSet<Address> Addresses;
-    public required DbSet<MembershipPayment> MembershipPayments;
-    public required DbSet<BoardPosition> BoardPositions;
-    public required DbSet<Infrastructure.Hosts.Host> Hosts;
-    public required DbSet<Infrastructure.Delegates.Delegate> Delegates;
+    public required DbSet<User> Users { get; set; }
+    public required DbSet<Membership> Memberships { get; set; }
+    public required DbSet<Address> Addresses { get; set; }
+    public required DbSet<MembershipPayment> MembershipPayments { get; set; }
+    public required DbSet<BoardPosition> BoardPositions { get; set; }
+    public required DbSet<Infrastructure.Hosts.Host> Hosts { get; set; }
+    public required DbSet<Infrastructure.Delegates.Delegate> Delegates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Membership>()

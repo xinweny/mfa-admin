@@ -30,6 +30,6 @@ public class User {
     public ICollection<Delegates.Delegate>? Delegates;
 
     public User() {
-        CreatedAt = new DateTime();
+        CreatedAt = DateTime.Now;
     }
 }

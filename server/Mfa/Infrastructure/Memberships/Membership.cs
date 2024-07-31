@@ -24,6 +24,6 @@ public class Membership {
     public ICollection<MembershipPayment>? Payments { get; }
 
     public Membership() {
-        CreatedAt = new DateTime();
+        CreatedAt = DateTime.Now;
     }
 }
