@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 using Mfa.Features.Users;
 using Mfa.Features.MembershipPayments;
+using Mfa.Features.Addresses;
 
 namespace Mfa.Features.Memberships;
 
@@ -12,9 +13,23 @@ public class Membership {
     [Required]
     public required MembershipTypes Type { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    [Required]
+    public required DateTime CreatedAt { get; set; }
 
-    public ICollection<User> Users { get; } = [];
+    public DateTime? UpdatedAt { get; set; }
 
-    public ICollection<MembershipPayment> Payments { get; } = [];
+    public int? AddressId { get; set; }
+
+    public ICollection<User> Users { get; }
+
+    public ICollection<MembershipPayment> Payments { get; }
+
+    public Address? Address;
+
+    public Membership() {
+        CreatedAt = new DateTime();
+
+        Users = [];
+        Payments = [];
+    }
 }

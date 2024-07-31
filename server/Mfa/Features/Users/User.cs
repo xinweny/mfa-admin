@@ -23,10 +23,14 @@ public class User {
 
     public string? Title { get; set; }
 
-    [ForeignKey(nameof(Membership))]
-    public int? MembershipId { get; set; }
+    [Required]
+    public required DateTime UpdatedAt { get; set; }
 
-    public Membership? Membership;
+    [Required]
+    [ForeignKey(nameof(Membership))]
+    public required int MembershipId { get; set; }
+
+    public required Membership Membership;
 
     public ICollection<BoardMember>? BoardPositions;
 
