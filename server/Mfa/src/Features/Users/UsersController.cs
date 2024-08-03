@@ -19,7 +19,9 @@ public class UsersController: ControllerBase {
     [HttpGet("")]
     public async Task<IActionResult> GetUsersAsync([FromQuery] string? query) {
         try {
-            return Ok(await _userServices.GetUsersAsync(query));
+            IEnumerable<User> users = await _userServices.GetUsersAsync(query);
+
+            return Ok(users);
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }
@@ -37,6 +39,7 @@ public class UsersController: ControllerBase {
     }
 
     [HttpPost("")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto body) {
         try {
             await _userServices.CreateUserAsync(body);
@@ -47,10 +50,23 @@ public class UsersController: ControllerBase {
         }
     }
 
-    [HttpPost("{id}"), ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateUserAsync([FromRoute] int id, [FromBody] UpdateUserDto body) {
+    [HttpPost("{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] UpdateUserDto body) {
         try {
             await _userServices.UpdateUserAsync(id, body);
+
+            return Ok();
+        } catch (Exception ex) {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpDelete("{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteUserAsync([FromRoute] int id) {
+        try {
+            await _userServices.DeleteUserAsync(id);
 
             return Ok();
         } catch (Exception ex) {
