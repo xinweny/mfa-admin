@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Mfa.Database;
+using Mfa.Middleware;
 
 namespace Mfa;
 
@@ -12,6 +13,11 @@ public class Program {
         builder.Services.AddDbContext<MfaDbContext>(options => {
             options.UseNpgsql(builder.Configuration.GetConnectionString("postgresdb"));
         });
+
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+        builder.Services.AddProblemDetails();
+        builder.Services.AddLogging();
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
