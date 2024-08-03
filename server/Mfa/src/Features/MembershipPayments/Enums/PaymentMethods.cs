@@ -1,4 +1,4 @@
-namespace Mfa.Features.MembershipPayments;
+namespace Mfa.Enums;
 
 public enum PaymentMethods {
     EFT,

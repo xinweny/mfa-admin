@@ -1,6 +1,6 @@
-namespace Mfa.Features.BoardPositions;
+namespace Mfa.Enums;
 
-public enum Positions {
+public enum BoardPositionTitles {
     President,
     VicePresident,
     Secretary,

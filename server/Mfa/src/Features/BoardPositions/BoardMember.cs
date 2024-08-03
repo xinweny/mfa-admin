@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Users;
+using Mfa.Enums;
 
-namespace Mfa.Features.BoardPositions;
+namespace Mfa.Models;
 
 public class BoardPosition {
     [Key]
@@ -12,7 +12,7 @@ public class BoardPosition {
     [Required]
     public required int Year { get; set; }
     [Required]
-    public required Positions Position { get; set; }
+    public required BoardPositionTitles Position { get; set; }
 
     [Required, ForeignKey(nameof(User))]
     public required int UserId;

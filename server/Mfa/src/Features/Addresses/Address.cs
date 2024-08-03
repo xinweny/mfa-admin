@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Mfa.Features.Memberships;
 
-namespace Mfa.Features.Addresses;
+using Mfa.Enums;
+
+namespace Mfa.Models;
 
 public class Address {
     [Key]

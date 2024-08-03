@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mfa.Features.Users;
+using Mfa.Models;
+using Mfa.Dtos;
+using Mfa.Services;
+
+namespace Mfa.Controllers;
 
 [ApiController]
 [Route("api/users")]
@@ -15,9 +19,9 @@ public class UsersController: ControllerBase {
     [HttpGet("")]
     public async Task<IActionResult> GetUsersAsync([FromQuery] string? query) {
         try {
-            return Ok(await _userServices.GetQueriedUsersAsync(query));
-        } catch (Exception e) {
-            return StatusCode(500, e.Message);
+            return Ok(await _userServices.GetUsersAsync(query));
+        } catch (Exception ex) {
+            return StatusCode(500, ex.Message);
         }
     }
 
@@ -27,8 +31,8 @@ public class UsersController: ControllerBase {
             User? user = await _userServices.GetUserByIdAsync(id);
 
             return user == null ? NotFound() : Ok(user);
-        } catch (Exception e) {
-            return StatusCode(500, e.Message);
+        } catch (Exception ex) {
+            return StatusCode(500, ex.Message);
         }
     }
 
@@ -38,8 +42,8 @@ public class UsersController: ControllerBase {
             await _userServices.CreateUserAsync(body);
 
             return Ok();
-        } catch (Exception e) {
-            return StatusCode(500, e.Message);
+        } catch (Exception ex) {
+            return StatusCode(500, ex.Message);
         }
     }
 
@@ -49,8 +53,8 @@ public class UsersController: ControllerBase {
             await _userServices.UpdateUserAsync(id, body);
 
             return Ok();
-        } catch (Exception e) {
-            return StatusCode(500, e.Message);
+        } catch (Exception ex) {
+            return StatusCode(500, ex.Message);
         }
     }
 }

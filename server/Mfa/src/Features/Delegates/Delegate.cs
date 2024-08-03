@@ -1,9 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Users;
-
-namespace Mfa.Features.Delegates;
+namespace Mfa.Models;
 
 public class Delegate {
     [Key]

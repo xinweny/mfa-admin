@@ -1,12 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using Mfa.Features.Users;
-using Mfa.Features.Memberships;
-using Mfa.Features.Addresses;
-using Mfa.Features.MembershipPayments;
-using Mfa.Features.Delegates;
-using Mfa.Features.Hosts;
-using Mfa.Features.BoardPositions;
+using Mfa.Models;
 
 namespace Mfa.Database;
 
@@ -18,8 +12,8 @@ public class MfaDbContext: DbContext {
     public required DbSet<Address> Addresses { get; set; }
     public required DbSet<MembershipPayment> MembershipPayments { get; set; }
     public required DbSet<BoardPosition> BoardPositions { get; set; }
-    public required DbSet<Features.Hosts.Host> Hosts { get; set; }
-    public required DbSet<Features.Delegates.Delegate> Delegates { get; set; }
+    public required DbSet<Models.Host> Hosts { get; set; }
+    public required DbSet<Models.Delegate> Delegates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Membership>()

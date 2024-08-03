@@ -1,33 +1,32 @@
 using Microsoft.EntityFrameworkCore;
 
 using Mfa.Database;
+using Mfa.Models;
+using Mfa.Dtos;
+using Mfa.Interfaces;
 
-namespace Mfa.Features.Users;
+namespace Mfa.Services;
 
-public class UserServices {
-    private readonly MfaDbContext _db;
-    private readonly ILogger<UserServices> _logger;
+public class UserServices: IUserServices {
+    private readonly MfaDbContext _context;
 
-    public UserServices(MfaDbContext db, ILogger<UserServices> logger) {
-        _db = db;
-        _logger = logger;
+    public UserServices(MfaDbContext context) {
+        _context = context;
     }
 
-        public async Task<User?> GetUserByIdAsync(int id) {
-        return await _db.Users.FindAsync(id);
+        public async Task<User> GetUserByIdAsync(int id) {
+        User user = await _context.Users.FindAsync(id)
+            ?? throw new KeyNotFoundException();
+
+        return user;
     }
 
-    public async Task<List<User>> GetQueriedUsersAsync(string? query) {
+    public async Task<IEnumerable<User>> GetUsersAsync(string? query) {
         var users = GetAllUsers();
         
         if (!string.IsNullOrEmpty(query)) SearchUsersByFullName(query, users);
 
         return await users.ToListAsync();
-    }
-
-    private IQueryable<User> GetAllUsers() {
-        return from user in _db.Users
-            select user;
     }
 
     public async Task CreateUserAsync(CreateUserDto data) {
@@ -40,23 +39,32 @@ public class UserServices {
             MembershipId = data.MembershipId,
         };
 
-        _db.Add(user);
+        _context.Add(user);
 
-        await _db.SaveChangesAsync();
+        await _context.SaveChangesAsync();
     }
 
     public async Task UpdateUserAsync(int id, UpdateUserDto data) {
-        try {
-            User user = await GetUserByIdAsync(id)
-                ?? throw new Exception("User with id {id} not found.");
+        User user = await GetUserByIdAsync(id)
+            ?? throw new KeyNotFoundException();
 
-            _db.Entry(user).CurrentValues.SetValues(data);
-            
-            await _db.SaveChangesAsync();
-        }
-        catch (Exception e) {
-            _logger.LogError(e, "An ");
-        }
+        _context.Entry(user).CurrentValues.SetValues(data);
+        
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteUserAsync(int id) {
+        User user = await _context.Users.FindAsync(id)
+            ?? throw new KeyNotFoundException();
+
+        _context.Users.Remove(user);
+
+        await _context.SaveChangesAsync();
+    }
+
+    private IQueryable<User> GetAllUsers() {
+        return from user in _context.Users
+            select user;
     }
 
     private static void SearchUsersByFullName(string query, IQueryable<User> users) {

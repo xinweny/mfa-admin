@@ -1,10 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Features.Memberships;
-using Mfa.Features.BoardPositions;
-
-namespace Mfa.Features.Users;
+namespace Mfa.Models;
 
 public class User {
     [Key]
@@ -26,8 +23,8 @@ public class User {
     public Membership? Membership;
 
     public ICollection<BoardPosition>? BoardPositions;
-    public ICollection<Hosts.Host>? Hosts;
-    public ICollection<Delegates.Delegate>? Delegates;
+    public ICollection<Host>? Hosts;
+    public ICollection<Delegate>? Delegates;
 
     public User() {
         CreatedAt = DateTime.Now;

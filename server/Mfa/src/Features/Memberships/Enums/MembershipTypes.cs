@@ -1,4 +1,4 @@
-namespace Mfa.Features.Memberships;
+namespace Mfa.Enums;
 
 public enum MembershipTypes {
     Single,
