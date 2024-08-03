@@ -14,7 +14,7 @@ public class Program {
             options.UseNpgsql(builder.Configuration.GetConnectionString("postgresdb"));
         });
 
-        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+        builder.Services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         builder.Services.AddProblemDetails();
         builder.Services.AddLogging();
 
@@ -25,6 +25,9 @@ public class Program {
 
         app.UseHttpsRedirection();
         app.MapControllers();
+
+        app.UseStatusCodePages();
+        app.UseExceptionHandler();
 
         app.Run();
     }

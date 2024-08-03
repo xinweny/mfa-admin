@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Mfa.Database;
 
-namespace Mfa.Infrastructure.Users;
+namespace Mfa.Features.Users;
 
 public class UserServices {
     private readonly MfaDbContext _db;
@@ -54,8 +54,8 @@ public class UserServices {
             
             await _db.SaveChangesAsync();
         }
-        catch (Exception _e) {
-            throw;
+        catch (Exception e) {
+            _logger.LogError(e, "An ");
         }
     }
 

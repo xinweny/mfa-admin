@@ -1,4 +1,4 @@
-namespace Mfa.Infrastructure.BoardPositions;
+namespace Mfa.Features.BoardPositions;
 
 public enum Positions {
     President,

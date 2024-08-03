@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Infrastructure.Users;
+using Mfa.Features.Users;
 
-namespace Mfa.Infrastructure.Hosts;
+namespace Mfa.Features.Hosts;
 
 public class Host {
     [Key]

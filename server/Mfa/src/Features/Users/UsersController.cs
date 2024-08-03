@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mfa.Infrastructure.Users;
+namespace Mfa.Features.Users;
 
 [ApiController]
 [Route("api/users")]

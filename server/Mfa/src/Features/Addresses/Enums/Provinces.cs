@@ -1,4 +1,4 @@
-namespace Mfa.Infrastructure.Addresses;
+namespace Mfa.Features.Addresses;
 
 public enum Provinces {
     AB,

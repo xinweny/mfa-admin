@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Mfa.Infrastructure.Memberships;
+using Mfa.Features.Memberships;
 
-namespace Mfa.Infrastructure.MembershipPayments;
+namespace Mfa.Features.MembershipPayments;
 
 public class MembershipPayment {
     [Key]

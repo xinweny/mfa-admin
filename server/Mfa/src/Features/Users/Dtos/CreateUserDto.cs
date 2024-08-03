@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mfa.Infrastructure.Users;
+namespace Mfa.Features.Users;
 
 public class CreateUserDto {
     [Required]

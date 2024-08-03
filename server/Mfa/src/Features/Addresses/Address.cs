@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Mfa.Infrastructure.Memberships;
+using Mfa.Features.Memberships;
 
-namespace Mfa.Infrastructure.Addresses;
+namespace Mfa.Features.Addresses;
 
 public class Address {
     [Key]
