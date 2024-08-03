@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Mfa.Models;
 using Mfa.Dtos;
-using Mfa.Services;
+using Mfa.Interfaces;
 
 namespace Mfa.Controllers;
 
@@ -10,9 +10,9 @@ namespace Mfa.Controllers;
 [Route("api/users")]
 
 public class UsersController: ControllerBase {
-    private readonly UserServices _userServices;
+    private readonly IUserServices _userServices;
 
-    public UsersController(UserServices userServices) {
+    public UsersController(IUserServices userServices) {
         _userServices = userServices;
     }
 

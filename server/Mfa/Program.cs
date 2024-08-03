@@ -33,8 +33,6 @@ public class Program {
         app.UseStatusCodePages();
         app.UseExceptionHandler();
 
-
-
         app.Run();
     }
 
