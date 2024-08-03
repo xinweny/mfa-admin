@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 
 using Mfa.Database;
+using Mfa.Interfaces;
+using Mfa.Services;
 using Mfa.Middleware;
 
 namespace Mfa;
@@ -21,6 +23,8 @@ public class Program {
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+        RegisterServices(builder);
+
         var app = builder.Build();
 
         app.UseHttpsRedirection();
@@ -29,6 +33,12 @@ public class Program {
         app.UseStatusCodePages();
         app.UseExceptionHandler();
 
+
+
         app.Run();
+    }
+
+    public static void RegisterServices(WebApplicationBuilder builder) {
+        builder.Services.AddScoped<IUserServices, UserServices>();
     }
 }
