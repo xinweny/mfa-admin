@@ -1,48 +1,39 @@
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Mfa.Middleware;
 
-public class ErrorResponse {
-    public string? Title { get; set; }
-    public int StatusCode { get; set; }
-    public string? Message { get; set; }
-}
+public class ExceptionHandlerMiddleware: IExceptionHandler {
+    private readonly ILogger<ExceptionHandlerMiddleware> _logger;
 
-public class GlobalExceptionHandler: IExceptionHandler {
-    private readonly ILogger<GlobalExceptionHandler> _logger;
-
-    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) {
+    public ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger) {
         _logger = logger;
     }
 
-
-    
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
         CancellationToken cancellationToken
     ) {
-        _logger.LogError($"An error occurred while processing your request: {exception.Message}");
-
-        var errorResponse = new ErrorResponse {
-            Message = exception.Message,
+        var problemDetails = new ProblemDetails {
+            Detail = exception.Message,
         };
 
-        switch (exception) {
-            case BadHttpRequestException:
-                errorResponse.StatusCode = (int) HttpStatusCode.BadRequest;
-                errorResponse.Title = exception.GetType().Name;
-                break;
-            default:
-                errorResponse.StatusCode = (int) HttpStatusCode.InternalServerError;
-                errorResponse.Title = "Internal Server Error";
-                break;
-        }
+        switch (exception)
+            {
+                case BadHttpRequestException:
+                    problemDetails.Status = (int)HttpStatusCode.BadRequest;
+                    problemDetails.Title = exception.GetType().Name;
+                    break;
 
-        httpContext.Response.StatusCode = errorResponse.StatusCode;
+                default:
+                    problemDetails.Status = (int)HttpStatusCode.InternalServerError;
+                    problemDetails.Title = "Internal Server Error";
+                    break;
+            }
 
-        await httpContext.Response.WriteAsJsonAsync(errorResponse, cancellationToken);
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
         return true;
     }
