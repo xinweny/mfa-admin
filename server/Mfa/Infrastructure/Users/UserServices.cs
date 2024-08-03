@@ -1,15 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 
 using Mfa.Database;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Mfa.Infrastructure.Users;
 
-public class UsersService {
+public class UserServices {
     private readonly MfaDbContext _db;
+    private readonly ILogger<UserServices> _logger;
 
-    public UsersService(MfaDbContext db) {
+    public UserServices(MfaDbContext db, ILogger<UserServices> logger) {
         _db = db;
+        _logger = logger;
     }
 
         public async Task<User?> GetUserByIdAsync(int id) {
@@ -29,7 +30,7 @@ public class UsersService {
             select user;
     }
 
-    private async Task CreateUserAsync(CreateUserDto data) {
+    public async Task CreateUserAsync(CreateUserDto data) {
         var user = new User() {
             FirstName = data.FirstName,
             LastName = data.LastName,
@@ -42,6 +43,20 @@ public class UsersService {
         _db.Add(user);
 
         await _db.SaveChangesAsync();
+    }
+
+    public async Task UpdateUserAsync(int id, UpdateUserDto data) {
+        try {
+            User user = await GetUserByIdAsync(id)
+                ?? throw new Exception("User with id {id} not found.");
+
+            _db.Entry(user).CurrentValues.SetValues(data);
+            
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception _e) {
+            throw;
+        }
     }
 
     private static void SearchUsersByFullName(string query, IQueryable<User> users) {
