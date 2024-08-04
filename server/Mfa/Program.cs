@@ -23,20 +23,20 @@ public class Program {
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        RegisterServices(builder);
+        RegisterDependencies(builder);
 
         var app = builder.Build();
-
-        app.UseHttpsRedirection();
-        app.MapControllers();
 
         app.UseStatusCodePages();
         app.UseExceptionHandler();
 
+        app.UseHttpsRedirection();
+        app.MapControllers();
+
         app.Run();
     }
 
-    public static void RegisterServices(WebApplicationBuilder builder) {
+    public static void RegisterDependencies(WebApplicationBuilder builder) {
         builder.Services.AddScoped<IUserServices, UserServices>();
     }
 }
