@@ -9,34 +9,13 @@ namespace Mfa;
 
 public class Program {
     public static void Main(string[] args) {
-        var builder = WebApplication.CreateBuilder(args);
-
-        builder.Services.AddControllers();
-        builder.Services.AddDbContext<MfaDbContext>(options => {
-            options.UseNpgsql(builder.Configuration.GetConnectionString("postgresdb"));
-        });
-
-        builder.Services.AddExceptionHandler<ExceptionHandlerMiddleware>();
-        builder.Services.AddProblemDetails();
-        builder.Services.AddLogging();
-
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-        RegisterDependencies(builder);
-
-        var app = builder.Build();
-
-        app.UseStatusCodePages();
-        app.UseExceptionHandler();
-
-        app.UseHttpsRedirection();
-        app.MapControllers();
-
-        app.Run();
+        CreateHostBuilder(args).Build().Run();
     }
 
-    public static void RegisterDependencies(WebApplicationBuilder builder) {
-        builder.Services.AddScoped<IUserServices, UserServices>();
+    public static IHostBuilder CreateHostBuilder(string[] args) {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder => {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }
