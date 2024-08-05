@@ -1,15 +1,15 @@
 namespace Mfa.Dtos;
 
-public class CreateUserDto {
-    public required string FirstName { get; set; }
+public record CreateUserDto {
+    public required string FirstName { get; init; }
 
-    public required string LastName { get; set; }
+    public required string LastName { get; init; }
 
-    public required string Email { get; set; }
+    public required string Email { get; init; }
 
-    public int? PhoneNumber { get; set; }
+    public int? PhoneNumber { get; init; }
 
-    public string? Title { get; set; }
+    public string? Title { get; init; }
     
-    public required int MembershipId { get; set; }
+    public required int MembershipId { get; init; }
 }

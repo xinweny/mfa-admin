@@ -14,7 +14,7 @@ public class UserServices: IUserServices {
         _context = context;
     }
 
-        public async Task<User> GetUserByIdAsync(int id) {
+    public async Task<User> GetUserByIdAsync(int id) {
         User user = await _context.Users.FindAsync(id)
             ?? throw new KeyNotFoundException();
 
@@ -22,9 +22,15 @@ public class UserServices: IUserServices {
     }
 
     public async Task<IEnumerable<User>> GetUsersAsync(string? query) {
-        var users = GetAllUsers();
+        var users = from user in _context.Users
+            select user;
         
-        if (!string.IsNullOrEmpty(query)) SearchUsersByFullName(query, users);
+        if (!string.IsNullOrEmpty(query)) {
+            string formattedQuery = query.ToUpper();
+
+            users = users
+                .Where(user => $"{user.FirstName} {user.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
+        }
 
         return await users.ToListAsync();
     }
@@ -62,16 +68,5 @@ public class UserServices: IUserServices {
         _context.Users.Remove(user);
 
         await _context.SaveChangesAsync();
-    }
-
-    private IQueryable<User> GetAllUsers() {
-        return from user in _context.Users
-            select user;
-    }
-
-    private static void SearchUsersByFullName(string query, IQueryable<User> users) {
-        string formattedQuery = query.ToUpper();
-
-        users = users.Where(user => $"{user.FirstName} {user.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
     }
 }

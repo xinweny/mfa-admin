@@ -2,8 +2,8 @@ namespace Mfa.Dtos;
 
 using Mfa.Enums;
 
-public class UpdateMembershipDto {
-    public MembershipTypes? Type { get; set; }
+public record UpdateMembershipDto {
+    public MembershipTypes? MembershipType { get; init; }
 
-    public int? AddressId { get; set; }
+    public int? AddressId { get; init; }
 }
