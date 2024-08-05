@@ -35,16 +35,14 @@ public class Startup {
             app.UseDeveloperExceptionPage();
         }
         else {
-            app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
 
         app.UseStatusCodePages();
         app.UseExceptionHandler();
-
         app.UseHttpsRedirection();
-        app.UseRouting();
         
+        app.UseRouting();
         app.UseEndpoints(endpoints => {
             endpoints.MapControllers();
         });

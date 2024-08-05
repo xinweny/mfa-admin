@@ -20,18 +20,17 @@ public class ExceptionHandlerMiddleware: IExceptionHandler {
             Detail = exception.Message,
         };
 
-        switch (exception)
-            {
-                case BadHttpRequestException:
-                    problemDetails.Status = (int)HttpStatusCode.BadRequest;
-                    problemDetails.Title = exception.GetType().Name;
-                    break;
+        switch (exception) {
+            case BadHttpRequestException:
+                problemDetails.Status = (int)HttpStatusCode.BadRequest;
+                problemDetails.Title = exception.GetType().Name;
+                break;
 
-                default:
-                    problemDetails.Status = (int)HttpStatusCode.InternalServerError;
-                    problemDetails.Title = "Internal Server Error";
-                    break;
-            }
+            default:
+                problemDetails.Status = (int)HttpStatusCode.InternalServerError;
+                problemDetails.Title = "Internal Server Error";
+                break;
+        }
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 

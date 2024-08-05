@@ -48,6 +48,8 @@ public class UserServices: IUserServices {
         User user = await GetUserByIdAsync(id)
             ?? throw new KeyNotFoundException();
 
+        user.UpdatedAt = DateTime.UtcNow;
+
         _context.Entry(user).CurrentValues.SetValues(data);
         
         await _context.SaveChangesAsync();
