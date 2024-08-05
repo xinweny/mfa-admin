@@ -10,7 +10,7 @@ public class Membership {
     public int Id { get; set; }
 
     [Required]
-    public required MembershipTypes Type { get; set; }
+    public required MembershipTypes MembershipType { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
