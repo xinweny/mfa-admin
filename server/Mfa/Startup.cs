@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 
-using Mfa.Database;
+using Mfa.Data;
 using Mfa.Middleware;
 using Mfa.Interfaces;
+using Mfa.Repositories;
 using Mfa.Services;
 
 namespace Mfa;
@@ -27,6 +28,8 @@ public class Startup {
         services.AddEndpointsApiExplorer();
         services.AddDatabaseDeveloperPageExceptionFilter();
 
+        services.AddAutoMapper(typeof(Startup));
+
         RegisterDependencies(services);
     }
 
@@ -49,6 +52,10 @@ public class Startup {
     }
 
     private static void RegisterDependencies(IServiceCollection services) {
+        // Repositories
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        // Services
         services.AddScoped<IUserServices, UserServices>();
     }
 }
