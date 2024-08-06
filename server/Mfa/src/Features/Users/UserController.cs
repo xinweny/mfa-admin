@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 
-using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
 
@@ -9,19 +8,23 @@ namespace Mfa.Controllers;
 [ApiController]
 [Route("api/users")]
 
-public class UsersController: ControllerBase {
+public class UserController: ControllerBase {
     private readonly IUserServices _userServices;
 
-    public UsersController(IUserServices userServices) {
+    public UserController(IUserServices userServices) {
         _userServices = userServices;
     }
 
     [HttpGet("")]
     public async Task<IActionResult> GetUsersAsync([FromQuery] string? query) {
         try {
-            IEnumerable<User> users = await _userServices.GetUsersAsync(query);
+            IEnumerable<GetUsersResponseDto> users = await _userServices.GetUsers(new GetUsersRequestDto {
+                Query = query,
+            });
 
-            return Ok(users);
+            return Ok(new ResponseDto<IEnumerable<GetUsersResponseDto>> {
+                Data = users,
+            });
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }
@@ -30,9 +33,11 @@ public class UsersController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserByIdAsync([FromRoute] int id) {
         try {
-            User? user = await _userServices.GetUserByIdAsync(id);
+            GetUserResponseDto user = await _userServices.GetUserById(id);
 
-            return user == null ? NotFound() : Ok(user);
+            return Ok(new ResponseDto<GetUserResponseDto> {
+                Data = user,
+            });
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }
@@ -40,9 +45,9 @@ public class UsersController: ControllerBase {
 
     [HttpPost("")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto body) {
+    public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequestDto body) {
         try {
-            await _userServices.CreateUserAsync(body);
+            await _userServices.CreateUser(body);
 
             return Ok();
         } catch (Exception ex) {
@@ -52,9 +57,9 @@ public class UsersController: ControllerBase {
 
     [HttpPost("{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] UpdateUserDto body) {
+    public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] UpdateUserRequestDto body) {
         try {
-            await _userServices.UpdateUserAsync(id, body);
+            await _userServices.UpdateUser(id, body);
 
             return Ok();
         } catch (Exception ex) {
@@ -66,7 +71,7 @@ public class UsersController: ControllerBase {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteUserAsync([FromRoute] int id) {
         try {
-            await _userServices.DeleteUserAsync(id);
+            await _userServices.DeleteUser(id);
 
             return Ok();
         } catch (Exception ex) {

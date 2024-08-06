@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Mfa.Models;
 
-namespace Mfa.Database;
+namespace Mfa.Data;
 
 public class MfaDbContext: DbContext {
     public MfaDbContext(DbContextOptions<MfaDbContext> options): base(options) {}

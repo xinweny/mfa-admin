@@ -13,7 +13,7 @@ public class MembershipServices: IMembershipServices {
         _context = context;
     }
 
-    public Task CreateMembershipAsync(CreateMembershipDto data)
+    public Task CreateMembershipAsync(CreateMembershipRequestDto dto)
     {
         throw new NotImplementedException();
     }
@@ -42,7 +42,7 @@ public class MembershipServices: IMembershipServices {
         throw new NotImplementedException();
     }
 
-    public Task UpdateMembershipAsync(int id, UpdateMembershipDto data)
+    public Task UpdateMembershipAsync(int id, UpdateMembershipRequestDto dto)
     {
         throw new NotImplementedException();
     }

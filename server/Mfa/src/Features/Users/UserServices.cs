@@ -1,72 +1,51 @@
-using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
-using Mfa.Database;
-using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
+using Mfa.Models;
 
 namespace Mfa.Services;
 
-public class UserServices: IUserServices {
-    private readonly MfaDbContext _context;
+public class UserServices : IUserServices
+{
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public UserServices(MfaDbContext context) {
-        _context = context;
+    public UserServices(IUserRepository userRepository, IMapper mapper) {
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public async Task<User> GetUserByIdAsync(int id) {
-        User user = await _context.Users.FindAsync(id)
-            ?? throw new KeyNotFoundException();
+    public async Task<int> CreateUser(CreateUserRequestDto dto)
+    {
+        User user = await _userRepository.CreateUser(_mapper.Map<User>(dto));
 
-        return user;
+        return user.Id;
     }
 
-    public async Task<IEnumerable<User>> GetUsersAsync(string? query) {
-        var users = from user in _context.Users
-            select user;
-        
-        if (!string.IsNullOrEmpty(query)) {
-            string formattedQuery = query.ToUpper();
+    public async Task DeleteUser(int id)
+    {
+        User user = await _userRepository.GetUserById(id);
 
-            users = users
-                .Where(user => $"{user.FirstName} {user.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
-        }
-
-        return await users.ToListAsync();
+        await _userRepository.DeleteUser(user);
     }
 
-    public async Task CreateUserAsync(CreateUserDto data) {
-        var user = new User() {
-            FirstName = data.FirstName,
-            LastName = data.LastName,
-            Email = data.Email,
-            PhoneNumber = data.PhoneNumber,
-            Title = data.Title,
-            MembershipId = data.MembershipId,
-        };
+    public async Task<GetUserResponseDto> GetUserById(int id)
+    {
+        User user = await _userRepository.GetUserById(id);
 
-        _context.Add(user);
-
-        await _context.SaveChangesAsync();
+        return _mapper.Map<GetUserResponseDto>(user);
     }
 
-    public async Task UpdateUserAsync(int id, UpdateUserDto data) {
-        User user = await GetUserByIdAsync(id)
-            ?? throw new KeyNotFoundException();
-
-        user.UpdatedAt = DateTime.UtcNow;
-
-        _context.Entry(user).CurrentValues.SetValues(data);
-        
-        await _context.SaveChangesAsync();
+    public async Task<IEnumerable<GetUsersResponseDto>> GetUsers(GetUsersRequestDto dto)
+    {
+        return await _userRepository.GetUsers(dto);;
     }
 
-    public async Task DeleteUserAsync(int id) {
-        User user = await _context.Users.FindAsync(id)
-            ?? throw new KeyNotFoundException();
+    public async Task UpdateUser(int id, UpdateUserRequestDto dto)
+    {
+        User user = await _userRepository.GetUserById(id);
 
-        _context.Users.Remove(user);
-
-        await _context.SaveChangesAsync();
+        await _userRepository.UpdateUser(user, dto);
     }
 }
