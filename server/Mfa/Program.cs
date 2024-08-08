@@ -1,10 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
-using Mfa.Database;
-using Mfa.Interfaces;
-using Mfa.Services;
-using Mfa.Middleware;
-
 namespace Mfa;
 
 public class Program {

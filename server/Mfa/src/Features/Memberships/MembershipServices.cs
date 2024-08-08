@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using Mfa.Database;
+using Mfa.Data;
 using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
@@ -13,17 +13,17 @@ public class MembershipServices: IMembershipServices {
         _context = context;
     }
 
-    public Task CreateMembershipAsync(CreateMembershipRequestDto dto)
+    public Task CreateMembership(CreateMembershipRequestDto dto)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteMembershipAsync(int id)
+    public Task DeleteMembership(int id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Membership> GetMembershipByIdAsync(int id)
+    public async Task<Membership> GetMembershipById(int id)
     {
         Membership membership = await _context.Memberships
             .Include(m =>
@@ -37,12 +37,12 @@ public class MembershipServices: IMembershipServices {
         return membership;
     }
 
-    public Task<IEnumerable<Membership>> GetMembershipsAsync()
+    public Task<IEnumerable<Membership>> GetMemberships()
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateMembershipAsync(int id, UpdateMembershipRequestDto dto)
+    public Task UpdateMembership(int id, UpdateMembershipRequestDto dto)
     {
         throw new NotImplementedException();
     }

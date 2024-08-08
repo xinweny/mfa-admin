@@ -28,8 +28,6 @@ public class Startup {
         services.AddEndpointsApiExplorer();
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddAutoMapper(typeof(Startup));
-
         RegisterDependencies(services);
     }
 

@@ -1,5 +1,4 @@
-using AutoMapper;
-
+using Mfa.Mappers;
 using Mfa.Dtos;
 using Mfa.Interfaces;
 using Mfa.Models;
@@ -9,16 +8,14 @@ namespace Mfa.Services;
 public class UserServices : IUserServices
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
 
-    public UserServices(IUserRepository userRepository, IMapper mapper) {
+    public UserServices(IUserRepository userRepository) {
         _userRepository = userRepository;
-        _mapper = mapper;
     }
 
     public async Task<int> CreateUser(CreateUserRequestDto dto)
     {
-        User user = await _userRepository.CreateUser(_mapper.Map<User>(dto));
+        User user = await _userRepository.CreateUser(dto.ToUser());
 
         return user.Id;
     }
@@ -34,7 +31,7 @@ public class UserServices : IUserServices
     {
         User user = await _userRepository.GetUserById(id);
 
-        return _mapper.Map<GetUserResponseDto>(user);
+        return user.ToGetUserResponseDto();
     }
 
     public async Task<IEnumerable<GetUsersResponseDto>> GetUsers(GetUsersRequestDto dto)

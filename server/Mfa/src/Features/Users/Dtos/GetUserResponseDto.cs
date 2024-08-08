@@ -8,4 +8,5 @@ public class GetUserResponseDto {
     public int? PhoneNumber { get; set; }
     public string? Title { get; set; }
     public required int MembershipId { get; set; }
+    public required UserMembershipDto Membership { get; set; }
 }

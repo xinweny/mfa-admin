@@ -1,3 +1,6 @@
+using Mfa.Enums;
+using Mfa.Models;
+
 namespace Mfa.Dtos;
 
 public class GetUsersResponseDto {
@@ -8,5 +11,12 @@ public class GetUsersResponseDto {
     public int? PhoneNumber { get; set; }
     public string? Title { get; set; }
     public required int MembershipId { get; set; }
-    public required IncludeMembershipDto Membership { get; set; }
+    public required MembershipDto Membership { get; set; }
+
+    public class MembershipDto {
+        public required int Id { get; set; }
+        public required MembershipTypes MembershipType { get; set; }
+        public int? AddressId { get; set; }
+        public Address? Address { get; set; }
+    }
 }

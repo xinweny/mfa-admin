@@ -1,11 +1,11 @@
 using Mfa.Enums;
-using Mfa.Models;
 
 namespace Mfa.Dtos;
 
-public class IncludeMembershipDto {
+public class UserMembershipDto {
     public required int Id { get; set; }
     public required MembershipTypes MembershipType { get; set; }
     public int? AddressId { get; set; }
-    public Address? Address { get; set; }
+    public AddressDto? Address { get; set; }
+    public ICollection<MembershipUsersDto>? Users { get; }
 }

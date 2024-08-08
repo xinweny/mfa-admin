@@ -1,20 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 
 using Mfa.Data;
 using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
+using Mfa.Mappers;
 
 namespace Mfa.Repositories;
 
 public class UserRepository: IUserRepository {
     private readonly MfaDbContext _context;
-    private readonly IMapper _mapper;
 
-    public UserRepository(MfaDbContext context, IMapper mapper) {
+    public UserRepository(MfaDbContext context) {
         _context = context;
-        _mapper = mapper;
     }
 
     public async Task<User> GetUserById(int id) {
@@ -25,7 +23,7 @@ public class UserRepository: IUserRepository {
     }
 
     public async Task<IEnumerable<GetUsersResponseDto>> GetUsers(GetUsersRequestDto dto) {
-        var users = from user in _context.Users
+        var usersQuery = from user in _context.Users
             select user;
 
         string? query = dto.Query;
@@ -33,13 +31,15 @@ public class UserRepository: IUserRepository {
         if (!string.IsNullOrEmpty(query)) {
             string formattedQuery = query.ToUpper();
 
-            users = users
+            usersQuery = usersQuery
                 .Where(user => $"{user.FirstName} {user.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        return await users
-            .Select(user => _mapper.Map<GetUsersResponseDto>(user))
+        var users = await usersQuery
+            .Select(user => user.)
             .ToListAsync();
+
+        return users;
     }
 
     public async Task<User> CreateUser(User user) {
