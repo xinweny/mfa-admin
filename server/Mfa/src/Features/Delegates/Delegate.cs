@@ -13,5 +13,5 @@ public class Delegate {
     [Required, ForeignKey(nameof(Member))]
     public required int MemberId { get; set; }
     [Required]
-    public Member? member;
+    public Member? Member;
 }

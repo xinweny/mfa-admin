@@ -36,7 +36,7 @@ public class MemberRepository: IMemberRepository {
         }
 
         var members = await membersQuery
-            .Include(member => member.ToGetMembersResponseDto())
+            .Select(member => member.ToGetMembersResponseDto())
             .ToListAsync();
 
         return members;
