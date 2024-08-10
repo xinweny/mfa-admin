@@ -7,7 +7,7 @@ namespace Mfa.Data;
 public class MfaDbContext: DbContext {
     public MfaDbContext(DbContextOptions<MfaDbContext> options): base(options) {}
 
-    public required DbSet<User> Users { get; set; }
+    public required DbSet<Member> Members { get; set; }
     public required DbSet<Membership> Memberships { get; set; }
     public required DbSet<Address> Addresses { get; set; }
     public required DbSet<MembershipPayment> MembershipPayments { get; set; }
@@ -17,9 +17,9 @@ public class MfaDbContext: DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Membership>()
-            .HasMany(membership => membership.Users)
-            .WithOne(user => user.Membership)
-            .HasForeignKey(user => user.MembershipId);
+            .HasMany(membership => membership.Members)
+            .WithOne(member => member.Membership)
+            .HasForeignKey(member => member.MembershipId);
 
         modelBuilder.Entity<Membership>()
             .HasMany(membership => membership.Payments)
@@ -31,25 +31,25 @@ public class MfaDbContext: DbContext {
             .WithOne(address => address.Membership)
             .HasForeignKey<Membership>(membership => membership.AddressId);
 
-        modelBuilder.Entity<User>()
-            .HasOne(user => user.Membership)
-            .WithMany(membership => membership.Users)
-            .HasForeignKey(user => user.MembershipId);
+        modelBuilder.Entity<Member>()
+            .HasOne(member => member.Membership)
+            .WithMany(membership => membership.Members)
+            .HasForeignKey(member => member.MembershipId);
 
-        modelBuilder.Entity<User>()
-            .HasMany(user => user.BoardPositions)
-            .WithOne(boardPosition => boardPosition.User)
-            .HasForeignKey(boardPosition => boardPosition.UserId);
+        modelBuilder.Entity<Member>()
+            .HasMany(member => member.BoardPositions)
+            .WithOne(boardPosition => boardPosition.Member)
+            .HasForeignKey(boardPosition => boardPosition.MemberId);
         
-        modelBuilder.Entity<User>()
-            .HasMany(user => user.Hosts)
-            .WithOne(host => host.User)
-            .HasForeignKey(host => host.UserId);
+        modelBuilder.Entity<Member>()
+            .HasMany(member => member.Hosts)
+            .WithOne(host => host.Member)
+            .HasForeignKey(host => host.MemberId);
 
-        modelBuilder.Entity<User>()
-            .HasMany(user => user.Delegates)
-            .WithOne(d => d.User)
-            .HasForeignKey(d => d.UserId);
+        modelBuilder.Entity<Member>()
+            .HasMany(member => member.Delegates)
+            .WithOne(d => d.Member)
+            .HasForeignKey(d => d.MemberId);
         
         modelBuilder.Entity<Address>()
             .HasOne(address => address.Membership)

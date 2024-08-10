@@ -6,17 +6,17 @@ namespace Mfa.Repositories;
 
 public class MembershipRepository : IMembershipRepository
 {
-    public Task<User> CreateMembership(Membership membership)
+    public Task<Member> CreateMembership(Membership membership)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteUser(User user)
+    public Task DeleteMembership(Member member)
     {
         throw new NotImplementedException();
     }
 
-    public Task<User> GetMembershipById(int id)
+    public Task<Member> GetMembershipById(int id)
     {
         throw new NotImplementedException();
     }
@@ -26,7 +26,7 @@ public class MembershipRepository : IMembershipRepository
         throw new NotImplementedException();
     }
 
-    public Task<User> UpdateMembership(User user, UpdateUserRequestDto dto)
+    public Task<Member> UpdateMembership(Member member, UpdateMemberRequestDto dto)
     {
         throw new NotImplementedException();
     }

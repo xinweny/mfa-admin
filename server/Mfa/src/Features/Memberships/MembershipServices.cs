@@ -4,6 +4,7 @@ using Mfa.Data;
 using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
+using Mfa.Mappers;
 
 namespace Mfa.Services;
 public class MembershipServices: IMembershipServices {
@@ -27,8 +28,8 @@ public class MembershipServices: IMembershipServices {
     {
         Membership membership = await _context.Memberships
             .Include(m =>
-                m.Users
-                    .Select(user => new { user.Id, user.FirstName, user.LastName })
+                m.Members
+                    .Select(member => member.ToMembershipMembersDto())
             )
             .Include(m => m.Address)
             .FirstOrDefaultAsync(m => m.Id == id)    

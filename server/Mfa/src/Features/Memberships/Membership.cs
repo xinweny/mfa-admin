@@ -18,7 +18,7 @@ public class Membership {
     public int? AddressId { get; set; }
     public Address? Address;
 
-    public ICollection<User>? Users { get; }
+    public ICollection<Member>? Members { get; }
     public ICollection<MembershipPayment>? Payments { get; }
 
     public Membership() {

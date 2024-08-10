@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mfa.Models;
 
-public class User {
+public class Member {
     [Key]
     public int Id { get; set; }
 
@@ -26,7 +26,7 @@ public class User {
     public ICollection<Host>? Hosts;
     public ICollection<Delegate>? Delegates;
 
-    public User() {
+    public Member() {
         CreatedAt = DateTime.Now;
     }
 }

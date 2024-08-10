@@ -14,8 +14,8 @@ public class BoardPosition {
     [Required]
     public required BoardPositionTitles Position { get; set; }
 
-    [Required, ForeignKey(nameof(User))]
-    public required int UserId;
+    [Required, ForeignKey(nameof(Member))]
+    public required int MemberId;
     [Required]
-    public User? User;
+    public Member? Member;
 }

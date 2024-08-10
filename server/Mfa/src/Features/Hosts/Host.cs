@@ -10,8 +10,8 @@ public class Host {
     [Required]
     public required int Year { get; set; }
 
-    [Required, ForeignKey(nameof(User))]
-    public required int UserId { get; set; }
+    [Required, ForeignKey(nameof(Member))]
+    public required int MemberId { get; set; }
     [Required]
-    public User? User;
+    public Member? member;
 }

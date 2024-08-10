@@ -1,6 +1,6 @@
 namespace Mfa.Dtos;
 
-public class UpdateUserRequestDto {
+public class UpdateMemberRequestDto {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Email { get; set; }

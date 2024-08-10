@@ -1,6 +1,6 @@
 namespace Mfa.Dtos;
 
-public class GetUserResponseDto {
+public class GetMemberResponseDto {
     public required int Id { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
@@ -8,5 +8,5 @@ public class GetUserResponseDto {
     public int? PhoneNumber { get; set; }
     public string? Title { get; set; }
     public required int MembershipId { get; set; }
-    public required UserMembershipDto Membership { get; set; }
+    public required MemberMembershipDto Membership { get; set; }
 }

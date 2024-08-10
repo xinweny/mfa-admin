@@ -1,5 +1,5 @@
 namespace Mfa.Dtos;
 
-public class GetUsersRequestDto {
+public class GetMembersRequestDto {
     public string? Query { get; set; }
 }

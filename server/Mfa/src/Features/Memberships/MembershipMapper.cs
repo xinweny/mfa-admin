@@ -4,13 +4,22 @@ using Mfa.Models;
 namespace Mfa.Mappers;
 
 public static class MembershipMapper {
-    public static UserMembershipDto ToUserMembershipDto(this Membership membership) {
-        return new UserMembershipDto {
+    public static MemberMembershipDto ToMemberMembershipDto(this Membership membership) {
+        return new MemberMembershipDto {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
             Address = membership.Address.ToAddressDto(),
-            Users = membership.Users.Select(user => user.ToMembershipUsersDto()),
+            Members = membership.Members.Select(member => member.ToMembershipMembersDto()),
+        }; 
+    }
+
+    public static MembersMembershipDto ToMembersMembershipDto(this Membership membership) {
+        return new MembersMembershipDto {
+            Id = membership.Id,
+            MembershipType = membership.MembershipType,
+            AddressId = membership.AddressId,
+            Address = membership.Address.ToAddressDto(),
         }; 
     }
 }
