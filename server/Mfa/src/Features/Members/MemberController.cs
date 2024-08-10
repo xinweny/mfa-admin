@@ -9,16 +9,16 @@ namespace Mfa.Controllers;
 [Route("api/members")]
 
 public class MemberController: ControllerBase {
-    private readonly IMemberServices _MemberServices;
+    private readonly IMemberServices _memberServices;
 
-    public MemberController(IMemberServices MemberServices) {
-        _MemberServices = MemberServices;
+    public MemberController(IMemberServices memberServices) {
+        _memberServices = memberServices;
     }
 
     [HttpGet("")]
     public async Task<IActionResult> GetMembersAsync([FromQuery] string? query) {
         try {
-            IEnumerable<GetMembersResponseDto> members = await _MemberServices.GetMembers(new GetMembersRequestDto {
+            IEnumerable<GetMembersResponseDto> members = await _memberServices.GetMembers(new GetMembersRequestDto {
                 Query = query,
             });
 
@@ -33,7 +33,7 @@ public class MemberController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
         try {
-            GetMemberResponseDto member = await _MemberServices.GetMemberById(id);
+            GetMemberResponseDto member = await _memberServices.GetMemberById(id);
 
             return Ok(new ResponseDto<GetMemberResponseDto> {
                 Data = member,
@@ -47,7 +47,7 @@ public class MemberController: ControllerBase {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequestDto body) {
         try {
-            await _MemberServices.CreateMember(body);
+            await _memberServices.CreateMember(body);
 
             return Ok();
         } catch (Exception ex) {
@@ -59,7 +59,7 @@ public class MemberController: ControllerBase {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequestDto body) {
         try {
-            await _MemberServices.UpdateMember(id, body);
+            await _memberServices.UpdateMember(id, body);
 
             return Ok();
         } catch (Exception ex) {
@@ -71,7 +71,7 @@ public class MemberController: ControllerBase {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteMemberAsync([FromRoute] int id) {
         try {
-            await _MemberServices.DeleteMember(id);
+            await _memberServices.DeleteMember(id);
 
             return Ok();
         } catch (Exception ex) {

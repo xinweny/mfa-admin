@@ -52,8 +52,11 @@ public class Startup {
     private static void RegisterDependencies(IServiceCollection services) {
         // Repositories
         services.AddScoped<IMemberRepository, MemberRepository>();
+        services.AddScoped<IMembershipRepository, MembershipRepository>();
 
         // Services
         services.AddScoped<IMemberServices, MemberServices>();
+        services.AddScoped<IMembershipServices, MembershipServices>();
+        
     }
 }

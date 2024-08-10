@@ -1,3 +1,4 @@
+using Mfa.Data;
 using Mfa.Dtos;
 using Mfa.Interfaces;
 using Mfa.Models;
@@ -6,19 +7,29 @@ namespace Mfa.Repositories;
 
 public class MembershipRepository : IMembershipRepository
 {
-    public Task<Member> CreateMembership(Membership membership)
+    private readonly MfaDbContext _context;
+
+    public MembershipRepository(MfaDbContext context) {
+        _context = context;
+    }
+
+    public Task<Membership> CreateMembership(Membership membership)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteMembership(Member member)
+    public Task DeleteMembership(Membership membership)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Member> GetMembershipById(int id)
+    public async Task<Membership> GetMembershipById(int id)
     {
-        throw new NotImplementedException();
+        Membership membership = await _context.Memberships
+            .FindAsync(id)    
+            ?? throw new KeyNotFoundException();
+
+        return membership;
     }
 
     public Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships(GetMembershipsRequestDto dto)
@@ -26,7 +37,7 @@ public class MembershipRepository : IMembershipRepository
         throw new NotImplementedException();
     }
 
-    public Task<Member> UpdateMembership(Member member, UpdateMemberRequestDto dto)
+    public Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequestDto dto)
     {
         throw new NotImplementedException();
     }

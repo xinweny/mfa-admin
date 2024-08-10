@@ -22,4 +22,15 @@ public static class MembershipMapper {
             Address = membership.Address.ToAddressDto(),
         }; 
     }
+
+    public static GetMembershipResponseDto ToGetMembershipResponseDto(this Membership membership) {
+        return new GetMembershipResponseDto {
+            Id = membership.Id,
+            MembershipType = membership.MembershipType,
+            AddressId = membership.AddressId,
+            Address = membership.Address.ToAddressDto(),
+            CreatedAt = membership.CreatedAt,
+            UpdatedAt = membership.UpdatedAt,
+        };
+    }
 }

@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
-using Mfa.Data;
 using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
@@ -8,10 +5,10 @@ using Mfa.Mappers;
 
 namespace Mfa.Services;
 public class MembershipServices: IMembershipServices {
-    private readonly MfaDbContext _context;
+    private readonly IMembershipRepository _membershipRepository;
 
-    public MembershipServices(MfaDbContext context) {
-        _context = context;
+    public MembershipServices(IMembershipRepository membershipRepository) {
+        _membershipRepository = membershipRepository;
     }
 
     public Task CreateMembership(CreateMembershipRequestDto dto)
@@ -24,21 +21,14 @@ public class MembershipServices: IMembershipServices {
         throw new NotImplementedException();
     }
 
-    public async Task<Membership> GetMembershipById(int id)
+    public async Task<GetMembershipResponseDto> GetMembershipById(int id)
     {
-        Membership membership = await _context.Memberships
-            .Include(m =>
-                m.Members
-                    .Select(member => member.ToMembershipMembersDto())
-            )
-            .Include(m => m.Address)
-            .FirstOrDefaultAsync(m => m.Id == id)    
-            ?? throw new KeyNotFoundException();
+        Membership membership = await _membershipRepository.GetMembershipById(id);
 
-        return membership;
+        return membership.ToGetMembershipResponseDto();
     }
 
-    public Task<IEnumerable<Membership>> GetMemberships()
+    public Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships()
     {
         throw new NotImplementedException();
     }

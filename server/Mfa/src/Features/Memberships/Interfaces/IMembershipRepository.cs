@@ -5,8 +5,8 @@ namespace Mfa.Interfaces;
 
 public interface IMembershipRepository {
     Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships(GetMembershipsRequestDto dto);
-    Task<Member> GetMembershipById(int id);
-    Task<Member> CreateMembership(Membership membership);
-    Task<Member> UpdateMembership(Member member, UpdateMemberRequestDto dto);
-    Task DeleteMembership(Member member);
+    Task<Membership> GetMembershipById(int id);
+    Task<Membership> CreateMembership(Membership membership);
+    Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequestDto dto);
+    Task DeleteMembership(Membership membership);
 }
