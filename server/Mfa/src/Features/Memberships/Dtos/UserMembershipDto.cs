@@ -7,5 +7,5 @@ public class UserMembershipDto {
     public required MembershipTypes MembershipType { get; set; }
     public int? AddressId { get; set; }
     public AddressDto? Address { get; set; }
-    public ICollection<MembershipUsersDto>? Users { get; }
+    public IEnumerable<MembershipUsersDto>? Users { get; set; }
 }

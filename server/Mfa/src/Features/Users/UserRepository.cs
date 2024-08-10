@@ -36,7 +36,7 @@ public class UserRepository: IUserRepository {
         }
 
         var users = await usersQuery
-            .Select(user => user.)
+            .Include(user => user.ToGetUsersResponseDto())
             .ToListAsync();
 
         return users;

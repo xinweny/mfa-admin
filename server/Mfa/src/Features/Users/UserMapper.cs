@@ -1,6 +1,5 @@
 using Mfa.Models;
 using Mfa.Dtos;
-using Npgsql.Replication;
 
 namespace Mfa.Mappers;
 
@@ -14,7 +13,7 @@ public static class UserMapper {
             Email = user.Email,
             Title = user.Title,
             MembershipId = user.MembershipId,
-            Membership = user.Membership,
+            Membership = user.Membership.ToUserMembershipDto(),
         };
     }
 
@@ -39,6 +38,14 @@ public static class UserMapper {
             Title = user.Title,
             MembershipId = user.MembershipId,
             Membership = user.Membership,
+        };
+    }
+
+    public static MembershipUsersDto ToMembershipUsersDto(this User user) {
+        return new MembershipUsersDto {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
         };
     }
 }
