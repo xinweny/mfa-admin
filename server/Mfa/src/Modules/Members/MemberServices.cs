@@ -1,7 +1,6 @@
 using Mfa.Mappers;
 using Mfa.Dtos;
 using Mfa.Interfaces;
-using Mfa.Models;
 
 namespace Mfa.Services;
 
@@ -13,25 +12,23 @@ public class MemberServices : IMemberServices
         _userRepository = userRepository;
     }
 
-    public async Task<int> CreateMember(CreateMemberRequest dto)
+    public async Task CreateMember(CreateMemberRequest dto)
     {
-        Member user = await _userRepository.CreateMember(dto.ToMember());
-
-        return user.Id;
+        await _userRepository.CreateMember(dto.ToMember());
     }
 
     public async Task DeleteMember(int id)
     {
-        Member user = await _userRepository.GetMemberById(id);
+        var member = await _userRepository.GetMemberById(id);
 
-        await _userRepository.DeleteMember(user);
+        await _userRepository.DeleteMember(member);
     }
 
     public async Task<GetMemberResponse> GetMemberById(int id)
     {
-        Member user = await _userRepository.GetMemberById(id);
+        var member = await _userRepository.GetMemberById(id);
 
-        return user.ToGetMemberResponse();
+        return member.ToGetMemberResponse();
     }
 
     public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto)
@@ -41,8 +38,8 @@ public class MemberServices : IMemberServices
 
     public async Task UpdateMember(int id, UpdateMemberRequest dto)
     {
-        Member user = await _userRepository.GetMemberById(id);
+        var member = await _userRepository.GetMemberById(id);
 
-        await _userRepository.UpdateMember(user, dto);
+        await _userRepository.UpdateMember(member, dto);
     }
 }

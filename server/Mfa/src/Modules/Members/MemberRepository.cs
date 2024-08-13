@@ -50,6 +50,14 @@ public class MemberRepository: IMemberRepository {
         return member;
     }
 
+    public async Task<IEnumerable<Member>> CreateMembers(IEnumerable<Member> members) {
+        _context.Members.AddRange(members);
+
+        await _context.SaveChangesAsync();
+
+        return members;
+    }
+
     public async Task<Member> UpdateMember(Member member, UpdateMemberRequest dto) {
         member.UpdatedAt = DateTime.UtcNow;
 

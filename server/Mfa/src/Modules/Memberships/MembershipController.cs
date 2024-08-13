@@ -41,7 +41,9 @@ public class MembershipController: ControllerBase {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMembershipRequest body) {
         try {
-            throw new NotImplementedException();
+            await _membershipServices.CreateMembership(body);
+
+            return Ok();
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }

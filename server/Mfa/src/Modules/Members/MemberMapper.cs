@@ -28,6 +28,17 @@ public static class MemberMapper {
         };
     }
 
+    public static Member ToMember(this CreateMembershipMember dto, int membershipId) {
+        return new Member {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            PhoneNumber = dto.PhoneNumber,
+            Email = dto.Email,
+            Title = dto.Title,
+            MembershipId = membershipId,
+        };
+    }
+
     public static GetMembersResponse ToGetMembersResponse(this Member member) {
         return new GetMembersResponse {
             Id = member.Id,
