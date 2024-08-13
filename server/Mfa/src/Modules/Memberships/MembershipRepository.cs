@@ -13,9 +13,13 @@ public class MembershipRepository : IMembershipRepository
         _context = context;
     }
 
-    public Task<Membership> CreateMembership(Membership membership)
+    public async Task<Membership> CreateMembership(Membership membership)
     {
-        throw new NotImplementedException();
+        _context.Memberships.Add(membership);
+
+        await _context.SaveChangesAsync();
+
+        return membership;
     }
 
     public Task DeleteMembership(Membership membership)
@@ -32,12 +36,12 @@ public class MembershipRepository : IMembershipRepository
         return membership;
     }
 
-    public Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships(GetMembershipsRequestDto dto)
+    public Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest dto)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequestDto dto)
+    public Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest dto)
     {
         throw new NotImplementedException();
     }

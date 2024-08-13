@@ -4,8 +4,8 @@ using Mfa.Dtos;
 namespace Mfa.Mappers;
 
 public static class MemberMapper {
-    public static GetMemberResponseDto ToGetMemberResponseDto(this Member member) {
-        return new GetMemberResponseDto {
+    public static GetMemberResponse ToGetMemberResponse(this Member member) {
+        return new GetMemberResponse {
             Id = member.Id,
             FirstName = member.FirstName,
             LastName = member.LastName,
@@ -13,11 +13,11 @@ public static class MemberMapper {
             Email = member.Email,
             Title = member.Title,
             MembershipId = member.MembershipId,
-            Membership = member.Membership.ToMemberMembershipDto(),
+            Membership = member.Membership.ToMemberMembership(),
         };
     }
 
-    public static Member ToMember(this CreateMemberRequestDto dto) {
+    public static Member ToMember(this CreateMemberRequest dto) {
         return new Member {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
@@ -28,8 +28,8 @@ public static class MemberMapper {
         };
     }
 
-    public static GetMembersResponseDto ToGetMembersResponseDto(this Member member) {
-        return new GetMembersResponseDto {
+    public static GetMembersResponse ToGetMembersResponse(this Member member) {
+        return new GetMembersResponse {
             Id = member.Id,
             FirstName = member.FirstName,
             LastName = member.LastName,
@@ -37,12 +37,12 @@ public static class MemberMapper {
             Email = member.Email,
             Title = member.Title,
             MembershipId = member.MembershipId,
-            Membership = member.Membership.ToMembersMembershipDto(),
+            Membership = member.Membership.ToMembersMembership(),
         };
     }
 
-    public static MembershipMembersDto ToMembershipMembersDto(this Member member) {
-        return new MembershipMembersDto {
+    public static MembershipMember ToMembershipMember(this Member member) {
+        return new MembershipMember {
             Id = member.Id,
             FirstName = member.FirstName,
             LastName = member.LastName,

@@ -18,11 +18,11 @@ public class MemberController: ControllerBase {
     [HttpGet("")]
     public async Task<IActionResult> GetMembersAsync([FromQuery] string? query) {
         try {
-            IEnumerable<GetMembersResponseDto> members = await _memberServices.GetMembers(new GetMembersRequestDto {
+            IEnumerable<GetMembersResponse> members = await _memberServices.GetMembers(new GetMembersRequest {
                 Query = query,
             });
 
-            return Ok(new ResponseDto<IEnumerable<GetMembersResponseDto>> {
+            return Ok(new ResponseDto<IEnumerable<GetMembersResponse>> {
                 Data = members,
             });
         } catch (Exception ex) {
@@ -33,9 +33,9 @@ public class MemberController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
         try {
-            GetMemberResponseDto member = await _memberServices.GetMemberById(id);
+            GetMemberResponse member = await _memberServices.GetMemberById(id);
 
-            return Ok(new ResponseDto<GetMemberResponseDto> {
+            return Ok(new ResponseDto<GetMemberResponse> {
                 Data = member,
             });
         } catch (Exception ex) {
@@ -45,7 +45,7 @@ public class MemberController: ControllerBase {
 
     [HttpPost("")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequestDto body) {
+    public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequest body) {
         try {
             await _memberServices.CreateMember(body);
 
@@ -57,7 +57,7 @@ public class MemberController: ControllerBase {
 
     [HttpPost("{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequestDto body) {
+    public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             await _memberServices.UpdateMember(id, body);
 

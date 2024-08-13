@@ -22,7 +22,7 @@ public class MemberRepository: IMemberRepository {
         return member;
     }
 
-    public async Task<IEnumerable<GetMembersResponseDto>> GetMembers(GetMembersRequestDto dto) {
+    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto) {
         var membersQuery = from member in _context.Members
             select member;
 
@@ -36,24 +36,24 @@ public class MemberRepository: IMemberRepository {
         }
 
         var members = await membersQuery
-            .Select(member => member.ToGetMembersResponseDto())
+            .Select(member => member.ToGetMembersResponse())
             .ToListAsync();
 
         return members;
     }
 
     public async Task<Member> CreateMember(Member member) {
-        _context.Add(member);
+        _context.Members.Add(member);
 
         await _context.SaveChangesAsync();
 
         return member;
     }
 
-    public async Task<Member> UpdateMember(Member member, UpdateMemberRequestDto dto) {
+    public async Task<Member> UpdateMember(Member member, UpdateMemberRequest dto) {
         member.UpdatedAt = DateTime.UtcNow;
 
-        _context.Entry(member).CurrentValues.SetValues(dto);
+        _context.Members.Entry(member).CurrentValues.SetValues(dto);
         
         await _context.SaveChangesAsync();
 

@@ -13,7 +13,7 @@ public class MemberServices : IMemberServices
         _userRepository = userRepository;
     }
 
-    public async Task<int> CreateMember(CreateMemberRequestDto dto)
+    public async Task<int> CreateMember(CreateMemberRequest dto)
     {
         Member user = await _userRepository.CreateMember(dto.ToMember());
 
@@ -27,19 +27,19 @@ public class MemberServices : IMemberServices
         await _userRepository.DeleteMember(user);
     }
 
-    public async Task<GetMemberResponseDto> GetMemberById(int id)
+    public async Task<GetMemberResponse> GetMemberById(int id)
     {
         Member user = await _userRepository.GetMemberById(id);
 
-        return user.ToGetMemberResponseDto();
+        return user.ToGetMemberResponse();
     }
 
-    public async Task<IEnumerable<GetMembersResponseDto>> GetMembers(GetMembersRequestDto dto)
+    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto)
     {
         return await _userRepository.GetMembers(dto);;
     }
 
-    public async Task UpdateMember(int id, UpdateMemberRequestDto dto)
+    public async Task UpdateMember(int id, UpdateMemberRequest dto)
     {
         Member user = await _userRepository.GetMemberById(id);
 

@@ -29,7 +29,7 @@ public class MembershipController: ControllerBase {
         try {
             var membership = await _membershipServices.GetMembershipById(id);
 
-            return Ok(new ResponseDto<GetMembershipResponseDto> {
+            return Ok(new ResponseDto<GetMembershipResponse> {
                 Data = membership,
             });
         } catch (Exception ex) {
@@ -39,7 +39,7 @@ public class MembershipController: ControllerBase {
 
     [HttpPost("")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMemberRequestDto body) {
+    public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMembershipRequest body) {
         try {
             throw new NotImplementedException();
         } catch (Exception ex) {
@@ -49,7 +49,7 @@ public class MembershipController: ControllerBase {
 
     [HttpPost("{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMemberRequestDto body) {
+    public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             throw new NotImplementedException();
         } catch (Exception ex) {

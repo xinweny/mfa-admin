@@ -11,9 +11,11 @@ public class MembershipServices: IMembershipServices {
         _membershipRepository = membershipRepository;
     }
 
-    public Task CreateMembership(CreateMembershipRequestDto dto)
+    public async Task<int> CreateMembership(CreateMembershipRequest dto)
     {
-        throw new NotImplementedException();
+        var membership = await _membershipRepository.CreateMembership(dto.ToMembership());
+
+        return membership.Id;
     }
 
     public Task DeleteMembership(int id)
@@ -21,19 +23,19 @@ public class MembershipServices: IMembershipServices {
         throw new NotImplementedException();
     }
 
-    public async Task<GetMembershipResponseDto> GetMembershipById(int id)
+    public async Task<GetMembershipResponse> GetMembershipById(int id)
     {
         Membership membership = await _membershipRepository.GetMembershipById(id);
 
-        return membership.ToGetMembershipResponseDto();
+        return membership.ToGetMembershipResponse();
     }
 
-    public Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships()
+    public Task<IEnumerable<GetMembershipsResponse>> GetMemberships()
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateMembership(int id, UpdateMembershipRequestDto dto)
+    public Task UpdateMembership(int id, UpdateMembershipRequest dto)
     {
         throw new NotImplementedException();
     }

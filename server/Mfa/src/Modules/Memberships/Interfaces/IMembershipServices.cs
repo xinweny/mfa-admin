@@ -3,9 +3,9 @@ using Mfa.Dtos;
 namespace Mfa.Interfaces;
 
 public interface IMembershipServices {
-    Task<IEnumerable<GetMembershipsResponseDto>> GetMemberships();
-    Task<GetMembershipResponseDto> GetMembershipById(int id);
-    Task CreateMembership(CreateMembershipRequestDto dto);
-    Task UpdateMembership(int id, UpdateMembershipRequestDto dto);
+    Task<IEnumerable<GetMembershipsResponse>> GetMemberships();
+    Task<GetMembershipResponse> GetMembershipById(int id);
+    Task<int> CreateMembership(CreateMembershipRequest dto);
+    Task UpdateMembership(int id, UpdateMembershipRequest dto);
     Task DeleteMembership(int id);
 }

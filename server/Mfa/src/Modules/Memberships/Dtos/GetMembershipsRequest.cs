@@ -3,5 +3,5 @@ namespace Mfa.Dtos;
 using Mfa.Models;
 using Mfa.Enums;
 
-public record GetMembershipsRequestDto {
+public record GetMembershipsRequest {
 }

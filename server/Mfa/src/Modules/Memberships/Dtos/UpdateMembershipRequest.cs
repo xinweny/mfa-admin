@@ -2,7 +2,7 @@ namespace Mfa.Dtos;
 
 using Mfa.Enums;
 
-public class UpdateMembershipRequestDto {
+public class UpdateMembershipRequest {
     public MembershipTypes? MembershipType { get; init; }
     public int? AddressId { get; set; }
 }

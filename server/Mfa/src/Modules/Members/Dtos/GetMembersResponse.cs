@@ -3,7 +3,7 @@ using Mfa.Models;
 
 namespace Mfa.Dtos;
 
-public class GetMembersResponseDto {
+public class GetMembersResponse {
     public required int Id { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
@@ -11,7 +11,7 @@ public class GetMembersResponseDto {
     public int? PhoneNumber { get; set; }
     public string? Title { get; set; }
     public required int MembershipId { get; set; }
-    public required MembersMembershipDto Membership { get; set; }
+    public required MembersMembership Membership { get; set; }
 
     public class MembershipDto {
         public required int Id { get; set; }

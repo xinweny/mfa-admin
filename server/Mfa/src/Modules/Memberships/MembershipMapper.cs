@@ -4,18 +4,18 @@ using Mfa.Models;
 namespace Mfa.Mappers;
 
 public static class MembershipMapper {
-    public static MemberMembershipDto ToMemberMembershipDto(this Membership membership) {
-        return new MemberMembershipDto {
+    public static MemberMembership ToMemberMembership(this Membership membership) {
+        return new MemberMembership {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
-            Members = membership.Members?.Select(member => member.ToMembershipMembersDto()) ?? [],
+            Members = membership.Members?.Select(member => member.ToMembershipMember()) ?? [],
         }; 
     }
 
-    public static MembersMembershipDto ToMembersMembershipDto(this Membership membership) {
-        return new MembersMembershipDto {
+    public static MembersMembership ToMembersMembership(this Membership membership) {
+        return new MembersMembership {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
@@ -23,14 +23,21 @@ public static class MembershipMapper {
         }; 
     }
 
-    public static GetMembershipResponseDto ToGetMembershipResponseDto(this Membership membership) {
-        return new GetMembershipResponseDto {
+    public static GetMembershipResponse ToGetMembershipResponse(this Membership membership) {
+        return new GetMembershipResponse {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
+        };
+    }
+
+    public static Membership ToMembership(this CreateMembershipRequest dto) {
+        return new Membership {
+            MembershipType = dto.MembershipType,
+            AddressId = dto.AddressId,
         };
     }
 }
