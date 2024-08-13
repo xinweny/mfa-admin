@@ -44,7 +44,6 @@ public class MemberController: ControllerBase {
     }
 
     [HttpPost("")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequest body) {
         try {
             await _memberServices.CreateMember(body);
@@ -56,7 +55,6 @@ public class MemberController: ControllerBase {
     }
 
     [HttpPost("{id}")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             await _memberServices.UpdateMember(id, body);
@@ -68,7 +66,6 @@ public class MemberController: ControllerBase {
     }
 
     [HttpDelete("{id}")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteMemberAsync([FromRoute] int id) {
         try {
             await _memberServices.DeleteMember(id);

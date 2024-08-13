@@ -38,7 +38,6 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpPost("")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMembershipRequest body) {
         try {
             await _membershipServices.CreateMembership(body);
@@ -50,7 +49,6 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpPost("{id}")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             throw new NotImplementedException();
@@ -60,7 +58,6 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpDelete("{id}")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteMembeshipAsync([FromRoute] int id) {
         try {
             throw new NotImplementedException();
