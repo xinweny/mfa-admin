@@ -9,8 +9,8 @@ public static class MembershipMapper {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
-            Address = membership.Address.ToAddressDto(),
-            Members = membership.Members.Select(member => member.ToMembershipMembersDto()),
+            Address = membership.Address?.ToAddressDto(),
+            Members = membership.Members?.Select(member => member.ToMembershipMembersDto()) ?? [],
         }; 
     }
 
@@ -19,7 +19,7 @@ public static class MembershipMapper {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
-            Address = membership.Address.ToAddressDto(),
+            Address = membership.Address?.ToAddressDto(),
         }; 
     }
 
@@ -28,7 +28,7 @@ public static class MembershipMapper {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
             AddressId = membership.AddressId,
-            Address = membership.Address.ToAddressDto(),
+            Address = membership.Address?.ToAddressDto(),
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
         };
