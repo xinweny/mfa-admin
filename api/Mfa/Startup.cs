@@ -44,9 +44,15 @@ public class Startup {
         app.UseHttpsRedirection();
         
         app.UseRouting();
+        RegisterMiddleware(app);
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => {
             endpoints.MapControllers();
         });
+    }
+
+    private static void RegisterMiddleware( IApplicationBuilder app) {
+        app.UseMiddleware<IPWhitelistMiddleware>();
     }
 
     private static void RegisterDependencies(IServiceCollection services) {
@@ -57,6 +63,5 @@ public class Startup {
         // Services
         services.AddScoped<IMemberServices, MemberServices>();
         services.AddScoped<IMembershipServices, MembershipServices>();
-        
     }
 }
