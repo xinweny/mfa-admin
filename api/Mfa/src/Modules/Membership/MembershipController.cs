@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using Mfa.Dtos;
 using Mfa.Interfaces;
@@ -7,6 +8,7 @@ namespace Mfa.Controllers;
 
 [ApiController]
 [Route("api/memberships")]
+[Authorize]
 
 public class MembershipController: ControllerBase {
     private readonly IMembershipServices _membershipServices;
