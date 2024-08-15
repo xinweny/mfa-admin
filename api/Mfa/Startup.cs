@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Mfa.Data;
 using Mfa.Middleware;
@@ -21,6 +22,12 @@ public class Startup {
         services.AddDbContext<MfaDbContext>(options => {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
         });
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
+                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
+                options.Audience = Configuration["Auth0:Audiences"];
+            });
 
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
