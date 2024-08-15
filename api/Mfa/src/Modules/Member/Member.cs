@@ -15,7 +15,7 @@ public class Member {
     [Column("email"), Required]
     public required string Email { get; set; }
     [Column("phone_number")]
-    public int? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
     [Column("title")]
     public string? Title { get; set; }
     [Column("created_at"), Required]
@@ -35,6 +35,6 @@ public class Member {
     public ICollection<Delegate>? Delegates;
 
     public Member() {
-        CreatedAt = DateTime.Now;
+        CreatedAt = DateTime.UtcNow;
     }
 }

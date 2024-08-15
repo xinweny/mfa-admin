@@ -20,18 +20,21 @@ public static class MembershipMapper {
             MembershipType = dto.MembershipType,
         };
 
-        var address = dto.Address;
+        var addressDto = dto.Address;
 
-        if (address != null) {
-            membership.Address = new Address {
+        if (addressDto != null) {
+            var address = new Address {
                 MembershipId = membership.Id,
-                Line1 = address.Line1,
-                Line2 = address.Line2,
-                Line3 = address.Line3,
-                City = address.City,
-                PostalCode = address.PostalCode,
-                Province = address.Province,
+                Line1 = addressDto.Line1,
+                Line2 = addressDto.Line2,
+                Line3 = addressDto.Line3,
+                City = addressDto.City,
+                PostalCode = addressDto.PostalCode,
+                Province = addressDto.Province,
             };
+
+            membership.Address = address;
+            membership.AddressId = address.Id;
         }
 
         if (dto.Members != null) {

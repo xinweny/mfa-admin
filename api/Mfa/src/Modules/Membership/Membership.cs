@@ -25,6 +25,6 @@ public class Membership {
     public IEnumerable<MembershipPayment>? Payments { get; set; }
 
     public Membership() {
-        CreatedAt = DateTime.Now;
+        CreatedAt = DateTime.UtcNow;
     }
 }
