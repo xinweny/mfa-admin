@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Auth0.AspNetCore.Authentication;
 
 using Mfa.Data;
 using Mfa.Middleware;
 using Mfa.Interfaces;
 using Mfa.Repositories;
 using Mfa.Services;
+
 
 namespace Mfa;
 
@@ -17,11 +17,6 @@ public class Startup {
     }
 
     public void ConfigureServices(IServiceCollection services) {
-        services.AddAuth0WebAppAuthentication(options => {
-            options.Domain = Configuration["Auth0:Domain"];
-            options.ClientId = Configuration["Auth0:ClientId"];
-        });
-
         services.AddControllers();
         services.AddDbContext<MfaDbContext>(options => {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
@@ -50,8 +45,9 @@ public class Startup {
         app.UseHttpsRedirection();
         
         app.UseRouting();
-        RegisterMiddleware(app);
+        app.UseAuthentication();
         app.UseAuthorization();
+        RegisterMiddleware(app);
         app.UseEndpoints(endpoints => {
             endpoints.MapControllers();
         });
