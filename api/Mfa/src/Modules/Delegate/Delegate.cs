@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mfa.Models;
 
+[Table("delegates")]
 public class Delegate {
-    [Key]
+    [Column("id"), Key]
     public int Id { get; set; }
 
-    [Required]
+    [Column("year"), Required]
     public required int Year { get; set; }
 
-    [Required, ForeignKey(nameof(Member))]
+    [Column("member_id"), Required, ForeignKey(nameof(Member))]
     public required int MemberId { get; set; }
     [Required]
     public Member? Member;

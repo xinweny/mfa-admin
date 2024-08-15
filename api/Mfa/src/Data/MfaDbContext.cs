@@ -11,9 +11,10 @@ public class MfaDbContext: DbContext {
     public required DbSet<Membership> Memberships { get; set; }
     public required DbSet<Address> Addresses { get; set; }
     public required DbSet<MembershipPayment> MembershipPayments { get; set; }
-    public required DbSet<BoardPosition> BoardPositions { get; set; }
+    public required DbSet<BoardMember> BoardMembers { get; set; }
     public required DbSet<Models.Host> Hosts { get; set; }
     public required DbSet<Models.Delegate> Delegates { get; set; }
+    public required DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<Membership>()
@@ -55,5 +56,10 @@ public class MfaDbContext: DbContext {
             .HasOne(address => address.Membership)
             .WithOne(membership => membership.Address)
             .HasForeignKey<Address>(address => address.MembershipId);
+        
+        modelBuilder.Entity<User>()
+            .HasOne(user => user.Member)
+            .WithOne(member => member.User)
+            .HasForeignKey<User>(user => user.MemberId);
     }
 }

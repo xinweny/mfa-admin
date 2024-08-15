@@ -5,22 +5,25 @@ using Mfa.Enums;
 
 namespace Mfa.Models;
 
+[Table("addresses")]
 public class Address {
-    [Key]
+    [Column("id"), Key]
     public int Id { get; set; }
 
-    [Required]
-    public required string Address1 { get; set; }
-    public string? Address2 { get; set; }
-    public string? Address3 { get; set; }
-    [Required]
+    [Column("line1"), Required]
+    public required string Line1 { get; set; }
+    [Column("line2")]
+    public string? Line2 { get; set; }
+    [Column("line3")]
+    public string? Line3 { get; set; }
+    [Column("city"), Required]
     public required string City { get; set; }
-    [Required]
+    [Column("postal_code"), Required]
     public required string PostalCode { get; set; }
-    [Required]
+    [Column("province"), Required]
     public required Provinces Province { get; set; }
 
-    [Required, ForeignKey(nameof(Membership))]
+    [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
     public Membership? Membership { get; set; }
 }

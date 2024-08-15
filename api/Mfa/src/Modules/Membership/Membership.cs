@@ -5,16 +5,19 @@ using Mfa.Enums;
 
 namespace Mfa.Models;
 
+[Table("memberships")]
 public class Membership {
-    [Key]
+    [Column("id"), Key]
     public int Id { get; set; }
 
-    [Required]
+    [Column("membership_type"), Required]
     public required MembershipTypes MembershipType { get; set; }
+    [Column("created_at"), Required]
     public DateTime CreatedAt { get; set; }
+    [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
-    [ForeignKey(nameof(Address))]
+    [Column("address_id"), ForeignKey(nameof(Address))]
     public int? AddressId { get; set; }
     public Address? Address;
 

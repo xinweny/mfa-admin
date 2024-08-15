@@ -7,9 +7,9 @@ public static class AddressMapper {
     public static AddressDto ToAddressDto(this Address address) {
         return new AddressDto {
             Id = address.Id,
-            Address1 = address.Address1,
-            Address2 = address.Address2,
-            Address3 = address.Address3,
+            Line1 = address.Line1,
+            Line2 = address.Line2,
+            Line3 = address.Line3,
             City = address.City,
             PostalCode = address.PostalCode,
             Province = address.Province,

@@ -3,26 +3,34 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mfa.Models;
 
+[Table("members")]
 public class Member {
-    [Key]
+    [Column("id"), Key]
     public int Id { get; set; }
 
-    [Required]
+    [Column("first_name"), Required]
     public required string FirstName { get; set; }
-    [Required]
+    [Column("last_name"), Required]
     public required string LastName { get; set; }
-    [Required]
+    [Column("email"), Required]
     public required string Email { get; set; }
+    [Column("phone_number")]
     public int? PhoneNumber { get; set; }
+    [Column("title")]
     public string? Title { get; set; }
+    [Column("created_at"), Required]
     public DateTime CreatedAt { get; set; }
+    [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
-    [Required, ForeignKey(nameof(Membership))]
+    [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
     public Membership? Membership;
+    [Column("user_id"), ForeignKey(nameof(User))]
+    public int? UserId { get; set; }
+    public User? User;
 
-    public ICollection<BoardPosition>? BoardPositions;
+    public ICollection<BoardMember>? BoardPositions;
     public ICollection<Host>? Hosts;
     public ICollection<Delegate>? Delegates;
 

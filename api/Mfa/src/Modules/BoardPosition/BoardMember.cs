@@ -5,16 +5,17 @@ using Mfa.Enums;
 
 namespace Mfa.Models;
 
-public class BoardPosition {
-    [Key]
+[Table("board_members")]
+public class BoardMember {
+    [Column("id"), Key]
     public int Id { get; set; }
 
-    [Required]
+    [Column("year"), Required]
     public required int Year { get; set; }
-    [Required]
-    public required BoardPositionTitles Position { get; set; }
+    [Column("board_position"), Required]
+    public required BoardPositions BoardPosition { get; set; }
 
-    [Required, ForeignKey(nameof(Member))]
+    [Column("member_id"), Required, ForeignKey(nameof(Member))]
     public required int MemberId;
     [Required]
     public Member? Member;
