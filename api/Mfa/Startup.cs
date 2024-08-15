@@ -1,12 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 using Mfa.Data;
 using Mfa.Middleware;
 using Mfa.Interfaces;
 using Mfa.Repositories;
 using Mfa.Services;
+using Mfa.Authorization;
 
 namespace Mfa;
 
@@ -26,8 +28,9 @@ public class Startup {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
                 options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-                options.Audience = Configuration["Auth0:Audiences"];
+                options.Audience = Configuration["Auth0:Audience"];
             });
+        services.AddAuthorization(); // TODO: add scopes
 
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
@@ -82,6 +85,8 @@ public class Startup {
     }
 
     private static void RegisterDependencies(IServiceCollection services) {
+        services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
         // Repositories
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IMembershipRepository, MembershipRepository>();
