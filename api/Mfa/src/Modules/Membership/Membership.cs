@@ -21,8 +21,8 @@ public class Membership {
     public int? AddressId { get; set; }
     public Address? Address;
 
-    public ICollection<Member>? Members { get; }
-    public ICollection<MembershipPayment>? Payments { get; }
+    public IEnumerable<Member>? Members { get; set; }
+    public IEnumerable<MembershipPayment>? Payments { get; set; }
 
     public Membership() {
         CreatedAt = DateTime.Now;

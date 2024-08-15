@@ -6,11 +6,9 @@ using Mfa.Enums;
 namespace Mfa.Services;
 public class MembershipServices: IMembershipServices {
     private readonly IMembershipRepository _membershipRepository;
-    private readonly IMemberRepository _memberRepository;
 
-    public MembershipServices(IMembershipRepository membershipRepository, IMemberRepository memberRepository) {
+    public MembershipServices(IMembershipRepository membershipRepository) {
         _membershipRepository = membershipRepository;
-        _memberRepository = memberRepository;
     }
 
     public async Task CreateMembership(CreateMembershipRequest dto)
@@ -19,9 +17,7 @@ public class MembershipServices: IMembershipServices {
             if (dto.MembershipType == MembershipTypes.Single && dto.Members.Count() > 1) throw new Exception("Single memberships can only have one member.");
         }
 
-        var membership = await _membershipRepository.CreateMembership(dto.ToMembership());
-
-        if (dto.Members != null) await _memberRepository.CreateMembers(dto.Members.Select(dto => dto.ToMember(membership.Id)));
+        await _membershipRepository.CreateMembership(dto.ToMembership());
     }
 
     public Task DeleteMembership(int id)

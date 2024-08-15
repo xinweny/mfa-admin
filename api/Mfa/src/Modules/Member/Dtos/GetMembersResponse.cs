@@ -11,12 +11,12 @@ public class GetMembersResponse {
     public int? PhoneNumber { get; set; }
     public string? Title { get; set; }
     public required int MembershipId { get; set; }
-    public required MembersMembership Membership { get; set; }
+    public required MembershipDto Membership { get; set; }
 
     public class MembershipDto {
         public required int Id { get; set; }
         public required MembershipTypes MembershipType { get; set; }
         public int? AddressId { get; set; }
-        public Address? Address { get; set; }
+        public AddressDto? Address { get; set; }
     }
 }

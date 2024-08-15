@@ -5,6 +5,8 @@ namespace Mfa.Mappers;
 
 public static class MemberMapper {
     public static GetMemberResponse ToGetMemberResponse(this Member member) {
+        var membership = member.Membership;
+
         return new GetMemberResponse {
             Id = member.Id,
             FirstName = member.FirstName,
@@ -13,7 +15,17 @@ public static class MemberMapper {
             Email = member.Email,
             Title = member.Title,
             MembershipId = member.MembershipId,
-            Membership = member.Membership.ToMemberMembership(),
+            Membership = new GetMemberResponse.MembershipDto {
+                Id = membership.Id,
+                MembershipType = membership.MembershipType,
+                AddressId = membership.AddressId,
+                Address = membership.Address?.ToAddressDto(),
+                Members = membership.Members?.Select(m => new GetMemberResponse.MembershipDto.MemberDto {
+                    Id = m.Id,
+                    FirstName = m.FirstName,
+                    LastName = m.LastName,
+                }) ?? [],
+            },
         };
     }
 
@@ -28,18 +40,9 @@ public static class MemberMapper {
         };
     }
 
-    public static Member ToMember(this CreateMembershipMember dto, int membershipId) {
-        return new Member {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            PhoneNumber = dto.PhoneNumber,
-            Email = dto.Email,
-            Title = dto.Title,
-            MembershipId = membershipId,
-        };
-    }
-
     public static GetMembersResponse ToGetMembersResponse(this Member member) {
+        var membership = member.Membership;
+
         return new GetMembersResponse {
             Id = member.Id,
             FirstName = member.FirstName,
@@ -48,15 +51,12 @@ public static class MemberMapper {
             Email = member.Email,
             Title = member.Title,
             MembershipId = member.MembershipId,
-            Membership = member.Membership.ToMembersMembership(),
-        };
-    }
-
-    public static MembershipMember ToMembershipMember(this Member member) {
-        return new MembershipMember {
-            Id = member.Id,
-            FirstName = member.FirstName,
-            LastName = member.LastName,
+            Membership = new GetMembersResponse.MembershipDto {
+                Id = membership.Id,
+                MembershipType = membership.MembershipType,
+                AddressId = membership.AddressId,
+                Address = membership.Address?.ToAddressDto(),
+            },
         };
     }
 }
