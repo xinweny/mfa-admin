@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 using Mfa.Data;
 using Mfa.Middleware;
 using Mfa.Interfaces;
 using Mfa.Repositories;
 using Mfa.Services;
-
 
 namespace Mfa;
 
@@ -25,9 +25,16 @@ public class Startup {
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
         services.AddLogging();
+        services.AddDatabaseDeveloperPageExceptionFilter();
 
         services.AddEndpointsApiExplorer();
-        services.AddDatabaseDeveloperPageExceptionFilter();
+        services.AddSwaggerGen(options => {
+            options.SwaggerDoc("v1", new OpenApiInfo {
+                Version = "v1",
+                Title = "MFA Member API",
+                Description = "An ASP.NET Core Web API for managing members and memberships of the Mississauga Friendship Association."
+            });
+        });
 
         RegisterDependencies(services);
     }
@@ -35,6 +42,12 @@ public class Startup {
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
         if (env.IsDevelopment()) {
             app.UseDeveloperExceptionPage();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
         }
         else {
             app.UseHsts();
