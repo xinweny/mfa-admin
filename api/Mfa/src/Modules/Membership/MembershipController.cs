@@ -48,7 +48,7 @@ public class MembershipController: ControllerBase {
         }
     }
 
-    [HttpPost("{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             throw new NotImplementedException();

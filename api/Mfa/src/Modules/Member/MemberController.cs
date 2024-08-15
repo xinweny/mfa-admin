@@ -54,7 +54,7 @@ public class MemberController: ControllerBase {
         }
     }
 
-    [HttpPost("{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
             await _memberServices.UpdateMember(id, body);
