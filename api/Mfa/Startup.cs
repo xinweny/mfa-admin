@@ -62,7 +62,11 @@ public class Startup {
         app.UseAuthorization();
         RegisterMiddleware(app);
         app.UseEndpoints(endpoints => {
-            endpoints.MapControllers();
+            if (env.IsDevelopment()) {
+                endpoints.MapControllers().AllowAnonymous();
+            } else {
+                endpoints.MapControllers();
+            }
         });
     }
 
