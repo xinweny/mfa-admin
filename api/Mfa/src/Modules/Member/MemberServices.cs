@@ -4,11 +4,11 @@ using Mfa.Interfaces;
 
 namespace Mfa.Services;
 
-public class MemberServices : IMemberServices
+public class MemberService : IMemberService
 {
     private readonly IMemberRepository _memberRepository;
 
-    public MemberServices(IMemberRepository memberRepository) {
+    public MemberService(IMemberRepository memberRepository) {
         _memberRepository = memberRepository;
     }
 

@@ -2,7 +2,7 @@ using Mfa.Dtos;
 
 namespace Mfa.Interfaces;
 
-public interface IMembershipServices {
+public interface IMembershipService {
     Task<IEnumerable<GetMembershipsResponse>> GetMemberships();
     Task<GetMembershipResponse> GetMembershipById(int id);
     Task CreateMembership(CreateMembershipRequest dto);

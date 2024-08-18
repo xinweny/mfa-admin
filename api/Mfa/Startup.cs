@@ -92,7 +92,7 @@ public class Startup {
         services.AddScoped<IMembershipRepository, MembershipRepository>();
 
         // Services
-        services.AddScoped<IMemberServices, MemberServices>();
-        services.AddScoped<IMembershipServices, MembershipServices>();
+        services.AddScoped<IMemberService, MemberService>();
+        services.AddScoped<IMembershipService, MembershipService>();
     }
 }

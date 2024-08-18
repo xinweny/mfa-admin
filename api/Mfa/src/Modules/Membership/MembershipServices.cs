@@ -5,10 +5,10 @@ using Mfa.Enums;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Mfa.Services;
-public class MembershipServices: IMembershipServices {
+public class MembershipService: IMembershipService {
     private readonly IMembershipRepository _membershipRepository;
 
-    public MembershipServices(IMembershipRepository membershipRepository) {
+    public MembershipService(IMembershipRepository membershipRepository) {
         _membershipRepository = membershipRepository;
     }
 

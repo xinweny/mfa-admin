@@ -11,16 +11,16 @@ namespace Mfa.Controllers;
 [Authorize]
 
 public class MemberController: ControllerBase {
-    private readonly IMemberServices _memberServices;
+    private readonly IMemberService _memberService;
 
-    public MemberController(IMemberServices memberServices) {
-        _memberServices = memberServices;
+    public MemberController(IMemberService memberService) {
+        _memberService = memberService;
     }
 
     [HttpGet("")]
     public async Task<IActionResult> GetMembersAsync([FromQuery] string? query) {
         try {
-            IEnumerable<GetMembersResponse> members = await _memberServices.GetMembers(new GetMembersRequest {
+            IEnumerable<GetMembersResponse> members = await _memberService.GetMembers(new GetMembersRequest {
                 Query = query,
             });
 
@@ -35,7 +35,7 @@ public class MemberController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
         try {
-            GetMemberResponse member = await _memberServices.GetMemberById(id);
+            GetMemberResponse member = await _memberService.GetMemberById(id);
 
             return Ok(new ResponseDto<GetMemberResponse> {
                 Data = member,
@@ -48,7 +48,7 @@ public class MemberController: ControllerBase {
     [HttpPost("")]
     public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequest body) {
         try {
-            await _memberServices.CreateMember(body);
+            await _memberService.CreateMember(body);
 
             return Ok();
         } catch (Exception ex) {
@@ -59,7 +59,7 @@ public class MemberController: ControllerBase {
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
         try {
-            await _memberServices.UpdateMember(id, body);
+            await _memberService.UpdateMember(id, body);
 
             return Ok();
         } catch (Exception ex) {
@@ -70,7 +70,7 @@ public class MemberController: ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMemberAsync([FromRoute] int id) {
         try {
-            await _memberServices.DeleteMember(id);
+            await _memberService.DeleteMember(id);
 
             return Ok();
         } catch (Exception ex) {

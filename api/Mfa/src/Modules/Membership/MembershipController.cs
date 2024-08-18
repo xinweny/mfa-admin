@@ -11,10 +11,10 @@ namespace Mfa.Controllers;
 [Authorize]
 
 public class MembershipController: ControllerBase {
-    private readonly IMembershipServices _membershipServices;
+    private readonly IMembershipService _membershipService;
 
-    public MembershipController(IMembershipServices membershipServices) {
-        _membershipServices = membershipServices;
+    public MembershipController(IMembershipService membershipService) {
+        _membershipService = membershipService;
     }
 
     [HttpGet("")]
@@ -29,7 +29,7 @@ public class MembershipController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMembershipByIdAsync([FromRoute] int id) {
         try {
-            var membership = await _membershipServices.GetMembershipById(id);
+            var membership = await _membershipService.GetMembershipById(id);
 
             return Ok(new ResponseDto<GetMembershipResponse> {
                 Data = membership,
@@ -42,7 +42,7 @@ public class MembershipController: ControllerBase {
     [HttpPost("")]
     public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMembershipRequest body) {
         try {
-            await _membershipServices.CreateMembership(body);
+            await _membershipService.CreateMembership(body);
 
             return Ok();
         } catch (Exception ex) {
@@ -53,7 +53,7 @@ public class MembershipController: ControllerBase {
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMembershipRequest body) {
         try {
-            await _membershipServices.UpdateMembership(id, body);
+            await _membershipService.UpdateMembership(id, body);
 
             return Ok();
         } catch (Exception ex) {
@@ -64,7 +64,7 @@ public class MembershipController: ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMembeshipAsync([FromRoute] int id) {
         try {
-            await _membershipServices.DeleteMembership(id);
+            await _membershipService.DeleteMembership(id);
 
             return Ok();
         } catch (Exception ex) {
