@@ -52,8 +52,10 @@ public class MembershipRepository : IMembershipRepository
 
         _context.Memberships.Entry(membership).CurrentValues.SetValues(dto);
 
-        if (membership.Address != null && dto.Address != null) {
-            _context.Addresses.Entry(membership.Address).CurrentValues.SetValues(dto.Address);
+        var address = membership.Address;
+
+        if (address != null && dto.Address != null) {
+            _context.Addresses.Entry(address).CurrentValues.SetValues(dto.Address);
         }
         
         await _context.SaveChangesAsync();

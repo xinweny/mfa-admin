@@ -27,4 +27,16 @@ public static class AddressMapper {
             MembershipId = dto.MembershipId,
         };
     }
+
+    public static Address ToAddress(this CreateAddressRequest dto) {
+        return new Address {
+            Line1 = dto.Line1,
+            Line2 = dto.Line2,
+            Line3 = dto.Line3,
+            City = dto.City,
+            PostalCode = dto.PostalCode,
+            Province = dto.Province,
+            MembershipId = dto.MembershipId,
+        };
+    }
 }
