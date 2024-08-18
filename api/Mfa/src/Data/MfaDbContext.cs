@@ -56,11 +56,6 @@ public class MfaDbContext: DbContext {
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(d => d.MemberId);
         
-        modelBuilder.Entity<Address>()
-            .HasOne(address => address.Membership)
-            .WithOne(membership => membership.Address)
-            .HasForeignKey<Address>(address => address.MembershipId);
-        
         modelBuilder.Entity<User>()
             .HasOne(user => user.Member)
             .WithOne(member => member.User)

@@ -26,10 +26,8 @@ public class Member {
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
     public Membership? Membership;
-    [Column("user_id"), ForeignKey(nameof(User))]
-    public int? UserId { get; set; }
-    public User? User;
 
+    public User? User;
     public ICollection<BoardMember>? BoardPositions;
     public ICollection<Host>? Hosts;
     public ICollection<Delegate>? Delegates;

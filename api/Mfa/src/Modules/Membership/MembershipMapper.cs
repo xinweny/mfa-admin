@@ -24,7 +24,6 @@ public static class MembershipMapper {
 
         if (addressDto != null) {
             var address = new Address {
-                MembershipId = membership.Id,
                 Line1 = addressDto.Line1,
                 Line2 = addressDto.Line2,
                 Line3 = addressDto.Line3,

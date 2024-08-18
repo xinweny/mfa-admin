@@ -23,7 +23,5 @@ public class Address {
     [Column("province"), Required]
     public required Provinces Province { get; set; }
 
-    [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
-    public required int MembershipId { get; set; }
     public Membership? Membership { get; set; }
 }

@@ -12,7 +12,6 @@ public static class AddressMapper {
             City = address.City,
             PostalCode = address.PostalCode,
             Province = address.Province,
-            MembershipId = address.MembershipId,
         };
     }
 
@@ -24,7 +23,6 @@ public static class AddressMapper {
             City = dto.City,
             PostalCode = dto.PostalCode,
             Province = dto.Province,
-            MembershipId = dto.MembershipId,
         };
     }
 
@@ -36,7 +34,6 @@ public static class AddressMapper {
             City = dto.City,
             PostalCode = dto.PostalCode,
             Province = dto.Province,
-            MembershipId = dto.MembershipId,
         };
     }
 }

@@ -1,8 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 using Mfa.Data;
 using Mfa.Dtos;
 using Mfa.Interfaces;
 using Mfa.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Mfa.Repositories;
 
@@ -30,12 +31,22 @@ public class MembershipRepository : IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Membership> GetMembershipById(int id)
+    public async Task<Membership?> GetMembershipById(int id) {
+        Membership membership = await _context.Memberships
+            .Where(m => m.Id == id)
+            .Include(m => m.Address)
+            .SingleAsync()
+            ?? throw new KeyNotFoundException();
+
+        return membership;
+    }
+
+    public async Task<Membership?> GetMembership(int id)
     {
         Membership membership = await _context.Memberships
             .Where(m => m.Id == id)
             .Include(m => m.Address)
-            .FirstAsync()
+            .SingleAsync()
             ?? throw new KeyNotFoundException();
 
         return membership;
@@ -51,12 +62,6 @@ public class MembershipRepository : IMembershipRepository
         membership.UpdatedAt = DateTime.UtcNow;
 
         _context.Memberships.Entry(membership).CurrentValues.SetValues(dto);
-
-        var address = membership.Address;
-
-        if (address != null && dto.Address != null) {
-            _context.Addresses.Entry(address).CurrentValues.SetValues(dto.Address);
-        }
         
         await _context.SaveChangesAsync();
 

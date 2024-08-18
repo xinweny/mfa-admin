@@ -9,5 +9,4 @@ public class UpdateAddressRequest {
     public string? City { get; set; }
     public string? PostalCode { get; set; }
     public Provinces? Province { get; set; }
-    public required int MembershipId { get; set; }
 }

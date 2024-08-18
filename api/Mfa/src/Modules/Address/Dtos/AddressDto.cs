@@ -9,5 +9,4 @@ public class AddressDto {
     public required string City { get; set; }
     public required string PostalCode { get; set; }
     public required Provinces Province { get; set; }
-    public required int MembershipId { get; set; }
 }

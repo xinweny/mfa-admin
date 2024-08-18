@@ -27,14 +27,16 @@ public class MembershipService: IMembershipService {
 
     public async Task DeleteMembership(int id)
     {
-        var membership = await _membershipRepository.GetMembershipById(id);
+        var membership = await _membershipRepository.GetMembershipById(id)
+            ?? throw new KeyNotFoundException();
 
         await _membershipRepository.DeleteMembership(membership);
     }
 
     public async Task<GetMembershipResponse> GetMembershipById(int id)
     {
-        var membership = await _membershipRepository.GetMembershipById(id);
+        var membership = await _membershipRepository.GetMembershipById(id)
+            ?? throw new KeyNotFoundException();
 
         return membership.ToGetMembershipResponse();
     }
@@ -46,7 +48,8 @@ public class MembershipService: IMembershipService {
 
     public async Task UpdateMembership(int id, UpdateMembershipRequest dto)
     {
-        var membership = await _membershipRepository.GetMembershipById(id);
+        var membership = await _membershipRepository.GetMembershipById(id)
+            ?? throw new KeyNotFoundException();
 
         await _membershipRepository.UpdateMembership(membership, dto);
     }

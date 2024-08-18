@@ -20,7 +20,7 @@ public class MemberController: ControllerBase {
     [HttpGet("")]
     public async Task<IActionResult> GetMembersAsync([FromQuery] string? query) {
         try {
-            IEnumerable<GetMembersResponse> members = await _memberService.GetMembers(new GetMembersRequest {
+            var members = await _memberService.GetMembers(new GetMembersRequest {
                 Query = query,
             });
 
@@ -35,7 +35,7 @@ public class MemberController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
         try {
-            GetMemberResponse member = await _memberService.GetMemberById(id);
+            var member = await _memberService.GetMemberById(id);
 
             return Ok(new ResponseDto<GetMemberResponse> {
                 Data = member,

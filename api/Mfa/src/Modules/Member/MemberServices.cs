@@ -19,14 +19,16 @@ public class MemberService : IMemberService
 
     public async Task DeleteMember(int id)
     {
-        var member = await _memberRepository.GetMemberById(id);
+        var member = await _memberRepository.GetMemberById(id)
+            ?? throw new KeyNotFoundException();
 
         await _memberRepository.DeleteMember(member);
     }
 
     public async Task<GetMemberResponse> GetMemberById(int id)
     {
-        var member = await _memberRepository.GetMemberById(id);
+        var member = await _memberRepository.GetMember(id)
+            ?? throw new KeyNotFoundException();
 
         return member.ToGetMemberResponse();
     }
@@ -38,7 +40,8 @@ public class MemberService : IMemberService
 
     public async Task UpdateMember(int id, UpdateMemberRequest dto)
     {
-        var member = await _memberRepository.GetMemberById(id);
+        var member = await _memberRepository.GetMemberById(id)
+            ?? throw new KeyNotFoundException();
 
         await _memberRepository.UpdateMember(member, dto);
     }

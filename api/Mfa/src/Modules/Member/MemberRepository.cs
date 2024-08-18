@@ -15,7 +15,14 @@ public class MemberRepository: IMemberRepository {
         _context = context;
     }
 
-    public async Task<Member> GetMemberById(int id) {
+    public async Task<Member?> GetMemberById(int id) {
+        Member member = await _context.Members.FindAsync(id)
+            ?? throw new KeyNotFoundException();
+
+        return member;
+    }
+
+    public async Task<Member?> GetMember(int id) {
         Member member = await _context.Members.FindAsync(id)
             ?? throw new KeyNotFoundException();
 
