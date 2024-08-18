@@ -10,8 +10,10 @@ public class BoardMember {
     [Column("id"), Key]
     public int Id { get; set; }
 
-    [Column("year"), Required]
-    public required int Year { get; set; }
+    [Column("start_date"), Required]
+    public required DateTime StartDate { get; set; }
+    [Column("end_date")]
+    public DateTime? EndDate { get; set; }
     [Column("board_position"), Required]
     public required BoardPositions BoardPosition { get; set; }
 
