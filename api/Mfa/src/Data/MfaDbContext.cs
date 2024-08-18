@@ -20,6 +20,7 @@ public class MfaDbContext: DbContext {
         modelBuilder.Entity<Membership>()
             .HasMany(membership => membership.Members)
             .WithOne(member => member.Membership)
+            .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(member => member.MembershipId);
 
         modelBuilder.Entity<Membership>()
@@ -40,16 +41,19 @@ public class MfaDbContext: DbContext {
         modelBuilder.Entity<Member>()
             .HasMany(member => member.BoardPositions)
             .WithOne(boardPosition => boardPosition.Member)
+            .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(boardPosition => boardPosition.MemberId);
         
         modelBuilder.Entity<Member>()
             .HasMany(member => member.Hosts)
             .WithOne(host => host.Member)
+            .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(host => host.MemberId);
 
         modelBuilder.Entity<Member>()
             .HasMany(member => member.Delegates)
             .WithOne(d => d.Member)
+            .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(d => d.MemberId);
         
         modelBuilder.Entity<Address>()
