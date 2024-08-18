@@ -4,8 +4,8 @@ namespace Mfa.Dtos;
 
 public class CreateMembershipRequest {
     public required MembershipTypes MembershipType { get; set; }
-    public IEnumerable<MemberDto>? Members { get; set; }
-    public AddressDto? Address { get; set; }
+    public required IEnumerable<MemberDto> Members { get; set; }
+    public CreateAddressDto? Address { get; set; }
 
     public class MemberDto {
         public required string FirstName { get; set; }
@@ -15,7 +15,7 @@ public class CreateMembershipRequest {
         public string? Title { get; set; }
     }
 
-    public class AddressDto {
+    public class CreateAddressDto {
         public required string Line1 { get; set; }
         public string? Line2 { get; set; }
         public string? Line3 { get; set; }

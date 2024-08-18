@@ -51,9 +51,11 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
+    public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int id, [FromBody] UpdateMembershipRequest body) {
         try {
-            throw new NotImplementedException();
+            await _membershipServices.UpdateMembership(id, body);
+
+            return Ok();
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }
@@ -62,7 +64,9 @@ public class MembershipController: ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMembeshipAsync([FromRoute] int id) {
         try {
-            throw new NotImplementedException();
+            await _membershipServices.DeleteMembership(id);
+
+            return Ok();
         } catch (Exception ex) {
             return StatusCode(500, ex.Message);
         }

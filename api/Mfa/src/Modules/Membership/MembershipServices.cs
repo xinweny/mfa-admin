@@ -2,6 +2,7 @@ using Mfa.Dtos;
 using Mfa.Interfaces;
 using Mfa.Mappers;
 using Mfa.Enums;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Mfa.Services;
 public class MembershipServices: IMembershipServices {
@@ -13,16 +14,22 @@ public class MembershipServices: IMembershipServices {
 
     public async Task CreateMembership(CreateMembershipRequest dto)
     {
-        if (dto.Members != null) {
-            if (dto.MembershipType == MembershipTypes.Single && dto.Members.Count() > 1) throw new Exception("Single memberships can only have one member.");
+        if (dto.Members.IsNullOrEmpty()) {
+            throw new Exception("Memberships must contain at least one member.");
+        }
+
+        if (dto.MembershipType == MembershipTypes.Single && dto.Members.Count() != 1) {
+            throw new Exception("Single memberships can only have one member.");
         }
 
         await _membershipRepository.CreateMembership(dto.ToMembership());
     }
 
-    public Task DeleteMembership(int id)
+    public async Task DeleteMembership(int id)
     {
-        throw new NotImplementedException();
+        var membership = await _membershipRepository.GetMembershipById(id);
+
+        await _membershipRepository.DeleteMembership(membership);
     }
 
     public async Task<GetMembershipResponse> GetMembershipById(int id)
@@ -37,8 +44,10 @@ public class MembershipServices: IMembershipServices {
         throw new NotImplementedException();
     }
 
-    public Task UpdateMembership(int id, UpdateMembershipRequest dto)
+    public async Task UpdateMembership(int id, UpdateMembershipRequest dto)
     {
-        throw new NotImplementedException();
+        var membership = await _membershipRepository.GetMembershipById(id);
+
+        await _membershipRepository.UpdateMembership(membership, dto);
     }
 }
