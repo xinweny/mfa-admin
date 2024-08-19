@@ -4,7 +4,7 @@ using Mfa.Dtos;
 namespace Mfa.Interfaces;
 
 public interface IMembershipRepository {
-    Task<IEnumerable<Membership>> GetMemberships(GetMembershipsRequest req);
+    Task<IEnumerable<Membership>> GetMemberships();
     Task<Membership?> GetMembershipById(int id);
     Task<Membership> CreateMembership(Membership membership);
     Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest req);

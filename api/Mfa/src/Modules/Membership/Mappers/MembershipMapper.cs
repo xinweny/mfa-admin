@@ -8,6 +8,27 @@ public static class MembershipMapper {
         return new GetMembershipResponse {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
+            Members = membership.Members?.Select(m => new GetMembershipResponse.MemberDto {
+                Id = m.Id,
+                FirstName = m.FirstName,
+                LastName = m.LastName
+            }),
+            AddressId = membership.AddressId,
+            Address = membership.Address?.ToAddressDto(),
+            CreatedAt = membership.CreatedAt,
+            UpdatedAt = membership.UpdatedAt,
+        };
+    }
+
+    public static GetMembershipsResponse ToGetMembershipsResponse(this Membership membership) {
+        return new GetMembershipsResponse {
+            Id = membership.Id,
+            MembershipType = membership.MembershipType,
+            Members = membership.Members?.Select(m => new GetMembershipsResponse.MemberDto {
+                Id = m.Id,
+                FirstName = m.FirstName,
+                LastName = m.LastName
+            }),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
             CreatedAt = membership.CreatedAt,

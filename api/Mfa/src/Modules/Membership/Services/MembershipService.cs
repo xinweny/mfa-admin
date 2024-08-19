@@ -41,9 +41,11 @@ public class MembershipService: IMembershipService {
         return membership.ToGetMembershipResponse();
     }
 
-    public Task<IEnumerable<GetMembershipsResponse>> GetMemberships()
+    public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships()
     {
-        throw new NotImplementedException();
+        var memberships = await _membershipRepository.GetMemberships();
+
+        return memberships.Select(m => m.ToGetMembershipsResponse());
     }
 
     public async Task UpdateMembership(int id, UpdateMembershipRequest req)

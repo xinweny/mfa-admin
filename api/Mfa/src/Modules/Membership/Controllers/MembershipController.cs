@@ -18,8 +18,12 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetMembershipsAsync([FromQuery] string? query) {
-        throw new NotImplementedException();
+    public async Task<IActionResult> GetMembershipsAsync() {
+        var memberships = await _membershipService.GetMemberships();
+
+        return Ok(new ApiResponse<IEnumerable<GetMembershipsResponse>> {
+            Data = memberships,
+        });
     }
 
     [HttpGet("{id}")]

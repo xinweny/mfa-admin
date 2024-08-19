@@ -35,15 +35,21 @@ public class MembershipRepository : IMembershipRepository
         Membership membership = await _context.Memberships
             .Where(m => m.Id == id)
             .Include(m => m.Address)
+            .Include(m => m.Members)
             .SingleAsync()
             ?? throw new KeyNotFoundException();
 
         return membership;
     }
     
-    public Task<IEnumerable<Membership>> GetMemberships(GetMembershipsRequest req)
+    public async Task<IEnumerable<Membership>> GetMemberships()
     {
-        throw new NotImplementedException();
+        var memberships = await _context.Memberships
+            .Include(m => m.Address)
+            .Include(m => m.Members)
+            .ToListAsync();
+        
+        return memberships;
     }
 
     public async Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest req)
