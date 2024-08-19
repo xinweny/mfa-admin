@@ -15,13 +15,11 @@ public class MembershipRepository : IMembershipRepository
         _context = context;
     }
 
-    public async Task<Membership> CreateMembership(Membership membership)
+    public async Task CreateMembership(Membership membership)
     {
         _context.Memberships.Add(membership);
 
         await _context.SaveChangesAsync();
-
-        return membership;
     }
 
     public async Task DeleteMembership(Membership membership)
@@ -52,14 +50,21 @@ public class MembershipRepository : IMembershipRepository
         return memberships;
     }
 
-    public async Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest req)
+    public async Task UpdateMembership(Membership membership, UpdateMembershipRequest req)
     {
         membership.UpdatedAt = DateTime.UtcNow;
 
-        _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
+        membership.MembershipType = req.MembershipType;
         
         await _context.SaveChangesAsync();
+    }
 
-        return membership;
+    public async Task UpdateMembershipAddressId(Membership membership, int? addressId)
+    {
+        membership.UpdatedAt = DateTime.UtcNow;
+
+        membership.AddressId = addressId;
+        
+        await _context.SaveChangesAsync();
     }
 }

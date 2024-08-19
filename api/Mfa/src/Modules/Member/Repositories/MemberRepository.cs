@@ -53,30 +53,24 @@ public class MemberRepository: IMemberRepository {
         return members;
     }
 
-    public async Task<Member> CreateMember(Member member) {
+    public async Task CreateMember(Member member) {
         _context.Members.Add(member);
 
         await _context.SaveChangesAsync();
-
-        return member;
     }
 
-    public async Task<IEnumerable<Member>> CreateMembers(IEnumerable<Member> members) {
+    public async Task CreateMembers(IEnumerable<Member> members) {
         _context.Members.AddRange(members);
 
         await _context.SaveChangesAsync();
-
-        return members;
     }
 
-    public async Task<Member> UpdateMember(Member member, UpdateMemberRequest req) {
+    public async Task UpdateMember(Member member, UpdateMemberRequest req) {
         member.UpdatedAt = DateTime.UtcNow;
 
         _context.Members.Entry(member).CurrentValues.SetValues(req);
         
         await _context.SaveChangesAsync();
-
-        return member;
     }
 
     public async Task DeleteMember(Member member) {

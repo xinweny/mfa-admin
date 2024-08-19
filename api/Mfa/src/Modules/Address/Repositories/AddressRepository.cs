@@ -28,13 +28,11 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public async Task<Address> CreateAddress(Address address)
+    public async Task CreateAddress(Address address)
     {
         _context.Addresses.Add(address);
 
         await _context.SaveChangesAsync();
-
-        return address;
     }
 
     public async Task DeleteAddress(Address address)
@@ -44,12 +42,10 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Address> UpdateAddress(Address address, UpdateAddressRequest dto)
+    public async Task UpdateAddress(Address address, UpdateAddressRequest dto)
     {
         _context.Addresses.Entry(address).CurrentValues.SetValues(dto);
 
         await _context.SaveChangesAsync();
-
-        return address;
     }
 }

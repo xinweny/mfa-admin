@@ -23,11 +23,11 @@ public class MembershipAddressService : IMembershipAddressService
 
         if (membership.Address != null) throw new Exception("Membership already has an address.");
 
-        var address = await _addressRepository.CreateAddress(dto.ToAddress());
+        var address = dto.ToAddress();
 
-        await _membershipRepository.UpdateMembership(membership, new UpdateMembershipRequest {
-            AddressId = address.Id,
-        });
+        await _addressRepository.CreateAddress(address);
+
+        await _membershipRepository.UpdateMembershipAddressId(membership, address.Id);
     }
     
     public async Task DeleteAddress(int membershipId)
@@ -37,9 +37,7 @@ public class MembershipAddressService : IMembershipAddressService
 
         var address = membership.Address ?? throw new KeyNotFoundException();
     
-        await _membershipRepository.UpdateMembership(membership, new UpdateMembershipRequest {
-            AddressId = null,
-        });
+        await _membershipRepository.UpdateMembership(membership, null);
 
         await _addressRepository.DeleteAddress(address);
     }
