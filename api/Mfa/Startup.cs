@@ -95,6 +95,7 @@ public class Startup {
         // Services
         services.AddScoped<IMemberService, MemberService>();
         services.AddScoped<IMembershipService, MembershipService>();
+        services.AddScoped<IMembershipAddressService, MembershipAddressService>();
         services.AddScoped<IAddressService, AddressService>();
     }
 }

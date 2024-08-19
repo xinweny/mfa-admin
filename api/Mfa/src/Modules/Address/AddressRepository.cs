@@ -15,16 +15,6 @@ public class AddressRepository : IAddressRepository
         _context = context;
     }
 
-    public async Task<Address?> GetAddressByMembershipId(int membershipId) {
-        Address address = await _context.Memberships
-            .Where(m => m.Id == membershipId)
-            .Select(m => m.Address)
-            .SingleAsync()
-            ?? throw new KeyNotFoundException();
-
-        return address;
-    }
-
     public async Task<Address> CreateAddress(Address address)
     {
         _context.Addresses.Add(address);

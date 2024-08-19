@@ -3,7 +3,6 @@ using Mfa.Dtos;
 namespace Mfa.Interfaces;
 
 public interface IAddressService {
-    Task CreateAddress(int membershipId, CreateAddressRequest dto);
-    Task UpdateAddress(int membershipId, UpdateAddressRequest dto);
-    Task DeleteAddress(int membershipId);
+    Task<AddressDto> GetAddress(int id);
+    Task<IEnumerable<AddressDto>> GetAddresses();
 }

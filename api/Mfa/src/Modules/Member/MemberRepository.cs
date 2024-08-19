@@ -22,13 +22,6 @@ public class MemberRepository: IMemberRepository {
         return member;
     }
 
-    public async Task<Member?> GetMember(int id) {
-        Member member = await _context.Members.FindAsync(id)
-            ?? throw new KeyNotFoundException();
-
-        return member;
-    }
-
     public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto) {
         var membersQuery = from member in _context.Members
             select member;

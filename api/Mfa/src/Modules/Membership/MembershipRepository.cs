@@ -40,18 +40,7 @@ public class MembershipRepository : IMembershipRepository
 
         return membership;
     }
-
-    public async Task<Membership?> GetMembership(int id)
-    {
-        Membership membership = await _context.Memberships
-            .Where(m => m.Id == id)
-            .Include(m => m.Address)
-            .SingleAsync()
-            ?? throw new KeyNotFoundException();
-
-        return membership;
-    }
-
+    
     public Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest dto)
     {
         throw new NotImplementedException();
