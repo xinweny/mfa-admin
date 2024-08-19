@@ -15,6 +15,19 @@ public class AddressRepository : IAddressRepository
         _context = context;
     }
 
+    public async Task<IEnumerable<Address>> GetAddresses() {
+        var addressQuery = from address in _context.Addresses
+            select address;
+        
+        return await addressQuery.ToListAsync();
+    }
+
+    public async Task<Address?> GetAddressById(int id) {
+        var address = await _context.Addresses.FindAsync(id);
+
+        return address;
+    }
+
     public async Task<Address> CreateAddress(Address address)
     {
         _context.Addresses.Add(address);

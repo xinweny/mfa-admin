@@ -4,7 +4,7 @@ using Mfa.Dtos;
 namespace Mfa.Interfaces;
 
 public interface IMemberRepository {
-    Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto);
+    Task<IEnumerable<Member>> GetMembers(GetMembersRequest dto);
     Task<Member?> GetMemberById(int id);
     Task<Member> CreateMember(Member member);
     Task<IEnumerable<Member>> CreateMembers(IEnumerable<Member> members);

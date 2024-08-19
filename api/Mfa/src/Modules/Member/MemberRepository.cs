@@ -4,7 +4,6 @@ using Mfa.Data;
 using Mfa.Models;
 using Mfa.Dtos;
 using Mfa.Interfaces;
-using Mfa.Mappers;
 
 namespace Mfa.Repositories;
 
@@ -22,7 +21,7 @@ public class MemberRepository: IMemberRepository {
         return member;
     }
 
-    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto) {
+    public async Task<IEnumerable<Member>> GetMembers(GetMembersRequest dto) {
         var membersQuery = from member in _context.Members
             select member;
 
@@ -36,7 +35,6 @@ public class MemberRepository: IMemberRepository {
         }
 
         var members = await membersQuery
-            .Select(member => member.ToGetMembersResponse())
             .ToListAsync();
 
         return members;

@@ -27,7 +27,7 @@ public class MemberService : IMemberService
 
     public async Task<GetMemberResponse> GetMemberById(int id)
     {
-        var member = await _memberRepository.GetMember(id)
+        var member = await _memberRepository.GetMemberById(id)
             ?? throw new KeyNotFoundException();
 
         return member.ToGetMemberResponse();
@@ -35,7 +35,9 @@ public class MemberService : IMemberService
 
     public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto)
     {
-        return await _memberRepository.GetMembers(dto);;
+        var members = await _memberRepository.GetMembers(dto);
+
+        return members.Select(m => m.ToGetMembersResponse());
     }
 
     public async Task UpdateMember(int id, UpdateMemberRequest dto)
