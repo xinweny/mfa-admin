@@ -22,7 +22,7 @@ public class Membership {
     public Address? Address;
 
     public virtual ICollection<Member>? Members { get; set; }
-    public virtual ICollection<MembershipPayment>? Payments { get; set; }
+    public virtual ICollection<Due>? Dues { get; set; }
 
     public Membership() {
         CreatedAt = DateTime.UtcNow;

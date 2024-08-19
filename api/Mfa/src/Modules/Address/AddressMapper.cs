@@ -15,25 +15,25 @@ public static class AddressMapper {
         };
     }
 
-    public static Address ToAddress(this AddressDto dto) {
+    public static Address ToAddress(this AddressDto req) {
         return new Address {
-            Line1 = dto.Line1,
-            Line2 = dto.Line2,
-            Line3 = dto.Line3,
-            City = dto.City,
-            PostalCode = dto.PostalCode,
-            Province = dto.Province,
+            Line1 = req.Line1,
+            Line2 = req.Line2,
+            Line3 = req.Line3,
+            City = req.City,
+            PostalCode = req.PostalCode,
+            Province = req.Province,
         };
     }
 
-    public static Address ToAddress(this CreateAddressRequest dto) {
+    public static Address ToAddress(this CreateAddressRequest req) {
         return new Address {
-            Line1 = dto.Line1,
-            Line2 = dto.Line2,
-            Line3 = dto.Line3,
-            City = dto.City,
-            PostalCode = dto.PostalCode,
-            Province = dto.Province,
+            Line1 = req.Line1,
+            Line2 = req.Line2,
+            Line3 = req.Line3,
+            City = req.City,
+            PostalCode = req.PostalCode,
+            Province = req.Province,
         };
     }
 }

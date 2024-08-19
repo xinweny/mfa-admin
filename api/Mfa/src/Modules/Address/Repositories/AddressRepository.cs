@@ -42,9 +42,9 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAddress(Address address, UpdateAddressRequest dto)
+    public async Task UpdateAddress(Address address, UpdateAddressRequest req)
     {
-        _context.Addresses.Entry(address).CurrentValues.SetValues(dto);
+        _context.Addresses.Entry(address).CurrentValues.SetValues(req);
 
         await _context.SaveChangesAsync();
     }

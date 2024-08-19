@@ -5,8 +5,8 @@ using Mfa.Enums;
 
 namespace Mfa.Models;
 
-[Table("membership_payments")]
-public class MembershipPayment {
+[Table("dues")]
+public class Due {
     [Column("id"), Key]
     public int Id { get; set; }
 

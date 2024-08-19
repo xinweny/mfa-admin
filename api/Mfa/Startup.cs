@@ -91,11 +91,13 @@ public class Startup {
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IMembershipRepository, MembershipRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<IDueRepository, DueRepository>();
 
         // Services
         services.AddScoped<IMemberService, MemberService>();
         services.AddScoped<IMembershipService, MembershipService>();
         services.AddScoped<IMembershipAddressService, MembershipAddressService>();
         services.AddScoped<IAddressService, AddressService>();
+        services.AddScoped<IDueService, DueService>();
     }
 }

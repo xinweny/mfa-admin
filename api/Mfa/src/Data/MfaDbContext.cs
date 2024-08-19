@@ -10,7 +10,7 @@ public class MfaDbContext: DbContext {
     public required DbSet<Member> Members { get; set; }
     public required DbSet<Membership> Memberships { get; set; }
     public required DbSet<Address> Addresses { get; set; }
-    public required DbSet<MembershipPayment> MembershipPayments { get; set; }
+    public required DbSet<Due> Dues { get; set; }
     public required DbSet<BoardMember> BoardMembers { get; set; }
     public required DbSet<Models.Host> Hosts { get; set; }
     public required DbSet<Models.Delegate> Delegates { get; set; }
@@ -24,9 +24,9 @@ public class MfaDbContext: DbContext {
             .HasForeignKey(member => member.MembershipId);
 
         modelBuilder.Entity<Membership>()
-            .HasMany(membership => membership.Payments)
-            .WithOne(payment => payment.Membership)
-            .HasForeignKey(payment => payment.MembershipId);
+            .HasMany(membership => membership.Dues)
+            .WithOne(due => due.Membership)
+            .HasForeignKey(due => due.MembershipId);
         
         modelBuilder.Entity<Membership>()
             .HasOne(membership => membership.Address)
