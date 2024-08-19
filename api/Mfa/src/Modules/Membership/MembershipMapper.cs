@@ -43,7 +43,6 @@ public static class MembershipMapper {
                 LastName = member.LastName,
                 PhoneNumber = member.PhoneNumber,
                 Email = member.Email,
-                Title = member.Title,
             }).ToList();
         }
 

@@ -12,7 +12,6 @@ public class CreateMembershipRequest {
         public required string LastName { get; set; }
         public required string Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public string? Title { get; set; }
     }
 
     public class CreateAddressDto {
