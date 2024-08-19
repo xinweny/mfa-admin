@@ -13,7 +13,6 @@ public static class MemberMapper {
             LastName = member.LastName,
             PhoneNumber = member.PhoneNumber,
             Email = member.Email,
-            Title = member.Title,
             MembershipId = member.MembershipId,
             Membership = new GetMemberResponse.MembershipDto {
                 Id = membership.Id,
@@ -35,7 +34,6 @@ public static class MemberMapper {
             LastName = dto.LastName,
             PhoneNumber = dto.PhoneNumber,
             Email = dto.Email,
-            Title = dto.Title,
             MembershipId = dto.MembershipId,
         };
     }
@@ -49,7 +47,6 @@ public static class MemberMapper {
             LastName = member.LastName,
             PhoneNumber = member.PhoneNumber,
             Email = member.Email,
-            Title = member.Title,
             MembershipId = member.MembershipId,
             Membership = new GetMembersResponse.MembershipDto {
                 Id = membership.Id,

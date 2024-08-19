@@ -17,8 +17,6 @@ public class Member {
     [Column("phone_number")]
     public string? PhoneNumber { get; set; }
     [Column("title")]
-    public string? Title { get; set; }
-    [Column("created_at"), Required]
     public DateTime CreatedAt { get; set; }
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
