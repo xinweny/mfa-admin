@@ -16,10 +16,10 @@ public class AddressRepository : IAddressRepository
     }
 
     public async Task<IEnumerable<Address>> GetAddresses() {
-        var addressQuery = from address in _context.Addresses
+        var addressesQuery = from address in _context.Addresses
             select address;
         
-        return await addressQuery.ToListAsync();
+        return await addressesQuery.ToListAsync();
     }
 
     public async Task<Address?> GetAddressById(int id) {
