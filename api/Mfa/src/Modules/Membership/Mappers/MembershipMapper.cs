@@ -15,12 +15,12 @@ public static class MembershipMapper {
         };
     }
 
-    public static Membership ToMembership(this CreateMembershipRequest dto) {
+    public static Membership ToMembership(this CreateMembershipRequest req) {
         Membership membership = new Membership {
-            MembershipType = dto.MembershipType,
+            MembershipType = req.MembershipType,
         };
 
-        var addressDto = dto.Address;
+        var addressDto = req.Address;
 
         if (addressDto != null) {
             var address = new Address {
@@ -36,8 +36,8 @@ public static class MembershipMapper {
             membership.AddressId = address.Id;
         }
 
-        if (dto.Members != null) {
-            membership.Members = dto.Members.Select(member => new Member {
+        if (req.Members != null) {
+            membership.Members = req.Members.Select(member => new Member {
                 MembershipId = membership.Id,
                 FirstName = member.FirstName,
                 LastName = member.LastName,

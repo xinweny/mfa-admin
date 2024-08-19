@@ -14,27 +14,40 @@ public class MemberRepository: IMemberRepository {
         _context = context;
     }
 
-    public async Task<Member?> GetMemberById(int id) {
-        Member member = await _context.Members.FindAsync(id)
+    public async Task<Member?> GetMemberById(int id, GetMemberRequest? req = null) {
+        Member member = await _context.Members
+            .Include(m => m.Membership)
+            .ThenInclude(m => m != null ? m.Address : null)
+            .Where(m => m.Id == id)
+            .SingleAsync()
             ?? throw new KeyNotFoundException();
 
         return member;
     }
 
-    public async Task<IEnumerable<Member>> GetMembers(GetMembersRequest dto) {
+    public async Task<Member?> GetMemberById(int id) {
+        return await GetMemberById(id, new GetMemberRequest {
+            includeAddress = false,
+            includeMembership = false,
+        });
+    }
+
+    public async Task<IEnumerable<Member>> GetMembers(GetMembersRequest req) {
         var membersQuery = from member in _context.Members
             select member;
 
-        string? query = dto.Query;
+        string? query = req.Query;
         
         if (!string.IsNullOrEmpty(query)) {
             string formattedQuery = query.ToUpper();
 
             membersQuery = membersQuery
-                .Where(member => $"{member.FirstName} {member.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
+                .Where(m => $"{m.FirstName} {m.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
         }
 
         var members = await membersQuery
+            .Include(m => m.Membership)
+            .ThenInclude(m => m != null ? m.Address : null)
             .ToListAsync();
 
         return members;
@@ -56,10 +69,10 @@ public class MemberRepository: IMemberRepository {
         return members;
     }
 
-    public async Task<Member> UpdateMember(Member member, UpdateMemberRequest dto) {
+    public async Task<Member> UpdateMember(Member member, UpdateMemberRequest req) {
         member.UpdatedAt = DateTime.UtcNow;
 
-        _context.Members.Entry(member).CurrentValues.SetValues(dto);
+        _context.Members.Entry(member).CurrentValues.SetValues(req);
         
         await _context.SaveChangesAsync();
 

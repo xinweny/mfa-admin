@@ -20,6 +20,7 @@ public class AddressController: ControllerBase {
     [HttpGet("")]
     public async Task<IActionResult> GetAddressesAsync() {
         var addresses = await _addressService.GetAddresses();
+
         return Ok(new ResponseDto<IEnumerable<AddressDto>> {
             Data = addresses,
         });
@@ -28,6 +29,7 @@ public class AddressController: ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAddressAsync([FromRoute] int id) {
         var address = await _addressService.GetAddress(id);
+        
         return Ok(new ResponseDto<AddressDto> {
             Data = address,
         });

@@ -6,7 +6,7 @@ namespace Mfa.Mappers;
 public static class MemberMapper {
     public static GetMemberResponse ToGetMemberResponse(this Member member) {
         var membership = member.Membership;
-
+        
         return new GetMemberResponse {
             Id = member.Id,
             FirstName = member.FirstName,
@@ -28,13 +28,13 @@ public static class MemberMapper {
         };
     }
 
-    public static Member ToMember(this CreateMemberRequest dto) {
+    public static Member ToMember(this CreateMemberRequest req) {
         return new Member {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            PhoneNumber = dto.PhoneNumber,
-            Email = dto.Email,
-            MembershipId = dto.MembershipId,
+            FirstName = req.FirstName,
+            LastName = req.LastName,
+            PhoneNumber = req.PhoneNumber,
+            Email = req.Email,
+            MembershipId = req.MembershipId,
         };
     }
 

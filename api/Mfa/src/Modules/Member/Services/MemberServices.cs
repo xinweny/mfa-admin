@@ -1,6 +1,7 @@
 using Mfa.Mappers;
 using Mfa.Dtos;
 using Mfa.Interfaces;
+using System.Diagnostics;
 
 namespace Mfa.Services;
 
@@ -12,9 +13,9 @@ public class MemberService : IMemberService
         _memberRepository = memberRepository;
     }
 
-    public async Task CreateMember(CreateMemberRequest dto)
+    public async Task CreateMember(CreateMemberRequest req)
     {
-        await _memberRepository.CreateMember(dto.ToMember());
+        await _memberRepository.CreateMember(req.ToMember());
     }
 
     public async Task DeleteMember(int id)
@@ -33,18 +34,18 @@ public class MemberService : IMemberService
         return member.ToGetMemberResponse();
     }
 
-    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest dto)
+    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest req)
     {
-        var members = await _memberRepository.GetMembers(dto);
+        var members = await _memberRepository.GetMembers(req);
 
         return members.Select(m => m.ToGetMembersResponse());
     }
 
-    public async Task UpdateMember(int id, UpdateMemberRequest dto)
+    public async Task UpdateMember(int id, UpdateMemberRequest req)
     {
         var member = await _memberRepository.GetMemberById(id)
             ?? throw new KeyNotFoundException();
 
-        await _memberRepository.UpdateMember(member, dto);
+        await _memberRepository.UpdateMember(member, req);
     }
 }

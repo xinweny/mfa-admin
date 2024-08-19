@@ -1,5 +1,4 @@
 using Mfa.Enums;
-using Mfa.Models;
 
 namespace Mfa.Dtos;
 

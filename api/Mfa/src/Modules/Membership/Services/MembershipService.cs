@@ -12,17 +12,17 @@ public class MembershipService: IMembershipService {
         _membershipRepository = membershipRepository;
     }
 
-    public async Task CreateMembership(CreateMembershipRequest dto)
+    public async Task CreateMembership(CreateMembershipRequest req)
     {
-        if (dto.Members.IsNullOrEmpty()) {
+        if (req.Members.IsNullOrEmpty()) {
             throw new Exception("Memberships must contain at least one member.");
         }
 
-        if (dto.MembershipType == MembershipTypes.Single && dto.Members.Count() != 1) {
+        if (req.MembershipType == MembershipTypes.Single && req.Members.Count() != 1) {
             throw new Exception("Single memberships can only have one member.");
         }
 
-        await _membershipRepository.CreateMembership(dto.ToMembership());
+        await _membershipRepository.CreateMembership(req.ToMembership());
     }
 
     public async Task DeleteMembership(int id)
@@ -46,11 +46,11 @@ public class MembershipService: IMembershipService {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateMembership(int id, UpdateMembershipRequest dto)
+    public async Task UpdateMembership(int id, UpdateMembershipRequest req)
     {
         var membership = await _membershipRepository.GetMembershipById(id)
             ?? throw new KeyNotFoundException();
 
-        await _membershipRepository.UpdateMembership(membership, dto);
+        await _membershipRepository.UpdateMembership(membership, req);
     }
 }

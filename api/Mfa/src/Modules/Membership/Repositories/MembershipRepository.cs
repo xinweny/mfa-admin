@@ -41,16 +41,16 @@ public class MembershipRepository : IMembershipRepository
         return membership;
     }
     
-    public Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest dto)
+    public Task<IEnumerable<Membership>> GetMemberships(GetMembershipsRequest req)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest dto)
+    public async Task<Membership> UpdateMembership(Membership membership, UpdateMembershipRequest req)
     {
         membership.UpdatedAt = DateTime.UtcNow;
 
-        _context.Memberships.Entry(membership).CurrentValues.SetValues(dto);
+        _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
         
         await _context.SaveChangesAsync();
 
