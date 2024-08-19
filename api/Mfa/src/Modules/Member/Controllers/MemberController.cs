@@ -23,7 +23,7 @@ public class MemberController: ControllerBase {
             Query = query,
         });
         
-        return Ok(new ResponseDto<IEnumerable<GetMembersResponse>> {
+        return Ok(new ApiResponse<IEnumerable<GetMembersResponse>> {
             Data = members,
         });
     }
@@ -32,7 +32,7 @@ public class MemberController: ControllerBase {
     public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
         var member = await _memberService.GetMemberById(id);
 
-        return Ok(new ResponseDto<GetMemberResponse> {
+        return Ok(new ApiResponse<GetMemberResponse> {
             Data = member,
         });
     }

@@ -26,7 +26,7 @@ public class MembershipController: ControllerBase {
     public async Task<IActionResult> GetMembershipByIdAsync([FromRoute] int id) {
         var membership = await _membershipService.GetMembershipById(id);
 
-        return Ok(new ResponseDto<GetMembershipResponse> {
+        return Ok(new ApiResponse<GetMembershipResponse> {
             Data = membership,
         });
     }
