@@ -1,6 +1,0 @@
-namespace Mfa.Dtos;
-
-public class PaginationRequest {
-    public required int Offset { get; set; }
-    public required int Limit { get; set; }
-}

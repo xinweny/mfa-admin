@@ -2,13 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using FluentValidation;
 
-using Mfa.Data;
+using Mfa.Database;
 using Mfa.Middleware;
-using Mfa.Interfaces;
-using Mfa.Repositories;
-using Mfa.Services;
-using Mfa.Authorization;
 
 namespace Mfa;
 
@@ -70,7 +67,7 @@ public class Startup {
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-        RegisterMiddleware(app);
+        app.UseMiddleware<IPWhitelistMiddleware>();
         app.UseEndpoints(endpoints => {
             if (env.IsDevelopment()) {
                 endpoints.MapControllers().AllowAnonymous();
@@ -78,10 +75,6 @@ public class Startup {
                 endpoints.MapControllers();
             }
         });
-    }
-
-    private static void RegisterMiddleware( IApplicationBuilder app) {
-        app.UseMiddleware<IPWhitelistMiddleware>();
     }
 
     private static void RegisterDependencies(IServiceCollection services) {
@@ -99,5 +92,8 @@ public class Startup {
         services.AddScoped<IMembershipAddressService, MembershipAddressService>();
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IDueService, DueService>();
+
+        // Validators
+        services.AddScoped<IValidator<Member>, MemberValidator>();
     }
 }
