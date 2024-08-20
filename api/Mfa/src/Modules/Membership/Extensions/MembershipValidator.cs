@@ -27,9 +27,7 @@ public class MembershipValidator: AbstractValidator<MembershipModel> {
             .WithMessage($"Family memberships cannot exceed ${MfaConstants.MaxFamilyMembershipMembers} members.")
             .Must(members => members!.Count() <= MfaConstants.MaxHonoraryMembershipMembers)
             .When(m => m.MembershipType == MembershipType.Honorary)
-            .WithMessage($"Honorary memberships cannot exceed ${MfaConstants.MaxHonoraryMembershipMembers} members.");
-        
-        RuleForEach(m => m.Members)
-            .SetValidator(new MemberValidator());
+            .WithMessage($"Honorary memberships cannot exceed ${MfaConstants.MaxHonoraryMembershipMembers} members.")
+            .ForEach(member => member.SetValidator(new MemberValidator()));
     }
 }

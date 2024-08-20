@@ -1,7 +1,7 @@
 namespace Mfa.Modules.Due;
 
 public enum PaymentMethod {
-    EFT,
-    Cash,
-    Cheque
+    Cash = 1,
+    EFT = 2,
+    Cheque = 3
 }

@@ -1,7 +1,7 @@
 namespace Mfa.Modules.Membership;
 
 public enum MembershipType {
-    Single,
-    Family,
-    Honorary
+    Single = 1,
+    Family = 2,
+    Honorary = 3,
 }

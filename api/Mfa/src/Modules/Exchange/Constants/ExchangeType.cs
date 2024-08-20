@@ -1,6 +1,6 @@
 namespace Mfa.Modules.Exchange;
 
 public enum ExchangeType {
-    Host,
-    Delegate,
+    Host = 1,
+    Delegate = 2,
 }
