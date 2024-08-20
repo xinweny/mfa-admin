@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using FluentValidation;
 
+using Mfa.Common.Enums;
 using Mfa.Database;
 
 namespace Mfa.Modules.Due;
@@ -7,13 +10,19 @@ namespace Mfa.Modules.Due;
 public class DueRepository : IDueRepository
 {
     private readonly MfaDbContext _context;
+    private readonly IValidator<DueModel> _validator;
 
-    public DueRepository(MfaDbContext context) {
+    public DueRepository(MfaDbContext context, IValidator<DueModel> validator) {
         _context = context;
+        _validator = validator;
     }
 
     public async Task CreateDues(IEnumerable<DueModel> dues)
     {
+        foreach (DueModel due in dues) {
+            _validator.ValidateAndThrow(due);
+        }
+
         _context.Dues.AddRange(dues);
 
         await _context.SaveChangesAsync();
@@ -26,18 +35,38 @@ public class DueRepository : IDueRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<DueModel>> GetDues(GetDuesRequest? req)
+    public async Task<DueModel?> GetDueById(int id)
+    {
+        var due = await _context.Dues.FindAsync(id);
+
+        return due;
+    }
+
+    public async Task<IEnumerable<DueModel>> GetDues(int? membershipId, GetDuesRequest? req)
     {
         var duesQuery = _context.Dues;
 
-        if (req?.MembershipId != null) duesQuery.Where(d => d.Id == req.MembershipId);
+        if (req == null) return await duesQuery.ToListAsync();
 
-        return await duesQuery.ToListAsync();;
+        if (membershipId != null) duesQuery.Where(d => d.MembershipId == membershipId);
+        if (!req.PaymentMethods.IsNullOrEmpty()) duesQuery.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
+        if (req.FromDate != null) duesQuery.Where(d => d.PaymentDate >= req.FromDate);
+        if (req.ToDate != null) duesQuery.Where(d => d.PaymentDate <= req.ToDate);
+        
+        if (req.PaymentDate == SortOrder.Ascending) {
+            duesQuery.OrderBy(d => d.PaymentDate);
+        } else if (req.PaymentDate == SortOrder.Descending) {
+            duesQuery.OrderBy(d => d.PaymentDate);
+        }
+
+        return await duesQuery.ToListAsync();
     }
 
     public async Task UpdateDue(DueModel due, UpdateDueRequest req)
     {
         _context.Dues.Entry(due).CurrentValues.SetValues(req);
+
+        _validator.ValidateAndThrow(due);
 
         await _context.SaveChangesAsync();
     }

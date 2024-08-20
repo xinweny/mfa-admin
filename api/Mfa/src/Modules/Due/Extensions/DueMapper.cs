@@ -11,4 +11,14 @@ public static class DueMapper {
         };
     }
 
+    public static GetDuesResponse ToGetDuesResponse(this DueModel due) {
+        return new GetDuesResponse {
+            Id = due.Id,
+            MembershipId = due.MembershipId,
+            AmountPaid = due.AmountPaid,
+            Year = due.Year,
+            PaymentMethod = due.PaymentMethod,
+            PaymentDate = due.PaymentDate,
+        };
+    }
 }

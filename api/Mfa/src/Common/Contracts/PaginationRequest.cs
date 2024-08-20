@@ -1,4 +1,4 @@
-namespace Mfa.Contracts;
+namespace Mfa.Common.Contracts;
 
 public class PaginationRequest {
     public required int Offset { get; set; }

@@ -15,13 +15,26 @@ public class DueService : IDueService
         await _dueRepository.CreateDues(dues);
     }
 
-    public Task DeleteDue(int dueId)
+    public async Task DeleteDue(int id)
     {
-        throw new NotImplementedException();
+        var due = await _dueRepository.GetDueById(id)
+            ?? throw new KeyNotFoundException();
+
+        await _dueRepository.DeleteDue(due);
     }
 
-    public Task UpdateDue(int dueId, UpdateDueRequest req)
+    public async Task<IEnumerable<GetDuesResponse>> GetDues(int? membershipId, GetDuesRequest? req)
     {
-        throw new NotImplementedException();
+        var dues = await _dueRepository.GetDues(membershipId, req);
+
+        return dues.Select(d => d.ToGetDuesResponse());
+    }
+
+    public async Task UpdateDue(int id, UpdateDueRequest req)
+    {
+        var due = await _dueRepository.GetDueById(id)
+            ?? throw new KeyNotFoundException();
+
+        await _dueRepository.UpdateDue(due, req);
     }
 }

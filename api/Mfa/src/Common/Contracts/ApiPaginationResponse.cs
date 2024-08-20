@@ -1,4 +1,4 @@
-namespace Mfa.Contracts;
+namespace Mfa.Common.Contracts;
 
 public class ApiPaginationResponse<T>: ApiResponse<T> {
     public int currentPage;

@@ -1,4 +1,4 @@
-namespace Mfa.Contracts;
+namespace Mfa.Common.Contracts;
 
 public class ApiResponse<T> {
     public required T? Data { get; set; }
