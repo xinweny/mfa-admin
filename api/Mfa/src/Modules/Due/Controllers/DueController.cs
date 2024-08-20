@@ -18,7 +18,7 @@ public class DueController: ControllerBase {
 
     [HttpGet("")]
     public async Task<IActionResult> GetDuesAsync([FromQuery] GetDuesRequest req) {
-        var dues = await _dueService.GetDues(null, req);
+        var dues = await _dueService.GetDues(req);
 
         return Ok(new ApiResponse<IEnumerable<GetDuesResponse>> {
             Data = dues,

@@ -23,9 +23,16 @@ public class DueService : IDueService
         await _dueRepository.DeleteDue(due);
     }
 
-    public async Task<IEnumerable<GetDuesResponse>> GetDues(int? membershipId, GetDuesRequest? req)
+    public async Task<IEnumerable<GetMembershipDuesResponse>> GetMembershipDues(int membershipId, GetDuesRequest? req)
     {
         var dues = await _dueRepository.GetDues(membershipId, req);
+
+        return dues.Select(d => d.ToGetMembershipDuesResponse());
+    }
+
+    public async Task<IEnumerable<GetDuesResponse>> GetDues(GetDuesRequest? req)
+    {
+        var dues = await _dueRepository.GetDues(null, req);
 
         return dues.Select(d => d.ToGetDuesResponse());
     }

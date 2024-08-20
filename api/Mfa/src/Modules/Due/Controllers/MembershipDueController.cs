@@ -18,9 +18,9 @@ public class MembershipDueController: ControllerBase {
 
     [HttpGet("")]
     public async Task<IActionResult> GetDuesAsync([FromRoute] int id, [FromQuery] GetDuesRequest req) {
-        var dues = await _dueService.GetDues(id, req);
+        var dues = await _dueService.GetMembershipDues(id, req);
 
-        return Ok(new ApiResponse<IEnumerable<GetDuesResponse>> {
+        return Ok(new ApiResponse<IEnumerable<GetMembershipDuesResponse>> {
             Data = dues,
         });
     }

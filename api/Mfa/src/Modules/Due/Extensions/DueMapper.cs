@@ -11,7 +11,20 @@ public static class DueMapper {
         };
     }
 
+    public static GetMembershipDuesResponse ToGetMembershipDuesResponse(this DueModel due) {
+        return new GetMembershipDuesResponse {
+            Id = due.Id,
+            MembershipId = due.MembershipId,
+            AmountPaid = due.AmountPaid,
+            Year = due.Year,
+            PaymentMethod = due.PaymentMethod,
+            PaymentDate = due.PaymentDate,
+        };
+    }
+
     public static GetDuesResponse ToGetDuesResponse(this DueModel due) {
+        var members = due.Membership?.Members ?? [];
+
         return new GetDuesResponse {
             Id = due.Id,
             MembershipId = due.MembershipId,
@@ -19,6 +32,11 @@ public static class DueMapper {
             Year = due.Year,
             PaymentMethod = due.PaymentMethod,
             PaymentDate = due.PaymentDate,
+            Members = members.Select(m => new GetDuesResponse.MemberDto {
+                Id = m.Id,
+                FirstName = m.FirstName,
+                LastName = m.LastName,
+            }),
         };
     }
 }

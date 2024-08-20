@@ -46,6 +46,10 @@ public class DueRepository : IDueRepository
     {
         var duesQuery = _context.Dues;
 
+        if (membershipId == null) duesQuery
+            .Include(d => d.Membership)
+            .ThenInclude(m => m != null ? m.Members : null);
+
         if (req == null) return await duesQuery.ToListAsync();
 
         if (membershipId != null) duesQuery.Where(d => d.MembershipId == membershipId);
