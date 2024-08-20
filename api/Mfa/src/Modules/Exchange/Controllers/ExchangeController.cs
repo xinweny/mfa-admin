@@ -10,9 +10,18 @@ namespace Mfa.Modules.Exchange;
 [Authorize]
 
 public class ExchangeController: ControllerBase {
-    private readonly IMemberService _memberService;
+    private readonly IExchangeService _exchangeService;
 
-    public ExchangeController(IMemberService memberService) {
-        _memberService = memberService;
+    public ExchangeController(IExchangeService exchangeService) {
+        _exchangeService = exchangeService;
+    }
+
+    [HttpGet("")]
+    public async Task<IActionResult> GetExchangesAsync([FromQuery] GetExchangesRequest req) {
+        var exchanges = await _exchangeService.GetExchanges(req);
+
+        return Ok(new ApiResponse<IEnumerable<GetExchangesResponse>> {
+            Data = exchanges,
+        });
     }
 }

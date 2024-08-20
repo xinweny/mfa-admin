@@ -1,11 +1,11 @@
-namespace Mfa.Modules.Host;
+namespace Mfa.Modules.Exchange;
 
-public interface IHostRepository {
-    Task<IEnumerable<HostModel>> GetHosts(GetHostsRequest req);
-    Task<HostModel?> GetHostById(int id);
-    Task<HostModel?> GetHostById(int id, GetHostRequest req);
-    Task CreateHost(HostModel host);
-    Task CreateHosts(IEnumerable<HostModel> hosts);
-    Task UpdateHost(HostModel host, UpdateHostRequest req);
-    Task DeleteHost(HostModel host);
+public interface IExchangeRepository {
+    Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req);
+    Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(int memberId);
+    Task<ExchangeModel?> GetExchangeById(int id);
+    Task CreateExchange(ExchangeModel exchange);
+    Task CreateExchanges(IEnumerable<ExchangeModel> exchanges);
+    Task UpdateExchange(ExchangeModel exchange, UpdateExchangeRequest req);
+    Task DeleteExchange(ExchangeModel exchange);
 }

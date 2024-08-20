@@ -41,10 +41,8 @@ public class MemberRepository: IMemberRepository {
         string? query = req.Query;
         
         if (!string.IsNullOrEmpty(query)) {
-            string formattedQuery = query.ToUpper();
-
             membersQuery = membersQuery
-                .Where(m => $"{m.FirstName} {m.LastName}".Contains(formattedQuery, StringComparison.CurrentCultureIgnoreCase));
+                .Where(m => m.DoesFullNameContainQuery(query));
         }
 
         var members = await membersQuery

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using Mfa.Modules.Membership;
 using Mfa.Modules.BoardMember;
-using Mfa.Modules.Exchangee;
+using Mfa.Modules.Exchange;
 
 namespace Mfa.Modules.Member;
 
@@ -29,7 +29,7 @@ public class MemberModel {
     public MembershipModel? Membership;
 
     public ICollection<BoardMemberModel>? BoardPosition;
-    public ICollection<ExchangeeModel>? Exchanges;
+    public ICollection<ExchangeModel>? Exchanges;
 
     public MemberModel() {
         CreatedAt = DateTime.UtcNow;
