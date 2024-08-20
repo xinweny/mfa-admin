@@ -14,17 +14,19 @@ public static class MemberMapper {
             Email = member.Email,
             JoinedDate = member.JoinedDate,
             MembershipId = member.MembershipId,
-            Membership = new GetMemberResponse.MembershipDto {
-                Id = membership.Id,
-                MembershipType = membership.MembershipType,
-                AddressId = membership.AddressId,
-                Address = membership.Address?.ToAddressDto(),
-                Members = membership.Members?.Select(m => new GetMemberResponse.MembershipDto.MemberDto {
-                    Id = m.Id,
-                    FirstName = m.FirstName,
-                    LastName = m.LastName,
-                }) ?? [],
-            },
+            Membership = membership != null
+                ? new GetMemberResponse.MembershipDto {
+                    Id = membership.Id,
+                    MembershipType = membership.MembershipType,
+                    AddressId = membership.AddressId,
+                    Address = membership.Address?.ToAddressDto(),
+                    Members = membership.Members?.Select(m => new GetMemberResponse.MembershipDto.MemberDto {
+                        Id = m.Id,
+                        FirstName = m.FirstName,
+                        LastName = m.LastName,
+                    }) ?? [],
+                }
+                : null,
         };
     }
 
@@ -50,12 +52,14 @@ public static class MemberMapper {
             Email = member.Email,
             JoinedDate = member.JoinedDate,
             MembershipId = member.MembershipId,
-            Membership = new GetMembersResponse.MembershipDto {
-                Id = membership.Id,
-                MembershipType = membership.MembershipType,
-                AddressId = membership.AddressId,
-                Address = membership.Address?.ToAddressDto(),
-            },
+            Membership = membership != null
+                ? new GetMembersResponse.MembershipDto {
+                    Id = membership.Id,
+                    MembershipType = membership.MembershipType,
+                    AddressId = membership.AddressId,
+                    Address = membership.Address?.ToAddressDto(),
+                }
+                : null,
         };
     }
 }

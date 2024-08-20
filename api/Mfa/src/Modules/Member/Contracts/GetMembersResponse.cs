@@ -11,7 +11,7 @@ public class GetMembersResponse {
     public string? PhoneNumber { get; set; }
     public DateOnly? JoinedDate { get; set; }
     public required int MembershipId { get; set; }
-    public required MembershipDto Membership { get; set; }
+    public MembershipDto? Membership { get; set; }
 
     public class MembershipDto {
         public required int Id { get; set; }
