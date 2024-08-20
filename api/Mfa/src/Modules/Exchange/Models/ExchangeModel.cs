@@ -12,6 +12,7 @@ public class ExchangeModel {
 
     [Column("year"), Required]
     public required int Year { get; set; }
+    [Column("exchange_type")]
     public required ExchangeType ExchangeType { get; set; }
 
     [Column("member_id"), Required, ForeignKey(nameof(Member))]
