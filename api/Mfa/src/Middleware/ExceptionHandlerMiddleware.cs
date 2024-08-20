@@ -1,3 +1,4 @@
+using FluentValidation;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,19 @@ public class ExceptionHandlerMiddleware: IExceptionHandler {
 
         switch (exception) {
             case BadHttpRequestException:
-                problemDetails.Status = (int)HttpStatusCode.BadRequest;
+                problemDetails.Status = (int) HttpStatusCode.BadRequest;
                 problemDetails.Title = exception.GetType().Name;
                 break;
-
+            case ValidationException:
+                problemDetails.Status = (int) HttpStatusCode.BadRequest;
+                problemDetails.Title = exception.GetType().Name;
+                break;
+            case KeyNotFoundException:
+                problemDetails.Status = (int) HttpStatusCode.NotFound;
+                problemDetails.Title = exception.GetType().Name;
+                break;
             default:
-                problemDetails.Status = (int)HttpStatusCode.InternalServerError;
+                problemDetails.Status = (int) HttpStatusCode.InternalServerError;
                 problemDetails.Title = "Internal Server Error";
                 break;
         }

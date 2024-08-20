@@ -27,7 +27,7 @@ public class MemberRepository: IMemberRepository {
             
         query.Where(m => m.Id == id);
 
-        return await query.SingleAsync() ?? throw new KeyNotFoundException();
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<MemberModel?> GetMemberById(int id) {

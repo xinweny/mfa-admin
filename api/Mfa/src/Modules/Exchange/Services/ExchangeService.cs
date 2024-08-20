@@ -15,7 +15,7 @@ public class ExchangeService: IExchangeService {
     public async Task DeleteExchange(int id)
     {
         var exchange = await _exchangeRepository.GetExchangeById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Exchange not found.");
 
         await _exchangeRepository.DeleteExchange(exchange);
     }
@@ -37,7 +37,7 @@ public class ExchangeService: IExchangeService {
     public async Task UpdateExchange(int id, UpdateExchangeRequest req)
     {
         var exchange = await _exchangeRepository.GetExchangeById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Exchange not found.");
 
         await _exchangeRepository.UpdateExchange(exchange, req);
     }

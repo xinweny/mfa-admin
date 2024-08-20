@@ -18,7 +18,7 @@ public class DueService : IDueService
     public async Task DeleteDue(int id)
     {
         var due = await _dueRepository.GetDueById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Due not found.");
 
         await _dueRepository.DeleteDue(due);
     }
@@ -40,7 +40,7 @@ public class DueService : IDueService
     public async Task UpdateDue(int id, UpdateDueRequest req)
     {
         var due = await _dueRepository.GetDueById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Due not found.");
 
         await _dueRepository.UpdateDue(due, req);
     }

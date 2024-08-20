@@ -10,7 +10,7 @@ public class MembershipRepository: IMembershipRepository
     private readonly MfaDbContext _context;
     private readonly IValidator<MembershipModel> _validator;
 
-    public MembershipRepository(MfaDbContext context, IValidator<MembershipModel>  validator) {
+    public MembershipRepository(MfaDbContext context, IValidator<MembershipModel> validator) {
         _context = context;
         _validator = validator;
     }
@@ -32,12 +32,11 @@ public class MembershipRepository: IMembershipRepository
     }
 
     public async Task<MembershipModel?> GetMembershipById(int id) {
-        MembershipModel membership = await _context.Memberships
+        var membership = await _context.Memberships
             .Where(m => m.Id == id)
             .Include(m => m.Address)
             .Include(m => m.Members)
-            .SingleAsync()
-            ?? throw new KeyNotFoundException();
+            .FirstOrDefaultAsync();
 
         return membership;
     }

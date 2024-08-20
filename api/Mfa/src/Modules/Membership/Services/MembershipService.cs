@@ -11,21 +11,13 @@ public class MembershipService: IMembershipService {
 
     public async Task CreateMembership(CreateMembershipRequest req)
     {
-        if (req.Members.IsNullOrEmpty()) {
-            throw new Exception("Memberships must contain at least one member.");
-        }
-
-        if (req.MembershipType == MembershipType.Single && req.Members.Count() != 1) {
-            throw new Exception("Single memberships can only have one member.");
-        }
-
         await _membershipRepository.CreateMembership(req.ToMembership());
     }
 
     public async Task DeleteMembership(int id)
     {
         var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Membership not found.");
 
         await _membershipRepository.DeleteMembership(membership);
     }
@@ -33,7 +25,7 @@ public class MembershipService: IMembershipService {
     public async Task<GetMembershipResponse> GetMembershipById(int id)
     {
         var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Membership not found.");
 
         return membership.ToGetMembershipResponse();
     }
@@ -48,7 +40,7 @@ public class MembershipService: IMembershipService {
     public async Task UpdateMembership(int id, UpdateMembershipRequest req)
     {
         var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Membership not found.");
 
         await _membershipRepository.UpdateMembership(membership, req);
     }

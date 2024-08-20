@@ -6,21 +6,30 @@ public class MemberValidator: AbstractValidator<MemberModel> {
     public MemberValidator() {
         RuleFor(m => m.FirstName)
             .NotEmpty()
-            .MaximumLength(256);
+            .WithMessage("First name is required.")
+            .MaximumLength(256)
+            .WithMessage("First name cannot exceed 256 characters.");
 
         RuleFor(m => m.LastName)
             .NotEmpty()
-            .MaximumLength(256);
+            .WithMessage("Last name is required.")
+            .MaximumLength(256)
+            .WithMessage("Last name cannot exceed 256 characters.");
 
         RuleFor(m => m.Email)
             .NotEmpty()
+            .WithMessage("Email is required.")
             .EmailAddress()
-            .MaximumLength(320);
+            .WithMessage("Invalid email.")
+            .MaximumLength(320)
+            .WithMessage("Email cannot exceed 320 characters.");
 
         RuleFor(m => m.PhoneNumber)
-            .Matches(@"^\d{10}$");
+            .Matches(@"^\d{10}$")
+            .WithMessage("Invalid phone number.");
 
         RuleFor(m => m.MembershipId)
-            .NotNull();
+            .NotNull()
+            .WithMessage("Membership ID is required.");
     }
 }

@@ -1,4 +1,4 @@
-namespace Mfa.Common.Enums;
+namespace Mfa.Common.Constants;
 
 public enum SortOrder {
     None = 0,

@@ -2,7 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-using Mfa.Common.Enums;
+using Mfa.Common.Constants;
 using Mfa.Database;
 
 namespace Mfa.Modules.BoardMember;

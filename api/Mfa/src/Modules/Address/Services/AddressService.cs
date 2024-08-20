@@ -11,7 +11,7 @@ public class AddressService : IAddressService
     public async Task<AddressDto> GetAddress(int id)
     {
         var address = await _addressRepository.GetAddressById(id)
-            ?? throw new KeyNotFoundException();
+            ?? throw new KeyNotFoundException("Address not found.");
 
         return address.ToAddressDto();
     }

@@ -6,24 +6,34 @@ public class AddressValidator: AbstractValidator<AddressModel> {
     public AddressValidator() {
         RuleFor(a => a.Line1)
             .NotEmpty()
-            .MaximumLength(256);
+            .WithMessage("Line1 is required.")
+            .MaximumLength(256)
+            .WithMessage("Line1 cannot exceed 256 characters.");
 
         RuleFor(a => a.Line2)
-            .MaximumLength(256);
+            .MaximumLength(256)
+            .WithMessage("Line2 cannot exceed 256 characters.");
 
         RuleFor(a => a.Line3)
-            .MaximumLength(256);
+            .MaximumLength(256)
+            .WithMessage("Line3 cannot exceed 256 characters.");
 
         RuleFor(a => a.City)
             .NotEmpty()
-            .MaximumLength(64);
+            .WithMessage("City is required.")
+            .MaximumLength(64)
+            .WithMessage("City name cannot exceed 64 characters.");
 
         RuleFor(a => a.PostalCode)
             .NotEmpty()
-            .MaximumLength(32);
+            .WithMessage("Postal code is required.")
+            .MaximumLength(32)
+            .WithMessage("Postal code length cannot exceed 32 characters.");
             
         RuleFor(a => a.Province)
             .NotEmpty()
-            .IsInEnum();
+            .WithMessage("Province is required.")
+            .IsInEnum()
+            .WithMessage("Invalid province.");
     }
 }

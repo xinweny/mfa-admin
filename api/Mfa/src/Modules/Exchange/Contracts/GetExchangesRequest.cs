@@ -1,4 +1,4 @@
-using Mfa.Common.Enums;
+using Mfa.Common.Constants;
 
 namespace Mfa.Modules.Exchange;
 
