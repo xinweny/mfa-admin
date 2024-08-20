@@ -31,8 +31,6 @@ public class AddressValidator: AbstractValidator<AddressModel> {
             .WithMessage("Postal code length cannot exceed 32 characters.");
             
         RuleFor(a => a.Province)
-            .NotEmpty()
-            .WithMessage("Province is required.")
             .IsInEnum()
             .WithMessage("Invalid province.");
     }

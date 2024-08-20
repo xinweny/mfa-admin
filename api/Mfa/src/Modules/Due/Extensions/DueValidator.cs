@@ -13,8 +13,6 @@ public class DueValidator: AbstractValidator<DueModel> {
             .WithMessage($"Year must be at least ${MfaConstants.MfaFoundingYear}.");
 
         RuleFor(d => d.PaymentMethod)
-            .NotNull()
-            .WithMessage("Payment method is required.")
             .IsInEnum()
             .WithMessage("Invalid payment method.");
 

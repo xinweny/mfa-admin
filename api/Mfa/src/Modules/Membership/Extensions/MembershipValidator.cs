@@ -1,5 +1,4 @@
 using FluentValidation;
-using Microsoft.IdentityModel.Tokens;
 
 using Mfa.Modules.Address;
 using Mfa.Modules.Member;
@@ -10,8 +9,8 @@ namespace Mfa.Modules.Membership;
 public class MembershipValidator: AbstractValidator<MembershipModel> {
     public MembershipValidator() {
         RuleFor(m => m.MembershipType)
-            .NotNull()
-            .IsInEnum();
+            .IsInEnum()
+            .WithMessage("Invalid membership type.");
 
         RuleFor(m => m.Address)
             .SetValidator(new AddressValidator()!)

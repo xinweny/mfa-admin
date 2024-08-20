@@ -1,5 +1,6 @@
 using Mfa.Modules.Address;
 using Mfa.Modules.Member;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Mfa.Modules.Membership;
 
@@ -57,7 +58,7 @@ public static class MembershipMapper {
             membership.AddressId = address.Id;
         }
 
-        if (req.Members != null) {
+        if (!req.Members.IsNullOrEmpty()) {
             membership.Members = req.Members.Select(member => new MemberModel {
                 MembershipId = membership.Id,
                 FirstName = member.FirstName,

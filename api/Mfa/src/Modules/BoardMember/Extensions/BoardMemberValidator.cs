@@ -7,8 +7,6 @@ namespace Mfa.Modules.BoardMember;
 public class BoardMemberValidator: AbstractValidator<BoardMemberModel> {
     public BoardMemberValidator() {
         RuleFor(b => b.BoardPosition)
-            .NotNull()
-            .WithMessage("Board position is required.")
             .IsInEnum()
             .WithMessage("Invalid board position.");
         
