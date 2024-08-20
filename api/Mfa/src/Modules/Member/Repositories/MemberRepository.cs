@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 using Mfa.Database;
 
@@ -6,9 +7,11 @@ namespace Mfa.Modules.Member;
 
 public class MemberRepository: IMemberRepository {
     private readonly MfaDbContext _context;
+    private readonly IValidator<MemberModel> _validator;
 
-    public MemberRepository(MfaDbContext context) {
+    public MemberRepository(MfaDbContext context, IValidator<MemberModel> validator) {
         _context = context;
+        _validator = validator;
     }
 
     public async Task<MemberModel?> GetMemberById(int id, GetMemberRequest? req = null) {
@@ -51,12 +54,18 @@ public class MemberRepository: IMemberRepository {
     }
 
     public async Task CreateMember(MemberModel member) {
+        _validator.ValidateAndThrow(member);
+
         _context.Members.Add(member);
 
         await _context.SaveChangesAsync();
     }
 
     public async Task CreateMembers(IEnumerable<MemberModel> members) {
+        foreach (MemberModel member in members) {
+            _validator.ValidateAndThrow(member);
+        }
+
         _context.Members.AddRange(members);
 
         await _context.SaveChangesAsync();
@@ -66,6 +75,8 @@ public class MemberRepository: IMemberRepository {
         member.UpdatedAt = DateTime.UtcNow;
 
         _context.Members.Entry(member).CurrentValues.SetValues(req);
+
+        _validator.ValidateAndThrow(member);
         
         await _context.SaveChangesAsync();
     }

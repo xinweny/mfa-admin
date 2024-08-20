@@ -14,9 +14,7 @@ public class DueRepository : IDueRepository
 
     public async Task CreateDues(IEnumerable<DueModel> dues)
     {
-        foreach (DueModel due in dues) {
-            _context.Dues.Add(due);
-        }
+        _context.Dues.AddRange(dues);
 
         await _context.SaveChangesAsync();
     }

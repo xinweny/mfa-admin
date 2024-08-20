@@ -3,12 +3,7 @@ using Microsoft.OpenApi.Models;
 
 using Mfa.Database;
 using Mfa.Middleware;
-
-using Mfa.Modules.Address;
-using Mfa.Modules.Auth;
-using Mfa.Modules.Due;
-using Mfa.Modules.Membership;
-using Mfa.Modules.Member;
+using Mfa.Modules;
 
 namespace Mfa;
 
@@ -28,7 +23,6 @@ public class Startup {
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
         services.AddLogging();
-        services.AddDatabaseDeveloperPageExceptionFilter();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options => {
@@ -39,11 +33,7 @@ public class Startup {
             });
         });
 
-        services.AddAuthModule(Configuration);
-        services.AddAddressModule();
-        services.AddDueModule();
-        services.AddMembershipModule();
-        services.AddMemberModule();
+        services.AddMfaApiModules(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {

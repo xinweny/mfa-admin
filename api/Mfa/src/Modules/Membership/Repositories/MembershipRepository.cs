@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 using Mfa.Database;
 
@@ -7,13 +8,17 @@ namespace Mfa.Modules.Membership;
 public class MembershipRepository: IMembershipRepository
 {
     private readonly MfaDbContext _context;
+    private readonly IValidator<MembershipModel> _validator;
 
-    public MembershipRepository(MfaDbContext context) {
+    public MembershipRepository(MfaDbContext context, IValidator<MembershipModel>  validator) {
         _context = context;
+        _validator = validator;
     }
 
     public async Task CreateMembership(MembershipModel membership)
     {
+        _validator.ValidateAndThrow(membership);
+
         _context.Memberships.Add(membership);
 
         await _context.SaveChangesAsync();
@@ -51,7 +56,9 @@ public class MembershipRepository: IMembershipRepository
     {
         membership.UpdatedAt = DateTime.UtcNow;
 
-        membership.MembershipType = req.MembershipType;
+        _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
+
+        _validator.ValidateAndThrow(membership);
         
         await _context.SaveChangesAsync();
     }
