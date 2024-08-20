@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 using Mfa.Database;
 
@@ -7,16 +8,18 @@ namespace Mfa.Modules.Address;
 public class AddressRepository : IAddressRepository
 {
     private readonly MfaDbContext _context;
+    private readonly IValidator<AddressModel> _validator;
 
-    public AddressRepository(MfaDbContext context) {
+    public AddressRepository(MfaDbContext context, IValidator<AddressModel> validator) {
         _context = context;
+        _validator = validator;
     }
 
     public async Task<IEnumerable<AddressModel>> GetAddresses() {
-        var addressesQuery = from address in _context.Addresses
-            select address;
+        var addresses = await _context.Addresses
+            .ToListAsync();
         
-        return await addressesQuery.ToListAsync();
+        return addresses;
     }
 
     public async Task<AddressModel?> GetAddressById(int id) {
@@ -27,6 +30,8 @@ public class AddressRepository : IAddressRepository
 
     public async Task CreateAddress(AddressModel address)
     {
+        _validator.ValidateAndThrow(address);
+
         _context.Addresses.Add(address);
 
         await _context.SaveChangesAsync();
@@ -42,6 +47,8 @@ public class AddressRepository : IAddressRepository
     public async Task UpdateAddress(AddressModel address, UpdateAddressRequest req)
     {
         _context.Addresses.Entry(address).CurrentValues.SetValues(req);
+
+        _validator.ValidateAndThrow(address);
 
         await _context.SaveChangesAsync();
     }
