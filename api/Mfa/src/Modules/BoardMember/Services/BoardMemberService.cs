@@ -1,4 +1,3 @@
-
 namespace Mfa.Modules.BoardMember;
 
 public class BoardMemberService: IBoardMemberService {
@@ -10,26 +9,36 @@ public class BoardMemberService: IBoardMemberService {
 
     public async Task CreateBoardMember(CreateBoardMemberRequest req)
     {
-        await _boardMemberRepository.CreateBoardMember(req);
+        await _boardMemberRepository.CreateBoardMember(req.ToBoardMember());
     }
 
-    public Task DeleteBoardMember(int id)
+    public async Task DeleteBoardMember(int id)
     {
-        throw new NotImplementedException();
+        var boardMember = await _boardMemberRepository.GetBoardMemberById(id)
+            ?? throw new KeyNotFoundException();
+
+        await _boardMemberRepository.DeleteBoardMember(boardMember);
     }
 
-    public Task<IEnumerable<GetBoardMembersResponse>> GetBoardMembers(GetBoardMembersRequest req)
+    public async Task<IEnumerable<GetBoardMembersResponse>> GetBoardMembers(GetBoardMembersRequest req)
     {
-        throw new NotImplementedException();
+        var boardMembers = await _boardMemberRepository.GetBoardMembers(req);
+
+        return boardMembers.Select(b => b.ToGetBoardMembersResponse());
     }
 
-    public Task<IEnumerable<GetMemberBoardMembersResponse>> GetMemberBoardMembers(int memberId)
+    public async Task<IEnumerable<GetMemberBoardMembersResponse>> GetMemberBoardMembers(int memberId)
     {
-        throw new NotImplementedException();
+        var boardMembers = await _boardMemberRepository.GetMemberBoardMembers(memberId);
+
+        return boardMembers.Select(b => b.ToGetMemberBoardMembersResponse());
     }
 
-    public Task UpdateBoardMember(int id, UpdateBoardMemberRequest req)
+    public async Task UpdateBoardMember(int id, UpdateBoardMemberRequest req)
     {
-        throw new NotImplementedException();
+        var boardMember = await _boardMemberRepository.GetBoardMemberById(id)
+            ?? throw new KeyNotFoundException();
+
+        await _boardMemberRepository.UpdateBoardMember(boardMember, req);
     }
 }
