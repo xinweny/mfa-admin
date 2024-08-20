@@ -8,9 +8,11 @@ public class DueService : IDueService
         _dueRepository = dueRepository;
     }
 
-    public Task CreateDue(CreateDueRequest req)
+    public async Task CreateDues(IEnumerable<CreateDueRequest> req)
     {
-        throw new NotImplementedException();
+        var dues = req.Select(r => r.ToDue());
+
+        await _dueRepository.CreateDues(dues);
     }
 
     public Task DeleteDue(int dueId)

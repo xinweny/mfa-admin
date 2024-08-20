@@ -13,4 +13,11 @@ public class DueController: ControllerBase {
     public DueController(IDueService dueService) {
         _dueService = dueService;
     }
+
+    [HttpPost("")]
+    public async Task<IActionResult> CreateDuesAsync([FromBody] IEnumerable<CreateDueRequest> req) {
+        await _dueService.CreateDues(req);
+
+        return Ok();
+    }
 }

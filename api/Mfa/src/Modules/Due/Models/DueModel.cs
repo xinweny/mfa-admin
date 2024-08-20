@@ -16,6 +16,8 @@ public class DueModel {
     public required PaymentMethods PaymentMethod { get; set; }
     [Column("amount_paid"), Required]
     public required int AmountPaid { get; set; }
+    [Column("payment_date"), Required]
+    public required DateTime PaymentDate { get; set; }
 
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required int MembershipId { get; set; }
