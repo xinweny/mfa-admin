@@ -1,5 +1,7 @@
 using FluentValidation;
 
+using Mfa.Common.Constants;
+
 namespace Mfa.Modules.Exchange;
 
 public class ExchangeValidator: AbstractValidator<ExchangeModel> {
@@ -10,7 +12,7 @@ public class ExchangeValidator: AbstractValidator<ExchangeModel> {
 
         RuleFor(e => e.Year)
             .NotNull()
-            .GreaterThanOrEqualTo(1993);
+            .GreaterThanOrEqualTo(Constants.MfaFoundingYear);
 
         RuleFor(e => e.MemberId)
             .NotNull();

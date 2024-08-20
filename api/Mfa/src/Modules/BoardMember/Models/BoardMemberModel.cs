@@ -11,9 +11,9 @@ public class BoardMemberModel {
     public int Id { get; set; }
 
     [Column("start_date"), Required]
-    public required DateTime StartDate { get; set; }
+    public required DateOnly StartDate { get; set; }
     [Column("end_date")]
-    public DateTime? EndDate { get; set; }
+    public DateOnly? EndDate { get; set; }
     [Column("board_position"), Required]
     public required BoardPosition BoardPosition { get; set; }
 

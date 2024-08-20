@@ -20,6 +20,9 @@ public class MemberModel {
     public required string Email { get; set; }
     [Column("phone_number")]
     public string? PhoneNumber { get; set; }
+    [Column("joined_date")]
+    public DateOnly? JoinedDate { get; set; }
+
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
     [Column("updated_at")]

@@ -67,9 +67,9 @@ public class BoardMemberRepository: IBoardMemberRepository {
         }
 
         if (req.SortTimeServed == SortOrder.Ascending) {
-            query.OrderBy(b => b.EndDate - b.StartDate);
+            query.OrderBy(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
         } else if (req.SortTimeServed == SortOrder.Descending) {
-            query.OrderByDescending(b => b.EndDate - b.StartDate);
+            query.OrderByDescending(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
         }
 
         return await query.ToListAsync();
