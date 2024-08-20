@@ -6,5 +6,5 @@ public class AddressDto {
     public string? Line3 { get; set; }
     public required string City { get; set; }
     public required string PostalCode { get; set; }
-    public required Provinces Province { get; set; }
+    public required Province Province { get; set; }
 }

@@ -14,22 +14,24 @@ public class MemberRepository: IMemberRepository {
         _validator = validator;
     }
 
-    public async Task<MemberModel?> GetMemberById(int id, GetMemberRequest? req = null) {
-        MemberModel member = await _context.Members
-            .Include(m => m.Membership)
-            .ThenInclude(m => m != null ? m.Address : null)
-            .Where(m => m.Id == id)
-            .SingleAsync()
-            ?? throw new KeyNotFoundException();
+    public async Task<MemberModel?> GetMemberById(int id, bool includeMembership) {
+        var query = _context.Members.AsQueryable();
 
-        return member;
+        if (includeMembership) {
+            query
+                .Include(m => m.Membership)
+                .ThenInclude(m => m != null ? m.Address : null)
+                .Include(m => m.Membership)
+                .ThenInclude(m => m != null ? m.Members : null);
+        }
+            
+        query.Where(m => m.Id == id);
+
+        return await query.SingleAsync() ?? throw new KeyNotFoundException();
     }
 
     public async Task<MemberModel?> GetMemberById(int id) {
-        return await GetMemberById(id, new GetMemberRequest {
-            includeAddress = false,
-            includeMembership = false,
-        });
+        return await GetMemberById(id, false);
     }
 
     public async Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req) {

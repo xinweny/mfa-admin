@@ -21,7 +21,7 @@ public class AddressModel {
     [Column("postal_code"), Required]
     public required string PostalCode { get; set; }
     [Column("province"), Required]
-    public required Provinces Province { get; set; }
+    public required Province Province { get; set; }
 
     public MembershipModel? Membership { get; set; }
 }

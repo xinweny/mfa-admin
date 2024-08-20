@@ -20,7 +20,7 @@ public class GetMemberResponse {
         }
 
         public required int Id { get; set; }
-        public required MembershipTypes MembershipType { get; set; }
+        public required MembershipType MembershipType { get; set; }
         public int? AddressId { get; set; }
         public AddressDto? Address { get; set; }
         public IEnumerable<MemberDto>? Members { get; set; }

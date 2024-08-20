@@ -1,5 +1,5 @@
 namespace Mfa.Modules.Membership;
 
 public class UpdateMembershipRequest {
-    public MembershipTypes MembershipType { get; set; }
+    public MembershipType MembershipType { get; set; }
 }

@@ -15,7 +15,7 @@ public class MembershipService: IMembershipService {
             throw new Exception("Memberships must contain at least one member.");
         }
 
-        if (req.MembershipType == MembershipTypes.Single && req.Members.Count() != 1) {
+        if (req.MembershipType == MembershipType.Single && req.Members.Count() != 1) {
             throw new Exception("Single memberships can only have one member.");
         }
 

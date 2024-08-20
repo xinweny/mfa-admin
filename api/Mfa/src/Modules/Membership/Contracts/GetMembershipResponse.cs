@@ -4,7 +4,7 @@ namespace Mfa.Modules.Membership;
 
 public record GetMembershipResponse {
     public required int Id { get; set; }
-    public MembershipTypes MembershipType { get; set; }
+    public MembershipType MembershipType { get; set; }
     public IEnumerable<MemberDto>? Members { get; set; }
     public int? AddressId { get; set; }
     public AddressDto? Address { get; set; }

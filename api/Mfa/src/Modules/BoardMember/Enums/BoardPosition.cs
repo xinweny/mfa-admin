@@ -1,6 +1,6 @@
 namespace Mfa.Modules.BoardMember;
 
-public enum BoardPositions {
+public enum BoardPosition {
     President,
     VicePresident,
     Secretary,

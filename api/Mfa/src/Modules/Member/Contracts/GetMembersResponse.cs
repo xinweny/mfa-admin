@@ -14,7 +14,7 @@ public class GetMembersResponse {
 
     public class MembershipDto {
         public required int Id { get; set; }
-        public required MembershipTypes MembershipType { get; set; }
+        public required MembershipType MembershipType { get; set; }
         public int? AddressId { get; set; }
         public AddressDto? Address { get; set; }
     }

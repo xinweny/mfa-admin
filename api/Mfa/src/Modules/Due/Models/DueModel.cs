@@ -5,7 +5,7 @@ using Mfa.Modules.Membership;
 
 namespace Mfa.Modules.Due;
 
-[Table("dues")]
+[Table("membership_dues")]
 public class DueModel {
     [Column("id"), Key]
     public int Id { get; set; }
@@ -13,7 +13,7 @@ public class DueModel {
     [Column("year"), Required]
     public required int Year { get; set; }
     [Column("payment_method"), Required]
-    public required PaymentMethods PaymentMethod { get; set; }
+    public required PaymentMethod PaymentMethod { get; set; }
     [Column("amount_paid"), Required]
     public required int AmountPaid { get; set; }
     [Column("payment_date"), Required]

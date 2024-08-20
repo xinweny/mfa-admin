@@ -13,7 +13,7 @@ public class MembershipModel {
     public int Id { get; set; }
 
     [Column("membership_type"), Required]
-    public required MembershipTypes MembershipType { get; set; }
+    public required MembershipType MembershipType { get; set; }
     [Column("created_at"), Required]
     public DateTime CreatedAt { get; set; }
     [Column("updated_at")]

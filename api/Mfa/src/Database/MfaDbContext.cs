@@ -4,8 +4,7 @@ using Mfa.Modules.Member;
 using Mfa.Modules.BoardMember;
 using Mfa.Modules.Address;
 using Mfa.Modules.Membership;
-using Mfa.Modules.Host;
-using Mfa.Modules.Delegate;
+using Mfa.Modules.Exchange;
 using Mfa.Modules.Due;
 using Mfa.Modules.User;
 
@@ -19,8 +18,7 @@ public class MfaDbContext: DbContext {
     public required DbSet<AddressModel> Addresses { get; set; }
     public required DbSet<DueModel> Dues { get; set; }
     public required DbSet<BoardMemberModel> BoardMembers { get; set; }
-    public required DbSet<HostModel> Hosts { get; set; }
-    public required DbSet<DelegateModel> Delegates { get; set; }
+    public required DbSet<ExchangeModel> Exchanges { get; set; }
     public required DbSet<UserModel> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -46,21 +44,15 @@ public class MfaDbContext: DbContext {
             .HasForeignKey(member => member.MembershipId);
 
         modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.BoardPositions)
+            .HasMany(member => member.BoardPosition)
             .WithOne(boardPosition => boardPosition.Member)
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(boardPosition => boardPosition.MemberId);
         
         modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.Hosts)
-            .WithOne(host => host.Member)
+            .HasMany(member => member.Exchanges)
+            .WithOne(exchange => exchange.Member)
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(host => host.MemberId);
-
-        modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.Delegates)
-            .WithOne(d => d.Member)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasForeignKey(d => d.MemberId);
     }
 }

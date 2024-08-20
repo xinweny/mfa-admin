@@ -53,7 +53,7 @@ public class DueRepository : IDueRepository
         if (req == null) return await duesQuery.ToListAsync();
 
         if (membershipId != null) duesQuery.Where(d => d.MembershipId == membershipId);
-        if (!req.PaymentMethods.IsNullOrEmpty()) duesQuery.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
+        if (!req.PaymentMethod.IsNullOrEmpty()) duesQuery.Where(d => req.PaymentMethod.Contains(d.PaymentMethod));
         if (req.FromDate != null) duesQuery.Where(d => d.PaymentDate >= req.FromDate);
         if (req.ToDate != null) duesQuery.Where(d => d.PaymentDate <= req.ToDate);
         

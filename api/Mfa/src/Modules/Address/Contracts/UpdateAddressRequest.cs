@@ -6,5 +6,5 @@ public class UpdateAddressRequest {
     public string? Line3 { get; set; }
     public string? City { get; set; }
     public string? PostalCode { get; set; }
-    public Provinces? Province { get; set; }
+    public Province? Province { get; set; }
 }

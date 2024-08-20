@@ -1,6 +1,6 @@
 namespace Mfa.Modules.Address;
 
-public enum Provinces {
+public enum Province {
     AB,
     BC,
     MB,

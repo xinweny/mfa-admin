@@ -15,7 +15,7 @@ public class BoardMemberModel {
     [Column("end_date")]
     public DateTime? EndDate { get; set; }
     [Column("board_position"), Required]
-    public required BoardPositions BoardPosition { get; set; }
+    public required BoardPosition BoardPosition { get; set; }
 
     [Column("member_id"), Required, ForeignKey(nameof(Member))]
     public required int MemberId;
