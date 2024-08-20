@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.IdentityModel.Tokens;
 
 public class IPWhitelistMiddleware {
     private readonly RequestDelegate _next;
@@ -13,7 +14,10 @@ public class IPWhitelistMiddleware {
         var remoteIP = context.Connection.RemoteIpAddress;
         var allowedIPs = _configuration.GetSection("AdminSafeList").Get<string[]>();
 
-        if (!IPAddress.IsLoopback(remoteIP) && !allowedIPs.Contains(remoteIP.ToString())) {
+        if (remoteIP == null) return;
+        if (allowedIPs.IsNullOrEmpty()) await _next(context);
+
+        if (!IPAddress.IsLoopback(remoteIP) && !allowedIPs!.Contains(remoteIP.ToString())) {
             context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
             await context.Response.WriteAsync("Access forbidden");
