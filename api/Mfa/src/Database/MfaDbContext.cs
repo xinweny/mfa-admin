@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-using Mfa.Members;
-using Mfa.BoardMembers;
-using Mfa.Addresses;
-using Mfa.Memberships;
-using Mfa.Hosts;
-using Mfa.Delegates;
-using Mfa.Dues;
-using Mfa.Users;
+using Mfa.Modules.Member;
+using Mfa.Modules.BoardMember;
+using Mfa.Modules.Address;
+using Mfa.Modules.Membership;
+using Mfa.Modules.Host;
+using Mfa.Modules.Delegate;
+using Mfa.Modules.Due;
+using Mfa.Modules.User;
 
 namespace Mfa.Database;
 

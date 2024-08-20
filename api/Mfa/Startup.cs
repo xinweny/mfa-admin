@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using FluentValidation;
 
 using Mfa.Database;
 using Mfa.Middleware;
+
+using Mfa.Modules.Address;
+using Mfa.Modules.Auth;
+using Mfa.Modules.Due;
+using Mfa.Modules.Membership;
+using Mfa.Modules.Member;
 
 namespace Mfa;
 
@@ -22,13 +25,6 @@ public class Startup {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
         });
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
-                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-                options.Audience = Configuration["Auth0:Audience"];
-            });
-        services.AddAuthorization(); // TODO: add scopes
-
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
         services.AddLogging();
@@ -43,7 +39,11 @@ public class Startup {
             });
         });
 
-        RegisterDependencies(services);
+        services.AddAuthModule(Configuration);
+        services.AddAddressModule();
+        services.AddDueModule();
+        services.AddMembershipModule();
+        services.AddMemberModule();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
@@ -75,25 +75,5 @@ public class Startup {
                 endpoints.MapControllers();
             }
         });
-    }
-
-    private static void RegisterDependencies(IServiceCollection services) {
-        services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-
-        // Repositories
-        services.AddScoped<IMemberRepository, MemberRepository>();
-        services.AddScoped<IMembershipRepository, MembershipRepository>();
-        services.AddScoped<IAddressRepository, AddressRepository>();
-        services.AddScoped<IDueRepository, DueRepository>();
-
-        // Services
-        services.AddScoped<IMemberService, MemberService>();
-        services.AddScoped<IMembershipService, MembershipService>();
-        services.AddScoped<IMembershipAddressService, MembershipAddressService>();
-        services.AddScoped<IAddressService, AddressService>();
-        services.AddScoped<IDueService, DueService>();
-
-        // Validators
-        services.AddScoped<IValidator<Member>, MemberValidator>();
     }
 }
