@@ -50,9 +50,9 @@ public class DueRepository : IDueRepository
         if (req.FromDate != null) duesQuery.Where(d => d.PaymentDate >= req.FromDate);
         if (req.ToDate != null) duesQuery.Where(d => d.PaymentDate <= req.ToDate);
         
-        if (req.PaymentDate == SortOrder.Ascending) {
+        if (req.SortPaymentDate == SortOrder.Ascending) {
             duesQuery.OrderBy(d => d.PaymentDate);
-        } else if (req.PaymentDate == SortOrder.Descending) {
+        } else if (req.SortPaymentDate == SortOrder.Descending) {
             duesQuery.OrderBy(d => d.PaymentDate);
         }
 

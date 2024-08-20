@@ -23,7 +23,7 @@ public static class DueMapper {
     }
 
     public static GetDuesResponse ToGetDuesResponse(this DueModel due) {
-        var members = due.Membership?.Members ?? [];
+        var membership = due.Membership ?? null;
 
         return new GetDuesResponse {
             Id = due.Id,
@@ -32,11 +32,17 @@ public static class DueMapper {
             Year = due.Year,
             PaymentMethod = due.PaymentMethod,
             PaymentDate = due.PaymentDate,
-            Members = members.Select(m => new GetDuesResponse.MemberDto {
-                Id = m.Id,
-                FirstName = m.FirstName,
-                LastName = m.LastName,
-            }),
+            Membership = membership != null
+                ? new GetDuesResponse.MembershipDto {
+                    Id = membership.Id,
+                    MembershipType = membership.MembershipType,
+                    Members = membership.Members?.Select(m => new GetDuesResponse.MembershipDto.MemberDto {
+                        Id = m.Id,
+                        FirstName = m.FirstName,
+                        LastName = m.LastName,
+                    }) ?? [],
+                }
+            : null,
         };
     }
 }

@@ -7,5 +7,5 @@ public class GetExchangesRequest {
     public int? FromYear { get; set; }
     public int? ToYear { get; set; }
     public ExchangeType? ExchangeType { get; set; }
-    public SortOrder Year { get; set; }
+    public SortOrder SortYear { get; set; }
 }

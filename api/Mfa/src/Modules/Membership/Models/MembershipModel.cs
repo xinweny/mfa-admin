@@ -23,8 +23,8 @@ public class MembershipModel {
     public int? AddressId { get; set; }
     public AddressModel? Address;
 
-    public virtual ICollection<MemberModel>? Members { get; set; }
-    public virtual ICollection<DueModel>? Dues { get; set; }
+    public IEnumerable<MemberModel>? Members { get; set; }
+    public IEnumerable<DueModel>? Dues { get; set; }
 
     public MembershipModel() {
         CreatedAt = DateTime.UtcNow;

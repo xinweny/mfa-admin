@@ -17,15 +17,6 @@ public class ExchangeRepository : IExchangeRepository
         _validator = validator;
     }
 
-    public async Task CreateExchange(ExchangeModel exchange)
-    {
-        _validator.ValidateAndThrow(exchange);
-
-        _context.Exchanges.Add(exchange);
-
-        await _context.SaveChangesAsync();
-    }
-
     public async Task CreateExchanges(IEnumerable<ExchangeModel> exchanges)
     {
         foreach (ExchangeModel exchange in exchanges) {
@@ -69,9 +60,9 @@ public class ExchangeRepository : IExchangeRepository
         if (req.FromYear != null) query.Where(e => e.Year >= req.FromYear);
         if (req.ToYear != null) query.Where(e => e.Year <= req.ToYear);
 
-        if (req.Year == SortOrder.Ascending) {
+        if (req.SortYear == SortOrder.Ascending) {
             query.OrderBy(e => e.Year);
-        } else if (req.Year == SortOrder.Descending) {
+        } else if (req.SortYear == SortOrder.Descending) {
             query.OrderByDescending(e => e.Year);
         }
 

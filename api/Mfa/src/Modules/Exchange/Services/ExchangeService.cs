@@ -7,9 +7,9 @@ public class ExchangeService: IExchangeService {
         _exchangeRepository = exchangeRepository;
     }
 
-    public async Task CreateExchange(CreateExchangeRequest req)
+    public async Task CreateExchanges(IEnumerable<CreateExchangeRequest> req)
     {
-        await _exchangeRepository.CreateExchange(req.ToExchange());
+        await _exchangeRepository.CreateExchanges(req.Select(e => e.ToExchange()));
     }
 
     public async Task DeleteExchange(int id)

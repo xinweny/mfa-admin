@@ -6,5 +6,5 @@ public class GetDuesRequest {
     public DateTime? FromDate { get; set; }
     public DateTime? ToDate { get; set; }
     public IEnumerable<PaymentMethod> PaymentMethods { get; set; } = [];
-    public SortOrder PaymentDate { get; set; } = SortOrder.None;
+    public SortOrder SortPaymentDate { get; set; } = SortOrder.None;
 }
