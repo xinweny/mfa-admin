@@ -32,16 +32,16 @@ public class BoardMemberController: ControllerBase {
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBoardMemberAsync([FromRoute] int id, [FromBody] UpdateBoardMemberRequest req) {
-        await _boardMemberService.UpdateBoardMember(id, req);
+    [HttpPut("{boardMemberId}")]
+    public async Task<IActionResult> UpdateBoardMemberAsync([FromRoute] int boardMemberId, [FromBody] UpdateBoardMemberRequest req) {
+        await _boardMemberService.UpdateBoardMember(boardMemberId, req);
 
         return Ok();
     }
 
-    [HttpPost("{id}")]
-    public async Task<IActionResult> DeleteBoardMemberAsync([FromRoute] int id) {
-        await _boardMemberService.DeleteBoardMember(id);
+    [HttpPost("{boardMemberId}")]
+    public async Task<IActionResult> DeleteBoardMemberAsync([FromRoute] int boardMemberId) {
+        await _boardMemberService.DeleteBoardMember(boardMemberId);
 
         return Ok();
     }

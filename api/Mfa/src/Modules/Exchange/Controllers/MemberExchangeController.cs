@@ -6,7 +6,7 @@ using Mfa.Common.Contracts;
 namespace Mfa.Modules.Exchange;
 
 [ApiController]
-[Route("api/members/{id}/exchanges")]
+[Route("api/members/{memberId}/exchanges")]
 [Authorize]
 
 public class MemberExchangeController: ControllerBase {
@@ -17,8 +17,8 @@ public class MemberExchangeController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetMemberExchangesAsync([FromRoute] int id) {
-        var exchanges = await _exchangeService.GetMemberExchanges(id);
+    public async Task<IActionResult> GetMemberExchangesAsync([FromRoute] int memberId) {
+        var exchanges = await _exchangeService.GetMemberExchanges(memberId);
 
         return Ok(new ApiResponse<IEnumerable<GetMemberExchangesResponse>> {
             Data = exchanges,

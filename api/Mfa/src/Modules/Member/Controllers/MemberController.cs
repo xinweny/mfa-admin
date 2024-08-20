@@ -25,9 +25,9 @@ public class MemberController: ControllerBase {
         });
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int id) {
-        var member = await _memberService.GetMemberById(id);
+    [HttpGet("{memberId}")]
+    public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int memberId) {
+        var member = await _memberService.GetMemberById(memberId);
 
         return Ok(new ApiResponse<GetMemberResponse> {
             Data = member,
@@ -41,16 +41,16 @@ public class MemberController: ControllerBase {
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMemberAsync([FromRoute] int id, [FromBody] UpdateMemberRequest body) {
-        await _memberService.UpdateMember(id, body);
+    [HttpPut("{memberId}")]
+    public async Task<IActionResult> UpdateMemberAsync([FromRoute] int memberId, [FromBody] UpdateMemberRequest body) {
+        await _memberService.UpdateMember(memberId, body);
 
         return Ok();
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMemberAsync([FromRoute] int id) {
-        await _memberService.DeleteMember(id);
+    [HttpDelete("{memberId}")]
+    public async Task<IActionResult> DeleteMemberAsync([FromRoute] int memberId) {
+        await _memberService.DeleteMember(memberId);
 
         return Ok();
     }

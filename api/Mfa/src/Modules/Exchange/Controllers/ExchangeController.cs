@@ -32,16 +32,16 @@ public class ExchangeController: ControllerBase {
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateExchangeAsync([FromRoute] int id, [FromBody] UpdateExchangeRequest req) {
-        await _exchangeService.UpdateExchange(id, req);
+    [HttpPut("{exchangeId}")]
+    public async Task<IActionResult> UpdateExchangeAsync([FromRoute] int exchangeId, [FromBody] UpdateExchangeRequest req) {
+        await _exchangeService.UpdateExchange(exchangeId, req);
 
         return Ok();
     }
 
-    [HttpPost("{id}")]
-    public async Task<IActionResult> DeleteExchangeAsync([FromRoute] int id) {
-        await _exchangeService.DeleteExchange(id);
+    [HttpPost("{exchangeId}")]
+    public async Task<IActionResult> DeleteExchangeAsync([FromRoute] int exchangeId) {
+        await _exchangeService.DeleteExchange(exchangeId);
 
         return Ok();
     }

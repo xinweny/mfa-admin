@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Mfa.Modules.Address;
 
 [ApiController]
-[Route("api/memberships/{id}/address")]
+[Route("api/memberships/{membershipId}/address")]
 [Authorize]
 
 public class MembershipAddressController: ControllerBase {
@@ -15,22 +15,22 @@ public class MembershipAddressController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateAddressAsync([FromRoute] int id, [FromBody] CreateAddressRequest body) {
-        await _membershipAddressService.CreateAddress(id, body);
+    public async Task<IActionResult> CreateAddressAsync([FromRoute] int membershipId, [FromBody] CreateAddressRequest body) {
+        await _membershipAddressService.CreateAddress(membershipId, body);
 
         return Ok();
     }
 
     [HttpPut("")]
-    public async Task<IActionResult> UpdateAddressAsync([FromRoute] int id, [FromBody] UpdateAddressRequest body) {
-        await _membershipAddressService.UpdateAddress(id, body);
+    public async Task<IActionResult> UpdateAddressAsync([FromRoute] int membershipId, [FromBody] UpdateAddressRequest body) {
+        await _membershipAddressService.UpdateAddress(membershipId, body);
 
         return Ok();
     }
 
     [HttpDelete("")]
-    public async Task<IActionResult> DeleteAddressAsync([FromRoute] int id) {
-        await _membershipAddressService.DeleteAddress(id);
+    public async Task<IActionResult> DeleteAddressAsync([FromRoute] int membershipId) {
+        await _membershipAddressService.DeleteAddress(membershipId);
 
         return Ok();
     }

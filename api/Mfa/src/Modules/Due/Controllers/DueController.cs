@@ -32,16 +32,16 @@ public class DueController: ControllerBase {
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateDueAsync([FromRoute] int id, [FromBody] UpdateDueRequest req) {
-        await _dueService.UpdateDue(id, req);
+    [HttpPut("{dueId}")]
+    public async Task<IActionResult> UpdateDueAsync([FromRoute] int dueId, [FromBody] UpdateDueRequest req) {
+        await _dueService.UpdateDue(dueId, req);
 
         return Ok();
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDueAsync([FromRoute] int id) {
-        await _dueService.DeleteDue(id);
+    [HttpDelete("{dueId}")]
+    public async Task<IActionResult> DeleteDueAsync([FromRoute] int dueId) {
+        await _dueService.DeleteDue(dueId);
 
         return Ok();
     }

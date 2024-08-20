@@ -25,9 +25,9 @@ public class AddressController: ControllerBase {
         });
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetAddressAsync([FromRoute] int id) {
-        var address = await _addressService.GetAddress(id);
+    [HttpGet("{addressId}")]
+    public async Task<IActionResult> GetAddressAsync([FromRoute] int addressId) {
+        var address = await _addressService.GetAddress(addressId);
 
         return Ok(new ApiResponse<AddressDto> {
             Data = address,
