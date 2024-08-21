@@ -12,15 +12,13 @@ public class MembershipService: IMembershipService {
     }
 
     public async Task DeleteMembership(int id) {
-        var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException("Membership not found.");
+        var membership = await _membershipRepository.GetMembershipById(id);
 
         await _membershipRepository.DeleteMembership(membership);
     }
 
     public async Task<GetMembershipResponse> GetMembershipById(int id) {
-        var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException("Membership not found.");
+        var membership = await _membershipRepository.GetMembershipById(id);
 
         return membership.ToGetMembershipResponse();
     }

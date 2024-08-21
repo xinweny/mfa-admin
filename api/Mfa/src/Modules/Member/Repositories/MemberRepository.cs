@@ -21,18 +21,17 @@ public class MemberRepository: IMemberRepository {
         _membershipValidator = membershipValidator;
     }
 
-    public async Task<MemberModel?> GetMemberById(int id) {
-        var query = _context.Members.AsQueryable();
-
-        query
+    public async Task<MemberModel> GetMemberById(int id) {
+        var member = await _context.Members
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null)
             .Include(m => m.Membership)
-            .ThenInclude(m => m != null ? m.Members : null);
-            
-        query.Where(m => m.Id == id);
+            .ThenInclude(m => m != null ? m.Members : null)
+            .Where(m => m.Id == id)
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Member not found.");
 
-        return await query.FirstOrDefaultAsync();
+        return member;
     }
 
     public async Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req) {

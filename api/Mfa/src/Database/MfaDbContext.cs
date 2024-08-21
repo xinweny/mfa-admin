@@ -44,7 +44,7 @@ public class MfaDbContext: DbContext {
             .HasForeignKey(member => member.MembershipId);
 
         modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.BoardPosition)
+            .HasMany(member => member.BoardPositions)
             .WithOne(boardPosition => boardPosition.Member)
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(boardPosition => boardPosition.MemberId);

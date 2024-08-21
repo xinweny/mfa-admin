@@ -29,12 +29,13 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<MembershipModel?> GetMembershipById(int id) {
+    public async Task<MembershipModel> GetMembershipById(int id) {
         var membership = await _context.Memberships
             .Where(m => m.Id == id)
             .Include(m => m.Address)
             .Include(m => m.Members)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Membership not found.");
 
         return membership;
     }

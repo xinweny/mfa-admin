@@ -17,12 +17,15 @@ public class ExchangeRepository : IExchangeRepository
         _validator = validator;
     }
 
-    public async Task CreateExchanges(IEnumerable<ExchangeModel> exchanges) {
+    public async Task CreateExchanges(int memberId, IEnumerable<ExchangeModel> exchanges) {
+        var member = await _context.Members.FindAsync(memberId);
+
+        if (member == null) throw new KeyNotFoundException("Associated member not found.");
+
         foreach (ExchangeModel exchange in exchanges) {
             _validator.ValidateAndThrow(exchange);
+            member.Exchanges.Add(exchange);
         }
-
-        _context.Exchanges.AddRange(exchanges);
 
         await _context.SaveChangesAsync();
     }
@@ -33,8 +36,10 @@ public class ExchangeRepository : IExchangeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<ExchangeModel?> GetExchangeById(int id) {
-        var exchange = await _context.Exchanges.FindAsync(id);
+    public async Task<ExchangeModel> GetExchangeById(int id) {
+        var exchange = await _context.Exchanges
+            .FindAsync(id)
+            ?? throw new KeyNotFoundException("Exchange not found.");
 
         return exchange;
     }

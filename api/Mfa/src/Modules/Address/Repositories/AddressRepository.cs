@@ -22,8 +22,9 @@ public class AddressRepository : IAddressRepository
         return addresses;
     }
 
-    public async Task<AddressModel?> GetAddressById(int id) {
-        var address = await _context.Addresses.FindAsync(id);
+    public async Task<AddressModel> GetAddressById(int id) {
+        var address = await _context.Addresses.FindAsync(id)
+            ?? throw new KeyNotFoundException("Address not found.");
 
         return address;
     }

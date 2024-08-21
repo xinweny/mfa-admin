@@ -28,11 +28,11 @@ public static class ExchangeMapper {
         };
     }
 
-    public static ExchangeModel ToExchange(this CreateExchangeRequest req) {
-        return new ExchangeModel {
-            Year = req.Year,
-            ExchangeType = req.ExchangeType,
+    public static ICollection<ExchangeModel> ToExchanges(this CreateExchangesRequest req) {
+        return req.Exchanges.Select(r => new ExchangeModel {
+            Year = r.Year,
+            ExchangeType = r.ExchangeType,
             MemberId = req.MemberId,
-        };
+        }).ToList();
     }
 }

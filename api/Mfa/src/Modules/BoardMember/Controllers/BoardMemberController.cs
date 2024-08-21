@@ -46,7 +46,7 @@ public class BoardMemberController: ControllerBase {
         return Ok();
     }
 
-    [HttpPost("{boardMemberId}")]
+    [HttpDelete("{boardMemberId}")]
     public async Task<IActionResult> DeleteBoardMemberAsync(
         [FromRoute] int boardMemberId
     ) {

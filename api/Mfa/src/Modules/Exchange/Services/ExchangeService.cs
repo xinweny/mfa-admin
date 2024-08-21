@@ -7,13 +7,12 @@ public class ExchangeService: IExchangeService {
         _exchangeRepository = exchangeRepository;
     }
 
-    public async Task CreateExchanges(IEnumerable<CreateExchangeRequest> req) {
-        await _exchangeRepository.CreateExchanges(req.Select(e => e.ToExchange()));
+    public async Task CreateExchanges(CreateExchangesRequest req) {
+        await _exchangeRepository.CreateExchanges(req.MemberId, req.ToExchanges());
     }
 
     public async Task DeleteExchange(int id) {
-        var exchange = await _exchangeRepository.GetExchangeById(id)
-            ?? throw new KeyNotFoundException("Exchange not found.");
+        var exchange = await _exchangeRepository.GetExchangeById(id);
 
         await _exchangeRepository.DeleteExchange(exchange);
     }
@@ -31,8 +30,7 @@ public class ExchangeService: IExchangeService {
     }
 
     public async Task UpdateExchange(int id, UpdateExchangeRequest req) {
-        var exchange = await _exchangeRepository.GetExchangeById(id)
-            ?? throw new KeyNotFoundException("Exchange not found.");
+        var exchange = await _exchangeRepository.GetExchangeById(id);
 
         await _exchangeRepository.UpdateExchange(exchange, req);
     }

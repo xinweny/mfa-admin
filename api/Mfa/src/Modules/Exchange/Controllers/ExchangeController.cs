@@ -29,7 +29,7 @@ public class ExchangeController: ControllerBase {
 
     [HttpPost("")]
     public async Task<IActionResult> CreateExchangesAsync(
-        [FromBody] IEnumerable<CreateExchangeRequest> req
+        [FromBody] CreateExchangesRequest req
     ) {
         await _exchangeService.CreateExchanges(req);
 

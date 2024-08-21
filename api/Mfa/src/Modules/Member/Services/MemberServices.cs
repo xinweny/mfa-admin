@@ -26,8 +26,7 @@ public class MemberService : IMemberService
     }
 
     public async Task UpdateMember(int id, UpdateMemberRequest req) {
-        var member = await _memberRepository.GetMemberById(id)
-            ?? throw new KeyNotFoundException("Member not found.");
+        var member = await _memberRepository.GetMemberById(id);
 
         await _memberRepository.UpdateMember(member, req);
     }
@@ -37,10 +36,7 @@ public class MemberService : IMemberService
     }
 
     public async Task DeleteMember(int id) {
-        var member = await _memberRepository.GetMemberById(id)
-            ?? throw new KeyNotFoundException("Member not found.");
-
-        if (member.Membership == null) throw new KeyNotFoundException("Membership not found.");
+        var member = await _memberRepository.GetMemberById(id);
 
         await _memberRepository.DeleteMember(member);
     }

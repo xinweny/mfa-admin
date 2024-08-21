@@ -17,6 +17,10 @@ public class BoardMemberRepository: IBoardMemberRepository {
     }
 
     public async Task CreateBoardMember(BoardMemberModel boardMember) {
+        var member = await _context.Members.FindAsync(boardMember.MemberId);
+
+        if (member == null) throw new KeyNotFoundException("Associated member not found.");
+
         _validator.ValidateAndThrow(boardMember);
 
         _context.Add(boardMember);
@@ -32,7 +36,9 @@ public class BoardMemberRepository: IBoardMemberRepository {
 
     public async Task<BoardMemberModel?> GetBoardMemberById(int id) {
         var boardMember = await _context.BoardMembers
-            .FindAsync(id);
+            .Include(b => b.Member)
+            .Where(b => b.Id == id)
+            .FirstOrDefaultAsync();
 
         return boardMember;
     }

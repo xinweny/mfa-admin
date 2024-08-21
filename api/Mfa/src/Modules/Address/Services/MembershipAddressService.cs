@@ -29,8 +29,7 @@ public class MembershipAddressService : IMembershipAddressService
     }
     
     public async Task DeleteAddress(int membershipId) {
-        var membership = await _membershipRepository.GetMembershipById(membershipId)
-            ?? throw new KeyNotFoundException("Membership not found.");
+        var membership = await _membershipRepository.GetMembershipById(membershipId);
 
         var address = membership.Address ?? throw new KeyNotFoundException("Address not found.");
     

@@ -32,8 +32,8 @@ public class MemberModel {
     public required int MembershipId { get; set; }
     public MembershipModel? Membership;
 
-    public ICollection<BoardMemberModel>? BoardPosition;
-    public ICollection<ExchangeModel>? Exchanges;
+    public ICollection<BoardMemberModel> BoardPositions = [];
+    public ICollection<ExchangeModel> Exchanges = [];
 
     public MemberModel() {
         CreatedAt = DateTime.UtcNow;
