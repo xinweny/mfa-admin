@@ -19,4 +19,16 @@ public class AddressService : IAddressService
 
         return address.Select(a => a.ToAddressDto());
     }
+
+    public async Task CreateAddress(int membershipId, CreateAddressRequest req) {
+        await _addressRepository.CreateAddress(membershipId, req.ToAddress());
+    }
+    
+    public async Task DeleteAddress(int membershipId) {
+        await _addressRepository.DeleteAddress(membershipId);
+    }
+
+    public async Task UpdateAddress(int membershipId, UpdateAddressRequest req) {
+        await _addressRepository.UpdateAddress(membershipId, req);
+    }
 }

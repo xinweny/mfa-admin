@@ -30,8 +30,7 @@ public class MembershipService: IMembershipService {
     }
 
     public async Task UpdateMembership(int id, UpdateMembershipRequest req) {
-        var membership = await _membershipRepository.GetMembershipById(id)
-            ?? throw new KeyNotFoundException("Membership not found.");
+        var membership = await _membershipRepository.GetMembershipById(id);
 
         await _membershipRepository.UpdateMembership(membership, req);
     }

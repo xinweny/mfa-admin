@@ -18,9 +18,11 @@ public class ExchangeRepository : IExchangeRepository
     }
 
     public async Task CreateExchanges(int memberId, IEnumerable<ExchangeModel> exchanges) {
-        var member = await _context.Members.FindAsync(memberId);
-
-        if (member == null) throw new KeyNotFoundException("Associated member not found.");
+        var member = await _context.Members
+            .Include(m => m.Exchanges)
+            .Where(m => m.Id == memberId)
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Associated member not found.");
 
         foreach (ExchangeModel exchange in exchanges) {
             _validator.ValidateAndThrow(exchange);

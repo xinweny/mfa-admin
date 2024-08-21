@@ -8,10 +8,10 @@ namespace Mfa.Modules.Address;
 [Authorize]
 
 public class MembershipAddressController: ControllerBase {
-    private readonly IMembershipAddressService _membershipAddressService;
+    private readonly IAddressService _addressService;
 
-    public MembershipAddressController(IMembershipAddressService membershipAddressService) {
-        _membershipAddressService = membershipAddressService;
+    public MembershipAddressController(IAddressService addressService) {
+        _addressService = addressService;
     }
 
     [HttpPost("")]
@@ -19,7 +19,7 @@ public class MembershipAddressController: ControllerBase {
         [FromRoute] int membershipId,
         [FromBody] CreateAddressRequest body
     ) {
-        await _membershipAddressService.CreateAddress(membershipId, body);
+        await _addressService.CreateAddress(membershipId, body);
 
         return Ok();
     }
@@ -29,7 +29,7 @@ public class MembershipAddressController: ControllerBase {
         [FromRoute] int membershipId,
         [FromBody] UpdateAddressRequest body
     ) {
-        await _membershipAddressService.UpdateAddress(membershipId, body);
+        await _addressService.UpdateAddress(membershipId, body);
 
         return Ok();
     }
@@ -38,7 +38,7 @@ public class MembershipAddressController: ControllerBase {
     public async Task<IActionResult> DeleteAddressAsync(
         [FromRoute] int membershipId
     ) {
-        await _membershipAddressService.DeleteAddress(membershipId);
+        await _addressService.DeleteAddress(membershipId);
 
         return Ok();
     }

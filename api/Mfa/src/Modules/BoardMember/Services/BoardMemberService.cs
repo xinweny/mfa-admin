@@ -12,8 +12,7 @@ public class BoardMemberService: IBoardMemberService {
     }
 
     public async Task DeleteBoardMember(int id) {
-        var boardMember = await _boardMemberRepository.GetBoardMemberById(id)
-            ?? throw new KeyNotFoundException("Board member not found.");
+        var boardMember = await _boardMemberRepository.GetBoardMemberById(id);
 
         await _boardMemberRepository.DeleteBoardMember(boardMember);
     }
@@ -31,8 +30,7 @@ public class BoardMemberService: IBoardMemberService {
     }
 
     public async Task UpdateBoardMember(int id, UpdateBoardMemberRequest req) {
-        var boardMember = await _boardMemberRepository.GetBoardMemberById(id)
-            ?? throw new KeyNotFoundException("Board member not found.");
+        var boardMember = await _boardMemberRepository.GetBoardMemberById(id);
 
         await _boardMemberRepository.UpdateBoardMember(boardMember, req);
     }

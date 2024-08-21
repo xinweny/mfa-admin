@@ -58,12 +58,4 @@ public class MembershipRepository: IMembershipRepository
         
         await _context.SaveChangesAsync();
     }
-
-    public async Task UpdateMembershipAddressId(MembershipModel membership, int? addressId) {
-        membership.UpdatedAt = DateTime.UtcNow;
-
-        membership.AddressId = addressId;
-        
-        await _context.SaveChangesAsync();
-    }
 }

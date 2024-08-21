@@ -1,7 +1,7 @@
 namespace Mfa.Modules.BoardMember;
 
 public interface IBoardMemberRepository {
-    Task<BoardMemberModel?> GetBoardMemberById(int id);
+    Task<BoardMemberModel> GetBoardMemberById(int id);
     Task<IEnumerable<BoardMemberModel>> GetBoardMembers( GetBoardMembersRequest req);
     Task<IEnumerable<BoardMemberModel>> GetMemberBoardMembers(int memberId);
     Task CreateBoardMember(BoardMemberModel boardMember);

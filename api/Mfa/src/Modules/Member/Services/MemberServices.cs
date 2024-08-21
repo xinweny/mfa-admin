@@ -13,8 +13,7 @@ public class MemberService : IMemberService
     }
 
     public async Task<GetMemberResponse> GetMemberById(int id) {
-        var member = await _memberRepository.GetMemberById(id)
-            ?? throw new KeyNotFoundException("Member not found.");
+        var member = await _memberRepository.GetMemberById(id);
 
         return member.ToGetMemberResponse();
     }

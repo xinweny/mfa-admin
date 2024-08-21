@@ -34,11 +34,12 @@ public class BoardMemberRepository: IBoardMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<BoardMemberModel?> GetBoardMemberById(int id) {
+    public async Task<BoardMemberModel> GetBoardMemberById(int id) {
         var boardMember = await _context.BoardMembers
             .Include(b => b.Member)
             .Where(b => b.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Board member not found.");
 
         return boardMember;
     }

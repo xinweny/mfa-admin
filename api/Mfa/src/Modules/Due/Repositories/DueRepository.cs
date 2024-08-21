@@ -18,9 +18,11 @@ public class DueRepository : IDueRepository
     }
 
     public async Task CreateDues(int membershipId, IEnumerable<DueModel> dues) {
-        var membership = await _context.Memberships.FindAsync(membershipId);
-
-        if (membership == null) throw new KeyNotFoundException("Associated membership not found.");
+        var membership = await _context.Memberships
+            .Include(m => m.Dues)
+            .Where(m => m.Id == membershipId)
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Associated membership not found.");
 
         foreach (DueModel due in dues) {
             _validator.ValidateAndThrow(due);
