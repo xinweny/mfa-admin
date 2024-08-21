@@ -1,5 +1,3 @@
-using Microsoft.IdentityModel.Tokens;
-
 namespace Mfa.Modules.Membership;
 
 public class MembershipService: IMembershipService {

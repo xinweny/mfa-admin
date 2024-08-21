@@ -54,8 +54,14 @@ public class MemberRepository: IMemberRepository {
         return members;
     }
 
-    public async Task CreateMember(MemberModel member, MembershipModel membership) {
-        membership.Members!.Add(member);
+    public async Task CreateMember(MemberModel member) {
+        var membership = await _context.Memberships
+            .Include(m => m.Members)
+            .Where(m => m.Id == member.MembershipId)
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Membership not found.");
+
+        membership.Members?.Add(member);
 
         _membershipValidator.ValidateAndThrow(membership);
 
@@ -72,8 +78,11 @@ public class MemberRepository: IMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteMember(MemberModel member, MembershipModel membership) {
-        membership.Members!.Remove(member);
+    public async Task DeleteMember(MemberModel member) {
+        var membership = member.Membership
+            ?? throw new KeyNotFoundException("Membership not found.");
+
+        membership.Members?.Remove(member);
 
         _membershipValidator.ValidateAndThrow(membership);
 
