@@ -57,7 +57,12 @@ public class MembershipRepository: IMembershipRepository
 
         _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
 
-        _validator.ValidateAndThrow(membership);
+        _validator.Validate(
+            membership,
+            options => options
+                .ThrowOnFailures()
+                .IncludeProperties([nameof(membership.MembershipType)])
+        );
         
         await _context.SaveChangesAsync();
     }
