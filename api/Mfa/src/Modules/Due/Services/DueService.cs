@@ -8,15 +8,12 @@ public class DueService : IDueService
         _dueRepository = dueRepository;
     }
 
-    public async Task CreateDues(IEnumerable<CreateDueRequest> req) {
-        var dues = req.Select(r => r.ToDue());
-
-        await _dueRepository.CreateDues(dues);
+    public async Task CreateDues(CreateDuesRequest req) {
+        await _dueRepository.CreateDues(req.MembershipId, req.ToDues());
     }
 
     public async Task DeleteDue(int id) {
-        var due = await _dueRepository.GetDueById(id)
-            ?? throw new KeyNotFoundException("Due not found.");
+        var due = await _dueRepository.GetDueById(id);
 
         await _dueRepository.DeleteDue(due);
     }
@@ -34,8 +31,7 @@ public class DueService : IDueService
     }
 
     public async Task UpdateDue(int id, UpdateDueRequest req) {
-        var due = await _dueRepository.GetDueById(id)
-            ?? throw new KeyNotFoundException("Due not found.");
+        var due = await _dueRepository.GetDueById(id);
 
         await _dueRepository.UpdateDue(due, req);
     }

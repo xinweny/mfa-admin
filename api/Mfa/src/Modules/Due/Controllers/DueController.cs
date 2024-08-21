@@ -29,7 +29,7 @@ public class DueController: ControllerBase {
 
     [HttpPost("")]
     public async Task<IActionResult> CreateDuesAsync(
-        [FromBody] IEnumerable<CreateDueRequest> req
+        [FromBody] CreateDuesRequest req
     ) {
         await _dueService.CreateDues(req);
 

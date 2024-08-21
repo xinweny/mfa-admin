@@ -17,12 +17,15 @@ public class DueRepository : IDueRepository
         _validator = validator;
     }
 
-    public async Task CreateDues(IEnumerable<DueModel> dues) {
+    public async Task CreateDues(int membershipId, IEnumerable<DueModel> dues) {
+        var membership = await _context.Memberships.FindAsync(membershipId);
+
+        if (membership == null) throw new KeyNotFoundException("Associated membership not found.");
+
         foreach (DueModel due in dues) {
             _validator.ValidateAndThrow(due);
+            membership.Dues.Add(due);
         }
-
-        _context.Dues.AddRange(dues);
 
         await _context.SaveChangesAsync();
     }
@@ -33,11 +36,12 @@ public class DueRepository : IDueRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<DueModel?> GetDueById(int id) {
+    public async Task<DueModel> GetDueById(int id) {
         var due = await _context.Dues
             .Include(d => d.Membership)
             .Where(d => d.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync()
+            ?? throw new KeyNotFoundException("Due not found.");
 
         return due;
     }

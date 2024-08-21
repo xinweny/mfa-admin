@@ -29,9 +29,9 @@ public static class ExchangeMapper {
     }
 
     public static ICollection<ExchangeModel> ToExchanges(this CreateExchangesRequest req) {
-        return req.Exchanges.Select(r => new ExchangeModel {
-            Year = r.Year,
-            ExchangeType = r.ExchangeType,
+        return req.Exchanges.Select(e => new ExchangeModel {
+            Year = e.Year,
+            ExchangeType = e.ExchangeType,
             MemberId = req.MemberId,
         }).ToList();
     }

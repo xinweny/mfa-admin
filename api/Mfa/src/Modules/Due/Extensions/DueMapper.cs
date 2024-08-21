@@ -1,14 +1,14 @@
 namespace Mfa.Modules.Due;
 
 public static class DueMapper {
-    public static DueModel ToDue(this CreateDueRequest req) {
-        return new DueModel {
+    public static ICollection<DueModel> ToDues(this CreateDuesRequest req) {
+        return req.Dues.Select(d => new DueModel {
             MembershipId = req.MembershipId,
-            AmountPaid = req.AmountPaid,
-            Year = req.Year,
-            PaymentMethod = req.PaymentMethod,
-            PaymentDate = req.PaymentDate,
-        };
+            AmountPaid = d.AmountPaid,
+            Year = d.Year,
+            PaymentMethod = d.PaymentMethod,
+            PaymentDate = d.PaymentDate,
+        }).ToList();
     }
 
     public static GetMembershipDuesResponse ToGetMembershipDuesResponse(this DueModel due) {
