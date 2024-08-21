@@ -15,8 +15,7 @@ public class MembershipRepository: IMembershipRepository
         _validator = validator;
     }
 
-    public async Task CreateMembership(MembershipModel membership)
-    {
+    public async Task CreateMembership(MembershipModel membership) {
         _validator.ValidateAndThrow(membership);
 
         _context.Memberships.Add(membership);
@@ -24,8 +23,7 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteMembership(MembershipModel membership)
-    {
+    public async Task DeleteMembership(MembershipModel membership) {
         _context.Memberships.Remove(membership);
 
         await _context.SaveChangesAsync();
@@ -41,8 +39,7 @@ public class MembershipRepository: IMembershipRepository
         return membership;
     }
     
-    public async Task<IEnumerable<MembershipModel>> GetMemberships()
-    {
+    public async Task<IEnumerable<MembershipModel>> GetMemberships() {
         var memberships = await _context.Memberships
             .Include(m => m.Address)
             .Include(m => m.Members)
@@ -51,8 +48,7 @@ public class MembershipRepository: IMembershipRepository
         return memberships;
     }
 
-    public async Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req)
-    {
+    public async Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req) {
         membership.UpdatedAt = DateTime.UtcNow;
 
         _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
@@ -62,8 +58,7 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateMembershipAddressId(MembershipModel membership, int? addressId)
-    {
+    public async Task UpdateMembershipAddressId(MembershipModel membership, int? addressId) {
         membership.UpdatedAt = DateTime.UtcNow;
 
         membership.AddressId = addressId;

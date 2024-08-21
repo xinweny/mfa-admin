@@ -7,35 +7,30 @@ public class ExchangeService: IExchangeService {
         _exchangeRepository = exchangeRepository;
     }
 
-    public async Task CreateExchanges(IEnumerable<CreateExchangeRequest> req)
-    {
+    public async Task CreateExchanges(IEnumerable<CreateExchangeRequest> req) {
         await _exchangeRepository.CreateExchanges(req.Select(e => e.ToExchange()));
     }
 
-    public async Task DeleteExchange(int id)
-    {
+    public async Task DeleteExchange(int id) {
         var exchange = await _exchangeRepository.GetExchangeById(id)
             ?? throw new KeyNotFoundException("Exchange not found.");
 
         await _exchangeRepository.DeleteExchange(exchange);
     }
 
-    public async Task<IEnumerable<GetExchangesResponse>> GetExchanges(GetExchangesRequest req)
-    {
+    public async Task<IEnumerable<GetExchangesResponse>> GetExchanges(GetExchangesRequest req) {
         var exchanges = await _exchangeRepository.GetExchanges(req);
 
         return exchanges.Select(e => e.ToGetExchangesResponse());
     }
 
-    public async Task<IEnumerable<GetMemberExchangesResponse>> GetMemberExchanges(int memberId)
-    {
+    public async Task<IEnumerable<GetMemberExchangesResponse>> GetMemberExchanges(int memberId) {
         var exchanges = await _exchangeRepository.GetExchangesByMemberId(memberId);
 
         return exchanges.Select(e => e.ToGetMemberExchangesResponse());
     }
 
-    public async Task UpdateExchange(int id, UpdateExchangeRequest req)
-    {
+    public async Task UpdateExchange(int id, UpdateExchangeRequest req) {
         var exchange = await _exchangeRepository.GetExchangeById(id)
             ?? throw new KeyNotFoundException("Exchange not found.");
 

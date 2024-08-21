@@ -17,7 +17,9 @@ public class ExchangeController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetExchangesAsync([FromQuery] GetExchangesRequest req) {
+    public async Task<IActionResult> GetExchangesAsync(
+        [FromQuery] GetExchangesRequest req
+    ) {
         var exchanges = await _exchangeService.GetExchanges(req);
 
         return Ok(new ApiResponse<IEnumerable<GetExchangesResponse>> {
@@ -26,21 +28,28 @@ public class ExchangeController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateExchangesAsync([FromBody] IEnumerable<CreateExchangeRequest> req) {
+    public async Task<IActionResult> CreateExchangesAsync(
+        [FromBody] IEnumerable<CreateExchangeRequest> req
+    ) {
         await _exchangeService.CreateExchanges(req);
 
         return Ok();
     }
 
     [HttpPut("{exchangeId}")]
-    public async Task<IActionResult> UpdateExchangeAsync([FromRoute] int exchangeId, [FromBody] UpdateExchangeRequest req) {
+    public async Task<IActionResult> UpdateExchangeAsync(
+        [FromRoute] int exchangeId,
+        [FromBody] UpdateExchangeRequest req
+    ) {
         await _exchangeService.UpdateExchange(exchangeId, req);
 
         return Ok();
     }
 
     [HttpPost("{exchangeId}")]
-    public async Task<IActionResult> DeleteExchangeAsync([FromRoute] int exchangeId) {
+    public async Task<IActionResult> DeleteExchangeAsync(
+        [FromRoute] int exchangeId
+    ) {
         await _exchangeService.DeleteExchange(exchangeId);
 
         return Ok();

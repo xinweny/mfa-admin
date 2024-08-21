@@ -17,7 +17,9 @@ public class MemberController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetMembersAsync([FromQuery] GetMembersRequest req) {
+    public async Task<IActionResult> GetMembersAsync(
+        [FromQuery] GetMembersRequest req
+    ) {
         var members = await _memberService.GetMembers(req);
         
         return Ok(new ApiResponse<IEnumerable<GetMembersResponse>> {
@@ -26,7 +28,9 @@ public class MemberController: ControllerBase {
     }
 
     [HttpGet("{memberId}")]
-    public async Task<IActionResult> GetMemberByIdAsync([FromRoute] int memberId) {
+    public async Task<IActionResult> GetMemberByIdAsync(
+        [FromRoute] int memberId
+    ) {
         var member = await _memberService.GetMemberById(memberId);
 
         return Ok(new ApiResponse<GetMemberResponse> {
@@ -35,7 +39,10 @@ public class MemberController: ControllerBase {
     }
 
     [HttpPut("{memberId}")]
-    public async Task<IActionResult> UpdateMemberAsync([FromRoute] int memberId, [FromBody] UpdateMemberRequest body) {
+    public async Task<IActionResult> UpdateMemberAsync(
+        [FromRoute] int memberId,
+        [FromBody] UpdateMemberRequest body
+    ) {
         await _memberService.UpdateMember(memberId, body);
 
         return Ok();

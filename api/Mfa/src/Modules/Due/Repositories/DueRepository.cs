@@ -17,8 +17,7 @@ public class DueRepository : IDueRepository
         _validator = validator;
     }
 
-    public async Task CreateDues(IEnumerable<DueModel> dues)
-    {
+    public async Task CreateDues(IEnumerable<DueModel> dues) {
         foreach (DueModel due in dues) {
             _validator.ValidateAndThrow(due);
         }
@@ -28,22 +27,19 @@ public class DueRepository : IDueRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteDue(DueModel due)
-    {
+    public async Task DeleteDue(DueModel due) {
         _context.Dues.Remove(due);
 
         await _context.SaveChangesAsync();
     }
 
-    public async Task<DueModel?> GetDueById(int id)
-    {
+    public async Task<DueModel?> GetDueById(int id) {
         var due = await _context.Dues.FindAsync(id);
 
         return due;
     }
 
-    public async Task<IEnumerable<DueModel>> GetDues(GetDuesRequest req)
-    {
+    public async Task<IEnumerable<DueModel>> GetDues(GetDuesRequest req) {
         var duesQuery = _context.Dues;
 
         if (!req.PaymentMethods.IsNullOrEmpty()) duesQuery.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
@@ -59,8 +55,7 @@ public class DueRepository : IDueRepository
         return await duesQuery.ToListAsync();
     }
 
-    public async Task<IEnumerable<DueModel>> GetMembershipDues(int membershipId)
-    {
+    public async Task<IEnumerable<DueModel>> GetMembershipDues(int membershipId) {
         var dues = await _context.Dues
             .Where(d => d.MembershipId == membershipId)
             .Include(d => d.Membership)
@@ -70,8 +65,7 @@ public class DueRepository : IDueRepository
         return dues;
     }
 
-    public async Task UpdateDue(DueModel due, UpdateDueRequest req)
-    {
+    public async Task UpdateDue(DueModel due, UpdateDueRequest req) {
         _context.Dues.Entry(due).CurrentValues.SetValues(req);
 
         _validator.ValidateAndThrow(due);

@@ -26,7 +26,9 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpGet("{membershipId}")]
-    public async Task<IActionResult> GetMembershipByIdAsync([FromRoute] int membershipId) {
+    public async Task<IActionResult> GetMembershipByIdAsync(
+        [FromRoute] int membershipId
+    ) {
         var membership = await _membershipService.GetMembershipById(membershipId);
 
         return Ok(new ApiResponse<GetMembershipResponse> {
@@ -35,21 +37,28 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateMembershipAsync([FromBody] CreateMembershipRequest body) {
+    public async Task<IActionResult> CreateMembershipAsync(
+        [FromBody] CreateMembershipRequest body
+    ) {
         await _membershipService.CreateMembership(body);
 
         return Ok();
     }
 
     [HttpPut("{membershipId}")]
-    public async Task<IActionResult> UpdateMembershipAsync([FromRoute] int membershipId, [FromBody] UpdateMembershipRequest body) {
+    public async Task<IActionResult> UpdateMembershipAsync(
+        [FromRoute] int membershipId,
+        [FromBody] UpdateMembershipRequest body
+    ) {
         await _membershipService.UpdateMembership(membershipId, body);
 
         return Ok();
     }
 
     [HttpDelete("{membershipId}")]
-    public async Task<IActionResult> DeleteMembeshipAsync([FromRoute] int membershipId) {
+    public async Task<IActionResult> DeleteMembeshipAsync(
+        [FromRoute] int membershipId
+    ) {
         await _membershipService.DeleteMembership(membershipId);
 
         return Ok();

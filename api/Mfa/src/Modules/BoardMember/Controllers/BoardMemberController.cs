@@ -17,7 +17,9 @@ public class BoardMemberController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetBoardMembersAsync([FromQuery] GetBoardMembersRequest req) {
+    public async Task<IActionResult> GetBoardMembersAsync(
+        [FromQuery] GetBoardMembersRequest req
+    ) {
         var boardMembers = await _boardMemberService.GetBoardMembers(req);
 
         return Ok(new ApiResponse<IEnumerable<GetBoardMembersResponse>> {
@@ -26,21 +28,28 @@ public class BoardMemberController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateBoardMemberAsync([FromBody] CreateBoardMemberRequest req) {
+    public async Task<IActionResult> CreateBoardMemberAsync(
+        [FromBody] CreateBoardMemberRequest req
+    ) {
         await _boardMemberService.CreateBoardMember(req);
 
         return Ok();
     }
 
     [HttpPut("{boardMemberId}")]
-    public async Task<IActionResult> UpdateBoardMemberAsync([FromRoute] int boardMemberId, [FromBody] UpdateBoardMemberRequest req) {
+    public async Task<IActionResult> UpdateBoardMemberAsync(
+        [FromRoute] int boardMemberId,
+        [FromBody] UpdateBoardMemberRequest req
+    ) {
         await _boardMemberService.UpdateBoardMember(boardMemberId, req);
 
         return Ok();
     }
 
     [HttpPost("{boardMemberId}")]
-    public async Task<IActionResult> DeleteBoardMemberAsync([FromRoute] int boardMemberId) {
+    public async Task<IActionResult> DeleteBoardMemberAsync(
+        [FromRoute] int boardMemberId
+    ) {
         await _boardMemberService.DeleteBoardMember(boardMemberId);
 
         return Ok();

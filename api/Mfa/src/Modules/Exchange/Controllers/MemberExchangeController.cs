@@ -17,7 +17,9 @@ public class MemberExchangeController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetMemberExchangesAsync([FromRoute] int memberId) {
+    public async Task<IActionResult> GetMemberExchangesAsync(
+        [FromRoute] int memberId
+    ) {
         var exchanges = await _exchangeService.GetMemberExchanges(memberId);
 
         return Ok(new ApiResponse<IEnumerable<GetMemberExchangesResponse>> {

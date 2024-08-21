@@ -8,23 +8,20 @@ public class MemberService : IMemberService
         _memberRepository = memberRepository;
     }
 
-    public async Task<GetMemberResponse> GetMemberById(int id)
-    {
+    public async Task<GetMemberResponse> GetMemberById(int id) {
         var member = await _memberRepository.GetMemberById(id)
             ?? throw new KeyNotFoundException("Member not found.");
 
         return member.ToGetMemberResponse();
     }
 
-    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest req)
-    {
+    public async Task<IEnumerable<GetMembersResponse>> GetMembers(GetMembersRequest req) {
         var members = await _memberRepository.GetMembers(req);
 
         return members.Select(m => m.ToGetMembersResponse());
     }
 
-    public async Task UpdateMember(int id, UpdateMemberRequest req)
-    {
+    public async Task UpdateMember(int id, UpdateMemberRequest req) {
         var member = await _memberRepository.GetMemberById(id)
             ?? throw new KeyNotFoundException("Member not found.");
 

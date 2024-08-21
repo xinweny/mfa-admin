@@ -15,21 +15,29 @@ public class MembershipAddressController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateAddressAsync([FromRoute] int membershipId, [FromBody] CreateAddressRequest body) {
+    public async Task<IActionResult> CreateAddressAsync(
+        [FromRoute] int membershipId,
+        [FromBody] CreateAddressRequest body
+    ) {
         await _membershipAddressService.CreateAddress(membershipId, body);
 
         return Ok();
     }
 
     [HttpPut("")]
-    public async Task<IActionResult> UpdateAddressAsync([FromRoute] int membershipId, [FromBody] UpdateAddressRequest body) {
+    public async Task<IActionResult> UpdateAddressAsync(
+        [FromRoute] int membershipId,
+        [FromBody] UpdateAddressRequest body
+    ) {
         await _membershipAddressService.UpdateAddress(membershipId, body);
 
         return Ok();
     }
 
     [HttpDelete("")]
-    public async Task<IActionResult> DeleteAddressAsync([FromRoute] int membershipId) {
+    public async Task<IActionResult> DeleteAddressAsync(
+        [FromRoute] int membershipId
+    ) {
         await _membershipAddressService.DeleteAddress(membershipId);
 
         return Ok();

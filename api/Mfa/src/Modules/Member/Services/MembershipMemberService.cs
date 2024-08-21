@@ -14,16 +14,14 @@ public class MembershipMemberService: IMembershipMemberService {
         _membershipRepository = membershipRepository;
     }
 
-    public async Task CreateMember(CreateMemberRequest req, int membershipId)
-    {
+    public async Task CreateMember(CreateMemberRequest req, int membershipId) {
         var membership = await _membershipRepository.GetMembershipById(membershipId)
             ?? throw new KeyNotFoundException("Membership not found.");
 
         await _memberRepository.CreateMember(req.ToMember(membershipId), membership);
     }
 
-    public async Task DeleteMember(int id, int membershipId)
-    {
+    public async Task DeleteMember(int id, int membershipId) {
         var membership = await _membershipRepository.GetMembershipById(membershipId)
             ?? throw new KeyNotFoundException("Membership not found.");
 

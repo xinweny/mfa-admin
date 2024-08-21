@@ -28,8 +28,7 @@ public class MembershipAddressService : IMembershipAddressService
         await _membershipRepository.UpdateMembershipAddressId(membership, address.Id);
     }
     
-    public async Task DeleteAddress(int membershipId)
-    {
+    public async Task DeleteAddress(int membershipId) {
         var membership = await _membershipRepository.GetMembershipById(membershipId)
             ?? throw new KeyNotFoundException("Membership not found.");
 
@@ -40,8 +39,7 @@ public class MembershipAddressService : IMembershipAddressService
         await _addressRepository.DeleteAddress(address);
     }
 
-    public async Task UpdateAddress(int membershipId, UpdateAddressRequest req)
-    {
+    public async Task UpdateAddress(int membershipId, UpdateAddressRequest req) {
         var membership = await _membershipRepository.GetMembershipById(membershipId)
             ?? throw new KeyNotFoundException("Membership not found.");
 

@@ -28,8 +28,7 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public async Task CreateAddress(AddressModel address)
-    {
+    public async Task CreateAddress(AddressModel address) {
         _validator.ValidateAndThrow(address);
 
         _context.Addresses.Add(address);
@@ -37,15 +36,13 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAddress(AddressModel address)
-    {
+    public async Task DeleteAddress(AddressModel address) {
         _context.Addresses.Remove(address);
 
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAddress(AddressModel address, UpdateAddressRequest req)
-    {
+    public async Task UpdateAddress(AddressModel address, UpdateAddressRequest req) {
         _context.Addresses.Entry(address).CurrentValues.SetValues(req);
 
         _validator.ValidateAndThrow(address);

@@ -17,7 +17,9 @@ public class DueController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetDuesAsync([FromQuery] GetDuesRequest req) {
+    public async Task<IActionResult> GetDuesAsync(
+        [FromQuery] GetDuesRequest req
+    ) {
         var dues = await _dueService.GetDues(req);
 
         return Ok(new ApiResponse<IEnumerable<GetDuesResponse>> {
@@ -26,21 +28,28 @@ public class DueController: ControllerBase {
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CreateDuesAsync([FromBody] IEnumerable<CreateDueRequest> req) {
+    public async Task<IActionResult> CreateDuesAsync(
+        [FromBody] IEnumerable<CreateDueRequest> req
+    ) {
         await _dueService.CreateDues(req);
 
         return Ok();
     }
 
     [HttpPut("{dueId}")]
-    public async Task<IActionResult> UpdateDueAsync([FromRoute] int dueId, [FromBody] UpdateDueRequest req) {
+    public async Task<IActionResult> UpdateDueAsync(
+        [FromRoute] int dueId,
+        [FromBody] UpdateDueRequest req
+    ) {
         await _dueService.UpdateDue(dueId, req);
 
         return Ok();
     }
 
     [HttpDelete("{dueId}")]
-    public async Task<IActionResult> DeleteDueAsync([FromRoute] int dueId) {
+    public async Task<IActionResult> DeleteDueAsync(
+        [FromRoute] int dueId
+    ) {
         await _dueService.DeleteDue(dueId);
 
         return Ok();

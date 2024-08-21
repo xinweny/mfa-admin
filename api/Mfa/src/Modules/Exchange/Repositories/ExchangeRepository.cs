@@ -17,8 +17,7 @@ public class ExchangeRepository : IExchangeRepository
         _validator = validator;
     }
 
-    public async Task CreateExchanges(IEnumerable<ExchangeModel> exchanges)
-    {
+    public async Task CreateExchanges(IEnumerable<ExchangeModel> exchanges) {
         foreach (ExchangeModel exchange in exchanges) {
             _validator.ValidateAndThrow(exchange);
         }
@@ -28,22 +27,19 @@ public class ExchangeRepository : IExchangeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteExchange(ExchangeModel exchange)
-    {
+    public async Task DeleteExchange(ExchangeModel exchange) {
         _context.Exchanges.Remove(exchange);
 
         await _context.SaveChangesAsync();
     }
 
-    public async Task<ExchangeModel?> GetExchangeById(int id)
-    {
+    public async Task<ExchangeModel?> GetExchangeById(int id) {
         var exchange = await _context.Exchanges.FindAsync(id);
 
         return exchange;
     }
 
-    public async Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req)
-    {
+    public async Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req) {
         var query = _context.Exchanges.AsQueryable();
 
         query.Include(e => e.Member);
@@ -69,8 +65,7 @@ public class ExchangeRepository : IExchangeRepository
         return await query.ToListAsync();
     }
 
-    public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(int memberId)
-    {
+    public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(int memberId) {
         var exchanges = await _context.Exchanges
             .Where(e => e.MemberId == memberId)
             .OrderByDescending(e => e.Year)
@@ -79,8 +74,7 @@ public class ExchangeRepository : IExchangeRepository
         return exchanges;
     }
 
-    public async Task UpdateExchange(ExchangeModel exchange, UpdateExchangeRequest req)
-    {
+    public async Task UpdateExchange(ExchangeModel exchange, UpdateExchangeRequest req) {
         _context.Entry(exchange).CurrentValues.SetValues(req);
 
         _validator.ValidateAndThrow(exchange);

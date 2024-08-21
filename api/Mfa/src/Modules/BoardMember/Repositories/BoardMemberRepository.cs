@@ -16,8 +16,7 @@ public class BoardMemberRepository: IBoardMemberRepository {
         _validator = validator;
     }
 
-    public async Task CreateBoardMember(BoardMemberModel boardMember)
-    {
+    public async Task CreateBoardMember(BoardMemberModel boardMember) {
         _validator.ValidateAndThrow(boardMember);
 
         _context.Add(boardMember);
@@ -25,23 +24,20 @@ public class BoardMemberRepository: IBoardMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteBoardMember(BoardMemberModel boardMember)
-    {
+    public async Task DeleteBoardMember(BoardMemberModel boardMember) {
         _context.BoardMembers.Remove(boardMember);
 
         await _context.SaveChangesAsync();
     }
 
-    public async Task<BoardMemberModel?> GetBoardMemberById(int id)
-    {
+    public async Task<BoardMemberModel?> GetBoardMemberById(int id) {
         var boardMember = await _context.BoardMembers
             .FindAsync(id);
 
         return boardMember;
     }
 
-    public async Task<IEnumerable<BoardMemberModel>> GetBoardMembers(GetBoardMembersRequest req)
-    {
+    public async Task<IEnumerable<BoardMemberModel>> GetBoardMembers(GetBoardMembersRequest req) {
         var query = _context.BoardMembers;
 
         query.Include(b => b.Member);
@@ -75,8 +71,7 @@ public class BoardMemberRepository: IBoardMemberRepository {
         return await query.ToListAsync();
     }
 
-    public async Task<IEnumerable<BoardMemberModel>> GetMemberBoardMembers(int memberId)
-    {
+    public async Task<IEnumerable<BoardMemberModel>> GetMemberBoardMembers(int memberId) {
         var boardMembers = await _context.BoardMembers
             .Where(b => b.MemberId == memberId)
             .OrderByDescending(b => b.StartDate)
@@ -85,8 +80,7 @@ public class BoardMemberRepository: IBoardMemberRepository {
         return boardMembers;
     }
 
-    public async Task UpdateBoardMember(BoardMemberModel boardMember, UpdateBoardMemberRequest req)
-    {
+    public async Task UpdateBoardMember(BoardMemberModel boardMember, UpdateBoardMemberRequest req) {
         _context.Entry(boardMember).CurrentValues.SetValues(req);
 
         _validator.ValidateAndThrow(boardMember);
