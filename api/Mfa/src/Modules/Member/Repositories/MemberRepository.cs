@@ -2,16 +2,23 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 
 using Mfa.Database;
+using Mfa.Modules.Membership;
 
 namespace Mfa.Modules.Member;
 
 public class MemberRepository: IMemberRepository {
     private readonly MfaDbContext _context;
-    private readonly IValidator<MemberModel> _validator;
+    private readonly IValidator<MemberModel> _memberValidator;
+    private readonly IValidator<MembershipModel> _membershipValidator;
 
-    public MemberRepository(MfaDbContext context, IValidator<MemberModel> validator) {
+    public MemberRepository(
+        MfaDbContext context,
+        IValidator<MemberModel> memberValidator,
+        IValidator<MembershipModel> membershipValidator
+    ) {
         _context = context;
-        _validator = validator;
+        _memberValidator = memberValidator;
+        _membershipValidator = membershipValidator;
     }
 
     public async Task<MemberModel?> GetMemberById(int id, bool includeMembership) {
@@ -53,20 +60,10 @@ public class MemberRepository: IMemberRepository {
         return members;
     }
 
-    public async Task CreateMember(MemberModel member) {
-        _validator.ValidateAndThrow(member);
+    public async Task CreateMember(MemberModel member, MembershipModel membership) {
+        membership.Members!.Add(member);
 
-        _context.Members.Add(member);
-
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task CreateMembers(IEnumerable<MemberModel> members) {
-        foreach (MemberModel member in members) {
-            _validator.ValidateAndThrow(member);
-        }
-
-        _context.Members.AddRange(members);
+        _membershipValidator.ValidateAndThrow(membership);
 
         await _context.SaveChangesAsync();
     }
@@ -76,13 +73,15 @@ public class MemberRepository: IMemberRepository {
 
         _context.Members.Entry(member).CurrentValues.SetValues(req);
 
-        _validator.ValidateAndThrow(member);
+        _memberValidator.ValidateAndThrow(member);
         
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteMember(MemberModel member) {
-        _context.Members.Remove(member);
+    public async Task DeleteMember(MemberModel member, MembershipModel membership) {
+        membership.Members!.Remove(member);
+
+        _membershipValidator.ValidateAndThrow(membership);
 
         await _context.SaveChangesAsync();
     }

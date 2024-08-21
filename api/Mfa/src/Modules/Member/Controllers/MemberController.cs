@@ -34,23 +34,9 @@ public class MemberController: ControllerBase {
         });
     }
 
-    [HttpPost("")]
-    public async Task<IActionResult> CreateMemberAsync([FromBody] CreateMemberRequest body) {
-        await _memberService.CreateMember(body);
-
-        return Ok();
-    }
-
     [HttpPut("{memberId}")]
     public async Task<IActionResult> UpdateMemberAsync([FromRoute] int memberId, [FromBody] UpdateMemberRequest body) {
         await _memberService.UpdateMember(memberId, body);
-
-        return Ok();
-    }
-
-    [HttpDelete("{memberId}")]
-    public async Task<IActionResult> DeleteMemberAsync([FromRoute] int memberId) {
-        await _memberService.DeleteMember(memberId);
 
         return Ok();
     }

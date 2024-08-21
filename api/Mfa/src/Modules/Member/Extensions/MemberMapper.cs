@@ -30,13 +30,13 @@ public static class MemberMapper {
         };
     }
 
-    public static MemberModel ToMember(this CreateMemberRequest req) {
+    public static MemberModel ToMember(this CreateMemberRequest req, int membershipId) {
         return new MemberModel {
             FirstName = req.FirstName,
             LastName = req.LastName,
             PhoneNumber = req.PhoneNumber,
             Email = req.Email,
-            MembershipId = req.MembershipId,
+            MembershipId = membershipId,
             JoinedDate = req.JoinedDate,
         };
     }

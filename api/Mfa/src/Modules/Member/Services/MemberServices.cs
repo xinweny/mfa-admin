@@ -8,19 +8,6 @@ public class MemberService : IMemberService
         _memberRepository = memberRepository;
     }
 
-    public async Task CreateMember(CreateMemberRequest req)
-    {
-        await _memberRepository.CreateMember(req.ToMember());
-    }
-
-    public async Task DeleteMember(int id)
-    {
-        var member = await _memberRepository.GetMemberById(id)
-            ?? throw new KeyNotFoundException("Member not found.");
-
-        await _memberRepository.DeleteMember(member);
-    }
-
     public async Task<GetMemberResponse> GetMemberById(int id)
     {
         var member = await _memberRepository.GetMemberById(id)
