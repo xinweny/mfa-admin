@@ -13,7 +13,7 @@ public static class MembershipMapper {
                 Id = m.Id,
                 FirstName = m.FirstName,
                 LastName = m.LastName
-            }),
+            }).ToList(),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
             CreatedAt = membership.CreatedAt,
@@ -29,7 +29,7 @@ public static class MembershipMapper {
                 Id = m.Id,
                 FirstName = m.FirstName,
                 LastName = m.LastName
-            }),
+            }).ToList(),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
             CreatedAt = membership.CreatedAt,

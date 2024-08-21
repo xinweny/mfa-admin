@@ -14,7 +14,7 @@ public class GetDuesResponse {
     public class MembershipDto {
         public required int Id { get; set; }
         public required MembershipType MembershipType { get; set; }
-        public required IEnumerable<MemberDto> Members { get; set; }
+        public required List<MemberDto> Members { get; set; }
 
         public class MemberDto {
         public required int Id { get; set; }

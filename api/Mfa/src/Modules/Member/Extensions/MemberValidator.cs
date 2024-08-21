@@ -1,5 +1,7 @@
 using FluentValidation;
 
+using Mfa.Common.Constants;
+
 namespace Mfa.Modules.Member;
 
 public class MemberValidator: AbstractValidator<MemberModel> {
@@ -27,6 +29,11 @@ public class MemberValidator: AbstractValidator<MemberModel> {
         RuleFor(m => m.PhoneNumber)
             .Matches(@"^\d{10}$")
                 .WithMessage("Invalid phone number.");
+        
+        RuleFor(m => m.JoinedDate)
+            .Must(joinedDate => joinedDate?.Year >= MfaConstants.MfaFoundingYear)
+                .When(m => m.JoinedDate != null)
+                .WithMessage($"Joined date year must be at least {MfaConstants.MfaFoundingYear}.");
 
         RuleFor(m => m.MembershipId)
             .NotNull()
