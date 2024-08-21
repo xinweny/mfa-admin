@@ -17,10 +17,17 @@ public class DueValidator: AbstractValidator<DueModel> {
                 .WithMessage("Invalid payment method.");
 
         RuleFor(d => d.AmountPaid)
+            .Cascade(CascadeMode.Stop)
             .NotNull()
                 .WithMessage("Amount paid is required.")
             .GreaterThan(0)
-                .WithMessage("Amount paid must be greater than 0.");
+                .WithMessage("Amount paid must be greater than 0.")
+            .Must(amountPaid => amountPaid == MfaConstants.SingleMembershipCost)
+                .When(d => d.Membership?.MembershipType == Membership.MembershipType.Single, ApplyConditionTo.CurrentValidator)
+                .WithMessage($"Single membership cost is ${MfaConstants.SingleMembershipCost}.")
+            .Must(amountPaid => amountPaid == MfaConstants.FamilyMembershipCost)
+                .When(d => d.Membership?.MembershipType == Membership.MembershipType.Family, ApplyConditionTo.CurrentValidator)
+                .WithMessage($"Family membership cost is ${MfaConstants.FamilyMembershipCost}.");
 
         RuleFor(d => d.PaymentDate)
             .NotNull()

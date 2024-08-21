@@ -34,7 +34,10 @@ public class DueRepository : IDueRepository
     }
 
     public async Task<DueModel?> GetDueById(int id) {
-        var due = await _context.Dues.FindAsync(id);
+        var due = await _context.Dues
+            .Include(d => d.Membership)
+            .Where(d => d.Id == id)
+            .FirstOrDefaultAsync();
 
         return due;
     }
