@@ -7,5 +7,4 @@ public class CreateAddressRequest {
     public required string City { get; set; }
     public required string PostalCode { get; set; }
     public required Province Province { get; set; }
-    public required int MembershipId { get; set; }
 }
