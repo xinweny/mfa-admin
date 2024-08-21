@@ -21,24 +21,18 @@ public class MemberRepository: IMemberRepository {
         _membershipValidator = membershipValidator;
     }
 
-    public async Task<MemberModel?> GetMemberById(int id, bool includeMembership) {
+    public async Task<MemberModel?> GetMemberById(int id) {
         var query = _context.Members.AsQueryable();
 
-        if (includeMembership) {
-            query
-                .Include(m => m.Membership)
-                .ThenInclude(m => m != null ? m.Address : null)
-                .Include(m => m.Membership)
-                .ThenInclude(m => m != null ? m.Members : null);
-        }
+        query
+            .Include(m => m.Membership)
+            .ThenInclude(m => m != null ? m.Address : null)
+            .Include(m => m.Membership)
+            .ThenInclude(m => m != null ? m.Members : null);
             
         query.Where(m => m.Id == id);
 
         return await query.FirstOrDefaultAsync();
-    }
-
-    public async Task<MemberModel?> GetMemberById(int id) {
-        return await GetMemberById(id, false);
     }
 
     public async Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req) {
