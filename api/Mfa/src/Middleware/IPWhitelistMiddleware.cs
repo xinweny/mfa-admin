@@ -14,10 +14,12 @@ public class IPWhitelistMiddleware {
         var remoteIP = context.Connection.RemoteIpAddress;
         var allowedIPs = _configuration.GetSection("AdminSafeList").Get<string[]>();
 
-        if (remoteIP == null) return;
-        if (allowedIPs.IsNullOrEmpty()) await _next(context);
+        if (allowedIPs.IsNullOrEmpty()) {
+            await _next(context);
+            return;
+        }
 
-        if (!IPAddress.IsLoopback(remoteIP) && !allowedIPs!.Contains(remoteIP.ToString())) {
+        if (remoteIP == null || !IPAddress.IsLoopback(remoteIP) && !allowedIPs!.Contains(remoteIP.ToString())) {
             context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
             await context.Response.WriteAsync("Access forbidden");
