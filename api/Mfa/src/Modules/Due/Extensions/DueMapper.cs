@@ -40,7 +40,7 @@ public static class DueMapper {
                         Id = m.Id,
                         FirstName = m.FirstName,
                         LastName = m.LastName,
-                    }) ?? [],
+                    }).ToList() ?? [],
                 }
             : null,
         };
