@@ -1,13 +1,15 @@
 services:
   dashboard:
+    depends_on: [database, backend]
     image: mfa/admin-dashboard
     build: ./dashboard
     profiles: []
   backend:
+    depends_on: [database]
     image: mfa/api
     build: ./api/MfaApi
     profiles: []
-  db:
+  database:
     image: postgres
     ports:
       - 5432:5432
