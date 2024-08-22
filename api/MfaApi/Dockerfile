@@ -22,4 +22,4 @@ COPY --from=build /src/out ./
 EXPOSE 80
 
 # Start the application
-ENTRYPOINT ["dotnet", "Mfa.dll"]
+ENTRYPOINT ["dotnet", "MfaApi.dll"]
