@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mfa", "Mfa\Mfa.csproj", "{55884FFE-FF18-446D-96E0-4CC9A36F08C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfaApi", "MfaApi\MfaApi.csproj", "{55884FFE-FF18-446D-96E0-4CC9A36F08C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mfa.Tests", "Mfa.Tests\Mfa.Tests.csproj", "{969F78FF-737A-4D7F-90E4-EA4A6DFB5692}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MfaApi.Tests", "MfaApi.Tests\MfaApi.Tests.csproj", "{969F78FF-737A-4D7F-90E4-EA4A6DFB5692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
