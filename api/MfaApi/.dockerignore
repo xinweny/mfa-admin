@@ -279,6 +279,7 @@ tools/Cake.CoreCLR
 tools
 .dotnet
 Dockerfile
+.dockerignore
 
 # .env file contains default environment variables for docker
 .env
