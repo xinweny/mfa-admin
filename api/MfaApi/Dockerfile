@@ -19,7 +19,7 @@ WORKDIR /app
 COPY --from=build /src/out ./
 
 # Expose the port
-EXPOSE 80
+EXPOSE 8080
 
 # Start the application
 ENTRYPOINT ["dotnet", "MfaApi.dll"]
