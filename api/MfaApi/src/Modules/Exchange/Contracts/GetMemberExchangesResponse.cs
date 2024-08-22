@@ -1,8 +1,8 @@
 namespace MfaApi.Modules.Exchange;
 
 public class GetMemberExchangesResponse {
-    public required int Id { get; set; }
+    public required Guid Id { get; set; }
     public required int Year { get; set; }
     public required ExchangeType ExchangeType { get; set; }
-    public required int MemberId { get; set; }
+    public required Guid MemberId { get; set; }
 }

@@ -1,10 +1,10 @@
 namespace MfaApi.Modules.Due;
 
 public interface IDueRepository {
-    Task<DueModel> GetDueById(int id);
+    Task<DueModel> GetDueById(Guid id);
     Task<IEnumerable<DueModel>> GetDues(GetDuesRequest req);
-    Task<IEnumerable<DueModel>> GetMembershipDues(int membershipId);
-    Task CreateDues(int membershipId, IEnumerable<DueModel> dues);
+    Task<IEnumerable<DueModel>> GetMembershipDues(Guid membershipId);
+    Task CreateDues(Guid membershipId, IEnumerable<DueModel> dues);
     Task UpdateDue(DueModel due, UpdateDueRequest req);
     Task DeleteDue(DueModel due);
 }

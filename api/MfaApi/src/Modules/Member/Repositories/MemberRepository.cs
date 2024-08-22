@@ -21,7 +21,7 @@ public class MemberRepository: IMemberRepository {
         _membershipValidator = membershipValidator;
     }
 
-    public async Task<MemberModel> GetMemberById(int id) {
+    public async Task<MemberModel> GetMemberById(Guid id) {
         var member = await _context.Members
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null)

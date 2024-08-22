@@ -12,7 +12,7 @@ public class MemberService : IMemberService
         _memberRepository = memberRepository;
     }
 
-    public async Task<GetMemberResponse> GetMemberById(int id) {
+    public async Task<GetMemberResponse> GetMemberById(Guid id) {
         var member = await _memberRepository.GetMemberById(id);
 
         return member.ToGetMemberResponse();
@@ -24,7 +24,7 @@ public class MemberService : IMemberService
         return members.Select(m => m.ToGetMembersResponse());
     }
 
-    public async Task UpdateMember(int id, UpdateMemberRequest req) {
+    public async Task UpdateMember(Guid id, UpdateMemberRequest req) {
         var member = await _memberRepository.GetMemberById(id);
 
         await _memberRepository.UpdateMember(member, req);
@@ -34,7 +34,7 @@ public class MemberService : IMemberService
         await _memberRepository.CreateMember(req.ToMember());
     }
 
-    public async Task DeleteMember(int id) {
+    public async Task DeleteMember(Guid id) {
         var member = await _memberRepository.GetMemberById(id);
 
         await _memberRepository.DeleteMember(member);

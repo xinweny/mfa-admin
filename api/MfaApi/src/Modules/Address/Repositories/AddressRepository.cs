@@ -23,7 +23,7 @@ public class AddressRepository : IAddressRepository
         return addresses;
     }
 
-    public async Task<AddressModel> GetAddressById(int id) {
+    public async Task<AddressModel> GetAddressById(Guid id) {
         var address = await _context.Addresses
             .FindAsync(id)
             ?? throw new KeyNotFoundException("Address not found.");
@@ -31,7 +31,7 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    public async Task CreateAddress(int membershipId, AddressModel address) {
+    public async Task CreateAddress(Guid membershipId, AddressModel address) {
         var membership = await GetMembership(membershipId);
 
         if (membership.Address != null) throw new BadHttpRequestException("Membership has an existing address.");
@@ -44,7 +44,7 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAddress(int membershipId) {
+    public async Task DeleteAddress(Guid membershipId) {
         var membership = await GetMembership(membershipId);
 
         var address = membership.Address
@@ -58,7 +58,7 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAddress(int membershipId, UpdateAddressRequest req) {
+    public async Task UpdateAddress(Guid membershipId, UpdateAddressRequest req) {
         var membership = await GetMembership(membershipId);
 
         var address = membership.Address
@@ -71,7 +71,7 @@ public class AddressRepository : IAddressRepository
         await _context.SaveChangesAsync();
     }
 
-    private async Task<MembershipModel> GetMembership(int membershipId) {
+    private async Task<MembershipModel> GetMembership(Guid membershipId) {
         var membership = await _context.Memberships
             .Include(m => m.Address)
             .Where(m => m.Id == membershipId)

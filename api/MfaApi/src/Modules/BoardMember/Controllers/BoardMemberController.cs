@@ -38,7 +38,7 @@ public class BoardMemberController: ControllerBase {
 
     [HttpPut("{boardMemberId}")]
     public async Task<IActionResult> UpdateBoardMemberAsync(
-        [FromRoute] int boardMemberId,
+        [FromRoute] Guid boardMemberId,
         [FromBody] UpdateBoardMemberRequest req
     ) {
         await _boardMemberService.UpdateBoardMember(boardMemberId, req);
@@ -48,7 +48,7 @@ public class BoardMemberController: ControllerBase {
 
     [HttpDelete("{boardMemberId}")]
     public async Task<IActionResult> DeleteBoardMemberAsync(
-        [FromRoute] int boardMemberId
+        [FromRoute] Guid boardMemberId
     ) {
         await _boardMemberService.DeleteBoardMember(boardMemberId);
 

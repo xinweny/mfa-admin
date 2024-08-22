@@ -10,7 +10,7 @@ namespace MfaApi.Modules.Member;
 [Table("members")]
 public class MemberModel {
     [Column("id"), Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("first_name"), Required]
     public required string FirstName { get; set; }
@@ -29,7 +29,7 @@ public class MemberModel {
     public DateTime? UpdatedAt { get; set; }
 
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
-    public required int MembershipId { get; set; }
+    public required Guid MembershipId { get; set; }
     public MembershipModel? Membership;
 
     public ICollection<BoardMemberModel> BoardPositions = [];

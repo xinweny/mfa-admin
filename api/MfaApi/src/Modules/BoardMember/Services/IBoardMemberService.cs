@@ -2,8 +2,8 @@ namespace MfaApi.Modules.BoardMember;
 
 public interface IBoardMemberService {
     Task<IEnumerable<GetBoardMembersResponse>> GetBoardMembers(GetBoardMembersRequest req);
-    Task<IEnumerable<GetMemberBoardMembersResponse>> GetMemberBoardMembers(int memberId);
+    Task<IEnumerable<GetMemberBoardMembersResponse>> GetMemberBoardMembers(Guid memberId);
     Task CreateBoardMember(CreateBoardMemberRequest req);
-    Task UpdateBoardMember(int id, UpdateBoardMemberRequest req);
-    Task DeleteBoardMember(int id);
+    Task UpdateBoardMember(Guid id, UpdateBoardMemberRequest req);
+    Task DeleteBoardMember(Guid id);
 }

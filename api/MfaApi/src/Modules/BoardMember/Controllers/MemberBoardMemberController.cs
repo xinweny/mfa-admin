@@ -20,7 +20,7 @@ public class MemberBoardMemberController: ControllerBase {
 
     [HttpGet("")]
     public async Task<IActionResult> GetMemberBoardMembersAsync(
-        [FromRoute] int memberId
+        [FromRoute] Guid memberId
     ) {
         var boardMembers = await _boardMemberService.GetMemberBoardMembers(memberId);
 

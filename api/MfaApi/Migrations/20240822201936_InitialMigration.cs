@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -16,8 +15,7 @@ namespace MfaApi.Migrations
                 name: "addresses",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     line1 = table.Column<string>(type: "text", nullable: false),
                     line2 = table.Column<string>(type: "text", nullable: true),
                     line3 = table.Column<string>(type: "text", nullable: true),
@@ -47,12 +45,11 @@ namespace MfaApi.Migrations
                 name: "memberships",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     membership_type = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    address_id = table.Column<int>(type: "integer", nullable: true)
+                    address_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,8 +65,7 @@ namespace MfaApi.Migrations
                 name: "members",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     first_name = table.Column<string>(type: "text", nullable: false),
                     last_name = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
@@ -77,7 +73,7 @@ namespace MfaApi.Migrations
                     joined_date = table.Column<DateOnly>(type: "date", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    membership_id = table.Column<int>(type: "integer", nullable: false)
+                    membership_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,13 +90,12 @@ namespace MfaApi.Migrations
                 name: "membership_dues",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     year = table.Column<int>(type: "integer", nullable: false),
                     payment_method = table.Column<int>(type: "integer", nullable: false),
                     amount_paid = table.Column<int>(type: "integer", nullable: false),
                     payment_date = table.Column<DateOnly>(type: "date", nullable: false),
-                    membership_id = table.Column<int>(type: "integer", nullable: false)
+                    membership_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,12 +112,11 @@ namespace MfaApi.Migrations
                 name: "board_members",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     start_date = table.Column<DateOnly>(type: "date", nullable: false),
                     end_date = table.Column<DateOnly>(type: "date", nullable: true),
                     board_position = table.Column<int>(type: "integer", nullable: false),
-                    member_id = table.Column<int>(type: "integer", nullable: false)
+                    member_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,11 +133,10 @@ namespace MfaApi.Migrations
                 name: "cultural_exchanges",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     year = table.Column<int>(type: "integer", nullable: false),
                     exchange_type = table.Column<int>(type: "integer", nullable: false),
-                    member_id = table.Column<int>(type: "integer", nullable: false)
+                    member_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {

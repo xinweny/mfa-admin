@@ -8,7 +8,7 @@ namespace MfaApi.Modules.BoardMember;
 [Table("board_members")]
 public class BoardMemberModel {
     [Column("id"), Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("start_date"), Required]
     public required DateOnly StartDate { get; set; }
@@ -18,7 +18,7 @@ public class BoardMemberModel {
     public required BoardPosition BoardPosition { get; set; }
 
     [Column("member_id"), Required, ForeignKey(nameof(Member))]
-    public required int MemberId;
+    public required Guid MemberId;
     [Required]
     public MemberModel? Member;
 }

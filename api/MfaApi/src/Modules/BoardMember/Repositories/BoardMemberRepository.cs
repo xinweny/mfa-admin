@@ -34,7 +34,7 @@ public class BoardMemberRepository: IBoardMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<BoardMemberModel> GetBoardMemberById(int id) {
+    public async Task<BoardMemberModel> GetBoardMemberById(Guid id) {
         var boardMember = await _context.BoardMembers
             .Include(b => b.Member)
             .Where(b => b.Id == id)
@@ -78,7 +78,7 @@ public class BoardMemberRepository: IBoardMemberRepository {
         return await query.ToListAsync();
     }
 
-    public async Task<IEnumerable<BoardMemberModel>> GetMemberBoardMembers(int memberId) {
+    public async Task<IEnumerable<BoardMemberModel>> GetMemberBoardMembers(Guid memberId) {
         var boardMembers = await _context.BoardMembers
             .Where(b => b.MemberId == memberId)
             .OrderByDescending(b => b.StartDate)

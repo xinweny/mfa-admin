@@ -8,7 +8,7 @@ namespace MfaApi.Modules.Due;
 [Table("membership_dues")]
 public class DueModel {
     [Column("id"), Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("year"), Required]
     public required int Year { get; set; }
@@ -20,7 +20,7 @@ public class DueModel {
     public required DateOnly PaymentDate { get; set; }
 
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
-    public required int MembershipId { get; set; }
+    public required Guid MembershipId { get; set; }
     public MembershipModel? Membership;
 }
 

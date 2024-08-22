@@ -1,7 +1,7 @@
 namespace MfaApi.Modules.Due;
 
 public class CreateDuesRequest {
-    public required int MembershipId { get; set; }
+    public required Guid MembershipId { get; set; }
     public required List<CreateDueRequest> Dues { get; set; }
     
     public class CreateDueRequest {

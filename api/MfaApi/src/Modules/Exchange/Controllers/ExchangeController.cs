@@ -38,7 +38,7 @@ public class ExchangeController: ControllerBase {
 
     [HttpPut("{exchangeId}")]
     public async Task<IActionResult> UpdateExchangeAsync(
-        [FromRoute] int exchangeId,
+        [FromRoute] Guid exchangeId,
         [FromBody] UpdateExchangeRequest req
     ) {
         await _exchangeService.UpdateExchange(exchangeId, req);
@@ -48,7 +48,7 @@ public class ExchangeController: ControllerBase {
 
     [HttpPost("{exchangeId}")]
     public async Task<IActionResult> DeleteExchangeAsync(
-        [FromRoute] int exchangeId
+        [FromRoute] Guid exchangeId
     ) {
         await _exchangeService.DeleteExchange(exchangeId);
 

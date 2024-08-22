@@ -17,7 +17,7 @@ public class DueRepository : IDueRepository
         _validator = validator;
     }
 
-    public async Task CreateDues(int membershipId, IEnumerable<DueModel> dues) {
+    public async Task CreateDues(Guid membershipId, IEnumerable<DueModel> dues) {
         var membership = await _context.Memberships
             .Include(m => m.Dues)
             .Where(m => m.Id == membershipId)
@@ -38,7 +38,7 @@ public class DueRepository : IDueRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<DueModel> GetDueById(int id) {
+    public async Task<DueModel> GetDueById(Guid id) {
         var due = await _context.Dues
             .Include(d => d.Membership)
             .Where(d => d.Id == id)
@@ -64,7 +64,7 @@ public class DueRepository : IDueRepository
         return await duesQuery.ToListAsync();
     }
 
-    public async Task<IEnumerable<DueModel>> GetMembershipDues(int membershipId) {
+    public async Task<IEnumerable<DueModel>> GetMembershipDues(Guid membershipId) {
         var dues = await _context.Dues
             .Where(d => d.MembershipId == membershipId)
             .Include(d => d.Membership)

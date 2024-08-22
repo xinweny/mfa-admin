@@ -8,7 +8,7 @@ public class AddressService : IAddressService
         _addressRepository = addressRepository;
     }
 
-    public async Task<AddressDto> GetAddress(int id) {
+    public async Task<AddressDto> GetAddress(Guid id) {
         var address = await _addressRepository.GetAddressById(id);
 
         return address.ToAddressDto();
@@ -20,15 +20,15 @@ public class AddressService : IAddressService
         return address.Select(a => a.ToAddressDto());
     }
 
-    public async Task CreateAddress(int membershipId, CreateAddressRequest req) {
+    public async Task CreateAddress(Guid membershipId, CreateAddressRequest req) {
         await _addressRepository.CreateAddress(membershipId, req.ToAddress());
     }
     
-    public async Task DeleteAddress(int membershipId) {
+    public async Task DeleteAddress(Guid membershipId) {
         await _addressRepository.DeleteAddress(membershipId);
     }
 
-    public async Task UpdateAddress(int membershipId, UpdateAddressRequest req) {
+    public async Task UpdateAddress(Guid membershipId, UpdateAddressRequest req) {
         await _addressRepository.UpdateAddress(membershipId, req);
     }
 }

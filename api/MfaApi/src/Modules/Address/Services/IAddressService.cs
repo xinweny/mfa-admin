@@ -1,9 +1,9 @@
 namespace MfaApi.Modules.Address;
 
 public interface IAddressService {
-    Task<AddressDto> GetAddress(int id);
+    Task<AddressDto> GetAddress(Guid id);
     Task<IEnumerable<AddressDto>> GetAddresses();
-    Task CreateAddress(int membershipId, CreateAddressRequest req);
-    Task UpdateAddress(int membershipId, UpdateAddressRequest req);
-    Task DeleteAddress(int membershipId);
+    Task CreateAddress(Guid membershipId, CreateAddressRequest req);
+    Task UpdateAddress(Guid membershipId, UpdateAddressRequest req);
+    Task DeleteAddress(Guid membershipId);
 }

@@ -8,7 +8,7 @@ namespace MfaApi.Modules.Address;
 [Table("addresses")]
 public class AddressModel {
     [Column("id"), Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("line1"), Required]
     public required string Line1 { get; set; }

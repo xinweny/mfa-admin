@@ -27,7 +27,7 @@ public class AddressController: ControllerBase {
 
     [HttpGet("{addressId}")]
     public async Task<IActionResult> GetAddressAsync(
-        [FromRoute] int addressId
+        [FromRoute] Guid addressId
     ) {
         var address = await _addressService.GetAddress(addressId);
 

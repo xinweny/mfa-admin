@@ -27,7 +27,7 @@ public class MembershipController: ControllerBase {
 
     [HttpGet("{membershipId}")]
     public async Task<IActionResult> GetMembershipByIdAsync(
-        [FromRoute] int membershipId
+        [FromRoute] Guid membershipId
     ) {
         var membership = await _membershipService.GetMembershipById(membershipId);
 
@@ -47,7 +47,7 @@ public class MembershipController: ControllerBase {
 
     [HttpPut("{membershipId}")]
     public async Task<IActionResult> UpdateMembershipAsync(
-        [FromRoute] int membershipId,
+        [FromRoute] Guid membershipId,
         [FromBody] UpdateMembershipRequest body
     ) {
         await _membershipService.UpdateMembership(membershipId, body);
@@ -57,7 +57,7 @@ public class MembershipController: ControllerBase {
 
     [HttpDelete("{membershipId}")]
     public async Task<IActionResult> DeleteMembeshipAsync(
-        [FromRoute] int membershipId
+        [FromRoute] Guid membershipId
     ) {
         await _membershipService.DeleteMembership(membershipId);
 

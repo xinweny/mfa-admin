@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MfaApi.Migrations
 {
     [DbContext(typeof(MfaDbContext))]
-    [Migration("20240822155354_InitialMigration")]
+    [Migration("20240822201936_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -27,12 +27,10 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.Address.AddressModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -68,12 +66,10 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.BoardMember.BoardMemberModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BoardPosition")
                         .HasColumnType("integer")
@@ -83,8 +79,8 @@ namespace MfaApi.Migrations
                         .HasColumnType("date")
                         .HasColumnName("end_date");
 
-                    b.Property<int>("MemberId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uuid")
                         .HasColumnName("member_id");
 
                     b.Property<DateOnly>("StartDate")
@@ -100,19 +96,17 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.Due.DueModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AmountPaid")
                         .HasColumnType("integer")
                         .HasColumnName("amount_paid");
 
-                    b.Property<int>("MembershipId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("MembershipId")
+                        .HasColumnType("uuid")
                         .HasColumnName("membership_id");
 
                     b.Property<DateOnly>("PaymentDate")
@@ -136,19 +130,17 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.Exchange.ExchangeModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ExchangeType")
                         .HasColumnType("integer")
                         .HasColumnName("exchange_type");
 
-                    b.Property<int>("MemberId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uuid")
                         .HasColumnName("member_id");
 
                     b.Property<int>("Year")
@@ -164,12 +156,10 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.Member.MemberModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -194,8 +184,8 @@ namespace MfaApi.Migrations
                         .HasColumnType("text")
                         .HasColumnName("last_name");
 
-                    b.Property<int>("MembershipId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("MembershipId")
+                        .HasColumnType("uuid")
                         .HasColumnName("membership_id");
 
                     b.Property<string>("PhoneNumber")
@@ -215,15 +205,13 @@ namespace MfaApi.Migrations
 
             modelBuilder.Entity("MfaApi.Modules.Membership.MembershipModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("integer")
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uuid")
                         .HasColumnName("address_id");
 
                     b.Property<DateTime>("CreatedAt")

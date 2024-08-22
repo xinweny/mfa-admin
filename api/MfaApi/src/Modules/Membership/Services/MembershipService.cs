@@ -11,13 +11,13 @@ public class MembershipService: IMembershipService {
         await _membershipRepository.CreateMembership(req.ToMembership());
     }
 
-    public async Task DeleteMembership(int id) {
+    public async Task DeleteMembership(Guid id) {
         var membership = await _membershipRepository.GetMembershipById(id);
 
         await _membershipRepository.DeleteMembership(membership);
     }
 
-    public async Task<GetMembershipResponse> GetMembershipById(int id) {
+    public async Task<GetMembershipResponse> GetMembershipById(Guid id) {
         var membership = await _membershipRepository.GetMembershipById(id);
 
         return membership.ToGetMembershipResponse();
@@ -29,7 +29,7 @@ public class MembershipService: IMembershipService {
         return memberships.Select(m => m.ToGetMembershipsResponse());
     }
 
-    public async Task UpdateMembership(int id, UpdateMembershipRequest req) {
+    public async Task UpdateMembership(Guid id, UpdateMembershipRequest req) {
         var membership = await _membershipRepository.GetMembershipById(id);
 
         await _membershipRepository.UpdateMembership(membership, req);

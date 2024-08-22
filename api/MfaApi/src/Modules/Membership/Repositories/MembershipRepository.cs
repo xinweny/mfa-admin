@@ -29,7 +29,7 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<MembershipModel> GetMembershipById(int id) {
+    public async Task<MembershipModel> GetMembershipById(Guid id) {
         var membership = await _context.Memberships
             .Where(m => m.Id == id)
             .Include(m => m.Address)

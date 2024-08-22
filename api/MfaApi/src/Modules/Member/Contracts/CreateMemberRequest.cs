@@ -1,7 +1,7 @@
 namespace MfaApi.Modules.Member;
 
 public class CreateMemberRequest {
-    public required int MembershipId { get; set; }
+    public required Guid MembershipId { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Email { get; set; }

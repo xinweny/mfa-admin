@@ -38,7 +38,7 @@ public class DueController: ControllerBase {
 
     [HttpPut("{dueId}")]
     public async Task<IActionResult> UpdateDueAsync(
-        [FromRoute] int dueId,
+        [FromRoute] Guid dueId,
         [FromBody] UpdateDueRequest req
     ) {
         await _dueService.UpdateDue(dueId, req);
@@ -48,7 +48,7 @@ public class DueController: ControllerBase {
 
     [HttpDelete("{dueId}")]
     public async Task<IActionResult> DeleteDueAsync(
-        [FromRoute] int dueId
+        [FromRoute] Guid dueId
     ) {
         await _dueService.DeleteDue(dueId);
 

@@ -17,7 +17,7 @@ public class ExchangeRepository : IExchangeRepository
         _validator = validator;
     }
 
-    public async Task CreateExchanges(int memberId, IEnumerable<ExchangeModel> exchanges) {
+    public async Task CreateExchanges(Guid memberId, IEnumerable<ExchangeModel> exchanges) {
         var member = await _context.Members
             .Include(m => m.Exchanges)
             .Where(m => m.Id == memberId)
@@ -38,7 +38,7 @@ public class ExchangeRepository : IExchangeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<ExchangeModel> GetExchangeById(int id) {
+    public async Task<ExchangeModel> GetExchangeById(Guid id) {
         var exchange = await _context.Exchanges
             .FindAsync(id)
             ?? throw new KeyNotFoundException("Exchange not found.");
@@ -72,7 +72,7 @@ public class ExchangeRepository : IExchangeRepository
         return await query.ToListAsync();
     }
 
-    public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(int memberId) {
+    public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(Guid memberId) {
         var exchanges = await _context.Exchanges
             .Where(e => e.MemberId == memberId)
             .OrderByDescending(e => e.Year)

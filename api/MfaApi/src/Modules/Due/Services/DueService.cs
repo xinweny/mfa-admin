@@ -12,13 +12,13 @@ public class DueService : IDueService
         await _dueRepository.CreateDues(req.MembershipId, req.ToDues());
     }
 
-    public async Task DeleteDue(int id) {
+    public async Task DeleteDue(Guid id) {
         var due = await _dueRepository.GetDueById(id);
 
         await _dueRepository.DeleteDue(due);
     }
 
-    public async Task<IEnumerable<GetMembershipDuesResponse>> GetMembershipDues(int membershipId) {
+    public async Task<IEnumerable<GetMembershipDuesResponse>> GetMembershipDues(Guid membershipId) {
         var dues = await _dueRepository.GetMembershipDues(membershipId);
 
         return dues.Select(d => d.ToGetMembershipDuesResponse());
@@ -30,7 +30,7 @@ public class DueService : IDueService
         return dues.Select(d => d.ToGetDuesResponse());
     }
 
-    public async Task UpdateDue(int id, UpdateDueRequest req) {
+    public async Task UpdateDue(Guid id, UpdateDueRequest req) {
         var due = await _dueRepository.GetDueById(id);
 
         await _dueRepository.UpdateDue(due, req);
