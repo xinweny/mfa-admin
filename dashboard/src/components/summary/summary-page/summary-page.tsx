@@ -1,7 +1,7 @@
 export function SummaryPage() {
   return (
-    <main>
+    <div>
       Summary
-    </main>
+    </div>
   );
 }
