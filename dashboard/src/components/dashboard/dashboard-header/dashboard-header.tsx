@@ -1,13 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { AppBar } from "@mui/material";
-
-import mfaLogo from "@/assets/images/mfa-logo.png";
+import mfaLogo from '@/assets/images/mfa-logo.png';
 
 export function DashboardHeader() {
   return (
-    <AppBar>
+    <header>
       <Link href="/dashboard">
         <Image
           src={mfaLogo}
@@ -16,6 +14,6 @@ export function DashboardHeader() {
           alt="Mississauga Friendship Association"
         />
       </Link>
-    </AppBar>
+    </header>
   );
 }
