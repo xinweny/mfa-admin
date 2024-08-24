@@ -4,10 +4,11 @@ namespace MfaApi.Modules.Membership;
 
 public record GetMembershipsResponse {
     public required Guid Id { get; set; }
-    public MembershipType MembershipType { get; set; }
+    public required MembershipType MembershipType { get; set; }
     public List<MemberDto>? Members { get; set; }
     public Guid? AddressId { get; set; }
     public AddressDto? Address { get; set; }
+    public required DateOnly StartDate { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

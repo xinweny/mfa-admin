@@ -14,6 +14,8 @@ public class MembershipModel {
 
     [Column("membership_type"), Required]
     public required MembershipType MembershipType { get; set; }
+    [Column("start_date"), Required]
+    public required DateOnly StartDate { get; set; }
     [Column("created_at"), Required]
     public DateTime CreatedAt { get; set; }
     [Column("updated_at")]

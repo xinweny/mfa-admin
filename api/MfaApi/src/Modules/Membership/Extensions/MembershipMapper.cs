@@ -16,6 +16,7 @@ public static class MembershipMapper {
             }).ToList(),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
+            StartDate = membership.StartDate,
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
         };
@@ -32,6 +33,7 @@ public static class MembershipMapper {
             }).ToList(),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),
+            StartDate = membership.StartDate,
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
         };
@@ -40,6 +42,7 @@ public static class MembershipMapper {
     public static MembershipModel ToMembership(this CreateMembershipRequest req) {
         MembershipModel membership = new MembershipModel {
             MembershipType = req.MembershipType,
+            StartDate = req.StartDate,
         };
 
         var addressDto = req.Address;

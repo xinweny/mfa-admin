@@ -5,6 +5,7 @@ namespace MfaApi.Modules.Membership;
 public class CreateMembershipRequest {
     public required MembershipType MembershipType { get; set; }
     public required List<MemberDto> Members { get; set; } = [];
+    public required DateOnly StartDate { get; set; }
     public CreateAddressDto? Address { get; set; }
 
     public class MemberDto {
