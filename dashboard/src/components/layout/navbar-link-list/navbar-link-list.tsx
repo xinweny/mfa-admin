@@ -13,7 +13,7 @@ import { NavbarLinkItemProps, NavbarLinkItem } from '../navbar-link-item';
 
 export function NavbarLinkList() {
   return (
-    <ul>
+    <ul className="space-y-0.5">
       {links.map(({ href, label, icon }) => (
         <NavbarLinkItem
           key={href}

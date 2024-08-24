@@ -9,10 +9,12 @@ export function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
   return (
-    <div className="w-full h-full">
+    <div className="w-screen h-screen flex overflow-hidden">
       <DashboardNavbar />
-      <DashboardHeader />
-      {children}
+      <div className="flex-grow overflow-y-auto">
+        <DashboardHeader />
+        {children}
+      </div>
     </div>
   );
 }
