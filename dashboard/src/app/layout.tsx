@@ -7,7 +7,7 @@ import '@/styles/reset.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MFA Membership',
+  title: 'MFA | Admin Dashboard',
 };
 
 export default function RootLayout({
