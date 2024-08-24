@@ -6,6 +6,9 @@ API_DIR = $(ROOT_DIR)/api/MfaApi
 dev-dashboard:
 	cd $(DASHBOARD_DIR) && npm run dev
 
+run-dashboard:
+	cd $(DASHBOARD_DIR) && npm run build && npm run start
+
 dev-api:
 	cd $(API_DIR) && dotnet watch
 
