@@ -27,12 +27,12 @@ export function NavbarLinkItem({
     ? pathname === href
     : pathname.includes(href);
 
-    console.log(pathname);
-
   return (
     <li className={cn(
       'px-4 py-1 rounded-md',
-      isActive ? 'bg-primary text-white' : 'hover:bg-secondary',
+      isActive
+        ? 'bg-primary text-white'
+        : 'hover:bg-secondary',
     )}>
       <Link href={href}>
         <div className="flex items-center gap-2">
