@@ -14,3 +14,6 @@ dev-api:
 
 run-api:
 	cd $(API_DIR) && dotnet run
+
+test-api:
+	cd $(API_DIR) && dotnet test

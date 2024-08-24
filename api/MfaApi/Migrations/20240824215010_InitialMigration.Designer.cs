@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MfaApi.Migrations
 {
     [DbContext(typeof(MfaDbContext))]
-    [Migration("20240824165400_AddStartDateColumnForMemberships")]
-    partial class AddStartDateColumnForMemberships
+    [Migration("20240824215010_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

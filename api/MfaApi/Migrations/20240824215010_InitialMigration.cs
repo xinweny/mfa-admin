@@ -47,6 +47,7 @@ namespace MfaApi.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     membership_type = table.Column<int>(type: "integer", nullable: false),
+                    start_date = table.Column<DateOnly>(type: "date", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     address_id = table.Column<Guid>(type: "uuid", nullable: true)
