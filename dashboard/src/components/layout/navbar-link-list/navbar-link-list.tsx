@@ -2,11 +2,13 @@
 
 import { usePathname } from 'next/navigation';
 
-import { RiOrganizationChart } from 'react-icons/ri';
-import { PiUsersThreeBold } from 'react-icons/pi';
-import { MdCardMembership } from 'react-icons/md';
-import { LuCircleDollarSign } from 'react-icons/lu';
-import { TbHeartHandshake } from 'react-icons/tb';
+import {
+  IdCardIcon,
+  UsersIcon,
+  CircleDollarSignIcon,
+  HeartHandshakeIcon,
+  NetworkIcon,
+} from 'lucide-react';
 
 import { NavbarLinkItemProps, NavbarLinkItem } from '../navbar-link-item';
 
@@ -32,26 +34,26 @@ const links = [
   { 
     href: '/members',
     label: 'Members',
-    icon: PiUsersThreeBold,
+    icon: UsersIcon,
   },
   { 
     href: '/memberships',
     label: 'Memberships',
-    icon: MdCardMembership,
+    icon: IdCardIcon,
   },
   {
     href: '/payments',
     label: 'Payments',
-    icon: LuCircleDollarSign,
+    icon: CircleDollarSignIcon,
   },
   {
     href: '/exchanges',
     label: 'Hosting & Delegation',
-    icon: TbHeartHandshake,
+    icon: HeartHandshakeIcon,
   },
   {
     href: '/board',
     label: 'Board',
-    icon: RiOrganizationChart,
+    icon: NetworkIcon,
   },
 ] satisfies Omit<NavbarLinkItemProps, 'isActive'>[];

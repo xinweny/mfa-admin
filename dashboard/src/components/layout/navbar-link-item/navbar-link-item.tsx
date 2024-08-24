@@ -1,13 +1,12 @@
 import Link from 'next/link';
-
-import { IconType } from 'react-icons';
+import { LucideIcon } from 'lucide-react';
 
 import { cn } from '@/lib';
 
 export interface NavbarLinkItemProps {
   href: string;
   label: string;
-  icon: IconType;
+  icon: LucideIcon;
   isActive: boolean;
 }
 
