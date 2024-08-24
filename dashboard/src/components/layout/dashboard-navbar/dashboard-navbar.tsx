@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { NavbarLinkList } from '../navbar-link-list';
+import { NavbarLinkList } from '../navbar-link-list'; 
 
 export function DashboardNavbar() {
   return (

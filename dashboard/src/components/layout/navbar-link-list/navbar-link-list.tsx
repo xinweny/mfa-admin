@@ -1,29 +1,25 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
 import {
   IdCardIcon,
   UsersIcon,
   CircleDollarSignIcon,
   HeartHandshakeIcon,
   NetworkIcon,
+  ChartBarIcon
 } from 'lucide-react';
 
 import { NavbarLinkItemProps, NavbarLinkItem } from '../navbar-link-item';
 
 export function NavbarLinkList() {
-  const pathname = usePathname();
-
   return (
     <ul>
       {links.map(({ href, label, icon }) => (
         <NavbarLinkItem
           key={href}
-          href={href}
+          href={`/dashboard${href}`}
           label={label}
           icon={icon}
-          isActive={pathname.includes(href)}
         />
       ))}
     </ul>
@@ -31,6 +27,12 @@ export function NavbarLinkList() {
 }
 
 const links = [
+  {
+    href: '',
+    label: 'Summary',
+    icon: ChartBarIcon,
+    exactHref: true,
+  },
   { 
     href: '/members',
     label: 'Members',
@@ -56,4 +58,4 @@ const links = [
     label: 'Board',
     icon: NetworkIcon,
   },
-] satisfies Omit<NavbarLinkItemProps, 'isActive'>[];
+] satisfies NavbarLinkItemProps[];

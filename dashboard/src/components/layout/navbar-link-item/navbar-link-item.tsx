@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { LucideIcon } from 'lucide-react';
 
 import { cn } from '@/lib';
@@ -7,21 +10,29 @@ export interface NavbarLinkItemProps {
   href: string;
   label: string;
   icon: LucideIcon;
-  isActive: boolean;
+  exactHref?: boolean;
 }
 
 export function NavbarLinkItem({
   href,
   label,
   icon,
-  isActive,
+  exactHref = false,
 }: NavbarLinkItemProps) {
   const Icon = icon;
+
+  const pathname = usePathname();
+
+  const isActive = exactHref
+    ? pathname === href
+    : pathname.includes(href);
+
+    console.log(pathname);
 
   return (
     <li className={cn(
       'px-4 py-1 rounded-md',
-      isActive ? 'bg-primary' : 'hover:bg-secondary',
+      isActive ? 'bg-primary text-white' : 'hover:bg-secondary',
     )}>
       <Link href={href}>
         <div className="flex items-center gap-2">
