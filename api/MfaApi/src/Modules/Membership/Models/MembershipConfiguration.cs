@@ -5,12 +5,6 @@ using MfaApi.Modules.Membership;
 
 public class MembershipConfiguration : IEntityTypeConfiguration<MembershipModel>
 {
-    private readonly IWebHostEnvironment _env;
-
-    public MembershipConfiguration(IWebHostEnvironment env) {
-        _env = env;
-    }
-
     public void Configure(EntityTypeBuilder<MembershipModel> builder)
     {
         builder

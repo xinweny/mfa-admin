@@ -5,12 +5,6 @@ namespace MfaApi.Modules.Member;
 
 public class MemberConfiguration: IEntityTypeConfiguration<MemberModel>
 {
-    private readonly IWebHostEnvironment _env;
-
-    public MemberConfiguration(IWebHostEnvironment env) {
-        _env = env;
-    }
-
     public void Configure(EntityTypeBuilder<MemberModel> builder)
     {
         builder
@@ -29,9 +23,5 @@ public class MemberConfiguration: IEntityTypeConfiguration<MemberModel>
             .WithOne(exchange => exchange.Member)
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(host => host.MemberId);
-
-        if (_env.IsDevelopment()) {
-
-        }
     }
 }

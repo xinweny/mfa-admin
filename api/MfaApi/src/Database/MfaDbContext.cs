@@ -29,7 +29,11 @@ public class MfaDbContext: DbContext {
     public required DbSet<UserModel> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        modelBuilder.ApplyConfiguration(new MemberConfiguration(_env));
-        modelBuilder.ApplyConfiguration(new MembershipConfiguration(_env));
+        modelBuilder.ApplyConfiguration(new MembershipConfiguration());
+        modelBuilder.ApplyConfiguration(new MemberConfiguration());
+
+        if (_env.IsDevelopment()) {
+            
+        }
     }
 }
