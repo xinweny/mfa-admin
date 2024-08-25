@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Bogus;
 
 namespace MfaApi.Modules.Member;
 
@@ -32,6 +31,7 @@ public class MemberConfiguration: IEntityTypeConfiguration<MemberModel>
             .HasForeignKey(host => host.MemberId);
 
         if (_env.IsDevelopment()) {
+
         }
     }
 }
