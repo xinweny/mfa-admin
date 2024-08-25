@@ -11,7 +11,14 @@ using MfaApi.Modules.User;
 namespace MfaApi.Database;
 
 public class MfaDbContext: DbContext {
-    public MfaDbContext(DbContextOptions<MfaDbContext> options): base(options) {}
+    private readonly IWebHostEnvironment _env;
+
+    public MfaDbContext(
+        DbContextOptions<MfaDbContext> options,
+        IWebHostEnvironment env
+    ): base(options) {
+        _env = env;
+    }
 
     public required DbSet<MemberModel> Members { get; set; }
     public required DbSet<MembershipModel> Memberships { get; set; }
@@ -22,37 +29,7 @@ public class MfaDbContext: DbContext {
     public required DbSet<UserModel> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        modelBuilder.Entity<MembershipModel>()
-            .HasMany(membership => membership.Members)
-            .WithOne(member => member.Membership)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasForeignKey(member => member.MembershipId);
-
-        modelBuilder.Entity<MembershipModel>()
-            .HasMany(membership => membership.Dues)
-            .WithOne(due => due.Membership)
-            .HasForeignKey(due => due.MembershipId);
-        
-        modelBuilder.Entity<MembershipModel>()
-            .HasOne(membership => membership.Address)
-            .WithOne(address => address.Membership)
-            .HasForeignKey<MembershipModel>(membership => membership.AddressId);
-
-        modelBuilder.Entity<MemberModel>()
-            .HasOne(member => member.Membership)
-            .WithMany(membership => membership.Members)
-            .HasForeignKey(member => member.MembershipId);
-
-        modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.BoardPositions)
-            .WithOne(boardPosition => boardPosition.Member)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasForeignKey(boardPosition => boardPosition.MemberId);
-        
-        modelBuilder.Entity<MemberModel>()
-            .HasMany(member => member.Exchanges)
-            .WithOne(exchange => exchange.Member)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasForeignKey(host => host.MemberId);
+        modelBuilder.ApplyConfiguration(new MemberConfiguration(_env));
+        modelBuilder.ApplyConfiguration(new MembershipConfiguration(_env));
     }
 }

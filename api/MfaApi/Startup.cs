@@ -15,10 +15,11 @@ public class Startup {
     }
 
     public void ConfigureServices(IServiceCollection services) {
-        services.AddControllers();
         services.AddDbContext<MfaDbContext>(options => {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
         });
+
+        services.AddControllers();
 
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
@@ -36,7 +37,10 @@ public class Startup {
         services.AddMfaApiModules(Configuration);
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+    public void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env
+    ) {
         if (env.IsDevelopment()) {
             app.UseDeveloperExceptionPage();
 
@@ -45,8 +49,7 @@ public class Startup {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                 options.RoutePrefix = string.Empty;
             });
-        }
-        else {
+        } else {
             app.UseHsts();
         }
 
