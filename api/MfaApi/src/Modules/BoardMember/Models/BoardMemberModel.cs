@@ -20,5 +20,5 @@ public class BoardMemberModel {
     [Column("member_id"), Required, ForeignKey(nameof(Member))]
     public required Guid MemberId;
     [Required]
-    public MemberModel? Member;
+    public virtual MemberModel? Member { get; set; }
 }

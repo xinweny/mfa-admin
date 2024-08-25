@@ -25,8 +25,8 @@ public class MembershipModel {
     public Guid? AddressId { get; set; }
     public AddressModel? Address;
 
-    public ICollection<MemberModel> Members { get; set; } = [];
-    public ICollection<DueModel> Dues { get; set; } = [];
+    public virtual ICollection<MemberModel> Members { get; set; } = [];
+    public virtual ICollection<DueModel> Dues { get; set; } = [];
 
     public MembershipModel() {
         CreatedAt = DateTime.UtcNow;

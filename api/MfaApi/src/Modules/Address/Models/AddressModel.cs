@@ -23,5 +23,5 @@ public class AddressModel {
     [Column("province"), Required]
     public required Province Province { get; set; }
 
-    public MembershipModel? Membership { get; set; }
+    public virtual MembershipModel? Membership { get; set; }
 }

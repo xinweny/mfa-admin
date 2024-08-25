@@ -21,6 +21,6 @@ public class DueModel {
 
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required Guid MembershipId { get; set; }
-    public MembershipModel? Membership;
+    public virtual MembershipModel? Membership { get; set; }
 }
 

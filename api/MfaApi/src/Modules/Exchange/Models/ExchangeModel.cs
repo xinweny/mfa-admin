@@ -18,5 +18,5 @@ public class ExchangeModel {
     [Column("member_id"), Required, ForeignKey(nameof(Member))]
     public required Guid MemberId { get; set; }
     [Required]
-    public MemberModel? Member;
+    public virtual MemberModel? Member { get; set; }
 }

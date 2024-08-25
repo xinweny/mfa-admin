@@ -30,10 +30,10 @@ public class MemberModel {
 
     [Column("membership_id"), Required, ForeignKey(nameof(Membership))]
     public required Guid MembershipId { get; set; }
-    public MembershipModel? Membership;
+    public virtual MembershipModel? Membership { get; set; }
 
-    public ICollection<BoardMemberModel> BoardPositions = [];
-    public ICollection<ExchangeModel> Exchanges = [];
+    public virtual ICollection<BoardMemberModel> BoardPositions { get; set; } = [];
+    public virtual ICollection<ExchangeModel> Exchanges { get; set; } = [];
 
     public MemberModel() {
         CreatedAt = DateTime.UtcNow;
