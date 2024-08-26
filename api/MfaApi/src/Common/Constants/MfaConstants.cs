@@ -6,5 +6,5 @@ public static class MfaConstants {
     public const int FamilyMembershipCost = 30;
     public const int MaxFamilyMembershipMembers = 4;
     public const int MaxHonoraryMembershipMembers = 4;
-    public const int BogusSeed = 555;
+    public const int BogusSeed = 999;
 }

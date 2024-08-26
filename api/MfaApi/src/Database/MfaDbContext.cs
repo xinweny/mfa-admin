@@ -33,7 +33,7 @@ public class MfaDbContext: DbContext {
         modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
         if (_env.IsDevelopment()) {
-            
+            modelBuilder.Seed();
         }
     }
 }
