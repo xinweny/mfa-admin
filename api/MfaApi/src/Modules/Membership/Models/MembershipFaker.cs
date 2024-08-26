@@ -8,9 +8,5 @@ public class MembershipFaker: Faker<MembershipModel> {
     public MembershipFaker() {
         RuleFor(m => m.Id, f => f.Random.Guid());
         RuleFor(m => m.MembershipType, f => f.PickRandomWithout([MembershipType.Honorary]));
-        RuleFor(
-            m => m.StartDate,
-            f => DateOnly.FromDateTime(f.Date.Between(new DateTime(MfaConstants.MfaFoundingYear, 1, 1), DateTime.UtcNow))
-        );
     }
 }

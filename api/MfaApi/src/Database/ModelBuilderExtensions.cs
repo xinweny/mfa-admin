@@ -25,7 +25,15 @@ public static class ModelBuilderExtensions {
             .UseSeed(MfaConstants.BogusSeed);
 
         // Generate memberships
-        var memberships = membershipFaker.Generate(20);
+        var memberships = membershipFaker
+            .RuleFor(
+                m => m.StartDate,
+                f => DateOnly.FromDateTime(f.Date
+                    .Between(new DateTime(
+                        DateTime.Now.AddYears(-5).Year, 1, 1),
+                        DateTime.Now
+                    )))
+            .Generate(20);
 
         List<AddressModel> addresses = [];
         
@@ -70,7 +78,10 @@ public static class ModelBuilderExtensions {
 
         foreach (MembershipModel membership in memberships) {
             int[] yearRange = Enumerable
-                .Range(membership.StartDate.Year, DateTime.UtcNow.Year)
+                .Range(
+                    membership.StartDate.Year,
+                    DateTime.Now.Year + 1 - membership.StartDate.Year
+                )
                 .ToArray();
             
             for (int i = 0; i < yearRange.Length; i++) {
@@ -84,6 +95,7 @@ public static class ModelBuilderExtensions {
                         .RuleFor(d => d.AmountPaid, membership.MembershipType == MembershipType.Single
                             ? MfaConstants.SingleMembershipCost
                             : MfaConstants.FamilyMembershipCost)
+                        .RuleFor(d => d.Year, yearRange[i])
                         .RuleFor(d => d.PaymentDate, membership.StartDate
                         .AddDays(random.Next(new DateOnly(yearRange[i] + 1, 1, 1).DayNumber - new DateOnly(yearRange[i], 1, 1).DayNumber)))
                         .Generate();
@@ -99,7 +111,10 @@ public static class ModelBuilderExtensions {
         List<ExchangeModel> exchanges = [];
 
         int[] mfaYearsRange = Enumerable
-            .Range(MfaConstants.MfaFoundingYear, DateTime.UtcNow.Year)
+            .Range(
+                MfaConstants.MfaFoundingYear,
+                DateTime.Now.Year + 1 - MfaConstants.MfaFoundingYear
+            )
             .ToArray();
         ExchangeType currentExchange = ExchangeType.Delegate;
         
