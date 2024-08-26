@@ -14,10 +14,6 @@ public class AddressValidator: AbstractValidator<AddressModel> {
             .MaximumLength(256)
                 .WithMessage("Line2 cannot exceed 256 characters.");
 
-        RuleFor(a => a.Line3)
-            .MaximumLength(256)
-                .WithMessage("Line3 cannot exceed 256 characters.");
-
         RuleFor(a => a.City)
             .NotEmpty()
                 .WithMessage("City is required.")
