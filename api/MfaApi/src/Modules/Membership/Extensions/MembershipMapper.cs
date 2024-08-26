@@ -51,7 +51,6 @@ public static class MembershipMapper {
             var address = new AddressModel {
                 Line1 = addressDto.Line1,
                 Line2 = addressDto.Line2,
-                Line3 = addressDto.Line3,
                 City = addressDto.City,
                 PostalCode = addressDto.PostalCode,
                 Province = addressDto.Province,
