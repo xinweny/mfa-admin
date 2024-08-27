@@ -1,9 +1,11 @@
-import { DashboardCommand } from '../dashboard-command/dashboard-command';
+import { DashboardCommand } from '../dashboard-command';
+import { ThemeSwitch } from '../theme-switch';
 
 export function DashboardHeader() {
   return (
-    <header className="bg-primary p-2">
+    <header className="p-2 w-full flex justify-between items-center border-b">
       <DashboardCommand />
+      <ThemeSwitch />
     </header>
   );
 }

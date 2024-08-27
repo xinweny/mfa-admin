@@ -31,9 +31,9 @@ export function DashboardCommand() {
   return (
     <>
       <Button
-        className="border gap-2 rounded-full"
+        className="border gap-2 rounded-full justify-between items-center"
         onClick={() => { setOpen(true); }}
-        variant="secondary"
+        variant="outline"
       >
         <CommandIcon size={16} />
         <span>Search commands</span>

@@ -31,8 +31,8 @@ export function NavbarLinkItem({
     <li className={cn(
       'px-4 py-2 rounded-md',
       isActive
-        ? 'bg-primary text-white'
-        : 'hover:bg-muted-foreground hover:text-white',
+        ? 'bg-primary text-primary-foreground'
+        : 'hover:bg-muted-foreground hover:text-primary-foreground',
     )}>
       <Link href={href}>
         <div className="flex items-center gap-2">
