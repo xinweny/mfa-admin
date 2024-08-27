@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 
+using MfaApi.Common.Constants;
 using MfaApi.Database;
+using MfaApi.Modules.Member;
 
 namespace MfaApi.Modules.Membership;
 
@@ -40,13 +42,28 @@ public class MembershipRepository: IMembershipRepository
         return membership;
     }
     
-    public async Task<IEnumerable<MembershipModel>> GetMemberships() {
-        var memberships = await _context.Memberships
+    public async Task<IEnumerable<MembershipModel>> GetMemberships(GetMembershipsRequest req) {
+        var query = _context.Memberships
             .Include(m => m.Address)
             .Include(m => m.Members)
-            .ToListAsync();
+            .Include(m => req.Year == null
+                ? m.Dues
+                : m.Dues.Where(d => d.Year == req.Year)
+            );
         
-        return memberships;
+        if (!string.IsNullOrEmpty(req.Query)) query.Where(
+            membership => membership.Members.Any(
+                member => member.DoesFullNameContainQuery(req.Query)
+            )
+        );
+
+        if (req.SortStartDate == SortOrder.Ascending) {
+            query.OrderBy(m => m.StartDate);
+        } else if (req.SortStartDate == SortOrder.Descending) {
+            query.OrderByDescending(m => m.StartDate);
+        }
+        
+        return await query.ToListAsync();
     }
 
     public async Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req) {

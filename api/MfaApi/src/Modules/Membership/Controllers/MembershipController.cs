@@ -17,8 +17,8 @@ public class MembershipController: ControllerBase {
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> GetMembershipsAsync() {
-        var memberships = await _membershipService.GetMemberships();
+    public async Task<IActionResult> GetMembershipsAsync([FromQuery] GetMembershipsRequest req) {
+        var memberships = await _membershipService.GetMemberships(req);
 
         return Ok(new ApiResponse<IEnumerable<GetMembershipsResponse>> {
             Data = memberships,

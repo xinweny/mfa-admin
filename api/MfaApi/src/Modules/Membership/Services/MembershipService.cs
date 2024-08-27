@@ -23,8 +23,10 @@ public class MembershipService: IMembershipService {
         return membership.ToGetMembershipResponse();
     }
 
-    public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships() {
-        var memberships = await _membershipRepository.GetMemberships();
+    public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest req) {
+        req.Year ??= DateTime.Now.Year;
+
+        var memberships = await _membershipRepository.GetMemberships(req);
 
         return memberships.Select(m => m.ToGetMembershipsResponse());
     }

@@ -49,19 +49,19 @@ public class DueRepository : IDueRepository
     }
 
     public async Task<IEnumerable<DueModel>> GetDues(GetDuesRequest req) {
-        var duesQuery = _context.Dues;
+        var query = _context.Dues;
 
-        if (!req.PaymentMethods.IsNullOrEmpty()) duesQuery.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
-        if (req.FromDate != null) duesQuery.Where(d => d.PaymentDate >= req.FromDate);
-        if (req.ToDate != null) duesQuery.Where(d => d.PaymentDate <= req.ToDate);
+        if (!req.PaymentMethods.IsNullOrEmpty()) query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
+        if (req.FromDate != null) query.Where(d => d.PaymentDate >= req.FromDate);
+        if (req.ToDate != null) query.Where(d => d.PaymentDate <= req.ToDate);
         
         if (req.SortPaymentDate == SortOrder.Ascending) {
-            duesQuery.OrderBy(d => d.PaymentDate);
+            query.OrderBy(d => d.PaymentDate);
         } else if (req.SortPaymentDate == SortOrder.Descending) {
-            duesQuery.OrderBy(d => d.PaymentDate);
+            query.OrderByDescending(d => d.PaymentDate);
         }
 
-        return await duesQuery.ToListAsync();
+        return await query.ToListAsync();
     }
 
     public async Task<IEnumerable<DueModel>> GetMembershipDues(Guid membershipId) {
