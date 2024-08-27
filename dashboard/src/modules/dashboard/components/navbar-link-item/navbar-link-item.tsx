@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LucideIcon } from 'lucide-react';
 
-import { cn } from '@/lib';
+import { cn } from '@/lib/cn';
 
 export interface NavbarLinkItemProps {
   href: string;

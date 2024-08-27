@@ -1,3 +1,3 @@
-import { SummaryPage } from "@/components/summary/summary-page";
+import { SummaryPage } from '@/modules/stats/components/summary-page';
 
 export default SummaryPage;
