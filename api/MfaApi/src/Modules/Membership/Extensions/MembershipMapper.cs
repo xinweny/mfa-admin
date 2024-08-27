@@ -26,7 +26,7 @@ public static class MembershipMapper {
         return new GetMembershipsResponse {
             Id = membership.Id,
             MembershipType = membership.MembershipType,
-            Members = membership.Members?.Select(m => new GetMembershipsResponse.MemberDto {
+            Members = membership.Members.Select(m => new GetMembershipsResponse.MemberDto {
                 Id = m.Id,
                 FirstName = m.FirstName,
                 LastName = m.LastName
@@ -36,6 +36,9 @@ public static class MembershipMapper {
             StartDate = membership.StartDate,
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
+            Dues = membership.Dues.Select(d => new GetMembershipsResponse.DueDto {
+                Id = d.Id,
+            }).ToList(),
         };
     }
 
