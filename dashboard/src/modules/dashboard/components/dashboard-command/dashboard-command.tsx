@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-import { CommandIcon } from 'lucide-react';
-
 import {
   CommandDialog,
   CommandInput,
@@ -11,6 +9,7 @@ import {
   CommandEmpty,
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export function DashboardCommand() {
   const [open, setOpen] = useState(false)
@@ -31,12 +30,17 @@ export function DashboardCommand() {
   return (
     <>
       <Button
-        className="border gap-2 rounded-full justify-between items-center"
+        className="border gap-2 rounded-lg justify-between items-center"
         onClick={() => { setOpen(true); }}
         variant="outline"
       >
-        <CommandIcon size={16} />
         <span>Search commands</span>
+        <Badge
+          className="px-1.5 rounded-lg"
+          variant="outline"
+        >
+          <span>⌘K</span>
+        </Badge>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
