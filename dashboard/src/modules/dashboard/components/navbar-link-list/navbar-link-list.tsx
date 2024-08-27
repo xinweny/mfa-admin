@@ -14,12 +14,13 @@ import { NavbarLinkItemProps, NavbarLinkItem } from '../navbar-link-item';
 export function NavbarLinkList() {
   return (
     <ul className="space-y-0.5">
-      {links.map(({ href, label, icon }) => (
+      {links.map(({ href, label, icon, exactHref }) => (
         <NavbarLinkItem
           key={href}
-          href={`/dashboard${href}`}
+          href={`/dashboard${href}/`}
           label={label}
           icon={icon}
+          exactHref={exactHref}
         />
       ))}
     </ul>

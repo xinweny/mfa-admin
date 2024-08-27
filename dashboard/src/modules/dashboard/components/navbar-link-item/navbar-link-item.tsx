@@ -21,7 +21,7 @@ export function NavbarLinkItem({
 }: NavbarLinkItemProps) {
   const Icon = icon;
 
-  const pathname = usePathname();
+  const pathname = usePathname() + '/';
 
   const isActive = exactHref
     ? pathname === href
