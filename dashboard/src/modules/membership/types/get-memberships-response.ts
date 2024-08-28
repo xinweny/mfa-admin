@@ -11,6 +11,7 @@ export interface GetMembershipsResponse {
   }[];
   dues: {
     id: string;
+    year: number;
   }[];
   addressId: string | null;
   address: Address | null;

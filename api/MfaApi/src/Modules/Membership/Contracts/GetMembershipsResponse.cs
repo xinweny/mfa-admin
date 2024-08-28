@@ -21,6 +21,6 @@ public record GetMembershipsResponse {
 
     public class DueDto {
         public required Guid Id { get; set; }
-
+        public required int Year { get; set; }
     }
 }

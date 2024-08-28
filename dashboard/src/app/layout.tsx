@@ -11,8 +11,6 @@ export const metadata: Metadata = {
   title: 'MFA | Admin Dashboard',
 };
 
-export const fetchCache = 'force-no-store';
-
 export default function RootLayout({
   children,
 }: Readonly<{

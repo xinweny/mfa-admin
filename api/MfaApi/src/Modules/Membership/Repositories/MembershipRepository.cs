@@ -57,6 +57,8 @@ public class MembershipRepository: IMembershipRepository
             )
         );
 
+        Console.WriteLine(req.SortStartDate);
+
         if (req.SortStartDate == SortOrder.Ascending) {
             query.OrderBy(m => m.StartDate);
         } else if (req.SortStartDate == SortOrder.Descending) {

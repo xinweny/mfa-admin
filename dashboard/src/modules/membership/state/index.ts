@@ -1,1 +1,1 @@
-export * from './use-get-memberships-url-params';
+export * from './use-year-url-param';

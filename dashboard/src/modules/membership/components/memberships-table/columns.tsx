@@ -10,6 +10,9 @@ import { provinceLabels } from '@/modules/address/constants';
 import { membershipTypeLabels } from '../../constants';
 
 import { Badge } from '@/components/ui/badge';
+import { DataTableSortButton } from '@/modules/data/components/data-table-sort-button';
+
+import { DuesYearFilter } from '../dues-year-filter';
 
 export const columns: ColumnDef<MembershipColumns>[] = [
   {
@@ -57,12 +60,17 @@ export const columns: ColumnDef<MembershipColumns>[] = [
   },
   {
     accessorKey: 'startDate',
-    header: 'Since',
+    header: () => (
+      <DataTableSortButton
+        name="sortStartDate"
+        label="Since"
+      />
+    ),
     cell: ({ row }) => row.original.startDate && format(row.original.startDate, 'dd/LL/yyyy'),
   },
   {
     accessorKey: 'paidForYear',
-    header: 'Paid',
+    header: () => <DuesYearFilter />,
     cell: ({ row }) => {      
       return row.original.paidForYear == null
         ? null

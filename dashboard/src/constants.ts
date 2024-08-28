@@ -1,0 +1,1 @@
+export const mfaFoundingYear = 1993;

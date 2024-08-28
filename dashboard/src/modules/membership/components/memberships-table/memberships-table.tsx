@@ -5,7 +5,9 @@ import {
   MembershipColumns,
 } from '../../types';
 
-import { DataTable } from '@/modules/dashboard/components/data-table';
+import { useYearUrlParam } from '../../state';
+
+import { DataTable } from '@/modules/data/components/data-table';
 
 import { columns } from './columns';
 
@@ -16,16 +18,24 @@ interface MembershipsTableProps {
 export function MembershipsTable({
   memberships,
 }: MembershipsTableProps) {
-  const data: MembershipColumns[] = memberships.map(membership => ({
-    id: membership.id,
-    membershipType: membership.membershipType,
-    members: membership.members,
-    address: membership.address || null,
-    startDate: membership.startDate
+  const [year] = useYearUrlParam();
+
+  const data: MembershipColumns[] = memberships.map(membership => {
+    const startDate = membership.startDate
       ? new Date(membership.startDate)
-      : null,
-    paidForYear: membership.dues?.length > 0,
-  }));
+      : null;
+
+    return {
+      id: membership.id,
+      membershipType: membership.membershipType,
+      members: membership.members,
+      address: membership.address || null,
+      startDate,
+      paidForYear: membership.dues.findIndex(d => d.year == year) === -1
+        ? startDate && year < startDate?.getFullYear() ? null : false
+        : true,
+    };
+  });
 
   return (
     <DataTable

@@ -38,6 +38,7 @@ public static class MembershipMapper {
             UpdatedAt = membership.UpdatedAt,
             Dues = membership.Dues.Select(d => new GetMembershipsResponse.DueDto {
                 Id = d.Id,
+                Year = d.Year,
             }).ToList(),
         };
     }

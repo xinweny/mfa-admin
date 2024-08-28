@@ -1,6 +1,6 @@
 import { Province } from '../types';
 
-export const provinceLabels = {
+export const provinceLabels: Record<Province, string> = {
   [Province.ON]: 'ON',
   [Province.AB]: 'AB',
   [Province.BC]: 'BC',
