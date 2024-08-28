@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: 'MFA | Admin Dashboard',
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({
   children,
 }: Readonly<{

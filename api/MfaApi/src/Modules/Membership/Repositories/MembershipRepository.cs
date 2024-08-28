@@ -43,7 +43,9 @@ public class MembershipRepository: IMembershipRepository
     }
     
     public async Task<IEnumerable<MembershipModel>> GetMemberships(GetMembershipsRequest req) {
-        var query = _context.Memberships
+        var query = _context.Memberships.AsQueryable();
+
+        query = query
             .Include(m => m.Address)
             .Include(m => m.Members)
             .Include(m => req.Year == null
@@ -51,18 +53,18 @@ public class MembershipRepository: IMembershipRepository
                 : m.Dues.Where(d => d.Year == req.Year)
             );
         
-        if (!string.IsNullOrEmpty(req.Query)) query.Where(
-            membership => membership.Members.Any(
-                member => member.DoesFullNameContainQuery(req.Query)
-            )
-        );
+        if (!string.IsNullOrEmpty(req.Query)) {
+            query = query.Where(
+                membership => membership.Members.Any(
+                    member => member.DoesFullNameContainQuery(req.Query)
+                )
+            );
+        }
 
-        Console.WriteLine(req.SortStartDate);
-
-        if (req.SortStartDate == SortOrder.Ascending) {
-            query.OrderBy(m => m.StartDate);
-        } else if (req.SortStartDate == SortOrder.Descending) {
-            query.OrderByDescending(m => m.StartDate);
+        if (SortOrder.Ascending.Equals(req.SortStartDate)) {
+            query = query.OrderBy(m => m.StartDate);
+        } else if (SortOrder.Descending.Equals(req.SortStartDate)) {
+            query = query.OrderByDescending(m => m.StartDate);
         }
         
         return await query.ToListAsync();

@@ -49,16 +49,22 @@ public class DueRepository : IDueRepository
     }
 
     public async Task<IEnumerable<DueModel>> GetDues(GetDuesRequest req) {
-        var query = _context.Dues;
+        var query = _context.Dues.AsQueryable();
 
-        if (!req.PaymentMethods.IsNullOrEmpty()) query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
-        if (req.FromDate != null) query.Where(d => d.PaymentDate >= req.FromDate);
-        if (req.ToDate != null) query.Where(d => d.PaymentDate <= req.ToDate);
+        if (!req.PaymentMethods.IsNullOrEmpty()) {
+            query = query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
+        };
+        if (req.FromDate != null) {
+            query = query.Where(d => d.PaymentDate >= req.FromDate);
+        }
+        if (req.ToDate != null) {
+            query = query.Where(d => d.PaymentDate <= req.ToDate);
+        }
         
-        if (req.SortPaymentDate == SortOrder.Ascending) {
-            query.OrderBy(d => d.PaymentDate);
-        } else if (req.SortPaymentDate == SortOrder.Descending) {
-            query.OrderByDescending(d => d.PaymentDate);
+        if (SortOrder.Ascending.Equals(req.SortPaymentDate)) {
+            query = query.OrderBy(d => d.PaymentDate);
+        } else if (SortOrder.Descending.Equals(req.SortPaymentDate)) {
+            query = query.OrderByDescending(d => d.PaymentDate);
         }
 
         return await query.ToListAsync();

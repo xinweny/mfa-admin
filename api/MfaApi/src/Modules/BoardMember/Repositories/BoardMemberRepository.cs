@@ -45,34 +45,34 @@ public class BoardMemberRepository: IBoardMemberRepository {
     }
 
     public async Task<IEnumerable<BoardMemberModel>> GetBoardMembers(GetBoardMembersRequest req) {
-        var query = _context.BoardMembers;
+        var query = _context.BoardMembers.AsQueryable();
 
-        query.Include(b => b.Member);
+        query = query.Include(b => b.Member);
 
         if (!req.BoardPositions.IsNullOrEmpty()) query.Where(b => req.BoardPositions!.Contains(b.BoardPosition));
         if (req.FromDate != null) {
-            query.Where(
+            query = query.Where(
                 b => b.StartDate >= req.FromDate
                 && (b.EndDate == null || b.EndDate <= req.FromDate)
             );
         }
         if (req.ToDate != null) {
-            query.Where(
+            query = query.Where(
                 b => b.StartDate <= req.ToDate
                 && (b.EndDate == null || b.EndDate <= req.ToDate)
             );
         }
 
-        if (req.SortDate == SortOrder.Ascending) {
-            query.OrderBy(b => b.StartDate);
-        } else if (req.SortDate == SortOrder.Descending) {
-            query.OrderByDescending(b => b.StartDate);
+        if (SortOrder.Ascending.Equals(req.SortDate)) {
+            query = query.OrderBy(b => b.StartDate);
+        } else if (SortOrder.Descending.Equals(req.SortDate)) {
+            query = query.OrderByDescending(b => b.StartDate);
         }
 
-        if (req.SortTimeServed == SortOrder.Ascending) {
-            query.OrderBy(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
-        } else if (req.SortTimeServed == SortOrder.Descending) {
-            query.OrderByDescending(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
+        if (SortOrder.Ascending.Equals(req.SortTimeServed)) {
+            query = query.OrderBy(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
+        } else if (SortOrder.Descending.Equals(req.SortTimeServed)) {
+            query = query.OrderByDescending(b => (b.EndDate ?? DateOnly.FromDateTime(DateTime.Now)).DayNumber - b.StartDate.DayNumber);
         }
 
         return await query.ToListAsync();

@@ -49,24 +49,29 @@ public class ExchangeRepository : IExchangeRepository
     public async Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req) {
         var query = _context.Exchanges.AsQueryable();
 
-        query.Include(e => e.Member);
+        query = query.Include(e => e.Member);
 
         if (!string.IsNullOrEmpty(req.Query)) {
-            query.Where(e =>
+            query = query.Where(e =>
                 e.Member != null
-                    ? e.Member.DoesFullNameContainQuery(req.Query)
-                    : false
+                    && e.Member.DoesFullNameContainQuery(req.Query)
             );
         }
 
-        if (req.ExchangeType != null) query.Where(e => e.ExchangeType == req.ExchangeType);
-        if (req.FromYear != null) query.Where(e => e.Year >= req.FromYear);
-        if (req.ToYear != null) query.Where(e => e.Year <= req.ToYear);
+        if (req.ExchangeType != null) {
+            query = query.Where(e => e.ExchangeType == req.ExchangeType);
+        }
+        if (req.FromYear != null) {
+            query = query.Where(e => e.Year >= req.FromYear);
+        }
+        if (req.ToYear != null) {
+            query = query.Where(e => e.Year <= req.ToYear);
+        }
 
-        if (req.SortYear == SortOrder.Ascending) {
-            query.OrderBy(e => e.Year);
-        } else if (req.SortYear == SortOrder.Descending) {
-            query.OrderByDescending(e => e.Year);
+        if (SortOrder.Ascending.Equals(req.SortYear)) {
+            query = query.OrderBy(e => e.Year);
+        } else if (SortOrder.Descending.Equals(req.SortYear)) {
+            query = query.OrderByDescending(e => e.Year);
         }
 
         return await query.ToListAsync();
