@@ -2,60 +2,52 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
-import Link from 'next/link';
 
-import { MembershipColumns } from '../../types';
+import { Address } from '@/modules/address/types';
+import { MembershipType } from '../../types/membership-type';
 
-import { provinceLabels } from '@/modules/address/constants';
-import { membershipTypeLabels } from '../../constants';
-
-import { Badge } from '@/components/ui/badge';
 import { DataTableSortButton } from '@/modules/data/components/data-table-sort-button';
 
-import { YearPaidFilter } from '../year-paid-filter';
+import { AddressDisplay } from '@/modules/address/components/address-display';
+import { PaidStatusCell } from './cells/paid-status-cell';
+import { MembersCell } from './cells/members-cell';
+import { MembershipTypeCell } from './cells/membership-type-cell';
+
+export interface MembershipColumns {
+  id: string;
+  members: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  }[];
+  address: Address | null,
+  membershipType: MembershipType;
+  startDate: Date | null;
+  hasPaid: boolean | null;
+}
 
 export const columns: ColumnDef<MembershipColumns>[] = [
   {
+    accessorKey: 'membershipType',
+    header: 'Type',
+    cell: ({ row: { original: { membershipType } } }) => (
+      <MembershipTypeCell
+        membershipType={membershipType}
+      />
+    ),
+  },
+  {
     accessorKey: 'members',
     header: 'Members',
-    cell: ({ row }) => (
-      <ul className="flex-col">
-        {row.original.members
-          .map(member => (
-            <li key={member.id} className="text-medium">
-              <Link href={`/dashboard/members/${member.id}`}>
-                {`${member.firstName} ${member.lastName.toUpperCase()}`}
-              </Link>
-            </li>
-          ))}
-      </ul>
-    ),
+    cell: ({ row: { original: { members } } }) => <MembersCell members={members} />,
   },
   {
     accessorKey: 'address',
     header: 'Address',
-    cell: ({ row }) => {
-      const address = row.original.address;
-
-      if (!address) return null;
-
-      return (
-        <span className="flex flex-col">
-          <span>{address.line1}</span>
-          <span>{address.line2}</span>
-          <span>{address.city}</span>
-          <span>{`${provinceLabels[address.province]} ${address.postalCode}`}</span>
-        </span>
-      );
-    },
-  },
-  {
-    accessorKey: 'membershipType',
-    header: 'Type',
-    cell: ({ row }) => (
-      <Badge variant="outline">
-        {membershipTypeLabels[row.original.membershipType]}
-      </Badge>
+    cell: ({ row: { original: { address } } }) => (
+      address == null
+        ? null
+        : <AddressDisplay address={address} />
     ),
   },
   {
@@ -66,27 +58,15 @@ export const columns: ColumnDef<MembershipColumns>[] = [
         label="Since"
       />
     ),
-    cell: ({ row }) => row.original.startDate && format(row.original.startDate, 'dd/LL/yyyy'),
+    cell: ({ row: { original: { startDate } } }) => startDate && format(startDate, 'dd/LL/yyyy'),
   },
   {
     accessorKey: 'paidForYear',
-    header: () => <YearPaidFilter />,
-    cell: ({ row }) => {      
-      return row.original.paidForYear == null
+    header: 'Paid',
+    cell: ({ row: { original: { hasPaid } } }) => (
+      hasPaid === null
         ? null
-        : (
-        <Badge
-          variant={row.original.paidForYear
-            ? 'default'
-            : 'destructive'
-          }
-        >
-          {row.original.paidForYear
-            ? 'Paid'
-            : 'Not Paid'
-          }
-        </Badge>
-      );
-    },
-  }
+        : <PaidStatusCell hasPaid={hasPaid} />
+    ),
+  },
 ];

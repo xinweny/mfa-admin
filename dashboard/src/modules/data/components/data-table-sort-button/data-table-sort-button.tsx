@@ -9,8 +9,6 @@ import { SortOrder } from '@/types/sort-order';
 
 import { useSortUrlParam } from '../../state';
 
-import { Button } from '@/components/ui/button';
-
 interface DataTableSortButtonProps {
   name: string;
   label: string;
@@ -25,9 +23,8 @@ export function DataTableSortButton({
   const SortIcon = sortIcons[sort];
 
   return (
-    <Button
-      className="gap-2"
-      variant="ghost"
+    <button
+      className="flex items-center gap-2"
       onClick={() => {
         switch (sort) {
           case SortOrder.Ascending:
@@ -43,7 +40,7 @@ export function DataTableSortButton({
     >
       <span>{label}</span>
       <SortIcon size={16} />
-    </Button>
+    </button>
   );
 }
 

@@ -1,9 +1,7 @@
 'use client';
 
-import {
-  GetMembershipsResponse,
-  MembershipColumns,
-} from '../../types';
+import { GetMembershipsResponse } from '../../types';
+import { MembershipColumns } from './columns';
 
 import { useYearPaidUrlParam } from '../../state';
 
@@ -31,7 +29,7 @@ export function MembershipsTable({
       members: membership.members,
       address: membership.address || null,
       startDate,
-      paidForYear: !membership.due
+      hasPaid: !membership.due
         ? startDate && year < startDate?.getFullYear() ? null : false
         : true,
     };

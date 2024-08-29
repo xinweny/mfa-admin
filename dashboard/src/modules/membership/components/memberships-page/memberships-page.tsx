@@ -3,6 +3,7 @@ import { DashboardContent } from '@/modules/dashboard/components/dashboard-conte
 import { GetMembershipsRequest } from '../../types';
 
 import { MembershipsTable } from '../memberships-table/memberships-table';
+import { DataTableHeader } from '@/modules/data/components/data-table-header';
 
 interface MembershipsPageProps {
   searchParams: GetMembershipsRequest;
@@ -24,6 +25,7 @@ export async function MembershipsPage({
 
   return (
     <DashboardContent>
+      <DataTableHeader text="Memberships" />
       <MembershipsTable
         memberships={memberships.data}
       />
