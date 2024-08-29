@@ -1,8 +1,8 @@
 import { useQueryState, parseAsInteger } from 'nuqs';
 
-export const useYearUrlParam = () => {
+export const useYearPaidUrlParam = () => {
   return useQueryState(
-    'year',
+    'yearPaid',
     parseAsInteger
       .withOptions({
         shallow: false,

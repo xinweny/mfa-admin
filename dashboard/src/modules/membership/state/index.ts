@@ -1,1 +1,1 @@
-export * from './use-year-url-param';
+export * from './use-year-paid-url-param';

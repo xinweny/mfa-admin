@@ -48,9 +48,9 @@ public class MembershipRepository: IMembershipRepository
         query = query
             .Include(m => m.Address)
             .Include(m => m.Members)
-            .Include(m => req.Year == null
+            .Include(m => req.YearPaid == null
                 ? m.Dues
-                : m.Dues.Where(d => d.Year == req.Year)
+                : m.Dues.Where(d => d.Year == req.YearPaid)
             );
         
         if (!string.IsNullOrEmpty(req.Query)) {

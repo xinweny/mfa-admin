@@ -11,7 +11,7 @@ public record GetMembershipsResponse {
     public required DateOnly StartDate { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public List<DueDto> Dues { get; set; } = [];
+    public DueDto? Due { get; set; }
 
     public class MemberDto {
         public required Guid Id { get; set; }

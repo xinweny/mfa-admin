@@ -24,7 +24,7 @@ public class MembershipService: IMembershipService {
     }
 
     public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest req) {
-        req.Year ??= DateTime.Now.Year;
+        req.YearPaid ??= DateTime.Now.Year;
 
         var memberships = await _membershipRepository.GetMemberships(req);
 

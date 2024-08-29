@@ -12,7 +12,7 @@ import { membershipTypeLabels } from '../../constants';
 import { Badge } from '@/components/ui/badge';
 import { DataTableSortButton } from '@/modules/data/components/data-table-sort-button';
 
-import { DuesYearFilter } from '../dues-year-filter';
+import { YearPaidFilter } from '../year-paid-filter';
 
 export const columns: ColumnDef<MembershipColumns>[] = [
   {
@@ -70,7 +70,7 @@ export const columns: ColumnDef<MembershipColumns>[] = [
   },
   {
     accessorKey: 'paidForYear',
-    header: () => <DuesYearFilter />,
+    header: () => <YearPaidFilter />,
     cell: ({ row }) => {      
       return row.original.paidForYear == null
         ? null

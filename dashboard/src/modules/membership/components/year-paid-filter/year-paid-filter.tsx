@@ -4,13 +4,13 @@ import { useState } from 'react';
 
 import { mfaFoundingYear } from '@/constants';
 
-import { useYearUrlParam } from '../../state';
+import { useYearPaidUrlParam } from '../../state';
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export function DuesYearFilter() {
-  const [year, setYear] = useYearUrlParam();
+export function YearPaidFilter() {
+  const [year, setYear] = useYearPaidUrlParam();
 
   const currentYear = new Date().getFullYear();
 

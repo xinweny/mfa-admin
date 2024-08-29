@@ -10,12 +10,12 @@ interface MembershipsPageProps {
 
 export async function MembershipsPage({
   searchParams: {
-    year,
+    yearPaid,
     sortStartDate,
   },
 }: MembershipsPageProps) {
   const searchParams = new URLSearchParams({
-    ...(year && { year }),
+    ...(yearPaid && { yearPaid }),
     ...(sortStartDate && { sortStartDate }),
   });
 

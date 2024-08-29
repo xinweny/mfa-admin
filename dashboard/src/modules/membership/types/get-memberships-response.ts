@@ -9,10 +9,10 @@ export interface GetMembershipsResponse {
     firstName: string;
     lastName: string;
   }[];
-  dues: {
+  due: {
     id: string;
     year: number;
-  }[];
+  } | null;
   addressId: string | null;
   address: Address | null;
   startDate: string | null;

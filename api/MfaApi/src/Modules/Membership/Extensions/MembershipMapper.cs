@@ -36,10 +36,10 @@ public static class MembershipMapper {
             StartDate = membership.StartDate,
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
-            Dues = membership.Dues.Select(d => new GetMembershipsResponse.DueDto {
+            Due = membership.Dues.Select(d => new GetMembershipsResponse.DueDto {
                 Id = d.Id,
                 Year = d.Year,
-            }).ToList(),
+            }).FirstOrDefault(),
         };
     }
 
