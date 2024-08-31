@@ -27,12 +27,14 @@ interface DataTableFiltersFormProps<T extends FieldValues> {
       formState: UseFormStateReturn<T>;
     }) => ReactElement<any, string | JSXElementConstructor<any>>;
   }[];
+  reset?: T,
 }
 
 export function DataTableFiltersForm<T extends FieldValues>({
   form,
   onSubmit,
   filters,
+  reset,
 }: DataTableFiltersFormProps<T>) {
   const {
     handleSubmit,
@@ -64,7 +66,18 @@ export function DataTableFiltersForm<T extends FieldValues>({
       <Button
         type="submit"
         className="self-end"
-      >Apply</Button>
+      >
+        Apply
+      </Button>
+      <Button
+        variant="link"
+        className="self-end"
+        onClick={() => {
+          form.reset(reset);
+        }}
+      >
+        Clear
+      </Button>
     </form>
   );
 }

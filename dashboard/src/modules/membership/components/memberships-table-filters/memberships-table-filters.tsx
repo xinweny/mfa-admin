@@ -17,7 +17,7 @@ export function MembershipsTableFilters() {
 
   const form = useForm<GetMembershipsSchema>({
     defaultValues: {
-      query: params.query || '',
+      query: params.query || undefined,
       yearPaid: params.yearPaid,
     },
     resolver: zodResolver(getMembershipsSchema),
@@ -54,6 +54,10 @@ export function MembershipsTableFilters() {
           ),
         },
       ]}
+      reset={{
+        query: '',
+        yearPaid: new Date().getFullYear(),
+      }}
     />
   );
 }
