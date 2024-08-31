@@ -1,13 +1,12 @@
 'use client';
 
 import { GetMembershipsResponse } from '../../types';
-import { MembershipColumns } from './columns';
 
-import { useYearPaidUrlParam } from '../../state';
+import { useGetMembershipsUrlParams } from '../../state';
 
 import { DataTable } from '@/modules/data/components/data-table';
 
-import { columns } from './columns';
+import { MembershipColumns, columns } from './columns';
 
 interface MembershipsTableProps {
   memberships: GetMembershipsResponse[];
@@ -16,7 +15,7 @@ interface MembershipsTableProps {
 export function MembershipsTable({
   memberships,
 }: MembershipsTableProps) {
-  const [year] = useYearPaidUrlParam();
+  const [{ yearPaid }] = useGetMembershipsUrlParams();
 
   const data: MembershipColumns[] = memberships.map(membership => {
     const startDate = membership.startDate
@@ -30,7 +29,7 @@ export function MembershipsTable({
       address: membership.address || null,
       startDate,
       hasPaid: !membership.due
-        ? startDate && year < startDate?.getFullYear() ? null : false
+        ? startDate && yearPaid < startDate?.getFullYear() ? null : false
         : true,
     };
   });

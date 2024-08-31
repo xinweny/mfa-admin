@@ -1,34 +1,36 @@
-import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
-
 import { GetMembershipsRequest } from '../../types';
 
-import { MembershipsTable } from '../memberships-table/memberships-table';
+import { getMembershipsSerializer } from '../../state';
+
+import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
+import { MembershipsTable } from '../memberships-table';
 import { DataTableHeader } from '@/modules/data/components/data-table-header';
+import { DataTableContainer } from '@/modules/data/components/data-table-container';
+import { MembershipsTableFilters } from '../memberships-table-filters';
 
 interface MembershipsPageProps {
   searchParams: GetMembershipsRequest;
 }
 
 export async function MembershipsPage({
-  searchParams: {
-    yearPaid,
-    sortStartDate,
-  },
+  searchParams,
 }: MembershipsPageProps) {
-  const searchParams = new URLSearchParams({
-    ...(yearPaid && { yearPaid }),
-    ...(sortStartDate && { sortStartDate }),
-  });
-
-  const memberships = await fetch(`${process.env.MFA_API_URL}/memberships?` + searchParams.toString())
+  const memberships = await fetch(
+    getMembershipsSerializer(
+      `${process.env.MFA_API_URL}/memberships`,
+      searchParams
+    ))
     .then(data => data.json());
 
   return (
     <DashboardContent>
-      <DataTableHeader text="Memberships" />
-      <MembershipsTable
-        memberships={memberships.data}
-      />
+      <DataTableContainer>
+        <DataTableHeader text="Memberships" />
+        <MembershipsTableFilters />
+        <MembershipsTable
+          memberships={memberships.data || []}
+        />
+      </DataTableContainer>
     </DashboardContent>
   );
 }

@@ -12,6 +12,7 @@ import { AddressDisplay } from '@/modules/address/components/address-display';
 import { PaidStatusCell } from './cells/paid-status-cell';
 import { MembersCell } from './cells/members-cell';
 import { MembershipTypeCell } from './cells/membership-type-cell';
+import { YearPaidFilter } from '../year-paid-filter';
 
 export interface MembershipColumns {
   id: string;
@@ -62,7 +63,7 @@ export const columns: ColumnDef<MembershipColumns>[] = [
   },
   {
     accessorKey: 'paidForYear',
-    header: 'Paid',
+    header: () => <YearPaidFilter />,
     cell: ({ row: { original: { hasPaid } } }) => (
       hasPaid === null
         ? null
