@@ -54,11 +54,12 @@ public class MembershipRepository: IMembershipRepository
             );
         
         if (!string.IsNullOrEmpty(req.Query)) {
+            var fullNameFilter = MemberUtils.GetFullNameFilter(req.Query);
+
             query = query.Where(
-                membership => membership.Members.Any(
-                    member => member.DoesFullNameContainQuery(req.Query)
-                )
-            );
+                membership => membership.Members
+                    .AsQueryable()
+                    .Any(fullNameFilter));
         }
 
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {

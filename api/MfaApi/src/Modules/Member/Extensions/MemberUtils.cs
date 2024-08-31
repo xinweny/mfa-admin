@@ -1,14 +1,10 @@
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
+
 namespace MfaApi.Modules.Member;
 
 public static class MemberUtils {
-    public static bool DoesFullNameContainQuery(this MemberModel member, string query) {
-        string[] fullNames = [
-            $"{member.FirstName} {member.LastName}",
-            $"{member.LastName} {member.FirstName}"
-        ];
-
-        return fullNames.Any(n => 
-            n.Contains(query, StringComparison.CurrentCultureIgnoreCase)
-        );
+    public static Expression<Func<MemberModel, bool>> GetFullNameFilter(string query) {
+        return member => EF.Functions.ILike(member.FirstName + " " + member.LastName, $"%{query}%");
     }
 }

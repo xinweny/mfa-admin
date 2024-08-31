@@ -17,7 +17,7 @@ export function MembershipsTableFilters() {
 
   const form = useForm<GetMembershipsSchema>({
     defaultValues: {
-      query: params.query || undefined,
+      query: params.query || '',
       yearPaid: params.yearPaid,
     },
     resolver: zodResolver(getMembershipsSchema),
