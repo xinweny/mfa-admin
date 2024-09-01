@@ -4,6 +4,7 @@ using FluentValidation;
 using MfaApi.Common.Constants;
 using MfaApi.Database;
 using MfaApi.Modules.Member;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MfaApi.Modules.Membership;
 
@@ -57,9 +58,13 @@ public class MembershipRepository: IMembershipRepository
             var fullNameFilter = MemberUtils.GetFullNameFilter(req.Query);
 
             query = query.Where(
-                membership => membership.Members
+                m => m.Members
                     .AsQueryable()
                     .Any(MemberUtils.GetFullNameFilter(req.Query)));
+        }
+
+        if (req.MembershipType != null) {
+            query = query.Where(m => m.MembershipType.Equals(req.MembershipType));
         }
 
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {
