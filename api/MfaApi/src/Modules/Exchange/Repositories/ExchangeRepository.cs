@@ -52,12 +52,8 @@ public class ExchangeRepository : IExchangeRepository
         query = query.Include(e => e.Member);
 
         if (!string.IsNullOrEmpty(req.Query)) {
-            var fullNameFilter = MemberUtils.GetFullNameFilter(req.Query);
-
-            query = query.Where(e =>
-                e.Member != null
-                    && EF.Functions.ILike(e.Member.FirstName + " " + e.Member.LastName, $"%{req.Query}%")
-            );
+            query = query.Where(e => e.Member != null
+            && MemberUtils.GetFullNameFilter(req.Query)(e.Member));
         }
 
         if (req.ExchangeType != null) {

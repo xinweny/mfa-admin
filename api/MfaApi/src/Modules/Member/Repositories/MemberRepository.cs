@@ -41,10 +41,8 @@ public class MemberRepository: IMemberRepository {
         string? query = req.Query;
         
         if (!string.IsNullOrEmpty(query)) {
-            var fullNameFilter = MemberUtils.GetFullNameFilter(query);
-
-            membersQuery = membersQuery
-                .Where(fullNameFilter);
+            membersQuery = (IQueryable<MemberModel>)membersQuery
+                .Where(MemberUtils.GetFullNameFilter(query));
         }
 
         var members = await membersQuery

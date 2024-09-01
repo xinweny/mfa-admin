@@ -58,7 +58,6 @@ public class MembershipRepository: IMembershipRepository
 
             query = query.Where(
                 membership => membership.Members
-                    .AsQueryable()
                     .Any(fullNameFilter));
         }
 
