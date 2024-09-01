@@ -6,6 +6,7 @@ import {
   createSerializer,
   parseAsBoolean,
 } from 'nuqs';
+import { createSearchParamsCache } from 'nuqs/server';
 
 import { SortOrder } from '@/types';
 import { MembershipType } from '../types';
@@ -25,4 +26,6 @@ export const useGetMembershipsUrlParams = () => {
   );
 };
 
-export const getMembershipsSerializer = createSerializer(parsers);
+export const getMembershipsUrlParams = createSearchParamsCache(parsers);
+
+export const serializeGetMembershipsRequest = createSerializer(parsers);

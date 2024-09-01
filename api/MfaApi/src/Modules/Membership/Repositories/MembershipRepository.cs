@@ -65,7 +65,9 @@ public class MembershipRepository: IMembershipRepository
         }
 
         if (req.HasPaid != null) {
-            query = query.Where(m => m.Dues.Where(d => d.Year == req.YearPaid).IsNullOrEmpty() == req.HasPaid);
+            query = query.Where(m => (bool) req.HasPaid
+                ? m.Dues.Count(d => d.Year == req.YearPaid) > 0
+                : m.Dues.Count(d => d.Year == req.YearPaid) == 0);
         }
 
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {

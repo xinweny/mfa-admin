@@ -8,7 +8,8 @@ import { MembershipType, membershipTypeLabels } from '../../types';
 import {
   getMembershipsSchema,
   GetMembershipsSchema,
-  MembershipTypeValues,
+  HasPaidInputValues,
+  MembershipTypeInputValues,
 } from './schema';
 
 import { mfaFoundingYear } from '@/constants';
@@ -27,16 +28,23 @@ export function MembershipsTableFilters() {
       query: params.query || '',
       yearPaid: params.yearPaid,
       membershipType: membershipTypeValues
-        .find(m => m.type === params.membershipType)?.value || MembershipTypeValues.All,
+        .find(m => m.value === params.membershipType)?.inputValue || MembershipTypeInputValues.All,
+      hasPaid: params.hasPaid === null
+        ? HasPaidInputValues.All
+        : params.hasPaid ? HasPaidInputValues.Paid : HasPaidInputValues.NotPaid,
     },
     resolver: zodResolver(getMembershipsSchema),
   });
 
-  const handleSubmit = async (data: GetMembershipsSchema) => {
-    await setParams({
+  const handleSubmit = (data: GetMembershipsSchema) => {
+    const membershipType = membershipTypeValues.find(m => m.inputValue === data.membershipType)?.value;
+    const hasPaid = hasPaidValues.find(p => p.inputValue === data.hasPaid)?.value;
+
+    setParams({
       query: data.query || null,
       yearPaid: data.yearPaid,
-      membershipType: membershipTypeValues.find(m => m.value === data.membershipType)?.type || null,
+      membershipType: membershipType || null,
+      hasPaid: hasPaid !== undefined ? hasPaid : null,
     });
   };
 
@@ -56,6 +64,17 @@ export function MembershipsTableFilters() {
           ),
         },
         {
+          label: 'Membership Types',
+          name: 'membershipType',
+          render: ({ field }) => (
+            <PopoverRadio
+              currentValue={field.value as string}
+              onChange={field.onChange}
+              values={membershipTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+            />
+          ),
+        },
+        {
           label: 'Year Paid',
           name: 'yearPaid',
           render: ({ field }) => (
@@ -67,13 +86,13 @@ export function MembershipsTableFilters() {
           ),
         },
         {
-          label: 'Membership Types',
-          name: 'membershipType',
+          label: 'Paid Status',
+          name: 'hasPaid',
           render: ({ field }) => (
             <PopoverRadio
               currentValue={field.value as string}
               onChange={field.onChange}
-              values={membershipTypeValues.map(({ value, label }) => ({ value, label }))}
+              values={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
         }
@@ -81,7 +100,8 @@ export function MembershipsTableFilters() {
       reset={{
         query: '',
         yearPaid: new Date().getFullYear(),
-        membershipType: MembershipTypeValues.All,
+        membershipType: MembershipTypeInputValues.All,
+        hasPaid: HasPaidInputValues.All,
       }}
     />
   );
@@ -89,24 +109,42 @@ export function MembershipsTableFilters() {
 
 const membershipTypeValues = [
   {
-    value: MembershipTypeValues.All,
-    type: null,
+    inputValue: MembershipTypeInputValues.All,
+    value: null,
     label: 'All',
   },
   {
-    value: MembershipTypeValues.Single,
-    type: MembershipType.Single,
+    inputValue: MembershipTypeInputValues.Single,
+    value: MembershipType.Single,
     label: membershipTypeLabels[MembershipType.Single],
   },
   {
-    value: MembershipTypeValues.Family,
-    type: MembershipType.Family,
+    inputValue: MembershipTypeInputValues.Family,
+    value: MembershipType.Family,
     label: membershipTypeLabels[MembershipType.Family],
   },
   {
-    value: MembershipTypeValues.Honorary,
-    type: MembershipType.Honorary,
+    inputValue: MembershipTypeInputValues.Honorary,
+    value: MembershipType.Honorary,
     label: membershipTypeLabels[MembershipType.Honorary],
+  },
+];
+
+const hasPaidValues = [
+  {
+    inputValue: HasPaidInputValues.All,
+    value: null,
+    label: 'All',
+  },
+  {
+    inputValue: HasPaidInputValues.Paid,
+    value: true,
+    label: 'Paid',
+  },
+  {
+    inputValue: HasPaidInputValues.NotPaid,
+    value: false,
+    label: 'Not Paid',
   },
 ];
 

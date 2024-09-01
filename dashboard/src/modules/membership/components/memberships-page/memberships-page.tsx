@@ -1,24 +1,23 @@
-import { GetMembershipsRequest } from '../../types';
-
-import { getMembershipsSerializer } from '../../state';
+import { serializeGetMembershipsRequest, getMembershipsUrlParams } from '../../state';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { MembershipsTable } from '../memberships-table';
 import { DataTableHeader } from '@/modules/data/components/data-table-header';
 import { DataTableContainer } from '@/modules/data/components/data-table-container';
 import { MembershipsTableFilters } from '../memberships-table-filters';
+import { parseAsBoolean } from 'nuqs';
 
 interface MembershipsPageProps {
-  searchParams: GetMembershipsRequest;
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
 export async function MembershipsPage({
   searchParams,
 }: MembershipsPageProps) {
   const memberships = await fetch(
-    getMembershipsSerializer(
+    serializeGetMembershipsRequest(
       `${process.env.MFA_API_URL}/memberships`,
-      searchParams
+      getMembershipsUrlParams.parse(searchParams)
     ))
     .then(data => data.json());
 

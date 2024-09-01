@@ -38,8 +38,9 @@ export const columns: ColumnDef<MembershipColumns>[] = [
   {
     accessorKey: 'membershipType',
     header: 'Type',
-    cell: ({ row: { original: { membershipType } } }) => (
+    cell: ({ row: { original: { membershipType, id } } }) => (
       <MembershipTypeCell
+        id={id}
         membershipType={membershipType}
       />
     ),
