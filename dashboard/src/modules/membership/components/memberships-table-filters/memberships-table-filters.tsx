@@ -73,7 +73,7 @@ export function MembershipsTableFilters() {
           ),
         },
         {
-          label: 'Membership Types',
+          label: 'Type',
           name: 'membershipType',
           render: ({ field }) => (
             <PopoverRadioFilter
