@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 
-interface PopoverRadioProps<T extends string> {
+interface PopoverRadioFilterProps<T extends string> {
   currentValue: T;
   values: {
     value: T;
@@ -16,11 +16,11 @@ interface PopoverRadioProps<T extends string> {
   onChange: (e: any) => void;
 }
 
-export function PopoverRadio<T extends string>({
+export function PopoverRadioFilter<T extends string>({
   currentValue,
   values,
   onChange,
-}: PopoverRadioProps<T>) {
+}: PopoverRadioFilterProps<T>) {
   return (
     <Popover>
       <PopoverTrigger asChild>

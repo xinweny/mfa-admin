@@ -63,21 +63,21 @@ export function DataTableFiltersForm<T extends FieldValues>({
           />
         </DataTableFilter>
       ))}
-      <Button
-        type="submit"
-        className="self-end"
-      >
-        Apply
-      </Button>
-      <Button
-        variant="link"
-        className="self-end"
-        onClick={() => {
-          form.reset(reset);
-        }}
-      >
-        Clear
-      </Button>
+      <div className="self-end flex items-end gap-2">
+        <Button
+          variant="link"
+          onClick={() => {
+            form.reset(reset);
+          }}
+        >
+          Reset
+        </Button>
+        <Button
+          type="submit"
+        >
+          Apply
+        </Button>
+      </div>
     </form>
   );
 }

@@ -18,7 +18,7 @@ import { useGetMembershipsUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/modules/data/components/data-table-filters-form';
 import { Input } from '@/components/ui/input';
-import { PopoverRadio } from '@/modules/data/components/popover-radio';
+import { PopoverRadioFilter } from '@/modules/data/components/popover-radio-filter';
 
 export function MembershipsTableFilters() {
   const [params, setParams] = useGetMembershipsUrlParams();
@@ -67,7 +67,7 @@ export function MembershipsTableFilters() {
           label: 'Membership Types',
           name: 'membershipType',
           render: ({ field }) => (
-            <PopoverRadio
+            <PopoverRadioFilter
               currentValue={field.value as string}
               onChange={field.onChange}
               values={membershipTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
@@ -89,7 +89,7 @@ export function MembershipsTableFilters() {
           label: 'Paid Status',
           name: 'hasPaid',
           render: ({ field }) => (
-            <PopoverRadio
+            <PopoverRadioFilter
               currentValue={field.value as string}
               onChange={field.onChange}
               values={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
