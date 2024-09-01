@@ -53,7 +53,7 @@ public class ExchangeRepository : IExchangeRepository
 
         if (!string.IsNullOrEmpty(req.Query)) {
             query = query.Where(e => e.Member != null
-            && MemberUtils.GetFullNameFilter(req.Query)(e.Member));
+            && MemberUtils.GetFullNameFilter(req.Query).Compile()(e.Member));
         }
 
         if (req.ExchangeType != null) {

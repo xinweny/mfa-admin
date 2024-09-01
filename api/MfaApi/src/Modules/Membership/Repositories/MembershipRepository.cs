@@ -58,7 +58,8 @@ public class MembershipRepository: IMembershipRepository
 
             query = query.Where(
                 membership => membership.Members
-                    .Any(fullNameFilter));
+                    .AsQueryable()
+                    .Any(MemberUtils.GetFullNameFilter(req.Query)));
         }
 
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {
