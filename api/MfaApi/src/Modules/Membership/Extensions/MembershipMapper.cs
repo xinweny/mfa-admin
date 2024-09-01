@@ -39,6 +39,9 @@ public static class MembershipMapper {
             Due = membership.Dues.Select(d => new GetMembershipsResponse.DueDto {
                 Id = d.Id,
                 Year = d.Year,
+                AmountPaid = d.AmountPaid,
+                PaymentMethod = d.PaymentMethod,
+                PaymentDate = d.PaymentDate,
             }).FirstOrDefault(),
         };
     }

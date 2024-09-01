@@ -1,5 +1,6 @@
 import { Address } from '@/modules/address/types';
 import { MembershipType } from './membership-type';
+import { PaymentMethod } from '@/modules/dues/types';
 
 export interface GetMembershipsResponse {
   id: string;
@@ -12,10 +13,13 @@ export interface GetMembershipsResponse {
   due: {
     id: string;
     year: number;
+    paymentDate: string | null;
+    amountPaid: number;
+    paymentMethod: PaymentMethod;
   } | null;
   addressId: string | null;
   address: Address | null;
-  startDate: string | null;
+  startDate: string;
   createdAt: string;
   updatedAt: string | null;
 }

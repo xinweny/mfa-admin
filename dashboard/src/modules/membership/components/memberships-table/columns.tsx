@@ -5,14 +5,15 @@ import { format } from 'date-fns';
 
 import { Address } from '@/modules/address/types';
 import { MembershipType } from '../../types/membership-type';
+import { PaymentMethod } from '@/modules/dues/types';
 
 import { DataTableSortButton } from '@/modules/data/components/data-table-sort-button';
 
 import { AddressDisplay } from '@/modules/address/components/address-display';
-import { PaidStatusCell } from './cells/paid-status-cell';
-import { MembersCell } from './cells/members-cell';
-import { MembershipTypeCell } from './cells/membership-type-cell';
-import { YearPaidFilter } from '../year-paid-filter';
+import { PaidStatusCell } from './components/paid-status-cell';
+import { MembersCell } from './components/members-cell';
+import { MembershipTypeCell } from './components/membership-type-cell';
+import { YearPaidHeader } from './components/year-paid-header';
 
 export interface MembershipColumns {
   id: string;
@@ -23,8 +24,14 @@ export interface MembershipColumns {
   }[];
   address: Address | null,
   membershipType: MembershipType;
-  startDate: Date | null;
-  hasPaid: boolean | null;
+  startDate: Date;
+  due: {
+    id: string;
+    year: number;
+    paymentDate: Date | null;
+    amountPaid: number;
+    paymentMethod: PaymentMethod;
+  } | null;
 }
 
 export const columns: ColumnDef<MembershipColumns>[] = [
@@ -62,12 +69,10 @@ export const columns: ColumnDef<MembershipColumns>[] = [
     cell: ({ row: { original: { startDate } } }) => startDate && format(startDate, 'dd/LL/yyyy'),
   },
   {
-    accessorKey: 'paidForYear',
-    header: () => <YearPaidFilter />,
-    cell: ({ row: { original: { hasPaid } } }) => (
-      hasPaid === null
-        ? null
-        : <PaidStatusCell hasPaid={hasPaid} />
+    accessorKey: 'due',
+    header: () => <YearPaidHeader />,
+    cell: ({ row: { original: { due, startDate } } }) => (
+      <PaidStatusCell due={due} startDate={startDate}  />
     ),
   },
 ];

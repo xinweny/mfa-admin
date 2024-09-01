@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { MembershipType } from '../../types';
+import { MembershipType, membershipTypeLabels } from '../../types';
 
 import {
   getMembershipsSchema,
@@ -17,14 +17,7 @@ import { useGetMembershipsUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/modules/data/components/data-table-filters-form';
 import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
+import { PopoverRadio } from '@/modules/data/components/popover-radio';
 
 export function MembershipsTableFilters() {
   const [params, setParams] = useGetMembershipsUrlParams();
@@ -33,8 +26,8 @@ export function MembershipsTableFilters() {
     defaultValues: {
       query: params.query || '',
       yearPaid: params.yearPaid,
-      membershipType: (Object.keys(membershipTypeValues) as MembershipTypeValues[])
-        .find(k => membershipTypeValues[k].type === params.membershipType) || MembershipTypeValues.All,
+      membershipType: membershipTypeValues
+        .find(m => m.type === params.membershipType)?.value || MembershipTypeValues.All,
     },
     resolver: zodResolver(getMembershipsSchema),
   });
@@ -43,7 +36,7 @@ export function MembershipsTableFilters() {
     await setParams({
       query: data.query || null,
       yearPaid: data.yearPaid,
-      membershipType: membershipTypeValues[data.membershipType].type,
+      membershipType: membershipTypeValues.find(m => m.value === data.membershipType)?.type || null,
     });
   };
 
@@ -77,26 +70,11 @@ export function MembershipsTableFilters() {
           label: 'Membership Types',
           name: 'membershipType',
           render: ({ field }) => (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="justify-start">
-                  {membershipTypeValues[field.value as MembershipTypeValues].label}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value as MembershipTypeValues}
-                >
-                  {Object.entries(membershipTypeValues).map(([key, value]) => (
-                    <div key={key} className="flex items-center gap-2">
-                      <RadioGroupItem value={key} />
-                      <Label>{value.label}</Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </PopoverContent>
-            </Popover>
+            <PopoverRadio
+              currentValue={field.value as string}
+              onChange={field.onChange}
+              values={membershipTypeValues.map(({ value, label }) => ({ value, label }))}
+            />
           ),
         }
       ]}
@@ -109,27 +87,26 @@ export function MembershipsTableFilters() {
   );
 }
 
-const membershipTypeValues = {
-  [MembershipTypeValues.All]: {
+const membershipTypeValues = [
+  {
+    value: MembershipTypeValues.All,
     type: null,
     label: 'All',
   },
-  [MembershipTypeValues.Single]: {
+  {
+    value: MembershipTypeValues.Single,
     type: MembershipType.Single,
-    label: 'Single',
+    label: membershipTypeLabels[MembershipType.Single],
   },
-  [MembershipTypeValues.Family]: {
+  {
+    value: MembershipTypeValues.Family,
     type: MembershipType.Family,
-    label: 'Family',
+    label: membershipTypeLabels[MembershipType.Family],
   },
-  [MembershipTypeValues.Honorary]: {
+  {
+    value: MembershipTypeValues.Honorary,
     type: MembershipType.Honorary,
-    label: 'Honorary',
+    label: membershipTypeLabels[MembershipType.Honorary],
   },
-} satisfies {
-  [key in MembershipTypeValues]: {
-    type: MembershipType | null,
-    label: string,
-  }
-};
+];
 

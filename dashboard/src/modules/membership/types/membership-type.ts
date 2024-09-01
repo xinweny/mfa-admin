@@ -3,3 +3,9 @@ export enum MembershipType {
   Family = '2',
   Honorary = '3',
 }
+
+export const membershipTypeLabels: Record<MembershipType, string> = {
+  [MembershipType.Single]: 'Single',
+  [MembershipType.Family]: 'Family',
+  [MembershipType.Honorary]: 'Honorary',
+};

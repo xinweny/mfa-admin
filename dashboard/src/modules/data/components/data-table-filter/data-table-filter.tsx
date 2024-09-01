@@ -12,7 +12,7 @@ export function DataTableFilter({
   children,
 }: DataTableFilterProps) {
   return (
-    <div className="grid max-w-xs items-center gap-1.5 ">
+    <div className="grid max-w-xs items-center gap-1.5">
       <Label
         htmlFor={name}
         className="font-semibold text-sm"

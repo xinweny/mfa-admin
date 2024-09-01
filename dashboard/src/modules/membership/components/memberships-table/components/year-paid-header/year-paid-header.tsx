@@ -1,10 +1,10 @@
 'use client';
 
-import { useGetMembershipsUrlParams } from '../../state';
+import { useGetMembershipsUrlParams } from '@/modules/membership/state';
 
 import { Label } from '@/components/ui/label';
 
-export function YearPaidFilter() {
+export function YearPaidHeader() {
   const [{ yearPaid }] = useGetMembershipsUrlParams();
 
   return (

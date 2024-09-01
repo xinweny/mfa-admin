@@ -1,5 +1,4 @@
-import { Address, Province } from '../../types';
-import { provinceLabels } from '../../constants';
+import { Address, provinceLabels } from '../../types';
 
 interface AddressDisplayProps {
   address: Address;

@@ -1,4 +1,5 @@
 using MfaApi.Modules.Address;
+using MfaApi.Modules.Due;
 
 namespace MfaApi.Modules.Membership;
 
@@ -22,5 +23,8 @@ public record GetMembershipsResponse {
     public class DueDto {
         public required Guid Id { get; set; }
         public required int Year { get; set; }
+        public required int AmountPaid { get; set; }
+        public required PaymentMethod PaymentMethod { get; set; }
+        public DateOnly? PaymentDate { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using Microsoft.IdentityModel.Tokens;
 
 using MfaApi.Common.Constants;
 using MfaApi.Database;
 using MfaApi.Modules.Member;
-using Microsoft.IdentityModel.Tokens;
 
 namespace MfaApi.Modules.Membership;
 
@@ -49,10 +49,7 @@ public class MembershipRepository: IMembershipRepository
         query = query
             .Include(m => m.Address)
             .Include(m => m.Members)
-            .Include(m => req.YearPaid == null
-                ? m.Dues
-                : m.Dues.Where(d => d.Year == req.YearPaid)
-            );
+            .Include(m => m.Dues.Where(d => d.Year == req.YearPaid));
         
         if (!string.IsNullOrEmpty(req.Query)) {
             var fullNameFilter = MemberUtils.GetFullNameFilter(req.Query);
@@ -65,6 +62,10 @@ public class MembershipRepository: IMembershipRepository
 
         if (req.MembershipType != null) {
             query = query.Where(m => m.MembershipType.Equals(req.MembershipType));
+        }
+
+        if (req.HasPaid != null) {
+            query = query.Where(m => m.Dues.Where(d => d.Year == req.YearPaid).IsNullOrEmpty() == req.HasPaid);
         }
 
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {

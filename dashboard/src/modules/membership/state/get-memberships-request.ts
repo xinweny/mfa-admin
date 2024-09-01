@@ -4,6 +4,7 @@ import {
   parseAsString,
   parseAsStringEnum,
   createSerializer,
+  parseAsBoolean,
 } from 'nuqs';
 
 import { SortOrder } from '@/types';
@@ -11,6 +12,7 @@ import { MembershipType } from '../types';
 
 const parsers = {
   yearPaid: parseAsInteger.withDefault(new Date().getFullYear()),
+  hasPaid: parseAsBoolean,
   query: parseAsString,
   membershipType: parseAsStringEnum<MembershipType>(Object.values(MembershipType)),
   sortStartDate: parseAsStringEnum(Object.values(SortOrder)),

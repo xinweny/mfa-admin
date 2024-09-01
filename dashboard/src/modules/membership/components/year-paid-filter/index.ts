@@ -1,1 +1,0 @@
-export * from './year-paid-filter';

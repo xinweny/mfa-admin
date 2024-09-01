@@ -1,6 +1,4 @@
-import { MembershipType } from '@/modules/membership/types';
-
-import { membershipTypeLabels } from '@/modules/membership/constants';
+import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
 
 import { Badge } from '@/components/ui/badge';
 
