@@ -22,6 +22,10 @@ export const getMembershipsSchema = z.object({
     .gte(mfaFoundingYear),
   membershipType: z.nativeEnum(MembershipTypeInputValues),
   hasPaid: z.nativeEnum(HasPaidInputValues),
+  dateRange: z.object({
+    from: z.optional(z.coerce.date()),
+    to: z.optional(z.coerce.date()),
+  }),
 });
 
 export type GetMembershipsSchema = z.infer<typeof getMembershipsSchema>;

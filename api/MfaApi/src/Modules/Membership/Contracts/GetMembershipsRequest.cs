@@ -8,4 +8,6 @@ public class GetMembershipsRequest {
     public MembershipType? MembershipType { get; set; }
     public SortOrder? SortStartDate { get; set; }
     public bool? HasPaid { get; set; }
+    public DateTime? SinceFrom { get; set; }
+    public DateTime? SinceTo { get; set; }
 }

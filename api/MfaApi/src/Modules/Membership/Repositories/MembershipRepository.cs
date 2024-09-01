@@ -70,6 +70,13 @@ public class MembershipRepository: IMembershipRepository
                 : m.Dues.Count(d => d.Year == req.YearPaid) == 0);
         }
 
+        if (req.SinceFrom != null) {
+            query = query.Where(b => b.StartDate >= DateOnly.FromDateTime((DateTime) req.SinceFrom));
+        }
+        if (req.SinceTo != null) {
+            query = query.Where(b => b.StartDate <= DateOnly.FromDateTime((DateTime) req.SinceTo));
+        }
+
         if (SortOrder.Ascending.Equals(req.SortStartDate)) {
             query = query.OrderBy(m => m.StartDate);
         } else if (SortOrder.Descending.Equals(req.SortStartDate)) {

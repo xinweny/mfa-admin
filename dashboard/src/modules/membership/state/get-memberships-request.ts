@@ -5,6 +5,7 @@ import {
   parseAsStringEnum,
   createSerializer,
   parseAsBoolean,
+  parseAsIsoDateTime,
 } from 'nuqs';
 import { createSearchParamsCache } from 'nuqs/server';
 
@@ -17,6 +18,8 @@ const parsers = {
   query: parseAsString,
   membershipType: parseAsStringEnum<MembershipType>(Object.values(MembershipType)),
   sortStartDate: parseAsStringEnum(Object.values(SortOrder)),
+  sinceFrom: parseAsIsoDateTime,
+  sinceTo: parseAsIsoDateTime,
 };
 
 export const useGetMembershipsUrlParams = () => {

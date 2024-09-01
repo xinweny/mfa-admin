@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { DateRange } from 'react-day-picker';
 
 import { MembershipType, membershipTypeLabels } from '../../types';
 
@@ -19,6 +20,7 @@ import { useGetMembershipsUrlParams } from '../../state';
 import { DataTableFiltersForm } from '@/modules/data/components/data-table-filters-form';
 import { Input } from '@/components/ui/input';
 import { PopoverRadioFilter } from '@/modules/data/components/popover-radio-filter';
+import { PopoverDateRangeFilter } from '@/modules/data/components/popover-date-range-filter';
 
 export function MembershipsTableFilters() {
   const [params, setParams] = useGetMembershipsUrlParams();
@@ -32,6 +34,10 @@ export function MembershipsTableFilters() {
       hasPaid: params.hasPaid === null
         ? HasPaidInputValues.All
         : params.hasPaid ? HasPaidInputValues.Paid : HasPaidInputValues.NotPaid,
+      dateRange: {
+        from: params.sinceFrom || undefined,
+        to: params.sinceFrom || undefined,
+      },
     },
     resolver: zodResolver(getMembershipsSchema),
   });
@@ -45,6 +51,8 @@ export function MembershipsTableFilters() {
       yearPaid: data.yearPaid,
       membershipType: membershipType || null,
       hasPaid: hasPaid !== undefined ? hasPaid : null,
+      sinceFrom: data.dateRange.from || null,
+      sinceTo: data.dateRange.to || null,
     });
   };
 
@@ -60,6 +68,7 @@ export function MembershipsTableFilters() {
             <Input
               placeholder="Search names"
               {...field}
+              value={field.value as string}
             />
           ),
         },
@@ -75,6 +84,16 @@ export function MembershipsTableFilters() {
           ),
         },
         {
+          label: 'Date Range',
+          name: 'dateRange',
+          render: ({ field }) => (
+            <PopoverDateRangeFilter
+              date={field.value as DateRange}
+              onChange={field.onChange}
+            />
+          ),
+        },
+        {
           label: 'Year Paid',
           name: 'yearPaid',
           render: ({ field }) => (
@@ -82,6 +101,7 @@ export function MembershipsTableFilters() {
               type="number"
               min={mfaFoundingYear}
               {...field}
+              value={field.value as number}
             />
           ),
         },
@@ -102,6 +122,7 @@ export function MembershipsTableFilters() {
         yearPaid: new Date().getFullYear(),
         membershipType: MembershipTypeInputValues.All,
         hasPaid: HasPaidInputValues.All,
+        dateRange: {},
       }}
     />
   );

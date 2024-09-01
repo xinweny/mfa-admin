@@ -54,11 +54,11 @@ public class DueRepository : IDueRepository
         if (!req.PaymentMethods.IsNullOrEmpty()) {
             query = query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
         };
-        if (req.FromDate != null) {
-            query = query.Where(d => d.PaymentDate >= req.FromDate);
+        if (req.DateFrom != null) {
+            query = query.Where(d => d.PaymentDate >= req.DateFrom);
         }
-        if (req.ToDate != null) {
-            query = query.Where(d => d.PaymentDate <= req.ToDate);
+        if (req.DateTo != null) {
+            query = query.Where(d => d.PaymentDate <= req.DateTo);
         }
         
         if (SortOrder.Ascending.Equals(req.SortPaymentDate)) {

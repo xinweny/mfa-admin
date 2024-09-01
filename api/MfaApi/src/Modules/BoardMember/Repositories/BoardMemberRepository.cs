@@ -50,16 +50,16 @@ public class BoardMemberRepository: IBoardMemberRepository {
         query = query.Include(b => b.Member);
 
         if (!req.BoardPositions.IsNullOrEmpty()) query.Where(b => req.BoardPositions!.Contains(b.BoardPosition));
-        if (req.FromDate != null) {
+        if (req.DateFrom != null) {
             query = query.Where(
-                b => b.StartDate >= req.FromDate
-                && (b.EndDate == null || b.EndDate <= req.FromDate)
+                b => b.StartDate >= req.DateFrom
+                && (b.EndDate == null || b.EndDate <= req.DateFrom)
             );
         }
-        if (req.ToDate != null) {
+        if (req.DateTo != null) {
             query = query.Where(
-                b => b.StartDate <= req.ToDate
-                && (b.EndDate == null || b.EndDate <= req.ToDate)
+                b => b.StartDate <= req.DateTo
+                && (b.EndDate == null || b.EndDate <= req.DateTo)
             );
         }
 
