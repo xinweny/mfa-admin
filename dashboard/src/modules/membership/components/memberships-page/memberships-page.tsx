@@ -5,7 +5,6 @@ import { MembershipsTable } from '../memberships-table';
 import { DataTableHeader } from '@/modules/data/components/data-table-header';
 import { DataTableContainer } from '@/modules/data/components/data-table-container';
 import { MembershipsTableFilters } from '../memberships-table-filters';
-import { parseAsBoolean } from 'nuqs';
 
 interface MembershipsPageProps {
   searchParams: Record<string, string | string[] | undefined>;
