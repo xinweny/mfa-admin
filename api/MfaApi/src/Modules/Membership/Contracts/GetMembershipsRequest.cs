@@ -1,4 +1,4 @@
-using MfaApi.Common.Constants;
+using MfaApi.Core.Constants;
 
 namespace MfaApi.Modules.Membership;
 

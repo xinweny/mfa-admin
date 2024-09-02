@@ -1,4 +1,4 @@
-import { serializeGetMembershipsRequest, getMembershipsUrlParams } from '../../state';
+import { serializeGetMembershipsUrlParams, getMembershipsUrlParams } from '../../state';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { MembershipsTable } from '../memberships-table';
@@ -14,7 +14,7 @@ export async function MembershipsPage({
   searchParams,
 }: MembershipsPageProps) {
   const memberships = await fetch(
-    serializeGetMembershipsRequest(
+    serializeGetMembershipsUrlParams(
       `${process.env.MFA_API_URL}/memberships`,
       getMembershipsUrlParams.parse(searchParams)
     ))

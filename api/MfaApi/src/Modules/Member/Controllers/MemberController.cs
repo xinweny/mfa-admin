@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-using MfaApi.Common.Contracts;
+using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Member;
 

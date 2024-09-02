@@ -1,4 +1,4 @@
-namespace MfaApi.Common.Constants;
+namespace MfaApi.Core.Constants;
 
 public static class MfaConstants {
     public const int MfaFoundingYear = 1993;

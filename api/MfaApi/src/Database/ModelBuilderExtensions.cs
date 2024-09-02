@@ -6,7 +6,7 @@ using MfaApi.Modules.Member;
 using MfaApi.Modules.Address;
 using MfaApi.Modules.Due;
 using MfaApi.Modules.Exchange;
-using MfaApi.Common.Constants;
+using MfaApi.Core.Constants;
 
 namespace MfaApi.Database;
 

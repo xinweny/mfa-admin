@@ -31,4 +31,4 @@ export const useGetMembershipsUrlParams = () => {
 
 export const getMembershipsUrlParams = createSearchParamsCache(parsers);
 
-export const serializeGetMembershipsRequest = createSerializer(parsers);
+export const serializeGetMembershipsUrlParams = createSerializer(parsers);

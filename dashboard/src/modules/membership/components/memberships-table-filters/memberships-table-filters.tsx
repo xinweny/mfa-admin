@@ -165,7 +165,7 @@ const hasPaidValues = [
   {
     inputValue: HasPaidInputValues.NotPaid,
     value: false,
-    label: 'Not Paid',
+    label: 'Unpaid',
   },
 ];
 

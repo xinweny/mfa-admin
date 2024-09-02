@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 
-using MfaApi.Common.Constants;
+using MfaApi.Core.Constants;
 using MfaApi.Database;
 
 namespace MfaApi.Modules.Due;

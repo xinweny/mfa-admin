@@ -28,7 +28,7 @@ export function PopoverRadioFilter<T extends string>({
           {values.find(v => v.value === currentValue)?.label}
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="w-auto">
         <RadioGroup
           onValueChange={onChange}
           defaultValue={currentValue}

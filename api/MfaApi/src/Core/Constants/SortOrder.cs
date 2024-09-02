@@ -1,4 +1,4 @@
-namespace MfaApi.Common.Constants;
+namespace MfaApi.Core.Constants;
 
 public enum SortOrder {
     Unsorted = 0,

@@ -2,7 +2,7 @@ using FluentValidation;
 
 using MfaApi.Modules.Address;
 using MfaApi.Modules.Member;
-using MfaApi.Common.Constants;
+using MfaApi.Core.Constants;
 
 namespace MfaApi.Modules.Membership;
 

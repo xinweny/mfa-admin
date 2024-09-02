@@ -43,7 +43,7 @@ export function PaidStatusCell({
         : 'bg-red-800 hover:bg-red-700'
     )}
   >
-    {hasPaid ? 'Paid' : 'Not Paid'}
+    {hasPaid ? 'Paid' : 'Unpaid'}
   </Badge>;
 
   if (!hasPaid) return badge;
