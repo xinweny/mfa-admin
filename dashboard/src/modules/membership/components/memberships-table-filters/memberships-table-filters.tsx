@@ -18,9 +18,10 @@ import { mfaFoundingYear } from '@/constants';
 import { useGetMembershipsUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/modules/data/components/data-table-filters-form';
-import { Input } from '@/components/ui/input';
 import { PopoverRadioFilter } from '@/modules/data/components/popover-radio-filter';
 import { PopoverDateRangeFilter } from '@/modules/data/components/popover-date-range-filter';
+import { NumberInputFilter } from '@/modules/data/components/number-input-filter';
+import { TextInputFilter } from '@/modules/data/components/text-input-filter';
 
 export function MembershipsTableFilters() {
   const [params, setParams] = useGetMembershipsUrlParams();
@@ -65,7 +66,7 @@ export function MembershipsTableFilters() {
           label: 'Search',
           name: 'query',
           render: ({ field }) => (
-            <Input
+            <TextInputFilter
               placeholder="Search names"
               {...field}
               value={field.value as string}
@@ -97,8 +98,7 @@ export function MembershipsTableFilters() {
           label: 'Year Paid',
           name: 'yearPaid',
           render: ({ field }) => (
-            <Input
-              type="number"
+            <NumberInputFilter
               min={mfaFoundingYear}
               {...field}
               value={field.value as number}
