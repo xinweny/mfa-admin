@@ -3,6 +3,9 @@ import {
   getMembersUrlParams,
 } from '../../state';
 
+import { ApiResponse } from '@/core/api/types';
+import { GetMembersResponse } from '../../types';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { DataTableHeader } from '@/core/data/components/data-table-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
@@ -17,7 +20,7 @@ interface MembersPageProps {
 export async function MembersPage({
   searchParams,
 }: MembersPageProps) {
-  const members = await fetch(
+  const members: ApiResponse<GetMembersResponse> = await fetch(
     serializeGetMembersUrlParams(
       `${process.env.MFA_API_URL}/members`,
       getMembersUrlParams.parse(searchParams)
@@ -30,10 +33,10 @@ export async function MembersPage({
         <DataTableHeader text="Members" />
         <MembershipsTableFilters />
         <MembersTable
-          members={members.data || []}
+          members={(members.data || []) as GetMembersResponse[]}
         />
         <DataTablePagination
-          pagination={members.metadata.pagination}
+          pagination={members.metadata?.pagination || null}
         />
       </DataTableContainer>
     </DashboardContent>

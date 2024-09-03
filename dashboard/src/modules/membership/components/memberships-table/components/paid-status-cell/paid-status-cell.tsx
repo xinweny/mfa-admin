@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 
 import { cn } from '@/lib/cn';
 
-import { PaymentMethod, paymentMethodLabels } from '@/modules/dues/types';
+import { PaymentMethod, paymentMethodLabels } from '@/modules/due/types';
 
 import { useGetMembershipsUrlParams } from '@/modules/membership/state';
 

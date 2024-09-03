@@ -4,8 +4,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 
 import { Address } from '@/modules/address/types';
-import { MembershipType } from '../../types/membership-type';
-import { PaymentMethod } from '@/modules/dues/types';
+import { MembershipType } from '../../types';
+import { PaymentMethod } from '@/modules/due/types';
 
 import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
 

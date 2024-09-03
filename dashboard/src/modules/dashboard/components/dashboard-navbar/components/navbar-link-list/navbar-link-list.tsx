@@ -45,8 +45,8 @@ const links = [
     icon: IdCardIcon,
   },
   {
-    href: '/payments',
-    label: 'Payments',
+    href: '/dues',
+    label: 'Dues',
     icon: CircleDollarSignIcon,
   },
   {

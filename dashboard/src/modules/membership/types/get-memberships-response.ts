@@ -1,6 +1,6 @@
 import { Address } from '@/modules/address/types';
 import { MembershipType } from './membership-type';
-import { PaymentMethod } from '@/modules/dues/types';
+import { PaymentMethod } from '@/modules/due/types';
 
 export interface GetMembershipsResponse {
   id: string;

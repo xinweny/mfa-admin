@@ -10,7 +10,11 @@ export function MemberRowDropdownMenu({
 }: MemberRowDropdownMenuProps) {
   return (
     <RowDropdownMenu>
-      <CopyIdDropdownMenuItem id={id} />
+      <CopyIdDropdownMenuItem
+        id={id}
+        label="Copy Member ID"
+        message="Member ID copied."
+      />
     </RowDropdownMenu>
   );
 }

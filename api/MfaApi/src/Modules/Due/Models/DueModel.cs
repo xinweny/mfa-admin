@@ -23,4 +23,3 @@ public class DueModel {
     public required Guid MembershipId { get; set; }
     public virtual MembershipModel? Membership { get; set; }
 }
-
