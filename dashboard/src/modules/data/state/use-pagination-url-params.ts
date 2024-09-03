@@ -5,18 +5,18 @@ import {
 } from 'nuqs';
 import { createSearchParamsCache } from 'nuqs/server';
 
-const parsers = {
+export const paginationParsers = {
   page: parseAsInteger.withDefault(1),
   limit: parseAsInteger,
 };
 
 export const usePaginationUrlParams = () => {
   return useQueryStates(
-    parsers,
+    paginationParsers,
     { shallow: false }
   );
 };
 
-export const paginationUrlParams = createSearchParamsCache(parsers);
+export const paginationUrlParams = createSearchParamsCache(paginationParsers);
 
-export const serializePaginationParams = createSerializer(parsers);
+export const serializePaginationParams = createSerializer(paginationParsers);

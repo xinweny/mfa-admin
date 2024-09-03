@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
-using Microsoft.IdentityModel.Tokens;
 
-using MfaApi.Core.Constants;
 using MfaApi.Database;
+using MfaApi.Core.Constants;
+using MfaApi.Core.Pagination;
 using MfaApi.Modules.Member;
 
 namespace MfaApi.Modules.Membership;
@@ -44,7 +44,9 @@ public class MembershipRepository: IMembershipRepository
     }
     
     public async Task<IEnumerable<MembershipModel>> GetMemberships(GetMembershipsRequest req) {
-        var query = _context.Memberships.AsQueryable();
+        var query = _context.Memberships
+            .AsNoTracking()
+            .AsQueryable();
 
         query = query
             .Include(m => m.Address)
@@ -82,6 +84,8 @@ public class MembershipRepository: IMembershipRepository
         } else if (SortOrder.Descending.Equals(req.SortStartDate)) {
             query = query.OrderByDescending(m => m.StartDate);
         }
+
+        query = query.Paginate(req);
         
         return await query.ToListAsync();
     }

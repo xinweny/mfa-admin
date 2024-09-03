@@ -12,6 +12,8 @@ import { createSearchParamsCache } from 'nuqs/server';
 import { SortOrder } from '@/types';
 import { MembershipType } from '../types';
 
+import { paginationParsers } from '@/modules/data/state';
+
 const parsers = {
   yearPaid: parseAsInteger.withDefault(new Date().getFullYear()),
   hasPaid: parseAsBoolean,
@@ -20,6 +22,7 @@ const parsers = {
   sortStartDate: parseAsStringEnum(Object.values(SortOrder)),
   sinceFrom: parseAsIsoDateTime,
   sinceTo: parseAsIsoDateTime,
+  ...paginationParsers,
 };
 
 export const useGetMembershipsUrlParams = () => {

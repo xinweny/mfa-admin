@@ -1,6 +1,6 @@
-using MfaApi.Core.Services;
-
 namespace MfaApi.Core;
+
+using Pagination;
 
 public static class CoreModule {
     public static void AddCoreModule(this IServiceCollection services) {

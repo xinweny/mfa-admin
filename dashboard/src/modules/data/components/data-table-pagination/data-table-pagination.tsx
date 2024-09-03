@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectContent,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import {
   Pagination,
@@ -19,20 +19,28 @@ import {
 } from '@/components/ui/pagination';
 
 interface DataTablePaginationProps {
-  numItems: number;
-  totalCount: number;
+  pagination: {
+    currentPage: number;
+    currentCount: number;
+    totalPages: number;
+    totalCount: number;
+    pageSize: number | null;
+  };
 }
 
 export function DataTablePagination({
-  numItems,
-  totalCount,
+  pagination: {
+    currentPage,
+    currentCount,
+    totalPages,
+    totalCount,
+    pageSize,
+  },
 }: DataTablePaginationProps) {
   const [{ page, limit }, setParams] = usePaginationUrlParams();
 
-  const totalPages = Math.ceil(totalCount / (limit || totalCount));
-
   return (
-    <div className="flex flex-wrap items-center justify-between">
+    <div className="grid grid-cols-3 items-center">
       <div className="flex items-center gap-2">
         <Select
           onValueChange={(value: string) => {
@@ -41,9 +49,10 @@ export function DataTablePagination({
               limit: value === 'all' ? null : Number(value),
             });
           }}
+          value={limit === null ? 'all' : limit.toString()}
         >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue defaultValue={limit || 'all'} />
+          <SelectTrigger className="w-auto">
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All</SelectItem>
@@ -52,17 +61,9 @@ export function DataTablePagination({
             <SelectItem value="100">100</SelectItem>
           </SelectContent>
         </Select>
-        <span>items per page</span>
+        <span className="text-sm">items per page</span>
       </div>
-      <span>
-        <span className="font-bold">{limit ? ((page - 1) * limit) + 1 : 1}</span>
-        <span> - </span>
-        <span className="font-bold">{numItems}</span>
-        <span> of </span>
-        <span className="font-bold">{totalCount}</span>
-        <span>items</span>
-      </span>
-      <Pagination>
+      <Pagination className="w-auto">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -73,6 +74,8 @@ export function DataTablePagination({
                 }))
               }}
               aria-disabled={page <= 1}
+              tabIndex={page <= 1 ? -1 : undefined}
+              className={page <= 1 ? 'pointer-events-none opacity-50' : undefined}
             />
           </PaginationItem>
           {[...Array(totalPages)].map((_, i) => {
@@ -87,7 +90,9 @@ export function DataTablePagination({
                       page: p,
                     }))
                   }}
-                  aria-disabled={page === p}
+                  aria-disabled={currentPage === p}
+                  tabIndex={currentPage === p ? -1 : undefined}
+                  className={currentPage === p ? 'pointer-events-none' : undefined}
                 >{p}</PaginationLink>
               </PaginationItem>
             );
@@ -101,10 +106,20 @@ export function DataTablePagination({
                 }))
               }}
               aria-disabled={page >= totalPages}
+              tabIndex={page >= totalPages ? -1 : undefined}
+              className={page >= totalPages ? 'pointer-events-none opacity-50' : undefined}
             />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
+      <span className="text-sm text-right">
+        <span className="font-bold">{pageSize ? ((page - 1) * pageSize) + 1 : 1}</span>
+        <span> - </span>
+        <span className="font-bold">{currentCount}</span>
+        <span> of </span>
+        <span className="font-bold">{totalCount}</span>
+        <span> items</span>
+      </span>
     </div>
   );
 }

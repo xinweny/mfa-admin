@@ -1,8 +1,9 @@
 using MfaApi.Core.Constants;
+using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Membership;
 
-public class GetMembershipsRequest {
+public class GetMembershipsRequest: PaginationRequest {
     public int YearPaid { get; set; } = DateTime.UtcNow.Year;
     public string? Query { get; set; }
     public MembershipType? MembershipType { get; set; }
