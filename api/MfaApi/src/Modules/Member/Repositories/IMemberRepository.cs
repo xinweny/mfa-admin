@@ -1,7 +1,7 @@
 namespace MfaApi.Modules.Member;
 
 public interface IMemberRepository {
-    Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req);
+    IQueryable<MemberModel> GetMembersQuery(GetMembersRequest req);
     Task<MemberModel> GetMemberById(Guid id);
     Task CreateMember(MemberModel member);
     Task UpdateMember(MemberModel member, UpdateMemberRequest req);

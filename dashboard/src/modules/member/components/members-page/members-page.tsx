@@ -1,13 +1,14 @@
 import {
   serializeGetMembersUrlParams,
   getMembersUrlParams,
-} from '../../state/get-members-request';
+} from '../../state';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { DataTableHeader } from '@/core/data/components/data-table-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 import { MembersTable } from '../members-table/members-table';
+import { MembershipsTableFilters } from '../members-table-filters';
 
 interface MembersPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -27,8 +28,12 @@ export async function MembersPage({
     <DashboardContent>
       <DataTableContainer>
         <DataTableHeader text="Members" />
+        <MembershipsTableFilters />
         <MembersTable
           members={members.data || []}
+        />
+        <DataTablePagination
+          pagination={members.metadata.pagination}
         />
       </DataTableContainer>
     </DashboardContent>

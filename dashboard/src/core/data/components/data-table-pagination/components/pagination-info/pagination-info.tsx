@@ -17,9 +17,19 @@ export function PaginationInfo({
   
   return (
     <span className="text-sm place-self-start justify-self-end py-2">
-      <span className="font-bold">{pageSize ? ((page - 1) * pageSize) + 1 : 1}</span>
+      <span className="font-bold">
+        {pageSize
+          ? ((page - 1) * pageSize) + 1
+          : 1
+        }
+      </span>
       <span> - </span>
-      <span className="font-bold">{currentCount}</span>
+      <span className="font-bold">
+        {pageSize
+          ? ((page - 1) * pageSize) + currentCount
+          : totalCount
+        }
+      </span>
       <span> of </span>
       <span className="font-bold">{totalCount}</span>
       <span> items</span>

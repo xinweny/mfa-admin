@@ -35,7 +35,7 @@ export function MembershipsTableFilters() {
       hasPaid: params.hasPaid === null
         ? HasPaidInputValues.All
         : params.hasPaid ? HasPaidInputValues.Paid : HasPaidInputValues.NotPaid,
-      dateRange: {
+      startDateRange: {
         from: params.sinceFrom || undefined,
         to: params.sinceFrom || undefined,
       },
@@ -52,8 +52,8 @@ export function MembershipsTableFilters() {
       yearPaid: data.yearPaid,
       membershipType: membershipType || null,
       hasPaid: hasPaid !== undefined ? hasPaid : null,
-      sinceFrom: data.dateRange.from || null,
-      sinceTo: data.dateRange.to || null,
+      sinceFrom: data.startDateRange.from || null,
+      sinceTo: data.startDateRange.to || null,
     });
   };
 
@@ -86,7 +86,7 @@ export function MembershipsTableFilters() {
         },
         {
           label: 'Date Range',
-          name: 'dateRange',
+          name: 'startDateRange',
           render: ({ field }) => (
             <PopoverDateRangeFilter
               date={field.value as DateRange}
@@ -115,14 +115,14 @@ export function MembershipsTableFilters() {
               values={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
-        }
+        },
       ]}
       reset={{
         query: '',
         yearPaid: new Date().getFullYear(),
         membershipType: MembershipTypeInputValues.All,
         hasPaid: HasPaidInputValues.All,
-        dateRange: {},
+        startDateRange: {},
       }}
     />
   );

@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using FluentValidation;
 
 using MfaApi.Database;
-using MfaApi.Core.Pagination;
 using MfaApi.Modules.Membership;
 using MfaApi.Core.Constants;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MfaApi.Modules.Member;
 
@@ -37,7 +38,7 @@ public class MemberRepository: IMemberRepository {
         return member;
     }
 
-    public async Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req) {
+    public IQueryable<MemberModel> GetMembersQuery(GetMembersRequest req) {
         var query = _context.Members
             .AsNoTracking()
             .AsQueryable();
@@ -51,10 +52,14 @@ public class MemberRepository: IMemberRepository {
         }
 
         if (req.IsMississaugaResident != null) {
-            query = query.Where(m => 
+            Expression<Func<MemberModel, bool>> expr = m => 
                 m.Membership != null
                 && m.Membership.Address != null
-                && EF.Functions.ILike(m.Membership.Address.City, "Mississauga")
+                && EF.Functions.ILike(m.Membership.Address.City, "Mississauga");
+
+            query = query.Where((bool) req.IsMississaugaResident
+                ? expr
+                : Expression.Lambda<Func<MemberModel, bool>>(Expression.Not(expr.Body), expr.Parameters)
             );
         }
 
@@ -84,9 +89,7 @@ public class MemberRepository: IMemberRepository {
             query = query.OrderByDescending(m => m.JoinedDate);
         }
 
-        query.Paginate(req);
-
-        return await query.ToListAsync();
+        return query;
     }
 
     public async Task CreateMember(MemberModel member) {

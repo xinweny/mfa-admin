@@ -1,5 +1,3 @@
-using MfaApi.Core;
-
 namespace MfaApi.Modules;
 
 using Address;
@@ -12,8 +10,6 @@ using BoardMember;
 
 public static class MfaApiModules {
     public static void AddMfaApiModules(this IServiceCollection services, IConfiguration Configuration) {
-        services.AddCoreModule();
-
         services.AddAuthModule(Configuration);
         
         services.AddAddressModule();

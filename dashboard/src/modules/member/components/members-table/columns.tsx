@@ -8,10 +8,10 @@ import { Address } from '@/modules/address/types';
 import { MembershipType } from '@/modules/membership/types';
 
 import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
-import { AddressDisplay } from '@/modules/address/components/address-display';
 
 import { MemberRowDropdownMenu } from './components/member-row-dropdown-menu';
 import { MembershipTypeCell } from './components/membership-type-cell';
+import { MississaugaResidentCell } from './components/mississauga-resident-cell';
 
 export interface MemberColumns {
   id: string;
@@ -58,16 +58,6 @@ export const columns: ColumnDef<MemberColumns>[] = [
       : null
   },
   {
-    accessorKey: 'joinedDate',
-    header: () => (
-      <DataTableSortButton
-        name="sortJoinedDate"
-        label="Joined"
-      />
-    ),
-    cell: ({ row: { original: { joinedDate } } }) => joinedDate && format(joinedDate, 'dd/LL/yyyy'),
-  },
-  {
     accessorKey: 'membershipType',
     header: 'Membership Type',
     cell: ({ row: { original: { membership: { membershipType, id } } } }) => (
@@ -76,6 +66,25 @@ export const columns: ColumnDef<MemberColumns>[] = [
         membershipType={membershipType}
       />
     ),
+  },
+  {
+    accessorKey: 'address',
+    header: 'Mississauga Ties',
+    cell: ({ row: { original: { address } } }) => (
+      <MississaugaResidentCell
+        city={address?.city}
+      />
+    )
+  },
+  {
+    accessorKey: 'joinedDate',
+    header: () => (
+      <DataTableSortButton
+        name="sortJoinedDate"
+        label="Joined"
+      />
+    ),
+    cell: ({ row: { original: { joinedDate } } }) => joinedDate && format(joinedDate, 'dd/LL/yyyy'),
   },
   {
     id: 'id',

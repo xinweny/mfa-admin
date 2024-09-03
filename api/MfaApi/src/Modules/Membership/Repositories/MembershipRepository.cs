@@ -44,7 +44,7 @@ public class MembershipRepository: IMembershipRepository
         return membership;
     }
     
-    public async Task<IEnumerable<MembershipModel>> GetMemberships(GetMembershipsRequest req) {
+    public IQueryable<MembershipModel> GetMembershipsQuery(GetMembershipsRequest req) {
         var query = _context.Memberships
             .AsNoTracking()
             .AsQueryable();
@@ -86,9 +86,7 @@ public class MembershipRepository: IMembershipRepository
             query = query.OrderByDescending(m => m.StartDate);
         }
 
-        query = query.Paginate(req);
-        
-        return await query.ToListAsync();
+        return query;
     }
 
     public async Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req) {

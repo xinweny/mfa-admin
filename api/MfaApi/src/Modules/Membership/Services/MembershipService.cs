@@ -1,3 +1,5 @@
+using MfaApi.Core.Pagination;
+
 namespace MfaApi.Modules.Membership;
 
 public class MembershipService: IMembershipService {
@@ -23,8 +25,10 @@ public class MembershipService: IMembershipService {
         return membership.ToGetMembershipResponse();
     }
 
-    public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest req) {
-        var memberships = await _membershipRepository.GetMemberships(req);
+    public async Task<IEnumerable<GetMembershipsResponse>> GetMemberships(GetMembershipsRequest req, PaginationMetadata metadata) {
+        var query = _membershipRepository.GetMembershipsQuery(req);
+
+        var memberships = await query.ToListWithPagination(req, metadata);
 
         return memberships.Select(m => m.ToGetMembershipsResponse());
     }

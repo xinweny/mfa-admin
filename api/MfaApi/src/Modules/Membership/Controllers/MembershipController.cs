@@ -12,23 +12,16 @@ namespace MfaApi.Modules.Membership;
 
 public class MembershipController: ControllerBase {
     private readonly IMembershipService _membershipService;
-    private readonly IPaginationService _paginationService;
 
-    public MembershipController(
-        IMembershipService membershipService,
-        IPaginationService paginationService
-    ) {
+    public MembershipController(IMembershipService membershipService) {
         _membershipService = membershipService;
-        _paginationService = paginationService;
     }
 
     [HttpGet("")]
     public async Task<IActionResult> GetMembershipsAsync([FromQuery] GetMembershipsRequest req) {
-        var pagination = await _paginationService.GetOffsetPagination<MembershipModel>(req);
+        var pagination = new PaginationMetadata();
 
-        var memberships = await _membershipService.GetMemberships(req);
-
-        pagination?.SetCurrentCount(memberships.Count());
+        var memberships = await _membershipService.GetMemberships(req, pagination);
 
         return Ok(new ApiResponse<IEnumerable<GetMembershipsResponse>> {
             Metadata = new ApiMetadata {
