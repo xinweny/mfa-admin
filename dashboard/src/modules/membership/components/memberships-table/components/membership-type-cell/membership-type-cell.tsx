@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 
 interface MembershipTypeCellProps {
   id: string;
-  membershipType: MembershipType
+  membershipType: MembershipType;
 }
 
 export function MembershipTypeCell({

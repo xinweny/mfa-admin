@@ -20,11 +20,12 @@ interface MembersPageProps {
 export async function MembersPage({
   searchParams,
 }: MembersPageProps) {
-  const members: ApiResponse<GetMembersResponse> = await fetch(
-    serializeGetMembersUrlParams(
-      `${process.env.MFA_API_URL}/members`,
-      getMembersUrlParams.parse(searchParams)
-    ))
+  const url = serializeGetMembersUrlParams(
+    `${process.env.MFA_API_URL}/members`,
+    getMembersUrlParams.parse(searchParams)
+  );
+
+  const members: ApiResponse<GetMembersResponse> = await fetch(url)
     .then(data => data.json());
 
   return (

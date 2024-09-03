@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 
-import { mfaFoundingYear } from '@/constants';
+import { mfaFoundingYear } from '@/core/constants';
 
 import { cn } from '@/lib/cn';
 

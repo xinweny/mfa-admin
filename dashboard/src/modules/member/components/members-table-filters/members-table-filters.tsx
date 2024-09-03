@@ -15,7 +15,6 @@ import { useGetMembersUrlParams } from '../../state';
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
 import { SelectFilter } from '@/core/data/components/select-filter';
 import { PopoverDateRangeFilter } from '@/core/data/components/popover-date-range-filter';
-import { NumberInputFilter } from '@/core/data/components/number-input-filter';
 import { TextInputFilter } from '@/core/data/components/text-input-filter';
 
 export function MembershipsTableFilters() {

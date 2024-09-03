@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import { mfaFoundingYear } from '@/constants';
+import { mfaFoundingYear } from '@/core/constants';
 
 export enum MembershipTypeInputValues {
   All = 'all',

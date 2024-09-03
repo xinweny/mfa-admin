@@ -5,7 +5,7 @@ using FluentValidation;
 using MfaApi.Database;
 using MfaApi.Modules.Membership;
 using MfaApi.Core.Constants;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Member;
 
@@ -71,23 +71,13 @@ public class MemberRepository: IMemberRepository {
             query = query.Where(m => m.JoinedDate <= DateOnly.FromDateTime((DateTime) req.JoinedTo));
         }
 
-        if (req.SortFirstName.Equals(SortOrder.Ascending)) {
-            query = query.OrderBy(m => m.FirstName);
-        } else if (req.SortFirstName.Equals(SortOrder.Descending)) {
-            query = query.OrderByDescending(m => m.FirstName);
+        if (req.SortFirstName != null) {
+            query = query.Sort(m => m.FirstName, (SortOrder) req.SortFirstName);
         }
 
-        if (req.SortLastName.Equals(SortOrder.Ascending)) {
-            query = query.OrderBy(m => m.LastName);
-        } else if (req.SortLastName.Equals(SortOrder.Descending)) {
-            query = query.OrderByDescending(m => m.LastName);
-        }
-
-        if (req.SortJoinedDate.Equals(SortOrder.Ascending)) {
-            query = query.OrderBy(m => m.JoinedDate);
-        } else if (req.SortJoinedDate.Equals(SortOrder.Descending)) {
-            query = query.OrderByDescending(m => m.JoinedDate);
-        }
+        query = query.Sort(m => m.FirstName, req.SortFirstName);
+        query = query.Sort(m => m.LastName, req.SortLastName);
+        query = query.Sort(m => m.JoinedDate, req.SortJoinedDate);
 
         return query;
     }

@@ -11,6 +11,9 @@ import { DataTableHeader } from '@/core/data/components/data-table-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 
+import { DuesTable } from '../dues-table';
+import { DuesTableFilters } from '../dues-table-filters';
+
 interface DuesPageProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
@@ -18,17 +21,25 @@ interface DuesPageProps {
 export async function DuesPage({
   searchParams,
 }: DuesPageProps) {
-  const dues: ApiResponse<GetDuesResponse> = await fetch(
-    serializeGetDuesUrlParams(
-      `${process.env.MFA_API_URL}/dues`,
-      getDuesUrlParams.parse(searchParams)
-    ))
+  const url = serializeGetDuesUrlParams(
+    `${process.env.MFA_API_URL}/dues`,
+    getDuesUrlParams.parse(searchParams)
+  );
+
+  const dues: ApiResponse<GetDuesResponse> = await fetch(url)
     .then(data => data.json());
 
   return (
     <DashboardContent>
       <DataTableContainer>
         <DataTableHeader text="Dues" />
+        <DuesTableFilters />
+        <DuesTable
+          dues={(dues.data || []) as GetDuesResponse[]}
+        />
+        <DataTablePagination
+          pagination={dues.metadata?.pagination || null}
+        />
       </DataTableContainer>
     </DashboardContent>
   );

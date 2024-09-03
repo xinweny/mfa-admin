@@ -1,19 +1,19 @@
 import { RowDropdownMenu } from '@/core/data/components/row-dropdown-menu';
 import { CopyIdDropdownMenuItem } from '@/core/data/components/copy-id-dropdown-menu-item';
 
-interface MembershipRowDropdownMenuProps {
-  membershipId: string;
+interface DueRowDropdownMenuProps {
+ dueId: string;
 }
 
-export function MembershipRowDropdownMenu({
-  membershipId,
-}: MembershipRowDropdownMenuProps) {
+export function DueRowDropdownMenu({
+  dueId,
+}: DueRowDropdownMenuProps) {
   return (
     <RowDropdownMenu>
       <CopyIdDropdownMenuItem
-        id={membershipId}
-        label="Copy Membership ID"
-        message="Membership ID copied."
+        id={dueId}
+        label="Copy Due ID"
+        message="Due ID copied."
       />
     </RowDropdownMenu>
   );

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
+using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Due;
 
@@ -20,9 +21,14 @@ public class DueController: ControllerBase {
     public async Task<IActionResult> GetDuesAsync(
         [FromQuery] GetDuesRequest req
     ) {
-        var dues = await _dueService.GetDues(req);
+        var pagination = new PaginationMetadata();
+
+        var dues = await _dueService.GetDues(req, pagination);
 
         return Ok(new ApiResponse<IEnumerable<GetDuesResponse>> {
+            Metadata = new ApiMetadata {
+                Pagination = pagination,
+            },
             Data = dues,
         });
     }

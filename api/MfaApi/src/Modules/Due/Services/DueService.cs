@@ -1,3 +1,5 @@
+using MfaApi.Core.Pagination;
+
 namespace MfaApi.Modules.Due;
 
 public class DueService : IDueService
@@ -24,8 +26,10 @@ public class DueService : IDueService
         return dues.Select(d => d.ToGetMembershipDuesResponse());
     }
 
-    public async Task<IEnumerable<GetDuesResponse>> GetDues(GetDuesRequest req) {
-        var dues = await _dueRepository.GetDues(req);
+    public async Task<IEnumerable<GetDuesResponse>> GetDues(GetDuesRequest req, PaginationMetadata metadata) {
+        var query = _dueRepository.GetDuesQuery(req);
+
+        var dues = await query.ToListWithPagination(req, metadata);
 
         return dues.Select(d => d.ToGetDuesResponse());
     }

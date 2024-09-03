@@ -31,7 +31,7 @@ export function DataTableSortButton({
             setSort(SortOrder.Descending);
             break;
           case SortOrder.Descending:
-            setSort(SortOrder.Unsorted);
+            setSort(null);
             break;
           default:
             setSort(SortOrder.Ascending);

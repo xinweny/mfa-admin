@@ -2,16 +2,16 @@ import { RowDropdownMenu } from '@/core/data/components/row-dropdown-menu';
 import { CopyIdDropdownMenuItem } from '@/core/data/components/copy-id-dropdown-menu-item';
 
 interface MemberRowDropdownMenuProps {
-  id: string;
+  memberId: string;
 }
 
 export function MemberRowDropdownMenu({
-  id,
+  memberId,
 }: MemberRowDropdownMenuProps) {
   return (
     <RowDropdownMenu>
       <CopyIdDropdownMenuItem
-        id={id}
+        id={memberId}
         label="Copy Member ID"
         message="Member ID copied."
       />

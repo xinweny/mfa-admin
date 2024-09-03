@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MfaApi.Core.Pagination;
 
 public static class PaginationUtils {
-    public static async Task<List<TEntity>>  ToListWithPagination<TEntity>(
+    public static async Task<List<TEntity>> ToListWithPagination<TEntity>(
         this IQueryable<TEntity> query,
         PaginationRequest req,
         PaginationMetadata metadata

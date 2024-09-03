@@ -3,8 +3,8 @@ using FluentValidation;
 
 using MfaApi.Database;
 using MfaApi.Core.Constants;
-using MfaApi.Core.Pagination;
 using MfaApi.Modules.Member;
+using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Membership;
 
@@ -80,12 +80,8 @@ public class MembershipRepository: IMembershipRepository
             query = query.Where(b => b.StartDate <= DateOnly.FromDateTime((DateTime) req.SinceTo));
         }
 
-        if (SortOrder.Ascending.Equals(req.SortStartDate)) {
-            query = query.OrderBy(m => m.StartDate);
-        } else if (SortOrder.Descending.Equals(req.SortStartDate)) {
-            query = query.OrderByDescending(m => m.StartDate);
-        }
-
+        query = query.Sort(m => m.StartDate, req.SortStartDate);
+        
         return query;
     }
 

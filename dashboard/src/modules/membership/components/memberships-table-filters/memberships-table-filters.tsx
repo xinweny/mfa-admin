@@ -13,7 +13,7 @@ import {
   MembershipTypeInputValues,
 } from './schema';
 
-import { mfaFoundingYear } from '@/constants';
+import { mfaFoundingYear } from '@/core/constants';
 
 import { useGetMembershipsUrlParams } from '../../state';
 

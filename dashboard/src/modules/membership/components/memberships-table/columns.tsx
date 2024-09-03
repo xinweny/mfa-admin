@@ -81,7 +81,7 @@ export const columns: ColumnDef<MembershipColumns>[] = [
     id: 'id',
     cell: ({ row: { original: { id } } }) => (
       <MembershipRowDropdownMenu
-        id={id}
+        membershipId={id}
       />
     ),
   },
