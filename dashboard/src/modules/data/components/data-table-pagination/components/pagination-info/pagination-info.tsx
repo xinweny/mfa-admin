@@ -16,7 +16,7 @@ export function PaginationInfo({
   const [{ page }] = usePaginationUrlParams();
   
   return (
-    <span className="text-sm place-self-start justify-self-end">
+    <span className="text-sm place-self-start justify-self-end py-2">
       <span className="font-bold">{pageSize ? ((page - 1) * pageSize) + 1 : 1}</span>
       <span> - </span>
       <span className="font-bold">{currentCount}</span>
