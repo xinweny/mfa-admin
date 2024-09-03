@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
+using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Member;
 
@@ -11,18 +12,30 @@ namespace MfaApi.Modules.Member;
 
 public class MemberController: ControllerBase {
     private readonly IMemberService _memberService;
+    private readonly IPaginationService _paginationService;
 
-    public MemberController(IMemberService memberService) {
+    public MemberController(
+        IMemberService memberService,
+        IPaginationService paginationService
+    ) {
         _memberService = memberService;
+        _paginationService = paginationService;
     }
 
     [HttpGet("")]
     public async Task<IActionResult> GetMembersAsync(
         [FromQuery] GetMembersRequest req
     ) {
+        var pagination = await _paginationService.GetOffsetPagination<MemberModel>(req);
+
         var members = await _memberService.GetMembers(req);
+
+        pagination?.SetCurrentCount(members.Count());
         
         return Ok(new ApiResponse<IEnumerable<GetMembersResponse>> {
+            Metadata = new ApiMetadata {
+                Pagination = pagination,
+            },
             Data = members,
         });
     }

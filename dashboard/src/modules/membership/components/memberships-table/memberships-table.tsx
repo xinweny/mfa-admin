@@ -13,17 +13,17 @@ interface MembershipsTableProps {
 export function MembershipsTable({
   memberships,
 }: MembershipsTableProps) {
-  const data: MembershipColumns[] = memberships.map(membership => {
+  const data: MembershipColumns[] = memberships.map(m => {
     return {
-      id: membership.id,
-      membershipType: membership.membershipType,
-      members: membership.members,
-      address: membership.address,
-      startDate: new Date(membership.startDate),
-      due: membership.due
+      id: m.id,
+      membershipType: m.membershipType,
+      members: m.members,
+      address: m.address,
+      startDate: new Date(m.startDate),
+      due: m.due
         ? {
-          ...membership.due,
-          paymentDate: membership.due.paymentDate ? new Date(membership.due.paymentDate) : null,
+          ...m.due,
+          paymentDate: m.due.paymentDate ? new Date(m.due.paymentDate) : null,
         }
         : null,
     };

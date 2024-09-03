@@ -34,6 +34,7 @@ public class MembershipRepository: IMembershipRepository
 
     public async Task<MembershipModel> GetMembershipById(Guid id) {
         var membership = await _context.Memberships
+            .AsNoTracking()
             .Where(m => m.Id == id)
             .Include(m => m.Address)
             .Include(m => m.Members)

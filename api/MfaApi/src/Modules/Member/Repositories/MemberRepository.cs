@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 
 using MfaApi.Database;
+using MfaApi.Core.Pagination;
 using MfaApi.Modules.Membership;
+using MfaApi.Core.Constants;
 
 namespace MfaApi.Modules.Member;
 
@@ -23,6 +25,7 @@ public class MemberRepository: IMemberRepository {
 
     public async Task<MemberModel> GetMemberById(Guid id) {
         var member = await _context.Members
+            .AsNoTracking()
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null)
             .Include(m => m.Membership)
@@ -35,23 +38,55 @@ public class MemberRepository: IMemberRepository {
     }
 
     public async Task<IEnumerable<MemberModel>> GetMembers(GetMembersRequest req) {
-        var membersQuery = from member in _context.Members
-            select member;
+        var query = _context.Members
+            .AsNoTracking()
+            .AsQueryable();
 
-        string? query = req.Query;
+        query = query
+            .Include(m => m.Membership)
+            .ThenInclude(m => m != null ? m.Address : null);
         
-        if (!string.IsNullOrEmpty(query)) {
-            membersQuery = membersQuery
-                .AsQueryable()
-                .Where(MemberUtils.GetFullNameFilter(query));
+        if (!string.IsNullOrEmpty(req.Query)) {
+            query = query.Where(MemberUtils.GetFullNameFilter(req.Query));
         }
 
-        var members = await membersQuery
-            .Include(m => m.Membership)
-            .ThenInclude(m => m != null ? m.Address : null)
-            .ToListAsync();
+        if (req.IsMississaugaResident != null) {
+            query = query.Where(m => 
+                m.Membership != null
+                && m.Membership.Address != null
+                && EF.Functions.ILike(m.Membership.Address.City, "Mississauga")
+            );
+        }
 
-        return members;
+        if (req.JoinedFrom != null) {
+            query = query.Where(m => m.JoinedDate >= DateOnly.FromDateTime((DateTime) req.JoinedFrom));
+        }
+
+        if (req.JoinedTo != null) {
+            query = query.Where(m => m.JoinedDate <= DateOnly.FromDateTime((DateTime) req.JoinedTo));
+        }
+
+        if (req.SortFirstName.Equals(SortOrder.Ascending)) {
+            query = query.OrderBy(m => m.FirstName);
+        } else if (req.SortFirstName.Equals(SortOrder.Descending)) {
+            query = query.OrderByDescending(m => m.FirstName);
+        }
+
+        if (req.SortLastName.Equals(SortOrder.Ascending)) {
+            query = query.OrderBy(m => m.LastName);
+        } else if (req.SortLastName.Equals(SortOrder.Descending)) {
+            query = query.OrderByDescending(m => m.LastName);
+        }
+
+        if (req.SortJoinedDate.Equals(SortOrder.Ascending)) {
+            query = query.OrderBy(m => m.JoinedDate);
+        } else if (req.SortJoinedDate.Equals(SortOrder.Descending)) {
+            query = query.OrderByDescending(m => m.JoinedDate);
+        }
+
+        query.Paginate(req);
+
+        return await query.ToListAsync();
     }
 
     public async Task CreateMember(MemberModel member) {
