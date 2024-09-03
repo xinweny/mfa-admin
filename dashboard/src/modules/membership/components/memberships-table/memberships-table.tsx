@@ -2,7 +2,7 @@
 
 import { GetMembershipsResponse } from '../../types';
 
-import { DataTable } from '@/modules/data/components/data-table';
+import { DataTable } from '@/core/data/components/data-table';
 
 import { MembershipColumns, columns } from './columns';
 

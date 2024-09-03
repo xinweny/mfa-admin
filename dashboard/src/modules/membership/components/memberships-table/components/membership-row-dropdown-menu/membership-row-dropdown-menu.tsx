@@ -5,5 +5,5 @@ export function MembershipRowDropdownMenu() {
     <RowDropdownMenu>
 
     </RowDropdownMenu>
-  )
+  );
 }

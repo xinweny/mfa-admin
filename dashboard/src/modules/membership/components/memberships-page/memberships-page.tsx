@@ -2,10 +2,10 @@ import { serializeGetMembershipsUrlParams, getMembershipsUrlParams } from '../..
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { MembershipsTable } from '../memberships-table';
-import { DataTableHeader } from '@/modules/data/components/data-table-header';
-import { DataTableContainer } from '@/modules/data/components/data-table-container';
+import { DataTableHeader } from '@/core/data/components/data-table-header';
+import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { MembershipsTableFilters } from '../memberships-table-filters';
-import { DataTablePagination } from '@/modules/data/components/data-table-pagination';
+import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 
 interface MembershipsPageProps {
   searchParams: Record<string, string | string[] | undefined>;

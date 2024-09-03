@@ -7,7 +7,7 @@ import { Address } from '@/modules/address/types';
 import { MembershipType } from '../../types/membership-type';
 import { PaymentMethod } from '@/modules/dues/types';
 
-import { DataTableSortButton } from '@/modules/data/components/data-table-sort-button';
+import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
 
 import { AddressDisplay } from '@/modules/address/components/address-display';
 import { PaidStatusCell } from './components/paid-status-cell';

@@ -1,6 +1,6 @@
 'use client';
 
-import { usePaginationUrlParams } from '@/modules/data/state';
+import { usePaginationUrlParams } from '@/core/data/state';
 
 interface PaginationInfoProps {
   pageSize: number | null;
