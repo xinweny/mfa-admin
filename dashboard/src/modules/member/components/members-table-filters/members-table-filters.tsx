@@ -14,7 +14,7 @@ import { useGetMembersUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
 import { SelectFilter } from '@/core/data/components/select-filter';
-import { PopoverDateRangeFilter } from '@/core/data/components/popover-date-range-filter';
+import { DateRangeFilter } from '@/core/data/components/date-range-filter';
 import { TextInputFilter } from '@/core/data/components/text-input-filter';
 
 export function MembershipsTableFilters() {
@@ -67,7 +67,7 @@ export function MembershipsTableFilters() {
           label: 'Date Range',
           name: 'joinedDateRange',
           render: ({ field }) => (
-            <PopoverDateRangeFilter
+            <DateRangeFilter
               date={field.value as DateRange}
               onChange={field.onChange}
             />

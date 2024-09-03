@@ -18,7 +18,7 @@ import { useGetDuesUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
 import { SelectFilter } from '@/core/data/components/select-filter';
-import { PopoverDateRangeFilter } from '@/core/data/components/popover-date-range-filter';
+import { DateRangeFilter } from '@/core/data/components/date-range-filter';
 import { NumberInputFilter } from '@/core/data/components/number-input-filter';
 
 export function DuesTableFilters() {
@@ -78,7 +78,7 @@ export function DuesTableFilters() {
           label: 'Date Range',
           name: 'paymentDateRange',
           render: ({ field }) => (
-            <PopoverDateRangeFilter
+            <DateRangeFilter
               date={field.value as DateRange}
               onChange={field.onChange}
             />

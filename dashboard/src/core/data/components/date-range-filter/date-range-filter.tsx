@@ -14,15 +14,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 
-interface PopoverDateRangeFilterProps {
+interface DateRangeFilterProps {
   date: DateRange;
   onChange: (e: any) => void;
 }
 
-export function PopoverDateRangeFilter({
+export function DateRangeFilter({
   date,
   onChange,
-}: PopoverDateRangeFilterProps) {
+}: DateRangeFilterProps) {
   const hasNoDatesSelected = !date.from && !date.to;
 
   return (
