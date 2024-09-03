@@ -36,7 +36,7 @@ export function NavbarLinkItem({
     )}>
       <Link href={href}>
         <div className="flex items-center gap-2">
-          <Icon />
+          <Icon width={24} />
           <span className="text-sm font-semibold">{label}</span>
         </div>
       </Link>
