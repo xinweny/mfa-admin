@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast';
+import { CopyIcon } from 'lucide-react';
 
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { RowDropdownMenuItem } from '../row-dropdown-menu-item';
 
 interface CopyIdDropdownMenuItemProps {
   id: string;
@@ -12,13 +13,13 @@ export function CopyIdDropdownMenuItem({
   label = 'Copy ID',
 }: CopyIdDropdownMenuItemProps) {
   return (
-    <DropdownMenuItem
+    <RowDropdownMenuItem
       onClick={() => {
         navigator.clipboard.writeText(id);
         toast.success('ID copied.');
       }}
-    >
-      {label}
-    </DropdownMenuItem>
+      icon={CopyIcon}
+      label={label}
+    />
   );
 }

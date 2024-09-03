@@ -18,7 +18,7 @@ import { mfaFoundingYear } from '@/constants';
 import { useGetMembershipsUrlParams } from '../../state';
 
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
-import { PopoverRadioFilter } from '@/core/data/components/popover-radio-filter';
+import { SelectFilter } from '@/core/data/components/select-filter';
 import { PopoverDateRangeFilter } from '@/core/data/components/popover-date-range-filter';
 import { NumberInputFilter } from '@/core/data/components/number-input-filter';
 import { TextInputFilter } from '@/core/data/components/text-input-filter';
@@ -77,7 +77,7 @@ export function MembershipsTableFilters() {
           label: 'Type',
           name: 'membershipType',
           render: ({ field }) => (
-            <PopoverRadioFilter
+            <SelectFilter
               currentValue={field.value as string}
               onChange={field.onChange}
               values={membershipTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
@@ -109,7 +109,7 @@ export function MembershipsTableFilters() {
           label: 'Paid Status',
           name: 'hasPaid',
           render: ({ field }) => (
-            <PopoverRadioFilter
+            <SelectFilter
               currentValue={field.value as string}
               onChange={field.onChange}
               values={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
