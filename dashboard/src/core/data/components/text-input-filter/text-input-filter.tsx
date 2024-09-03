@@ -1,11 +1,13 @@
+import { forwardRef } from 'react';
+
 import { Input, InputProps } from '@/components/ui/input';
 
 interface TextInputFilterProps extends InputProps {};
 
-export function TextInputFilter({
-  ...props
-}: TextInputFilterProps) {
+export const TextInputFilter = forwardRef<HTMLInputElement, TextInputFilterProps>((props, ref) => {
   return (
-    <Input {...props} />
+    <Input {...props} ref={ref} />
   );
-}
+})
+
+TextInputFilter.displayName = 'TextInputFilter';

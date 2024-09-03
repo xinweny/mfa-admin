@@ -14,6 +14,7 @@ import { PaidStatusCell } from './components/paid-status-cell';
 import { MembersCell } from './components/members-cell';
 import { MembershipTypeCell } from './components/membership-type-cell';
 import { YearPaidHeader } from './components/year-paid-header';
+import { MembershipRowDropdownMenu } from './components/membership-row-dropdown-menu';
 
 export interface MembershipColumns {
   id: string;
@@ -74,6 +75,14 @@ export const columns: ColumnDef<MembershipColumns>[] = [
     header: () => <YearPaidHeader />,
     cell: ({ row: { original: { due, startDate } } }) => (
       <PaidStatusCell due={due} startDate={startDate}  />
+    ),
+  },
+  {
+    id: 'id',
+    cell: ({ row: { original: { id } } }) => (
+      <MembershipRowDropdownMenu
+        id={id}
+      />
     ),
   },
 ];

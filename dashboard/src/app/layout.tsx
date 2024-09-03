@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'react-hot-toast';
 
 import '@/styles/globals.css';
 import '@/styles/reset.css';
@@ -26,6 +27,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
+          <Toaster />
           {children}
         </ThemeProvider>
       </body>
