@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 
 using MfaApi.Database;
 using MfaApi.Core.Sort;
+using MfaApi.Core.Utils;
 
 namespace MfaApi.Modules.Due;
 
@@ -60,8 +60,10 @@ public class DueRepository : IDueRepository
             query = query.Where(d => d.Year == req.Year);
         }
 
-        if (!req.PaymentMethods.IsNullOrEmpty()) {
-            query = query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
+        if (!string.IsNullOrEmpty(req.PaymentMethods)) {
+            PaymentMethod[] paymentMethods = req.PaymentMethods.ParseAsEnumArray<PaymentMethod>();
+
+            query = query.Where(d => paymentMethods.Contains(d.PaymentMethod));
         };
 
         if (req.MembershipType != null) {

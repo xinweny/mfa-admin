@@ -1,7 +1,5 @@
 using System.Linq.Expressions;
 
-using MfaApi.Core.Constants;
-
 namespace MfaApi.Core.Sort;
 
 public static class SortUtils {

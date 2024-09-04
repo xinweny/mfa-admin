@@ -1,4 +1,4 @@
-using MfaApi.Core.Constants;
+using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.BoardMember;
 

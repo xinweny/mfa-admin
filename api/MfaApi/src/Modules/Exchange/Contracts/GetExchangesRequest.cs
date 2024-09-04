@@ -1,4 +1,4 @@
-using MfaApi.Core.Constants;
+using MfaApi.Core.Sort;
 using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Exchange;
