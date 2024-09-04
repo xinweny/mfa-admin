@@ -30,7 +30,7 @@ export function MembershipCell({
       <Tooltip>
         <TooltipTrigger asChild>
           <Link href={`/dashboard/memberships/${id}`}>
-            <Badge variant="outline">
+            <Badge>
               {membershipTypeLabels[membershipType]}
             </Badge>
           </Link>

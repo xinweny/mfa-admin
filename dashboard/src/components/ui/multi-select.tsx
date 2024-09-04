@@ -51,7 +51,6 @@ function MultiSelect({ options, selected, onChange, className, ...props }: Multi
           <div className="flex gap-1 flex-wrap">
             {selected.map((item) => (
               <Badge
-                variant="secondary"
                 key={item}
                 onClick={() => handleUnselect(item)}
               >
