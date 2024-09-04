@@ -63,6 +63,12 @@ public class DueRepository : IDueRepository
             query = query.Where(d => req.PaymentMethods.Contains(d.PaymentMethod));
         };
 
+        if (req.MembershipType != null) {
+            query = query.Where(d =>
+                d.Membership != null && d.Membership.MembershipType == req.MembershipType
+            );
+        }
+
         if (req.DateFrom != null) {
             query = query.Where(d => d.PaymentDate >= DateOnly.FromDateTime((DateTime) req.DateFrom));
         }
