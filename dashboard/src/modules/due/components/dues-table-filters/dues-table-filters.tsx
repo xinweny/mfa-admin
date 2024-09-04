@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DateRange } from 'react-day-picker';
 
@@ -12,7 +12,8 @@ import {
 
 import { mfaFoundingYear } from '@/core/constants';
 
-import { MembershipType } from '@/modules/membership/types';
+import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
+import { PaymentMethod, paymentMethodLabels } from '../../types';
 
 import { useGetDuesUrlParams } from '../../state';
 
@@ -20,6 +21,7 @@ import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-
 import { SelectFilter } from '@/core/data/components/select-filter';
 import { DateRangeFilter } from '@/core/data/components/date-range-filter';
 import { NumberInputFilter } from '@/core/data/components/number-input-filter';
+import { MultiSelectFilter } from '@/core/data/components/multi-select-filter';
 
 export function DuesTableFilters() {
   const [params, setParams] = useGetDuesUrlParams();
@@ -28,6 +30,7 @@ export function DuesTableFilters() {
     defaultValues: {
       year: params.year,
       membershipType: membershipTypeValues.find(m => m.value === params.membershipType)?.inputValue || MembershipTypeInputValues.All,
+      paymentMethods: params.paymentMethods || [],
       paymentDateRange: {
         from: params.dateFrom || undefined,
         to: params.dateTo || undefined,
@@ -42,6 +45,7 @@ export function DuesTableFilters() {
     setParams({
       year: data.year,
       membershipType: membershipType !== undefined ? membershipType : null,
+      paymentMethods: data.paymentMethods.length === 0 ? null : data.paymentMethods,
       dateFrom: data.paymentDateRange.from || null,
       dateTo: data.paymentDateRange.to || null,
     });
@@ -75,6 +79,17 @@ export function DuesTableFilters() {
           ),
         },
         {
+          label: 'Payment Methods',
+          name: 'paymentMethods',
+          render: ({ field }) => (
+            <MultiSelectFilter
+              selected={field.value as string[]}
+              options={paymentMethodOptions}
+              {...field}
+            />
+          ),
+        },
+        {
           label: 'Date Range',
           name: 'paymentDateRange',
           render: ({ field }) => (
@@ -104,12 +119,26 @@ const membershipTypeValues = [
   {
     inputValue: MembershipTypeInputValues.Single,
     value: MembershipType.Single,
-    label: 'Single',
+    label: membershipTypeLabels[MembershipType.Single],
   },
   {
     inputValue: MembershipTypeInputValues.Family,
     value: MembershipType.Family,
-    label: 'Family',
+    label: membershipTypeLabels[MembershipType.Family],
   },
 ];
 
+const paymentMethodOptions = [
+  {
+    value: PaymentMethod.Cash,
+    label: paymentMethodLabels[PaymentMethod.Cash],
+  },
+  {
+    value: PaymentMethod.EFT,
+    label: paymentMethodLabels[PaymentMethod.EFT],
+  },
+  {
+    value: PaymentMethod.Cheque,
+    label: paymentMethodLabels[PaymentMethod.Cheque],
+  },
+]
