@@ -15,8 +15,7 @@ import { paginationParsers } from '@/core/data/state';
 
 const parsers = {
   query: parseAsString,
-  fromYear: parseAsInteger,
-  toYear: parseAsInteger,
+  year: parseAsInteger,
   exchangeType: parseAsStringEnum(Object.values(ExchangeType)),
   sortYear: parseAsStringEnum(Object.values(SortOrder)),
   ...paginationParsers,

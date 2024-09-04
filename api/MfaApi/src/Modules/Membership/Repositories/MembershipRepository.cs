@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 
 using MfaApi.Database;
-using MfaApi.Core.Constants;
-using MfaApi.Modules.Member;
 using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Membership;
@@ -55,12 +53,10 @@ public class MembershipRepository: IMembershipRepository
             .Include(m => m.Dues.Where(d => d.Year == req.YearPaid));
         
         if (!string.IsNullOrEmpty(req.Query)) {
-            var fullNameFilter = MemberUtils.GetFullNameFilter(req.Query);
-
-            query = query.Where(
-                m => m.Members
-                    .AsQueryable()
-                    .Any(MemberUtils.GetFullNameFilter(req.Query)));
+            query = query.Where(m => m.Members
+                .AsQueryable()
+                .Any(m => EF.Functions.ILike(m.FirstName + m.LastName, $"%{req.Query.Replace(" ", "")}%"))
+            );
         }
 
         if (req.MembershipType != null) {

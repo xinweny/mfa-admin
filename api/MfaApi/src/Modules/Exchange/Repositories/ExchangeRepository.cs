@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 
 using MfaApi.Database;
-using MfaApi.Core.Constants;
-using MfaApi.Modules.Member;
 using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Exchange;
@@ -56,18 +54,16 @@ public class ExchangeRepository : IExchangeRepository
 
         if (!string.IsNullOrEmpty(req.Query)) {
             query = query.Where(e => e.Member != null
-            && MemberUtils.GetFullNameFilter(req.Query).Compile()(e.Member));
+                && EF.Functions.ILike(e.Member.FirstName + e.Member.LastName, $"%{req.Query.Replace(" ", "")}%")
+            );
         }
 
         if (req.ExchangeType != null) {
             query = query.Where(e => e.ExchangeType == req.ExchangeType);
         }
         
-        if (req.FromYear != null) {
-            query = query.Where(e => e.Year >= req.FromYear);
-        }
-        if (req.ToYear != null) {
-            query = query.Where(e => e.Year <= req.ToYear);
+        if (req.Year != null) {
+            query = query.Where(e => e.Year == req.Year);
         }
 
         query = query.Sort(e => e.Year, req.SortYear);

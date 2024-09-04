@@ -2,7 +2,6 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { DateRange } from 'react-day-picker';
 
 import {
   getExchangesSchema,
@@ -17,14 +16,14 @@ import { useGetExchangesUrlParams } from '../../state';
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
 import { SelectFilter } from '@/core/data/components/select-filter';
 import { TextInputFilter } from '@/core/data/components/text-input-filter';
+import { NumberInputFilter } from '@/core/data/components/number-input-filter';
 
 export function ExchangesTableFilters() {
   const [params, setParams] = useGetExchangesUrlParams();
 
   const form = useForm<GetExchangesSchema>({
     defaultValues: {
-      fromYear: params.fromYear || undefined,
-      toYear: params.toYear || undefined,
+      year: params.year || undefined,
       exchangeType: exchangeTypeValues.find(e => e.value === params.exchangeType)?.inputValue || ExchangeTypeInputValues.All,
     },
     resolver: zodResolver(getExchangesSchema),
@@ -35,8 +34,7 @@ export function ExchangesTableFilters() {
 
     setParams({
       query: data.query || null,
-      fromYear: data.fromYear || null,
-      toYear: data.toYear || null,
+      year: data.year || null,
       exchangeType: exchangeType !== undefined ? exchangeType : null,
     });
   };
@@ -58,6 +56,16 @@ export function ExchangesTableFilters() {
           ),
         },
         {
+          label: 'Year',
+          name: 'year',
+          render: ({ field }) => (
+            <NumberInputFilter
+              {...field}
+              value={field.value as number}
+            />
+          ),
+        },
+        {
           label: 'Type',
           name: 'exchangeType',
           render: ({ field }) => (
@@ -71,8 +79,7 @@ export function ExchangesTableFilters() {
       ]}
       reset={{
         query: undefined,
-        fromYear: undefined,
-        toYear: undefined,
+        year: undefined,
         exchangeType: ExchangeTypeInputValues.All,
       }}
     />

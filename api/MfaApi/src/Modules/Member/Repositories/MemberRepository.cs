@@ -48,7 +48,7 @@ public class MemberRepository: IMemberRepository {
             .ThenInclude(m => m != null ? m.Address : null);
         
         if (!string.IsNullOrEmpty(req.Query)) {
-            query = query.Where(MemberUtils.GetFullNameFilter(req.Query));
+            query = query.Where(m => EF.Functions.ILike(m.FirstName + m.LastName, $"%{req.Query.Replace(" ", "")}%"));
         }
 
         if (req.IsMississaugaResident != null) {
