@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
+using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Exchange;
 
@@ -20,9 +21,14 @@ public class ExchangeController: ControllerBase {
     public async Task<IActionResult> GetExchangesAsync(
         [FromQuery] GetExchangesRequest req
     ) {
-        var exchanges = await _exchangeService.GetExchanges(req);
+        var pagination = new PaginationMetadata();
+
+        var exchanges = await _exchangeService.GetExchanges(req, pagination);
 
         return Ok(new ApiResponse<IEnumerable<GetExchangesResponse>> {
+            Metadata = new ApiMetadata {
+                Pagination = pagination,
+            },
             Data = exchanges,
         });
     }

@@ -1,3 +1,5 @@
+using MfaApi.Core.Pagination;
+
 namespace MfaApi.Modules.Exchange;
 
 public class ExchangeService: IExchangeService {
@@ -17,8 +19,10 @@ public class ExchangeService: IExchangeService {
         await _exchangeRepository.DeleteExchange(exchange);
     }
 
-    public async Task<IEnumerable<GetExchangesResponse>> GetExchanges(GetExchangesRequest req) {
-        var exchanges = await _exchangeRepository.GetExchanges(req);
+    public async Task<IEnumerable<GetExchangesResponse>> GetExchanges(GetExchangesRequest req, PaginationMetadata metadata) {
+        var query = _exchangeRepository.GetExchangesQuery(req);
+
+        var exchanges = await query.ToListWithPagination(req, metadata);
 
         return exchanges.Select(e => e.ToGetExchangesResponse());
     }

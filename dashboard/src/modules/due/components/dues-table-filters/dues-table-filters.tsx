@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DateRange } from 'react-day-picker';
 
@@ -79,7 +79,7 @@ export function DuesTableFilters() {
           ),
         },
         {
-          label: 'Payment Methods',
+          label: 'Methods',
           name: 'paymentMethods',
           render: ({ field }) => (
             <MultiSelectFilter
@@ -141,4 +141,4 @@ const paymentMethodOptions = [
     value: PaymentMethod.Cheque,
     label: paymentMethodLabels[PaymentMethod.Cheque],
   },
-]
+];

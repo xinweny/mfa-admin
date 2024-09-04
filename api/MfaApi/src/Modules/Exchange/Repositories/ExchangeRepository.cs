@@ -4,6 +4,7 @@ using FluentValidation;
 using MfaApi.Database;
 using MfaApi.Core.Constants;
 using MfaApi.Modules.Member;
+using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Exchange;
 
@@ -46,8 +47,10 @@ public class ExchangeRepository : IExchangeRepository
         return exchange;
     }
 
-    public async Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req) {
-        var query = _context.Exchanges.AsQueryable();
+    public IQueryable<ExchangeModel> GetExchangesQuery(GetExchangesRequest req) {
+        var query = _context.Exchanges
+            .AsNoTracking()
+            .AsQueryable();
 
         query = query.Include(e => e.Member);
 
@@ -59,6 +62,7 @@ public class ExchangeRepository : IExchangeRepository
         if (req.ExchangeType != null) {
             query = query.Where(e => e.ExchangeType == req.ExchangeType);
         }
+        
         if (req.FromYear != null) {
             query = query.Where(e => e.Year >= req.FromYear);
         }
@@ -66,17 +70,14 @@ public class ExchangeRepository : IExchangeRepository
             query = query.Where(e => e.Year <= req.ToYear);
         }
 
-        if (SortOrder.Ascending.Equals(req.SortYear)) {
-            query = query.OrderBy(e => e.Year);
-        } else if (SortOrder.Descending.Equals(req.SortYear)) {
-            query = query.OrderByDescending(e => e.Year);
-        }
+        query = query.Sort(e => e.Year, req.SortYear);
 
-        return await query.ToListAsync();
+        return query;
     }
 
     public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(Guid memberId) {
         var exchanges = await _context.Exchanges
+            .AsNoTracking()
             .Where(e => e.MemberId == memberId)
             .OrderByDescending(e => e.Year)
             .ToListAsync();

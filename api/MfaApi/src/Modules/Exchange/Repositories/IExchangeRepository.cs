@@ -1,7 +1,7 @@
 namespace MfaApi.Modules.Exchange;
 
 public interface IExchangeRepository {
-    Task<IEnumerable<ExchangeModel>> GetExchanges(GetExchangesRequest req);
+    IQueryable<ExchangeModel> GetExchangesQuery(GetExchangesRequest req);
     Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(Guid memberId);
     Task<ExchangeModel> GetExchangeById(Guid id);
     Task CreateExchanges(Guid memberId, IEnumerable<ExchangeModel> exchanges);
