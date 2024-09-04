@@ -83,9 +83,9 @@ export function DuesTableFilters() {
           name: 'paymentMethods',
           render: ({ field }) => (
             <MultiSelectFilter
-              selected={field.value as string[]}
               options={paymentMethodOptions}
-              {...field}
+              values={field.value as string[]}
+              onChange={field.onChange}
             />
           ),
         },
