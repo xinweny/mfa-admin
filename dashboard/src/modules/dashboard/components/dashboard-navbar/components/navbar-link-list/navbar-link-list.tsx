@@ -35,14 +35,14 @@ const links = [
     exactHref: true,
   },
   { 
-    href: '/members',
-    label: 'Members',
-    icon: UsersIcon,
-  },
-  { 
     href: '/memberships',
     label: 'Memberships',
     icon: IdCardIcon,
+  },
+  { 
+    href: '/members',
+    label: 'Members',
+    icon: UsersIcon,
   },
   {
     href: '/dues',

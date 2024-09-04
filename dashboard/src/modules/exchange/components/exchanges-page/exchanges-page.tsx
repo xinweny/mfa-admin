@@ -7,7 +7,10 @@ import { ApiResponse } from '@/core/api/types';
 import { GetExchangesResponse } from '../../types';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
-import { DataTableHeader } from '@/core/data/components/data-table-header';
+import {
+  DashboardContentHeader,
+  DashboardContentHeading,
+} from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 import { ExchangesTable } from '../exchanges-table';
@@ -30,8 +33,10 @@ export async function ExchangesPage({
 
   return (
     <DashboardContent>
+      <DashboardContentHeader>
+        <DashboardContentHeading text="Hosts & Delegates" />
+      </DashboardContentHeader>
       <DataTableContainer>
-        <DataTableHeader text="Hosts & Delegates" />
         <ExchangesTableFilters />
         <ExchangesTable
           exchanges={(exchanges.data || []) as GetExchangesResponse[]}

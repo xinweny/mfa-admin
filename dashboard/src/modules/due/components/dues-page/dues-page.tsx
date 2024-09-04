@@ -7,7 +7,10 @@ import { ApiResponse } from '@/core/api/types';
 import { GetDuesResponse } from '../../types';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
-import { DataTableHeader } from '@/core/data/components/data-table-header';
+import {
+  DashboardContentHeader,
+  DashboardContentHeading,
+} from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 
@@ -31,8 +34,10 @@ export async function DuesPage({
 
   return (
     <DashboardContent>
+      <DashboardContentHeader>
+        <DashboardContentHeading text="Dues" />
+      </DashboardContentHeader>
       <DataTableContainer>
-        <DataTableHeader text="Dues" />
         <DuesTableFilters />
         <DuesTable
           dues={(dues.data || []) as GetDuesResponse[]}

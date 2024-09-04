@@ -7,7 +7,10 @@ import { ApiResponse } from '@/core/api/types';
 import { GetMembersResponse } from '../../types';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
-import { DataTableHeader } from '@/core/data/components/data-table-header';
+import {
+  DashboardContentHeader,
+  DashboardContentHeading,
+} from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 import { MembersTable } from '../members-table/members-table';
@@ -30,8 +33,10 @@ export async function MembersPage({
 
   return (
     <DashboardContent>
+      <DashboardContentHeader>
+        <DashboardContentHeading text="Members" />
+      </DashboardContentHeader>
       <DataTableContainer>
-        <DataTableHeader text="Members" />
         <MembershipsTableFilters />
         <MembersTable
           members={(members.data || []) as GetMembersResponse[]}
