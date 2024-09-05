@@ -7,27 +7,29 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-interface SelectFilterProps<T extends string> {
+interface FormInputSelectProps<T extends string> {
   value: T;
   options: {
     value: T;
     label: string;
   }[];
   onChange: (e: any) => void;
+  placeholder?: string;
 }
 
-export function SelectFilter<T extends string>({
+export function FormInputSelect<T extends string>({
   value,
   options,
   onChange,
-}: SelectFilterProps<T>) {
+  placeholder,
+}: FormInputSelectProps<T>) {
   return (
     <Select
       onValueChange={onChange}
       defaultValue={value}
     >
       <SelectTrigger>
-        <SelectValue>
+        <SelectValue placeholder={placeholder}>
           {options.find(v => v.value === value)?.label}
         </SelectValue>
       </SelectTrigger>

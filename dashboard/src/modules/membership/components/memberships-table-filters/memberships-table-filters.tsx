@@ -78,9 +78,9 @@ export function MembershipsTableFilters() {
           name: 'membershipType',
           render: ({ field }) => (
             <SelectFilter
-              currentValue={field.value as string}
+              value={field.value as string}
               onChange={field.onChange}
-              values={membershipTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+              options={membershipTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
         },
@@ -110,9 +110,9 @@ export function MembershipsTableFilters() {
           name: 'hasPaid',
           render: ({ field }) => (
             <SelectFilter
-              currentValue={field.value as string}
+              value={field.value as string}
               onChange={field.onChange}
-              values={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+              options={hasPaidValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
         },

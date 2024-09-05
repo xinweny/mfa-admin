@@ -70,9 +70,9 @@ export function ExchangesTableFilters() {
           name: 'exchangeType',
           render: ({ field }) => (
             <SelectFilter
-              currentValue={field.value as string}
+              value={field.value as string}
               onChange={field.onChange}
-              values={exchangeTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+              options={exchangeTypeValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
         },

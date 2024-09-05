@@ -78,9 +78,9 @@ export function MembershipsTableFilters() {
           name: 'isMississaugaResident',
           render: ({ field }) => (
             <SelectFilter
-              currentValue={field.value as string}
+              value={field.value as string}
               onChange={field.onChange}
-              values={isMississaugaResidentValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+              options={isMississaugaResidentValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
             />
           ),
         },
