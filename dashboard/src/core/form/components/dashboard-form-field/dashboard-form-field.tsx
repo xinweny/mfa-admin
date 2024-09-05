@@ -1,11 +1,12 @@
 import { ReactElement, JSXElementConstructor } from 'react';
-
 import {
   FieldValues,
   useFormContext,
   Path,
   ControllerRenderProps,
 } from 'react-hook-form';
+
+import { cn } from '@/lib/cn';
 
 import {
   FormField,
@@ -21,6 +22,7 @@ interface DashboardFormFieldProps<T extends FieldValues> {
   render: (field: ControllerRenderProps<T, Path<T>>) => ReactElement<any, string | JSXElementConstructor<any>>;
   label: string;
   description?: string;
+  className?: string;
 }
 
 export function DashboardFormField<T extends FieldValues>({
@@ -28,6 +30,7 @@ export function DashboardFormField<T extends FieldValues>({
   label,
   render,
   description,
+  className,
 }: DashboardFormFieldProps<T>) {
   const { control } = useFormContext<T>();
 
@@ -36,8 +39,8 @@ export function DashboardFormField<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
+        <FormItem className={cn('flex flex-col', className)}>
+          <FormLabel className="font-semibold">{label}</FormLabel>
           {description && (
             <FormDescription>{description}</FormDescription>
           )}

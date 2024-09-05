@@ -9,7 +9,7 @@ import {
   ChartBarIcon
 } from 'lucide-react';
 
-import { NavbarLinkItemProps, NavbarLinkItem } from '../navbar-link-item';
+import { NavbarLinkItemProps, NavbarLinkItem } from './navbar-link-item';
 
 export function NavbarLinkList() {
   return (

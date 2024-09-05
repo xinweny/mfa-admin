@@ -2,6 +2,7 @@ import { UseFormReturn, FieldValues } from 'react-hook-form';
 
 import { cn } from '@/lib/cn';
 
+import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
 interface DashboardFormProps<T extends FieldValues> {
@@ -9,6 +10,8 @@ interface DashboardFormProps<T extends FieldValues> {
   children: React.ReactNode;
   onSubmit: (data: T) => void;
   className?: string;
+  submitLabel?: string;
+  reset?: () => void;
 }
 
 export function DashboardForm<T extends FieldValues>({
@@ -16,6 +19,8 @@ export function DashboardForm<T extends FieldValues>({
   children,
   onSubmit,
   className,
+  submitLabel = 'Submit',
+  reset = () => {},
 }: DashboardFormProps<T>) {
   return (
     <Form {...form}>
@@ -27,19 +32,25 @@ export function DashboardForm<T extends FieldValues>({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {children}
+        <div className={"flex gap-2 mt-2"}>
+          {reset && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={reset}
+              className="flex-grow"
+            >
+              Reset
+            </Button>
+          )}
+          <Button
+            type="submit"
+            className={"flex-grow"}
+          >
+            {submitLabel}
+          </Button>
+        </div>
       </form>
     </Form>
   )
-}
-
-interface DashboardFormTitleProps {
-  title: string;
-}
-
-export function DashboardFormTitle({
-  title,
-}: DashboardFormTitleProps) {
-  return (
-    <h1 className="text-2xl font-bold">{title}</h1>
-  );
 }

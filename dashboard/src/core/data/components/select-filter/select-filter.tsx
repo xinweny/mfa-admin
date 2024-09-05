@@ -24,11 +24,11 @@ export function SelectFilter<T extends string>({
   return (
     <Select
       onValueChange={onChange}
-      defaultValue={value}
+      value={value}
     >
       <SelectTrigger>
         <SelectValue>
-          {options.find(v => v.value === value)?.label}
+          {options.find(o => o.value === value)?.label}
         </SelectValue>
       </SelectTrigger>
       <SelectContent className="w-auto">

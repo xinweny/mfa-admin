@@ -1,10 +1,8 @@
 import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-import { DateRange } from 'react-day-picker';
-
-import { mfaFoundingYear } from '@/core/constants';
 
 import { cn } from '@/lib/cn';
+
+import { mfaFoundingYear } from '@/core/constants';
 
 import {
   Popover,
@@ -12,19 +10,22 @@ import {
   PopoverContent,
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
+import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 
-interface DateRangeFilterProps {
-  date: DateRange;
+interface FormInputDateProps {
+  value: Date | undefined;
   onChange: (e: any) => void;
+  fromYear?: number;
+  toYear?: number;
 }
 
-export function DateRangeFilter({
-  date,
+export function FormInputDate({
+  value,
   onChange,
-}: DateRangeFilterProps) {
-  const hasNoDatesSelected = !date.from && !date.to;
-
+  fromYear = mfaFoundingYear,
+  toYear = new Date().getFullYear(),
+}: FormInputDateProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -32,14 +33,14 @@ export function DateRangeFilter({
           variant="outline"
           className={cn(
             "w-auto justify-start text-left font-normal",
-            hasNoDatesSelected && "text-muted-foreground"
+            !value && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           <span>
-            {hasNoDatesSelected
-              ? 'Select dates'
-              : `${date.from ? format(date.from, 'dd/LL/yyyy') : ''} - ${date.to ? format(date.to, 'dd/LL/yyyy') : ''}`
+            {value
+              ? format(value, 'dd/LL/yyyy')
+              : 'Select date'
             }
           </span>
         </Button>
@@ -47,14 +48,12 @@ export function DateRangeFilter({
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           initialFocus
-          mode="range"
           captionLayout="dropdown-buttons"
-          defaultMonth={date?.from}
-          selected={date}
+          selected={value}
           onSelect={onChange}
           numberOfMonths={1}
-          fromYear={mfaFoundingYear}
-          toYear={new Date().getFullYear()}
+          fromYear={fromYear}
+          toYear={toYear}
         />
       </PopoverContent>
     </Popover>
