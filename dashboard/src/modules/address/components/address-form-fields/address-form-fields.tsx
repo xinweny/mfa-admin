@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
 import { FormInputSelect } from '@/core/form/components/form-input-select';
 import { provinceLabels } from '../../types';
+import { FormSectionContent } from '@/core/form/components/form-section';
 
 interface AddressFormFieldsProps {
   name: string;
@@ -12,7 +13,7 @@ export function AddressFormFields({
   name,
 }: AddressFormFieldsProps) {
   return (
-    <fieldset className="grid grid-cols-2 grid-rows-3 gap-2">
+    <FormSectionContent className="grid grid-cols-2 grid-rows-3 gap-2">
       <DashboardFormField
         name={`${name}.line1`}
         label="Line 1"
@@ -62,6 +63,6 @@ export function AddressFormFields({
           />
         )}
       />
-    </fieldset>
+    </FormSectionContent>
   );
 }

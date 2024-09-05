@@ -26,7 +26,7 @@ export function DashboardForm<T extends FieldValues>({
     <Form {...form}>
       <form
         className={cn(
-          'flex flex-col gap-2',
+          'flex flex-col gap-4',
           className
         )}
         onSubmit={form.handleSubmit(onSubmit)}
