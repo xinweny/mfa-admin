@@ -1,16 +1,15 @@
-import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/cn';
 
 interface FormSectionHeaderProps {
-  title: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
 export function FormSectionHeader({
-  title,
+  children,
+  className,
 }: FormSectionHeaderProps) {
   return (
-    <div>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <Separator className="my-2" />
-    </div>
+    <h3 className={cn('text-xl font-semibold border-b mb-2', className)}>{children}</h3>
   );
 }

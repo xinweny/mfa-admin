@@ -11,21 +11,23 @@ export function MemberFormFields({
   name,
 }: MemberFormFieldsProps) {
   return (
-    <fieldset>
-      <DashboardFormField
-        name={`${name ? `${name}.` : ''}firstName`}
-        label="First Name"
-        render={(field) => (
-          <Input {...field} />
-        )}
-      />
-      <DashboardFormField
-        name={`${name ? `${name}.` : ''}lastName`}
-        label="Last Name"
-        render={(field) => (
-          <Input {...field} />
-        )}
-      />
+    <>
+      <div className="flex items-center gap-2">
+        <DashboardFormField
+          name={`${name ? `${name}.` : ''}firstName`}
+          label="First Name"
+          render={(field) => (
+            <Input {...field} />
+          )}
+        />
+        <DashboardFormField
+          name={`${name ? `${name}.` : ''}lastName`}
+          label="Last Name"
+          render={(field) => (
+            <Input {...field} />
+          )}
+        />
+      </div>
       <DashboardFormField
         name={`${name ? `${name}.` : ''}email`}
         label="Email"
@@ -50,6 +52,6 @@ export function MemberFormFields({
           />
         )}
       />
-    </fieldset>
+    </>
   );
 }

@@ -10,7 +10,7 @@ export const createMembershipSchema = z.object({
   members: z.array(z.object({
     firstName: z.string().min(1),
     lastName: z.string().min(1),
-    email: z.string().email(),
+    email: z.string().email().min(1),
     phoneNumber: z.string().refine(isValidPhoneNumber),
     joinedDate: z.optional(z.date()),
   })),
