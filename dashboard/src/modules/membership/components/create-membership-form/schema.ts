@@ -14,7 +14,7 @@ export const createMembershipSchema = z.object({
     phoneNumber: z.string().refine(isValidPhoneNumber),
     joinedDate: z.optional(z.date()),
   })),
-  address: z.optional(addressSchema),
+  address: z.array(addressSchema).max(1),
   startDate: z.date(),
 });
 

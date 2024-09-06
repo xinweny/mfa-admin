@@ -1,5 +1,5 @@
 import { useFormContext, useFieldArray } from 'react-hook-form';
-import { XIcon, PlusIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 
 import { MembershipType } from '../../types';
 
@@ -19,6 +19,7 @@ import {
 } from '@/core/form/components/form-section';
 
 import { MemberFormFields } from '@/modules/member/components/member-form-fields';
+import { FormSectionHeaderButton } from '@/core/form/components/form-section-header-button';
 
 
 export function MembersFormSection() {
@@ -34,10 +35,8 @@ export function MembersFormSection() {
     <FormSection>
       <FormSectionHeader className="flex justify-between items-center">
         <span>Members</span>
-        <Button
-          type="button"
-          variant="link"
-          className="gap-2"
+        <FormSectionHeaderButton
+          label="Add Member"
           onClick={() => {
             append({
               firstName: '',
@@ -51,14 +50,10 @@ export function MembersFormSection() {
             (membershipType === MembershipType.Single && fields.length >= 1)
             || (fields.length >= 4)
           }
-        >
-          <PlusIcon width={16} />
-          <span>Add Member</span>
-        </Button>
+        />
       </FormSectionHeader>
       <FormSectionContent className="flex flex-row flex-wrap">
-        {
-          fields.map((field, index) => (
+        {fields.map((field, index) => (
             <Card key={field.id} className="max-w-[300px]">
               <CardHeader className="flex-row font-semibold flex items-center justify-between">
                 <span>{`Member ${index + 1}`}</span>
@@ -76,8 +71,7 @@ export function MembersFormSection() {
                 <MemberFormFields name={`members.${index}`} />
               </CardContent>
             </Card>
-          ))
-        }
+          ))}
       </FormSectionContent>
     </FormSection>
   );

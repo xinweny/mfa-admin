@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { MembershipType, membershipTypeLabels } from '../../types';
@@ -22,12 +22,13 @@ import {
 } from '@/core/form/components/form-section';
 
 import { MembersFormSection } from './members-form-section';
+import { AddressFormSection } from './address-form-section';
 
 export function CreateMembershipForm() {
   const form = useForm<CreateMembershipSchema>({
     defaultValues: {
       membershipType: MembershipType.Single,
-      address: undefined,
+      address: [],
       startDate: new Date(),
       members: [{
         firstName: '',
@@ -83,10 +84,7 @@ export function CreateMembershipForm() {
           />
         </FormSectionContent>
       </FormSection>
-      <FormSection>
-        <FormSectionHeader>Address</FormSectionHeader>
-        <AddressFormFields name="address" />
-      </FormSection>
+      <AddressFormSection />
       <MembersFormSection />
     </DashboardForm>
   );
