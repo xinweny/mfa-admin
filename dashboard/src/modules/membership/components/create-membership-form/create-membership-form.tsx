@@ -86,7 +86,9 @@ export function CreateMembershipForm() {
             render={(field) => (
               <FormInputSelect
                 value={field.value}
-                onChange={field.onChange}
+                onChange={(value) => {
+                  field.onChange(+value);
+                }}
                 options={Object.entries(membershipTypeLabels).map(([k, v]) => ({
                   label: v,
                   value: k,

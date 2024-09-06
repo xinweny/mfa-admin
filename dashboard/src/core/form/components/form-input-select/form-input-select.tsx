@@ -13,7 +13,7 @@ interface FormInputSelectProps {
     value: string;
     label: string;
   }[];
-  onChange: (e: any) => void;
+  onChange: (value: string) => void;
   placeholder?: string;
 }
 
@@ -26,7 +26,7 @@ export function FormInputSelect({
   return (
     <Select
       onValueChange={onChange}
-      value={value}
+      value={value.toString()}
     >
       <SelectTrigger>
         <SelectValue placeholder={placeholder}>
@@ -38,7 +38,7 @@ export function FormInputSelect({
           {options.map(({ value, label }) => (
             <SelectItem
               key={value}
-              value={value}
+              value={value.toString()}
             >
               {label}
             </SelectItem>
