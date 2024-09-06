@@ -49,7 +49,7 @@ public static class MembershipMapper {
     public static MembershipModel ToMembership(this CreateMembershipRequest req) {
         MembershipModel membership = new MembershipModel {
             MembershipType = req.MembershipType,
-            StartDate = req.StartDate,
+            StartDate = DateOnly.FromDateTime(req.StartDate),
         };
 
         var addressDto = req.Address;
@@ -74,6 +74,7 @@ public static class MembershipMapper {
                 LastName = member.LastName,
                 PhoneNumber = member.PhoneNumber,
                 Email = member.Email,
+                JoinedDate = DateOnly.FromDateTime(member.JoinedDate),
             }).ToList();
         }
 

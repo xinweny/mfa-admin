@@ -24,7 +24,7 @@ export function SelectFilter<T extends string>({
   return (
     <Select
       onValueChange={onChange}
-      value={value}
+      value={value.toString()}
     >
       <SelectTrigger>
         <SelectValue>
@@ -36,7 +36,7 @@ export function SelectFilter<T extends string>({
           {options.map(({ value, label }) => (
             <SelectItem
               key={value}
-              value={value}
+              value={value.toString()}
             >
               {label}
             </SelectItem>

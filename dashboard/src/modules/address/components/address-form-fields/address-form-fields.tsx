@@ -18,7 +18,7 @@ export function AddressFormFields({
         name={`${name}.line1`}
         label="Line 1"
         render={(field) => (
-          <Input {...field} />
+          <Input placeholder="300 City Centre Dr" {...field} />
         )}
       />
       <DashboardFormField

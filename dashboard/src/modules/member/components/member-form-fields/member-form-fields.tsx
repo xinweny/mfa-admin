@@ -17,14 +17,14 @@ export function MemberFormFields({
           name={`${name ? `${name}.` : ''}firstName`}
           label="First Name"
           render={(field) => (
-            <Input {...field} />
+            <Input placeholder="Seizan" {...field} />
           )}
         />
         <DashboardFormField
           name={`${name ? `${name}.` : ''}lastName`}
           label="Last Name"
           render={(field) => (
-            <Input {...field} />
+            <Input placeholder="Suginomori" {...field} />
           )}
         />
       </div>
@@ -32,14 +32,14 @@ export function MemberFormFields({
         name={`${name ? `${name}.` : ''}email`}
         label="Email"
         render={(field) => (
-          <Input type="email" {...field} />
+          <Input type="email" placeholder="example@gmail.com" {...field} />
         )}
       />
       <DashboardFormField
         name={`${name ? `${name}.` : ''}phoneNumber`}
         label="Phone Number"
         render={(field) => (
-          <Input  max={10} {...field} />
+          <Input max={10} placeholder="0123456789" {...field} />
         )}
       />
       <DashboardFormField

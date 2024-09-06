@@ -37,8 +37,8 @@ export function AddressFormSection() {
           }}
         />
       </FormSectionHeader>
-      {fields.map((field) => (
-        <AddressFormFields key={field.id} name="address" />
+      {fields.map((field, index) => (
+        <AddressFormFields key={field.id} name={`address.${index}`} />
       ))}
     </FormSection>
   );

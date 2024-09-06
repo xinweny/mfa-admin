@@ -1,6 +1,6 @@
 import {
   useQueryStates,
-  parseAsStringEnum,
+  parseAsNumberLiteral,
   parseAsString,
   createSerializer,
   parseAsInteger,
@@ -16,8 +16,8 @@ import { paginationParsers } from '@/core/data/state';
 const parsers = {
   query: parseAsString,
   year: parseAsInteger,
-  exchangeType: parseAsStringEnum(Object.values(ExchangeType)),
-  sortYear: parseAsStringEnum(Object.values(SortOrder)),
+  exchangeType: parseAsNumberLiteral(Object.values(ExchangeType) as number[]),
+  sortYear: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   ...paginationParsers,
 };
 

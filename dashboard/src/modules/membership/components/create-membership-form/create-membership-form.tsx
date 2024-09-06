@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { MembershipType, membershipTypeLabels } from '../../types';
+import { Province } from '@/modules/address/types';
 
 import { createMembershipSchema, CreateMembershipSchema } from './schema';
 
@@ -13,7 +14,6 @@ import {
 } from '@/core/form/components/dashboard-form';
 import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
 import { FormInputSelect } from '@/core/form/components/form-input-select';
-import { AddressFormFields } from '@/modules/address/components/address-form-fields';
 import { FormInputDate } from '@/core/form/components/form-input-date';
 import {
   FormSection,
@@ -23,12 +23,19 @@ import {
 
 import { MembersFormSection } from './members-form-section';
 import { AddressFormSection } from './address-form-section';
+import { createMembership } from '../../actions';
 
 export function CreateMembershipForm() {
   const form = useForm<CreateMembershipSchema>({
     defaultValues: {
       membershipType: MembershipType.Single,
-      address: [],
+      address: [{
+        line1: '',
+        line2: undefined,
+        city: '',
+        postalCode: '',
+        province: Province.ON,
+      }],
       startDate: new Date(),
       members: [{
         firstName: '',
@@ -41,8 +48,27 @@ export function CreateMembershipForm() {
     resolver: zodResolver(createMembershipSchema),
   });
 
-  const onSubmit = (data: CreateMembershipSchema) => {
-    console.log(data);
+  const onSubmit = async (data: CreateMembershipSchema) => {
+    const res = await createMembership({
+      membershipType: data.membershipType,
+      startDate: data.startDate,
+      address: data.address.length === 1
+        ? {
+          line1: data.address[0].line1,
+          line2: data.address[0].line2 || null,
+          city: data.address[0].city,
+          postalCode: data.address[0].postalCode,
+          province: data.address[0].province,
+        }
+        : null,
+      members: data.members.map(m => ({
+        firstName: m.firstName,
+        lastName: m.lastName,
+        email: m.email,
+        phoneNumber: m.phoneNumber || null,
+        joinedDate: m.joinedDate,
+      })),
+    });
   };
 
   return (

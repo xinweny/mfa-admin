@@ -20,7 +20,7 @@ export function DataTableSortButton({
 }: DataTableSortButtonProps) {
   const [sort, setSort] = useSortUrlParam(name);
 
-  const SortIcon = sortIcons[sort];
+  const SortIcon = sortIcons[sort as SortOrder];
 
   return (
     <button

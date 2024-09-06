@@ -6,6 +6,7 @@ import {
   createSerializer,
   parseAsBoolean,
   parseAsIsoDateTime,
+  parseAsNumberLiteral,
 } from 'nuqs';
 import { createSearchParamsCache } from 'nuqs/server';
 
@@ -18,8 +19,8 @@ const parsers = {
   yearPaid: parseAsInteger.withDefault(new Date().getFullYear()),
   hasPaid: parseAsBoolean,
   query: parseAsString,
-  membershipType: parseAsStringEnum<MembershipType>(Object.values(MembershipType)),
-  sortStartDate: parseAsStringEnum(Object.values(SortOrder)),
+  membershipType: parseAsStringEnum(Object.values(MembershipType).map(v => v.toString())),
+  sortStartDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   sinceFrom: parseAsIsoDateTime,
   sinceTo: parseAsIsoDateTime,
   ...paginationParsers,

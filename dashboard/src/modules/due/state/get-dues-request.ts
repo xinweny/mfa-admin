@@ -1,6 +1,6 @@
 import {
   useQueryStates,
-  parseAsStringEnum,
+  parseAsNumberLiteral,
   createSerializer,
   parseAsInteger,
   parseAsArrayOf,
@@ -16,12 +16,12 @@ import { paginationParsers } from '@/core/data/state';
 
 const parsers = {
   year: parseAsInteger.withDefault(new Date().getFullYear()),
-  paymentMethods: parseAsArrayOf(parseAsStringEnum(Object.values(PaymentMethod))),
-  membershipType: parseAsStringEnum(Object.values(MembershipType)),
+  paymentMethods: parseAsArrayOf(parseAsNumberLiteral(Object.values(PaymentMethod) as number[])),
+  membershipType: parseAsNumberLiteral(Object.values(MembershipType) as number[]),
   dateFrom: parseAsIsoDateTime,
   dateTo: parseAsIsoDateTime,
-  sortYear: parseAsStringEnum(Object.values(SortOrder)),
-  sortPaymentDate: parseAsStringEnum(Object.values(SortOrder)),
+  sortYear: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
+  sortPaymentDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   ...paginationParsers,
 };
 

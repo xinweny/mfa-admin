@@ -1,19 +1,13 @@
 import * as z from 'zod';
-import { isValidPhoneNumber } from 'libphonenumber-js';
 
 import { MembershipType } from '../../types';
 
 import { addressSchema } from '@/modules/address/schema';
+import { memberSchema } from '@/modules/member/schema';
 
 export const createMembershipSchema = z.object({
   membershipType: z.nativeEnum(MembershipType),
-  members: z.array(z.object({
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    email: z.string().email().min(1),
-    phoneNumber: z.string().refine(isValidPhoneNumber),
-    joinedDate: z.optional(z.date()),
-  })),
+  members: z.array(memberSchema),
   address: z.array(addressSchema).max(1),
   startDate: z.date(),
 });

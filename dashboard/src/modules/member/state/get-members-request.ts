@@ -1,7 +1,7 @@
 import {
   useQueryStates,
   parseAsString,
-  parseAsStringEnum,
+  parseAsNumberLiteral,
   createSerializer,
   parseAsBoolean,
   parseAsIsoDateTime,
@@ -17,9 +17,9 @@ const parsers = {
   joinedFrom: parseAsIsoDateTime,
   joinedTo: parseAsIsoDateTime,
   isMississaugaResident: parseAsBoolean,
-  sortFirstName: parseAsStringEnum(Object.values(SortOrder)),
-  sortLastName: parseAsStringEnum(Object.values(SortOrder)),
-  sortJoinedDate: parseAsStringEnum(Object.values(SortOrder)),
+  sortFirstName: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
+  sortLastName: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
+  sortJoinedDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   ...paginationParsers,
 };
 

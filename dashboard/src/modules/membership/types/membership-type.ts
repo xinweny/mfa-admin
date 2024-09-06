@@ -1,7 +1,7 @@
 export enum MembershipType {
-  Single = '1',
-  Family = '2',
-  Honorary = '3',
+  Single = 1,
+  Family = 2,
+  Honorary = 3,
 }
 
 export const membershipTypeLabels: Record<MembershipType, string> = {
