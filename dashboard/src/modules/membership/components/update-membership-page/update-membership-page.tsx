@@ -1,6 +1,11 @@
 import { redirect } from 'next/navigation';
 
+import { ApiResponse } from '@/core/api/types';
+import { GetMembershipResponse } from '../../types';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
+
+import { UpdateMembershipForm } from '../update-membership-form';
 
 interface UpdateMembershipPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -15,13 +20,13 @@ export async function UpdateMembershipPage({
 
   const res = await fetch(`${process.env.MFA_API_URL}/memberships/${id}`);
 
-  const membership = await res.json();
+  const membership: ApiResponse<GetMembershipResponse> = await res.json();
 
   if (!membership.data) redirect('/dashboard/memberships');
 
   return (
     <DashboardContent>
-      update
+      <UpdateMembershipForm membership={membership.data} />
     </DashboardContent>
   );
 }

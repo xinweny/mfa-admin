@@ -26,6 +26,7 @@ import { MembersFormSection } from './members-form-section';
 import { AddressFormSection } from './address-form-section';
 
 import { createMembership } from '../../actions';
+import { handleError } from '@/core/api/utils';
 
 export function CreateMembershipForm() {
   const form = useForm<CreateMembershipSchema>({
@@ -51,30 +52,32 @@ export function CreateMembershipForm() {
   });
 
   const onSubmit = async (data: CreateMembershipSchema) => {
-    const res = await createMembership({
-      membershipType: data.membershipType,
-      startDate: data.startDate,
-      address: data.address.length === 1
-        ? {
-          line1: data.address[0].line1,
-          line2: data.address[0].line2 || null,
-          city: data.address[0].city,
-          postalCode: data.address[0].postalCode,
-          province: data.address[0].province,
-        }
-        : null,
-      members: data.members.map(m => ({
-        firstName: m.firstName,
-        lastName: m.lastName,
-        email: m.email,
-        phoneNumber: m.phoneNumber || null,
-        joinedDate: m.joinedDate,
-      })),
-    });
+    try {
+      await createMembership({
+        membershipType: data.membershipType,
+        startDate: data.startDate,
+        address: data.address.length === 1
+          ? {
+            line1: data.address[0].line1,
+            line2: data.address[0].line2 || null,
+            city: data.address[0].city,
+            postalCode: data.address[0].postalCode,
+            province: data.address[0].province,
+          }
+          : null,
+        members: data.members.map(m => ({
+          firstName: m.firstName,
+          lastName: m.lastName,
+          email: m.email,
+          phoneNumber: m.phoneNumber || null,
+          joinedDate: m.joinedDate,
+        })),
+      });
 
-    res.error
-      ? toast.error(res.error)
-      : toast.success('Membership created successfully.');
+      toast.success('Membership created successfully.');
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return (
