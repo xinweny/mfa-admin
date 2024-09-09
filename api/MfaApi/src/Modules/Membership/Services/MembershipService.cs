@@ -9,8 +9,12 @@ public class MembershipService: IMembershipService {
         _membershipRepository = membershipRepository;
     }
 
-    public async Task CreateMembership(CreateMembershipRequest req) {
-        await _membershipRepository.CreateMembership(req.ToMembership());
+    public async Task<CreateMembershipResponse> CreateMembership(CreateMembershipRequest req) {
+        var membership = req.ToMembership();
+
+        await _membershipRepository.CreateMembership(membership);
+
+        return membership.ToCreateMembershipResponse();
     }
 
     public async Task DeleteMembership(Guid id) {

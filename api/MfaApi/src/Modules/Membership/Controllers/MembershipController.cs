@@ -46,9 +46,11 @@ public class MembershipController: ControllerBase {
     public async Task<IActionResult> CreateMembershipAsync(
         [FromBody] CreateMembershipRequest body
     ) {
-        await _membershipService.CreateMembership(body);
+        var membership = await _membershipService.CreateMembership(body);
 
-        return Ok();
+        return Ok(new ApiResponse<CreateMembershipResponse> {
+            Data = membership,
+        });
     }
 
     [HttpPut("{membershipId}")]

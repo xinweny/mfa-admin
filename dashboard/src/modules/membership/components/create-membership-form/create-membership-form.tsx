@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast from 'react-hot-toast';
 
 import { MembershipType, membershipTypeLabels } from '../../types';
 import { Province } from '@/modules/address/types';
@@ -23,6 +24,7 @@ import {
 
 import { MembersFormSection } from './members-form-section';
 import { AddressFormSection } from './address-form-section';
+
 import { createMembership } from '../../actions';
 
 export function CreateMembershipForm() {
@@ -69,6 +71,10 @@ export function CreateMembershipForm() {
         joinedDate: m.joinedDate,
       })),
     });
+
+    res.error
+      ? toast.error(res.error)
+      : toast.success('Membership created successfully.');
   };
 
   return (
@@ -88,6 +94,7 @@ export function CreateMembershipForm() {
                 value={field.value}
                 onChange={(value) => {
                   field.onChange(+value);
+                  form.resetField('members');
                 }}
                 options={Object.entries(membershipTypeLabels).map(([k, v]) => ({
                   label: v,

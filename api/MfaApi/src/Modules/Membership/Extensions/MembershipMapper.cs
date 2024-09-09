@@ -80,4 +80,10 @@ public static class MembershipMapper {
 
         return membership;
     }
+
+    public static CreateMembershipResponse ToCreateMembershipResponse(this MembershipModel membership) {
+        return new CreateMembershipResponse {
+            Id = membership.Id,
+        };
+    }
 }

@@ -26,8 +26,9 @@ export async function MembershipsPage({
     getMembershipsUrlParams.parse(searchParams)
   );
 
-  const memberships: ApiResponse<GetMembershipsResponse> = await fetch(url)
-    .then(data => data.json());
+  const res = await fetch(url);
+  
+  const memberships: ApiResponse<GetMembershipsResponse> = await res.json();
 
   return (
     <DashboardContent>
