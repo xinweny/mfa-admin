@@ -1,9 +1,9 @@
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { XIcon } from 'lucide-react';
 
-import { MembershipType } from '../../types';
+import { MembershipType } from '../../../types';
 
-import { CreateMembershipSchema } from './schema';
+import { CreateMembershipSchema } from '../schema';
 
 import {
   Card,

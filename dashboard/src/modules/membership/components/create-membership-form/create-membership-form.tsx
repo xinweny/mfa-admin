@@ -4,29 +4,23 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 
-import { MembershipType, membershipTypeLabels } from '../../types';
+import { MembershipType } from '../../types';
 import { Province } from '@/modules/address/types';
 
 import { createMembershipSchema, CreateMembershipSchema } from './schema';
+
+import { handleError } from '@/core/api/utils';
 
 import {
   DashboardForm,
   DashboardFormTitle,
 } from '@/core/form/components/dashboard-form';
-import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
-import { FormInputSelect } from '@/core/form/components/form-input-select';
-import { FormInputDate } from '@/core/form/components/form-input-date';
-import {
-  FormSection,
-  FormSectionHeader,
-  FormSectionContent,
-} from '@/core/form/components/form-section';
 
-import { MembersFormSection } from './members-form-section';
-import { AddressFormSection } from './address-form-section';
+import { MembersFormSection } from './components/members-form-section';
+import { AddressFormSection } from './components/address-form-section';
+import { MembershipFormSection } from './components/membership-form-section';
 
 import { createMembership } from '../../actions';
-import { handleError } from '@/core/api/utils';
 
 export function CreateMembershipForm() {
   const form = useForm<CreateMembershipSchema>({
@@ -84,44 +78,10 @@ export function CreateMembershipForm() {
     <DashboardForm
       form={form}
       onSubmit={onSubmit}
+      submitLabel="Create Membership"
     >
       <DashboardFormTitle title="Create Membership" />
-      <FormSection>
-        <FormSectionHeader>Membership</FormSectionHeader>
-        <FormSectionContent>
-          <DashboardFormField
-            name="membershipType"
-            label="Membership Type"
-            render={(field) => (
-              <FormInputSelect
-                value={field.value}
-                onChange={(value) => {
-                  field.onChange(+value);
-                  form.resetField('members');
-                }}
-                options={Object.entries(membershipTypeLabels).map(([k, v]) => ({
-                  label: v,
-                  value: k,
-                }))}
-                placeholder="Select membership type"
-              />
-            )}
-            className="flex-grow"
-          />
-          <DashboardFormField
-            name="startDate"
-            label="Start Date"
-            render={(field) => (
-              <FormInputDate
-                value={field.value as Date}
-                onChange={field.onChange}
-                toYear={new Date().getFullYear() + 1}
-              />
-            )}
-            className="flex-grow"
-          />
-        </FormSectionContent>
-      </FormSection>
+      <MembershipFormSection />
       <AddressFormSection />
       <MembersFormSection />
     </DashboardForm>

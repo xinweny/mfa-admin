@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-import { Province } from './types';
+import { Province } from '../../types';
 
 export const addressSchema = z.object({
   line1: z.string().min(1),

@@ -1,7 +1,7 @@
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 
-import { CreateMembershipSchema } from './schema';
+import { CreateMembershipSchema } from '../schema';
 
 import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
 
