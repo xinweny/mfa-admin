@@ -10,6 +10,6 @@ export function FormSectionHeader({
   className,
 }: FormSectionHeaderProps) {
   return (
-    <h3 className={cn('text-xl font-semibold border-b mb-2', className)}>{children}</h3>
+    <h3 className={cn('text-xl font-semibold mb-2', className)}>{children}</h3>
   );
 }

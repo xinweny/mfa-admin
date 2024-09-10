@@ -40,7 +40,6 @@ public class DueRepository : IDueRepository
 
     public async Task<DueModel> GetDueById(Guid id) {
         var due = await _context.Dues
-            .AsNoTracking()
             .Include(d => d.Membership)
             .Where(d => d.Id == id)
             .FirstOrDefaultAsync()

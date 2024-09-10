@@ -15,7 +15,7 @@ import { handleError } from '@/core/api/utils';
 import { updateMembership } from '../../actions';
 
 import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection } from '@/core/form/components/form-section';
+import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
 import { MembershipFormFields } from '../membership-form-fields';
 
 interface UpdateMembershipFormProps {
@@ -51,8 +51,9 @@ export function UpdateMembershipForm({
   };
 
   return (
-    <DashboardForm form={form} onSubmit={onSubmit} submitLabel="Save Changes">
+    <DashboardForm form={form} onSubmit={onSubmit} submitLabel="Update Membership">
       <FormSection>
+        <FormSectionHeader>Membership</FormSectionHeader>
         <MembershipFormFields />
       </FormSection>
     </DashboardForm>

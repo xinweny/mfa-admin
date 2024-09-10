@@ -2,18 +2,13 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { UpdateAddressRequest } from '../types';
 import { ErrorResponse } from '@/core/api/types';
 
-export const updateAddress = async (membershipId: string, req: UpdateAddressRequest) => {
+export const deleteAddress = async (membershipId: string) => {
   const res = await fetch(
     `${process.env.MFA_API_URL}/memberships/${membershipId}/address`,
     {
-      method: 'PUT',
-      body: JSON.stringify(req),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      method: 'DELETE',
     }
   );
   

@@ -26,7 +26,6 @@ public class MemberRepository: IMemberRepository {
 
     public async Task<MemberModel> GetMemberById(Guid id) {
         var member = await _context.Members
-            .AsNoTracking()
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null)
             .Include(m => m.Membership)

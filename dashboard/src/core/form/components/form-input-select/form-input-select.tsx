@@ -26,7 +26,7 @@ export function FormInputSelect({
   return (
     <Select
       onValueChange={onChange}
-      value={value.toString()}
+      value={value?.toString()}
     >
       <SelectTrigger>
         <SelectValue placeholder={placeholder}>

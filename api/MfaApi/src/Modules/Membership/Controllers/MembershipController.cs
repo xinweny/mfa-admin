@@ -60,7 +60,9 @@ public class MembershipController: ControllerBase {
     ) {
         await _membershipService.UpdateMembership(membershipId, body);
 
-        return Ok(new {});
+        return Ok(new ApiResponse<object> {
+            Data = null,
+        });
     }
 
     [HttpDelete("{membershipId}")]
@@ -69,6 +71,8 @@ public class MembershipController: ControllerBase {
     ) {
         await _membershipService.DeleteMembership(membershipId);
 
-        return Ok();
+        return Ok(new ApiResponse<object> {
+            Data = null,
+        });
     }
 }

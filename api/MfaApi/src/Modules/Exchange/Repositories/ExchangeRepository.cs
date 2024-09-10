@@ -73,7 +73,6 @@ public class ExchangeRepository : IExchangeRepository
 
     public async Task<IEnumerable<ExchangeModel>> GetExchangesByMemberId(Guid memberId) {
         var exchanges = await _context.Exchanges
-            .AsNoTracking()
             .Where(e => e.MemberId == memberId)
             .OrderByDescending(e => e.Year)
             .ToListAsync();

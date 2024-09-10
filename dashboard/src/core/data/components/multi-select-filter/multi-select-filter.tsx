@@ -1,5 +1,7 @@
 'use client';
 
+import { Key } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,20 +11,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 
-interface MultiSelectFilterProps {
+interface MultiSelectFilterProps<T> {
   options: {
-    value: string;
+    value: T;
     label: string;
   }[];
-  values: string[];
-  onChange: (values: string[]) => void;
+  values: T[];
+  onChange: (values: T[]) => void;
 }
 
-export function MultiSelectFilter({
+export function MultiSelectFilter<T>({
   values,
   options,
   onChange,
-}: MultiSelectFilterProps) {
+}: MultiSelectFilterProps<T>) {
   const selectedOptions = options.filter(o => values.includes(o.value));
 
   return (
@@ -35,7 +37,7 @@ export function MultiSelectFilter({
           {selectedOptions.length === 0
             ? 'All'
             : selectedOptions.map(o => (
-              <Badge key={o.value}>
+              <Badge key={o.value as Key}>
                 {o.label}
               </Badge>
             ))}
@@ -44,7 +46,7 @@ export function MultiSelectFilter({
       <DropdownMenuContent>
         {options.map(({ value, label }) => (
           <DropdownMenuCheckboxItem
-            key={value}
+            key={value as Key}
             checked={!!values.find(v => value === v)}
             onCheckedChange={checked => {
               onChange(checked

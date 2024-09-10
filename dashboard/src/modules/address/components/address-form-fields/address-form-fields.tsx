@@ -6,30 +6,30 @@ import { provinceLabels } from '../../types';
 import { FormSectionContent } from '@/core/form/components/form-section';
 
 interface AddressFormFieldsProps {
-  name: string;
+  name?: string;
 }
 
 export function AddressFormFields({
-  name,
+  name = '',
 }: AddressFormFieldsProps) {
   return (
-    <FormSectionContent className="grid grid-cols-2 grid-rows-3 gap-2">
+    <FormSectionContent className="flex gap-2">
       <DashboardFormField
-        name={`${name}.line1`}
+        name={`${name}line1`}
         label="Line 1"
         render={(field) => (
           <Input placeholder="300 City Centre Dr" {...field} />
         )}
       />
       <DashboardFormField
-        name={`${name}.line2`}
+        name={`${name}line2`}
         label="Line 2"
         render={(field) => (
           <Input {...field} />
         )}
       />
       <DashboardFormField
-        name={`${name}.city`}
+        name={`${name}city`}
         label="City"
         render={(field) => (
           <Input
@@ -39,7 +39,7 @@ export function AddressFormFields({
         )}
       />
       <DashboardFormField
-        name={`${name}.postalCode`}
+        name={`${name}postalCode`}
         label="Postal Code"
         render={(field) => (
           <Input
@@ -49,7 +49,7 @@ export function AddressFormFields({
         )}
       />
       <DashboardFormField
-        name={`${name}.province`}
+        name={`${name}province`}
         label="Province"
         render={(field) => (
           <FormInputSelect

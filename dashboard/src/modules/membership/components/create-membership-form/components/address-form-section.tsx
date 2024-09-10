@@ -3,12 +3,14 @@ import { MinusIcon, PlusIcon } from 'lucide-react';
 
 import { CreateMembershipSchema } from '../schema';
 
-import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
+import {
+  FormSection,
+  FormSectionHeader,
+  FormSectionHeaderButton,
+} from '@/core/form/components/form-section';
 
 import { AddressFormFields } from '@/modules/address/components/address-form-fields';
 import { Province } from '@/modules/address/types';
-import { FormSectionHeaderButton } from '@/core/form/components/form-section-header-button';
-
 
 export function AddressFormSection() {
   const { control } = useFormContext<CreateMembershipSchema>();
@@ -38,7 +40,7 @@ export function AddressFormSection() {
         />
       </FormSectionHeader>
       {fields.map((field, index) => (
-        <AddressFormFields key={field.id} name={`address.${index}`} />
+        <AddressFormFields key={field.id} name={`address.${index}.`} />
       ))}
     </FormSection>
   );

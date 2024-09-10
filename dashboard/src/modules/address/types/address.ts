@@ -1,4 +1,4 @@
-import { Province } from "./province";
+import { Province } from './province';
 
 export interface Address {
   line1: string;

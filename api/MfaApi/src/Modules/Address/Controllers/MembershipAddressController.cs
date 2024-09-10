@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
+using MfaApi.Core.Contracts;
+
 namespace MfaApi.Modules.Address;
 
 [ApiController]
@@ -21,7 +23,9 @@ public class MembershipAddressController: ControllerBase {
     ) {
         await _addressService.CreateAddress(membershipId, body);
 
-        return Ok();
+        return Ok(new ApiResponse<object> {
+            Data = null,
+        });
     }
 
     [HttpPut("")]
@@ -31,7 +35,9 @@ public class MembershipAddressController: ControllerBase {
     ) {
         await _addressService.UpdateAddress(membershipId, body);
 
-        return Ok();
+        return Ok(new ApiResponse<object> {
+            Data = null,
+        });
     }
 
     [HttpDelete("")]
@@ -40,6 +46,8 @@ public class MembershipAddressController: ControllerBase {
     ) {
         await _addressService.DeleteAddress(membershipId);
 
-        return Ok();
+        return Ok(new ApiResponse<object> {
+            Data = null,
+        });
     }
 }

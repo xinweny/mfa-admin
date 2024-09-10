@@ -1,5 +1,7 @@
 'use client';
 
+import { cn } from '@/lib/cn';
+
 import {
   Tabs,
   TabsList,
@@ -14,19 +16,25 @@ interface DashboardTabsProps {
     label: string;
     component: React.ReactNode;
   }[];
+  classNames?: {
+    tabsList?: string;
+    tabsContent?: string;
+    tabsTrigger?: string;
+  };
 }
 
 export function DashboardTabs({
   defaultValue,
   tabs,
+  classNames,
 }: DashboardTabsProps) {
   return (
     <Tabs defaultValue={defaultValue}>
-      <TabsList className="w-full flex-wrap h-auto">
+      <TabsList className={cn('w-full flex-wrap h-auto mb-4', classNames?.tabsList)}>
         {tabs.map(({ value, label }) => (
           <TabsTrigger
             key={value}
-            className="flex-grow"
+            className={cn('flex-grow', classNames?.tabsTrigger)}
             value={value}
           >
             {label}
@@ -34,7 +42,11 @@ export function DashboardTabs({
         ))}
       </TabsList>
       {tabs.map(({ value, component }) => (
-        <TabsContent key={value} value={value}>
+        <TabsContent
+          key={value}
+          value={value}
+          className={cn('border rounded-lg p-8', classNames?.tabsContent)}
+        >
           {component}
         </TabsContent>
       ))}
