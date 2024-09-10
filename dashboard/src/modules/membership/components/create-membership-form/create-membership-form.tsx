@@ -1,13 +1,15 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 
 import { MembershipType } from '../../types';
 import { Province } from '@/modules/address/types';
 
-import { createMembershipSchema, CreateMembershipSchema } from './schema';
+import {
+  createMembershipSchemaResolver,
+  CreateMembershipSchema,
+} from './schema';
 
 import { handleError } from '@/core/api/utils';
 
@@ -42,7 +44,7 @@ export function CreateMembershipForm() {
         joinedDate: new Date(),
       }],
     },
-    resolver: zodResolver(createMembershipSchema),
+    resolver: createMembershipSchemaResolver,
   });
 
   const onSubmit = async (data: CreateMembershipSchema) => {

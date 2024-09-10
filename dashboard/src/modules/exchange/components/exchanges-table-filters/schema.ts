@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { mfaFoundingYear } from '@/core/constants';
 
@@ -17,3 +18,5 @@ export const getExchangesSchema = z.object({
 });
 
 export type GetExchangesSchema = z.infer<typeof getExchangesSchema>;
+
+export const getExchangesSchemaResolver = zodResolver(getExchangesSchema);

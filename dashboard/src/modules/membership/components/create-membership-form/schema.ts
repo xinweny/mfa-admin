@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { membershipSchema } from '../membership-form-fields';
 import { addressSchema } from '@/modules/address/components/address-form-fields';
@@ -11,3 +12,5 @@ export const createMembershipSchema = z.object({
 });
 
 export type CreateMembershipSchema = z.infer<typeof createMembershipSchema>;
+
+export const createMembershipSchemaResolver = zodResolver(createMembershipSchema);

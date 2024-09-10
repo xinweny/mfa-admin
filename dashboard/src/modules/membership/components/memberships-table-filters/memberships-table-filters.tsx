@@ -1,13 +1,12 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { DateRange } from 'react-day-picker';
 
 import { MembershipType, membershipTypeLabels } from '../../types';
 
 import {
-  getMembershipsSchema,
+  getMembershipsSchemaResolver,
   GetMembershipsSchema,
   HasPaidInputValues,
   MembershipTypeInputValues,
@@ -40,7 +39,7 @@ export function MembershipsTableFilters() {
         to: params.sinceFrom || undefined,
       },
     },
-    resolver: zodResolver(getMembershipsSchema),
+    resolver: getMembershipsSchemaResolver,
   });
 
   const handleSubmit = (data: GetMembershipsSchema) => {
@@ -50,7 +49,7 @@ export function MembershipsTableFilters() {
     setParams({
       query: data.query || null,
       yearPaid: data.yearPaid,
-      membershipType: membershipType || null,
+      membershipType: membershipType !== undefined ? membershipType : null,
       hasPaid: hasPaid !== undefined ? hasPaid : null,
       sinceFrom: data.startDateRange.from || null,
       sinceTo: data.startDateRange.to || null,

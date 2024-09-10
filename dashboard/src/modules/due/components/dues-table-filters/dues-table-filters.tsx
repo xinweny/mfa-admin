@@ -1,11 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { DateRange } from 'react-day-picker';
 
 import {
-  getDuesSchema,
+  getDuesSchemaResolver,
   GetDuesSchema,
   MembershipTypeInputValues,
 } from './schema';
@@ -36,7 +35,7 @@ export function DuesTableFilters() {
         to: params.dateTo || undefined,
       },
     },
-    resolver: zodResolver(getDuesSchema),
+    resolver: getDuesSchemaResolver,
   });
 
   const handleSubmit = (data: GetDuesSchema) => {

@@ -1,12 +1,14 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 
 import { GetMembershipResponse, MembershipType } from '../../types';
 
-import { updateMembershipSchema, UpdateMembershipSchema } from './schema';
+import {
+  updateMembershipSchemaResolver,
+  UpdateMembershipSchema,
+} from './schema';
 
 import { handleError } from '@/core/api/utils';
 
@@ -28,7 +30,7 @@ export function UpdateMembershipForm({
       membershipType: membership.membershipType,
       startDate: new Date(membership.startDate),
     },
-    resolver: zodResolver(updateMembershipSchema),
+    resolver: updateMembershipSchemaResolver,
   });
 
   const onSubmit = async (data: UpdateMembershipSchema) => {

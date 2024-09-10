@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { mfaFoundingYear } from '@/core/constants';
 
@@ -29,3 +30,5 @@ export const getMembershipsSchema = z.object({
 });
 
 export type GetMembershipsSchema = z.infer<typeof getMembershipsSchema>;
+
+export const getMembershipsSchemaResolver = zodResolver(getMembershipsSchema);

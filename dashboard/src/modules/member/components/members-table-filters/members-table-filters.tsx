@@ -1,11 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { DateRange } from 'react-day-picker';
 
 import {
-  getMembersSchema,
+  getMembersSchemaResolver,
   GetMembersSchema,
   IsMississaugaResidentInputValues,
 } from './schema';
@@ -33,7 +32,7 @@ export function MembershipsTableFilters() {
         to: params.joinedTo || undefined,
       },
     },
-    resolver: zodResolver(getMembersSchema),
+    resolver: getMembersSchemaResolver,
   });
 
   const handleSubmit = (data: GetMembersSchema) => {

@@ -1,12 +1,11 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  getExchangesSchema,
   GetExchangesSchema,
   ExchangeTypeInputValues,
+  getExchangesSchemaResolver,
 } from './schema';
 
 import { ExchangeType, exchangeTypeLabels } from '../../types';
@@ -26,7 +25,7 @@ export function ExchangesTableFilters() {
       year: params.year || undefined,
       exchangeType: exchangeTypeValues.find(e => e.value === params.exchangeType)?.inputValue || ExchangeTypeInputValues.All,
     },
-    resolver: zodResolver(getExchangesSchema),
+    resolver: getExchangesSchemaResolver,
   });
 
   const handleSubmit = (data: GetExchangesSchema) => {

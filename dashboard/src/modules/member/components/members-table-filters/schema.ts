@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export enum IsMississaugaResidentInputValues {
   All = 'null',
@@ -16,3 +17,5 @@ export const getMembersSchema = z.object({
 });
 
 export type GetMembersSchema = z.infer<typeof getMembersSchema>;
+
+export const getMembersSchemaResolver = zodResolver(getMembersSchema);

@@ -19,7 +19,7 @@ const parsers = {
   yearPaid: parseAsInteger.withDefault(new Date().getFullYear()),
   hasPaid: parseAsBoolean,
   query: parseAsString,
-  membershipType: parseAsStringEnum(Object.values(MembershipType).map(v => v.toString())),
+  membershipType: parseAsNumberLiteral(Object.values(MembershipType) as number[]),
   sortStartDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   sinceFrom: parseAsIsoDateTime,
   sinceTo: parseAsIsoDateTime,
