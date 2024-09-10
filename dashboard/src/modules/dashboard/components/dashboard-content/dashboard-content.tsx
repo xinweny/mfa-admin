@@ -6,7 +6,7 @@ export function DashboardContent({
   children,
 }: DashboardContentProps) {
   return (
-    <main className="p-4">
+    <main className="flex flex-col p-4 gap-4">
       {children}
     </main>
   );

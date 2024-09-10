@@ -92,4 +92,17 @@ public class MembershipRepository: IMembershipRepository
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<MembershipModel>> GetMembershipWithDues(int year) {
+        var query = _context.Memberships
+            .AsNoTracking()
+            .AsQueryable();
+
+        query = query
+            .Include(m => m.Dues.Where(d => d.Year == year));
+
+        query = query.Where(m => m.StartDate.Year <= year);
+
+        return await query.ToListAsync();
+    }
 }

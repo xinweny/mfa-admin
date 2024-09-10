@@ -2,7 +2,6 @@ import {
   useQueryStates,
   parseAsInteger,
   parseAsString,
-  parseAsStringEnum,
   createSerializer,
   parseAsBoolean,
   parseAsIsoDateTime,
