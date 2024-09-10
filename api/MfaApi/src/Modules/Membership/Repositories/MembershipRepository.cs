@@ -32,7 +32,6 @@ public class MembershipRepository: IMembershipRepository
 
     public async Task<MembershipModel> GetMembershipById(Guid id) {
         var membership = await _context.Memberships
-            .AsNoTracking()
             .Where(m => m.Id == id)
             .Include(m => m.Address)
             .Include(m => m.Members)
@@ -84,7 +83,10 @@ public class MembershipRepository: IMembershipRepository
     public async Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req) {
         membership.UpdatedAt = DateTime.UtcNow;
 
-        _context.Memberships.Entry(membership).CurrentValues.SetValues(req);
+        _context.Memberships.Entry(membership).CurrentValues.SetValues(new {
+            req.MembershipType,
+            StartDate = DateOnly.FromDateTime(req.StartDate),
+        });
 
         _validator.ValidateAndThrow(membership);
         

@@ -60,7 +60,7 @@ public class MembershipController: ControllerBase {
     ) {
         await _membershipService.UpdateMembership(membershipId, body);
 
-        return Ok();
+        return Ok(new {});
     }
 
     [HttpDelete("{membershipId}")]

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { SelectSingleEventHandler } from 'react-day-picker';
 
 import { cn } from '@/lib/cn';
 
@@ -13,9 +14,10 @@ import { Button } from '@/components/ui/button';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 
+
 interface FormInputDateProps {
   value: Date | undefined;
-  onChange: (e: any) => void;
+  onChange: (date: any) => void;
   fromYear?: number;
   toYear?: number;
 }
@@ -48,8 +50,10 @@ export function FormInputDate({
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           initialFocus
+          mode="single"
           captionLayout="dropdown-buttons"
           selected={value}
+          defaultMonth={value}
           onSelect={onChange}
           numberOfMonths={1}
           fromYear={fromYear}
