@@ -116,12 +116,12 @@ public class MemberRepository: IMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<int> GetMembersCount(GetMembersSummaryRequest? req) {
+    public async Task<int> GetMembersCount(bool? mississaugaOnly) {
         var query = _context.Members
             .AsNoTracking()
             .AsQueryable();
 
-        if (req?.IsMississaugaResident == true) {
+        if (mississaugaOnly == true) {
             query = query
                 .Include(m => m.Membership)
                 .ThenInclude(m => m != null ? m.Address : null)
