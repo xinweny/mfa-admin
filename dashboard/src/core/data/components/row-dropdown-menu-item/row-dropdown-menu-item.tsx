@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 
 interface RowDropdownMenuItemProps {
-  onClick: () => void;
+  onClick?: () => void;
   icon: LucideIcon;
   label: string;
   className?: string;
