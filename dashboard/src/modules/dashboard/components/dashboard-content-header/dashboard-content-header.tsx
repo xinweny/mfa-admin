@@ -16,14 +16,3 @@ export function DashboardContentHeader({
   );
 }
 
-interface DashboardContentHeadingProps {
-  text: string;
-}
-
-export function DashboardContentHeading({
-  text,
-}: DashboardContentHeadingProps) {
-  return (
-    <h1 className="text-3xl font-bold">{text}</h1>
-  );
-}

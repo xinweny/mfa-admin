@@ -9,7 +9,7 @@ import { GetExchangesResponse } from '../../types';
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import {
   DashboardContentHeader,
-  DashboardContentHeading,
+  DashboardContentTitle,
 } from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
@@ -34,7 +34,7 @@ export async function ExchangesPage({
   return (
     <DashboardContent>
       <DashboardContentHeader>
-        <DashboardContentHeading text="Hosts & Delegates" />
+        <DashboardContentTitle title="Hosts & Delegates" />
       </DashboardContentHeader>
       <DataTableContainer>
         <ExchangesTableFilters />

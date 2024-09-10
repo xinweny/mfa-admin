@@ -46,9 +46,10 @@ export function UpsertAddressForm({
 
       if (address === null) {
         await createAddress(membershipId, addr);
-        toast.success('Address added successfully');
+        toast.success('Address added successfully.');
       } else {
         await updateAddress(membershipId, addr);
+        toast.success('Address updated successfully.');
       }
     } catch (err) {
       handleError(err);

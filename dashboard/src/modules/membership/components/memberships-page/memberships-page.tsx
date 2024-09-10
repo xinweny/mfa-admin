@@ -6,7 +6,7 @@ import { DashboardContent } from '@/modules/dashboard/components/dashboard-conte
 import { MembershipsTable } from '../memberships-table';
 import {
   DashboardContentHeader,
-  DashboardContentHeading,
+  DashboardContentTitle,
 } from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { MembershipsTableFilters } from '../memberships-table-filters';
@@ -33,7 +33,7 @@ export async function MembershipsPage({
   return (
     <DashboardContent>
       <DashboardContentHeader>
-        <DashboardContentHeading text="Memberships" />
+        <DashboardContentTitle title="Memberships" />
         <CreateEntityLinkButton
           path="memberships/new"
           label="Membership"

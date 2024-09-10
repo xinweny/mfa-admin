@@ -46,7 +46,7 @@ export function DashboardForm<T extends FieldValues>({
           <Button
             type="submit"
             className={"flex-grow"}
-            disabled={!form.formState.isDirty || form.formState.isSubmitting || form.formState.isSubmitted}
+            disabled={!form.formState.isDirty || form.formState.isSubmitting}
           >
             {submitLabel}
           </Button>

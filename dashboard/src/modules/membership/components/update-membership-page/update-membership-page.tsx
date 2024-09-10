@@ -4,7 +4,7 @@ import { ApiResponse } from '@/core/api/types';
 import { GetMembershipResponse } from '../../types';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
-import { DashboardContentHeader, DashboardContentHeading } from '@/modules/dashboard/components/dashboard-content-header';
+import { DashboardContentHeader, DashboardContentTitle } from '@/modules/dashboard/components/dashboard-content-header';
 
 import { UpdateMembershipForm } from '../update-membership-form';
 import { BackButton } from '@/modules/dashboard/components/back-button';
@@ -31,7 +31,13 @@ export async function UpdateMembershipPage({
   return (
     <DashboardContent>
       <DashboardContentHeader>
-        <DashboardContentHeading text="Edit Membership" />
+        <DashboardContentTitle
+          title="Edit Membership"
+          description={membership.data.members
+            ? membership.data.members.map(m => `${m.firstName} ${m.lastName}`).join(', ')
+            : undefined
+          }
+        />
         <BackButton href={`/dashboard/memberships/${membership.data.id}`} />
       </DashboardContentHeader>
       <DashboardTabs
