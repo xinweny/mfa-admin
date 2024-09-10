@@ -53,7 +53,6 @@ export function UpdateMembershipForm({
 
   return (
     <DashboardForm form={form} onSubmit={onSubmit}>
-      <DashboardFormTitle title="Edit Membership" />
       <FormSection>
         <FormSectionContent>
           <DashboardFormField
