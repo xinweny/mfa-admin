@@ -12,6 +12,7 @@ import { DataTableSortButton } from '@/core/data/components/data-table-sort-butt
 import { MemberRowDropdownMenu } from './components/member-row-dropdown-menu';
 import { MembershipTypeCell } from './components/membership-type-cell';
 import { MississaugaResidentCell } from './components/mississauga-resident-cell';
+import { MemberPageLink } from './components/member-page-link';
 
 export interface MemberColumns {
   id: string;
@@ -36,6 +37,9 @@ export const columns: ColumnDef<MemberColumns>[] = [
         label="First Name"
       />
     ),
+    cell: ({ row: { original: { id, firstName } } }) => (
+      <MemberPageLink memberId={id}>{firstName}</MemberPageLink>
+    ),
   },
   {
     accessorKey: 'lastName',
@@ -44,6 +48,9 @@ export const columns: ColumnDef<MemberColumns>[] = [
         name="sortLastName"
         label="Last Name"
       />
+    ),
+    cell: ({ row: { original: { id, lastName } } }) => (
+      <MemberPageLink memberId={id}>{lastName}</MemberPageLink>
     ),
   },
   {
