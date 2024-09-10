@@ -56,11 +56,6 @@ export async function UpdateMembershipPage({
               address={membership.data.address}
             />,
           },
-          {
-            value: 'Members',
-            label: 'Members',
-            component: null,
-          },
         ]}
       />
     </DashboardContent>

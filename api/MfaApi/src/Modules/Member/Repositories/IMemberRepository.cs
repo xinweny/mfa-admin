@@ -6,4 +6,5 @@ public interface IMemberRepository {
     Task CreateMember(MemberModel member);
     Task UpdateMember(MemberModel member, UpdateMemberRequest req);
     Task DeleteMember(MemberModel member);
+    Task<int> GetMembersCount();
 }

@@ -71,4 +71,13 @@ public class MemberController: ControllerBase {
 
         return Ok();
     }
+
+    [HttpGet("summary")]
+    public async Task<IActionResult> GetMembersSummaryAsync() {
+        var summary = await _memberService.GetMembersSummary();
+
+        return Ok(new ApiResponse<GetMembersSummaryResponse> {
+            Data = summary,
+        });
+    }
 }

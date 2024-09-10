@@ -115,4 +115,8 @@ public class MemberRepository: IMemberRepository {
 
         await _context.SaveChangesAsync();
     }
+
+    public async Task<int> GetMembersCount() {
+        return await _context.Members.CountAsync();
+    }
 }

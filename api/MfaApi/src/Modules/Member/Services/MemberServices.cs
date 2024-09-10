@@ -41,4 +41,12 @@ public class MemberService : IMemberService
 
         await _memberRepository.DeleteMember(member);
     }
+
+    public async Task<GetMembersSummaryResponse> GetMembersSummary() {
+        int totalCount = await _memberRepository.GetMembersCount();
+
+        return new GetMembersSummaryResponse {
+            TotalCount = totalCount,
+        };
+    }
 }

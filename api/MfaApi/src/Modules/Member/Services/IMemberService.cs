@@ -8,4 +8,5 @@ public interface IMemberService {
     Task UpdateMember(Guid id, UpdateMemberRequest req);
     Task CreateMember(CreateMemberRequest req);
     Task DeleteMember(Guid id);
+    Task<GetMembersSummaryResponse> GetMembersSummary();
 }
