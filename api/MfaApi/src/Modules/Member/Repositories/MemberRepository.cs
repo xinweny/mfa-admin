@@ -116,7 +116,20 @@ public class MemberRepository: IMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<int> GetMembersCount() {
-        return await _context.Members.CountAsync();
+    public async Task<int> GetMembersCount(GetMembersSummaryRequest? req) {
+        var query = _context.Members
+            .AsNoTracking()
+            .AsQueryable();
+
+        if (req?.IsMississaugaResident == true) {
+            query = query
+                .Include(m => m.Membership)
+                .ThenInclude(m => m != null ? m.Address : null)
+                .Where(m => m.Membership != null
+                    && m.Membership.Address != null
+                    && m.Membership.Address.City.ToLower() == "mississauga");
+        }
+
+        return await query.CountAsync();
     }
 }
