@@ -116,20 +116,20 @@ public class MemberRepository: IMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<int> GetMembersCount(bool? mississaugaOnly) {
+    public async Task<GetMembersSummaryResponse?> GetMembersSummary() {
         var query = _context.Members
             .AsNoTracking()
-            .AsQueryable();
-
-        if (mississaugaOnly == true) {
-            query = query
-                .Include(m => m.Membership)
+            .AsQueryable()
+            .Include(m => m.Membership)
                 .ThenInclude(m => m != null ? m.Address : null)
-                .Where(m => m.Membership != null
+            .GroupBy(m => true)
+            .Select((g) => new GetMembersSummaryResponse {
+                TotalCount = g.Count(),
+                MississaugaCount = g.Count(m => m.Membership != null
                     && m.Membership.Address != null
-                    && m.Membership.Address.City.ToLower() == "mississauga");
-        }
+                    && m.Membership.Address.City.ToLower() == "mississauga")
+            });
 
-        return await query.CountAsync();
+        return await query.SingleOrDefaultAsync();
     }
 }

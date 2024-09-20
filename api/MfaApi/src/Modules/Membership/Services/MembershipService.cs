@@ -44,30 +44,9 @@ public class MembershipService: IMembershipService {
         await _membershipRepository.UpdateMembership(membership, req);
     }
 
-    public async Task<GetMembershipsSummaryResponse> GetMembershipsSummary(GetMembershipsSummaryRequest req) {
-        var memberships = await _membershipRepository.GetMembershipWithDues(req.DueYear);
+    public async Task<GetMembershipsSummaryResponse?> GetMembershipsSummary(GetMembershipsSummaryRequest req) {
+        var summary = await _membershipRepository.GetMembershipsSummary(req);
 
-        if (memberships.Count() == 0) {
-            return new GetMembershipsSummaryResponse {
-                TotalYearlyDuesOwed = 0,
-                TotalYearlyDuesPaid = 0,
-            };
-        }
-
-        return new GetMembershipsSummaryResponse {
-            TotalYearlyDuesOwed = memberships
-                .Select(m => {
-                    return m.MembershipType switch {
-                        MembershipType.Single => MfaConstants.SingleMembershipCost,
-                        MembershipType.Family => MfaConstants.FamilyMembershipCost,
-                        _ => 0,
-                    };
-                })
-                .Aggregate((a, b) => a + b),
-            TotalYearlyDuesPaid = memberships
-                .Where(m => m.Dues.Count > 0)
-                .Select(m => m.Dues.First().AmountPaid)
-                .Aggregate((a, b) => a + b),
-        };
+        return summary;
     }
 }

@@ -33,7 +33,12 @@ export function DueYearSelect() {
           { length: new Date().getFullYear() - mfaFoundingYear + 1 },
           (_, i) => mfaFoundingYear + i
         ).map(year => (
-          <SelectItem value={year.toString()}>{year}</SelectItem>
+          <SelectItem
+            key={year}
+            value={year.toString()}
+          >
+              {year}
+            </SelectItem>
         ))}
       </SelectContent>
     </Select>

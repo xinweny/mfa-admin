@@ -13,9 +13,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import { DuesPieChart } from './components/dues-pie-chart';
-import { DueYearSelect } from './components/due-year-select';
-
 interface DuesChartProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
@@ -38,15 +35,10 @@ export async function DuesChart({
 
   return (
     <Card className="bg-secondary">
-      <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">
+      <CardHeader>
         <CardTitle>Membership Dues</CardTitle>
-        <DueYearSelect />
       </CardHeader>
       <CardContent className="p-4">
-        <DuesPieChart
-          amountOwed={summary.data.totalDues}
-          amountPaid={summary.data.totalDuesPaid}
-        />
       </CardContent>
     </Card>
   );

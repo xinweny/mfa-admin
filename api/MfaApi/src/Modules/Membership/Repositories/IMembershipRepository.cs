@@ -7,5 +7,5 @@ public interface IMembershipRepository {
     Task UpdateMembership(MembershipModel membership, UpdateMembershipRequest req);
     Task DeleteMembership(MembershipModel membership);
 
-    Task<IEnumerable<MembershipModel>> GetMembershipWithDues(int year);
+    Task<GetMembershipsSummaryResponse?> GetMembershipsSummary(GetMembershipsSummaryRequest req);
 }

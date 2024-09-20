@@ -1,4 +1,4 @@
 export interface GetMembershipsSummaryResponse {
-  totalYearlyDuesPaid: number;
-  totalYearlyDuesOwed: number;
+  totalDues: number;
+  totalDuesPaid: number;
 }

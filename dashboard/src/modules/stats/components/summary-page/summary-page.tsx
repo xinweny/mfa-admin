@@ -13,7 +13,9 @@ export function SummaryPage({
   return (
     <DashboardContent>
       <NumberSummaryCards />
-      <DuesChart searchParams={searchParams} />
+      <div className="grid grid-cols-3">
+        <DuesChart searchParams={searchParams} />
+      </div>
     </DashboardContent>
   );
 }

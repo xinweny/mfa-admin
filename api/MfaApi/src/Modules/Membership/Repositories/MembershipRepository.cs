@@ -3,6 +3,7 @@ using FluentValidation;
 
 using MfaApi.Database;
 using MfaApi.Core.Sort;
+using MfaApi.Core.Constants;
 
 namespace MfaApi.Modules.Membership;
 
@@ -93,16 +94,23 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<MembershipModel>> GetMembershipWithDues(int year) {
+    public async Task<GetMembershipsSummaryResponse?> GetMembershipsSummary(GetMembershipsSummaryRequest req) {
         var query = _context.Memberships
             .AsNoTracking()
-            .AsQueryable();
+            .AsQueryable()
+            .Include(m => m.Dues.Where(d => d.Year == req.DueYear))
+            .Where(m => m.StartDate.Year <= req.DueYear)
+            .GroupBy(m => true)
+            .Select((g) => new GetMembershipsSummaryResponse {
+                TotalDues = g.Sum(m => m.MembershipType == MembershipType.Single
+                    ? MfaConstants.SingleMembershipCost
+                    : (m.MembershipType == MembershipType.Family
+                        ? MfaConstants.FamilyMembershipCost
+                        : 0
+                    )),
+                TotalDuesPaid = g.Sum(m => m.Dues.First().AmountPaid),
+            });
 
-        query = query
-            .Include(m => m.Dues.Where(d => d.Year == year));
-
-        query = query.Where(m => m.StartDate.Year <= year);
-
-        return await query.ToListAsync();
+        return await query.SingleOrDefaultAsync();
     }
 }

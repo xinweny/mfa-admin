@@ -42,13 +42,9 @@ public class MemberService : IMemberService
         await _memberRepository.DeleteMember(member);
     }
 
-    public async Task<GetMembersSummaryResponse> GetMembersSummary() {
-        int totalCount = await _memberRepository.GetMembersCount(null);
-        int mississaugaResidentCount = await _memberRepository.GetMembersCount(true);
+    public async Task<GetMembersSummaryResponse?> GetMembersSummary() {
+        var summary = await _memberRepository.GetMembersSummary();
 
-        return new GetMembersSummaryResponse {
-            TotalCount = totalCount,
-            MississaugaRatio = (double) mississaugaResidentCount / totalCount,
-        };
+        return summary;
     }
 }
