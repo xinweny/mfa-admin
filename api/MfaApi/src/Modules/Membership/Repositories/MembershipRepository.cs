@@ -98,7 +98,7 @@ public class MembershipRepository: IMembershipRepository
         var query = _context.Memberships
             .AsNoTracking()
             .AsQueryable()
-            .Include(m => m.Dues.Where(d => d.Year == req.DueYear))
+            .Include(m => m.Dues)
             .Where(m => m.StartDate.Year <= req.DueYear)
             .GroupBy(m => true)
             .Select((g) => new GetMembershipsSummaryResponse {
@@ -108,7 +108,9 @@ public class MembershipRepository: IMembershipRepository
                         ? MfaConstants.FamilyMembershipCost
                         : 0
                     )),
-                TotalDuesPaid = g.Sum(m => m.Dues.First().AmountPaid),
+                TotalDuesPaid = g.Sum(m => m.Dues.Where(d => d.Year == req.DueYear).Count() == 0
+                    ? 0
+                    : m.Dues.First().AmountPaid),
             });
 
         return await query.SingleOrDefaultAsync();
