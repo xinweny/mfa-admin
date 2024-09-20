@@ -13,8 +13,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import { DuesPieChart } from './components/dues-pie-chart';
-import { DueYearSelect } from './components/due-year-select';
+import { DuesPieChart } from './dues-pie-chart';
+import { DueYearSelect } from './due-year-select';
 
 interface DuesChartProps {
   searchParams: Record<string, string | string[] | undefined>;

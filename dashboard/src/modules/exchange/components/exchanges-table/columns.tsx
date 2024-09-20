@@ -6,9 +6,9 @@ import { DataTableSortButton } from '@/core/data/components/data-table-sort-butt
 
 import { ExchangeType } from '../../types';
 
-import { ExchangeRowDropdownMenu } from './components/exchange-row-dropdown-menu';
-import { ExchangeTypeCell } from './components/exchange-type-cell';
-import { MemberCell } from './components/member-cell';
+import { ExchangeRowDropdownMenu } from './exchange-row-dropdown-menu';
+import { ExchangeTypeCell } from './exchange-type-cell';
+import { MemberCell } from './member-cell';
 
 export interface ExchangeColumns {
   id: string;

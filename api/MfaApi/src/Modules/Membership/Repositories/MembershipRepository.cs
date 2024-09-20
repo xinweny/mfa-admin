@@ -111,6 +111,12 @@ public class MembershipRepository: IMembershipRepository
                 TotalDuesPaid = g.Sum(m => m.Dues.Where(d => d.Year == req.DueYear).Count() == 0
                     ? 0
                     : m.Dues.First().AmountPaid),
+                TotalCount = g.Count(),
+                MembershipTypeCounts = new GetMembershipsSummaryResponse.MembershipTypeCountsDto {
+                    Single = g.Count(m => m.MembershipType == MembershipType.Single),
+                    Family = g.Count(m => m.MembershipType == MembershipType.Family),
+                    Honorary = g.Count(m => m.MembershipType == MembershipType.Honorary),
+                },
             });
 
         return await query.SingleOrDefaultAsync();

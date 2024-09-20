@@ -10,11 +10,11 @@ import { PaymentMethod } from '@/modules/due/types';
 import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
 
 import { AddressDisplay } from '@/modules/address/components/address-display';
-import { PaidStatusCell } from './components/paid-status-cell';
-import { MembersCell } from './components/members-cell';
-import { MembershipTypeCell } from './components/membership-type-cell';
-import { YearPaidHeader } from './components/year-paid-header';
-import { MembershipRowDropdownMenu } from './components/membership-row-dropdown-menu';
+import { PaidStatusCell } from './paid-status-cell';
+import { MembersCell } from './members-cell';
+import { MembershipTypeCell } from './membership-type-cell';
+import { YearPaidHeader } from './year-paid-header';
+import { MembershipRowDropdownMenu } from './membership-row-dropdown-menu';
 
 export interface MembershipColumns {
   id: string;

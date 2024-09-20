@@ -9,10 +9,10 @@ import { MembershipType } from '@/modules/membership/types';
 
 import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
 
-import { MemberRowDropdownMenu } from './components/member-row-dropdown-menu';
-import { MembershipTypeCell } from './components/membership-type-cell';
-import { MississaugaResidentCell } from './components/mississauga-resident-cell';
-import { MemberPageLink } from './components/member-page-link';
+import { MemberRowDropdownMenu } from './member-row-dropdown-menu';
+import { MembershipTypeCell } from './membership-type-cell';
+import { MississaugaResidentCell } from './mississauga-resident-cell';
+import { MemberPageLink } from './member-page-link';
 
 export interface MemberColumns {
   id: string;

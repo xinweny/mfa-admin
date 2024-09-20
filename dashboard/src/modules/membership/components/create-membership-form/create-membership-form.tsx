@@ -18,9 +18,9 @@ import {
   DashboardFormTitle,
 } from '@/core/form/components/dashboard-form';
 
-import { MembersFormSection } from './components/members-form-section';
-import { AddressFormSection } from './components/address-form-section';
-import { MembershipFormSection } from './components/membership-form-section';
+import { MembersFormSection } from './members-form-section';
+import { AddressFormSection } from './address-form-section';
+import { MembershipFormSection } from './membership-form-section';
 
 import { createMembership } from '../../actions';
 
