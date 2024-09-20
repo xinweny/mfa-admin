@@ -14,35 +14,49 @@ import {
   ChartLegendContent,
 } from '@/components/ui/chart';
 
-interface DuesPieChartProps {
-  amountOwed: number;
-  amountPaid: number;
+interface MembershipTypePieChartProps {
+  totalCount: number;
+  membershipTypeCounts: {
+    single: number;
+    family: number;
+    honorary: number;
+  }
 }
 
-export function DuesPieChart({
-  amountOwed,
-  amountPaid,
-}: DuesPieChartProps) {
+export function MembershipTypePieChart({
+  totalCount,
+  membershipTypeCounts,
+}: MembershipTypePieChartProps) {
+  const { single, family, honorary } = membershipTypeCounts;
+
   const data = [
     {
-      label: 'unpaid',
-      value: amountOwed - amountPaid,
+      label: 'single',
+      value: single,
     },
     {
-      label: 'paid',
-      value: amountPaid,
+      label: 'family',
+      value: family,
+    },
+    {
+      label: 'honorary',
+      value: honorary,
     },
   ];
 
   return (
     <ChartContainer config={{
-      unpaid: {
-        label: 'Unpaid',
+      single: {
+        label: 'Single',
         color: cellColors[0],
       },
-      paid: {
-        label: 'Paid',
+      family: {
+        label: 'Family',
         color: cellColors[1],
+      },
+      honorary: {
+        label: 'Honorary',
+        color: cellColors[2],
       },
     }}>
       <PieChart>
@@ -71,7 +85,7 @@ export function DuesPieChart({
                       y={viewBox.cy}
                       className="fill-foreground text-3xl font-bold"
                     >
-                      {`$${amountOwed.toLocaleString()}`}
+                      {totalCount}
                     </tspan>
                     <tspan
                       x={viewBox.cx}
@@ -86,9 +100,9 @@ export function DuesPieChart({
             }}
           />
           <LabelList
-            formatter={(v: number) => `$${v.toLocaleString()}`}
             dataKey="value"
             position="outside"
+            formatter={(v: number) => `${(v / totalCount * 100).toFixed(1)}%`}
           />
         </Pie>
         <ChartLegend content={<ChartLegendContent nameKey="label" />} />
@@ -97,4 +111,4 @@ export function DuesPieChart({
   );
 }
 
-const cellColors = ['#ef4444', '#3b82f6'];
+const cellColors = ['#eab308', '#22c55e', '#3b82f6'];

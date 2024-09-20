@@ -12,14 +12,15 @@ import {
   CardContent,
   CardTitle,
 } from '@/components/ui/card';
+import { MembershipTypePieChart } from './membership-type-pie-chart';
 
-interface DuesChartProps {
+interface MembershipTypeChartProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-export async function DuesChart({
+export async function MembershipTypeChart({
   searchParams,
-}: DuesChartProps) {
+}: MembershipTypeChartProps) {
   const params = getMembershipsSummaryUrlParams.parse(searchParams);
 
   const url = serializeGetMembershipsSummaryUrlParams(
@@ -36,9 +37,13 @@ export async function DuesChart({
   return (
     <Card className="bg-secondary">
       <CardHeader>
-        <CardTitle>Membership Dues</CardTitle>
+        <CardTitle>Membership Types</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
+        <MembershipTypePieChart
+          totalCount={summary.data.totalCount}
+          membershipTypeCounts={summary.data.membershipTypeCounts}
+        />
       </CardContent>
     </Card>
   );

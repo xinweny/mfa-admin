@@ -2,6 +2,7 @@ import { DashboardContent } from '@/modules/dashboard/components/dashboard-conte
 
 import { NumberSummaryCards } from '../number-summary-cards';
 import { DuesChart } from '../dues-chart';
+import { MembershipTypeChart } from '../membership-type-chart';
 
 interface SummaryPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -13,8 +14,9 @@ export function SummaryPage({
   return (
     <DashboardContent>
       <NumberSummaryCards />
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 gap-4">
         <DuesChart searchParams={searchParams} />
+        <MembershipTypeChart searchParams={searchParams} />
       </div>
     </DashboardContent>
   );
