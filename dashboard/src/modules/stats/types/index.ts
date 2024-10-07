@@ -1,2 +1,2 @@
-export * from './get-members-summary-response';
+export * from './get-members-counts-response';
 export * from './get-memberships-summary-response';

@@ -41,10 +41,4 @@ public class MemberService : IMemberService
 
         await _memberRepository.DeleteMember(member);
     }
-
-    public async Task<GetMembersSummaryResponse?> GetMembersSummary() {
-        var summary = await _memberRepository.GetMembersSummary();
-
-        return summary;
-    }
 }

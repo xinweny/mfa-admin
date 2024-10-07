@@ -4,7 +4,6 @@ using FluentValidation;
 
 using MfaApi.Database;
 using MfaApi.Modules.Membership;
-using MfaApi.Core.Constants;
 using MfaApi.Core.Sort;
 
 namespace MfaApi.Modules.Member;
@@ -116,18 +115,18 @@ public class MemberRepository: IMemberRepository {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<GetMembersSummaryResponse?> GetMembersSummary() {
+    public async Task<GetMembersCountsResponse?> GetMembersCounts() {
         var query = _context.Members
             .AsNoTracking()
             .AsQueryable()
             .Include(m => m.Membership)
                 .ThenInclude(m => m != null ? m.Address : null)
             .GroupBy(m => true)
-            .Select((g) => new GetMembersSummaryResponse {
+            .Select(g => new GetMembersCountsResponse {
                 TotalCount = g.Count(),
                 MississaugaCount = g.Count(m => m.Membership != null
                     && m.Membership.Address != null
-                    && m.Membership.Address.City.ToLower() == "mississauga")
+                    && m.Membership.Address.City.ToLower() == "mississauga"),
             });
 
         return await query.SingleOrDefaultAsync();

@@ -1,12 +1,12 @@
 import { ApiResponse } from '@/core/api/types';
-import { GetMembersSummaryResponse } from '../../types';
+import { GetMembersCountsResponse } from '../../types';
 
 import { NumberCard } from '../number-card';
 
 export async function NumberSummaryCards() {
-  const res = await fetch(`${process.env.MFA_API_URL}/members/summary`);
+  const res = await fetch(`${process.env.MFA_API_URL}/members/summary/counts`);
 
-  const summary: ApiResponse<GetMembersSummaryResponse> = await res.json();
+  const summary: ApiResponse<GetMembersCountsResponse> = await res.json();
 
   if (!summary.data) return null;
 

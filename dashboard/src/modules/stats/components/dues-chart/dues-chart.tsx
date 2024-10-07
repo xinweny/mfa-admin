@@ -36,8 +36,6 @@ export async function DuesChart({
 
   if (!summary.data) return null;
 
-  console.log(summary.data);
-
   return (
     <Card className="bg-secondary">
       <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">

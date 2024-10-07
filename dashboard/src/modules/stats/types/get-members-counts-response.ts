@@ -1,4 +1,4 @@
-export interface GetMembersSummaryResponse {
+export interface GetMembersCountsResponse {
   totalCount: number;
   mississaugaCount: number;
 }
