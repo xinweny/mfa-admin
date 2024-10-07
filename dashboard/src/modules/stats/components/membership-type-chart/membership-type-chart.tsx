@@ -1,5 +1,5 @@
 import { ApiResponse } from '@/core/api/types';
-import { GetMembershipsSummaryResponse } from '../../types';
+import { GetMembershipTypeCountsResponse } from '../../types';
 
 import {
   getMembershipsSummaryUrlParams,
@@ -24,13 +24,13 @@ export async function MembershipTypeChart({
   const params = getMembershipsSummaryUrlParams.parse(searchParams);
 
   const url = serializeGetMembershipsSummaryUrlParams(
-    `${process.env.MFA_API_URL}/memberships/summary`,
+    `${process.env.MFA_API_URL}/memberships/summary/membership-types`,
     params
   );
 
   const res = await fetch(url);
 
-  const summary: ApiResponse<GetMembershipsSummaryResponse> = await res.json();
+  const summary: ApiResponse<GetMembershipTypeCountsResponse> = await res.json();
 
   if (!summary.data) return null;
 
@@ -41,8 +41,7 @@ export async function MembershipTypeChart({
       </CardHeader>
       <CardContent className="p-4">
         <MembershipTypePieChart
-          totalCount={summary.data.totalCount}
-          membershipTypeCounts={summary.data.membershipTypeCounts}
+          counts={summary.data}
         />
       </CardContent>
     </Card>

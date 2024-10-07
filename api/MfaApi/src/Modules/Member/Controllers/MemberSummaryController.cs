@@ -17,7 +17,7 @@ public class MemberSummaryController: ControllerBase {
     }
 
     [HttpGet("counts")]
-    public async Task<IActionResult> GetMembersAsync() {
+    public async Task<IActionResult> GetMembersCountsAsync() {
 
         var counts = await _memberSummaryService.GetMembersCounts();
         

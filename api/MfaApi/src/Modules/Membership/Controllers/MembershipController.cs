@@ -75,15 +75,4 @@ public class MembershipController: ControllerBase {
             Data = null,
         });
     }
-
-    [HttpGet("summary")]
-    public async Task<IActionResult> GetMembershipsSummaryAsync(
-        [FromQuery] GetMembershipsSummaryRequest req
-    ) {
-        var summary = await _membershipService.GetMembershipsSummary(req);
-
-        return Ok(new ApiResponse<GetMembershipsSummaryResponse> {
-            Data = summary,
-        });
-    }
 }

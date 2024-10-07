@@ -1,5 +1,5 @@
 import { ApiResponse } from '@/core/api/types';
-import { GetMembershipsSummaryResponse } from '../../types';
+import { GetMembershipDueTotalsResponse } from '../../types';
 
 import {
   getMembershipsSummaryUrlParams,
@@ -26,13 +26,13 @@ export async function DuesChart({
   const params = getMembershipsSummaryUrlParams.parse(searchParams);
 
   const url = serializeGetMembershipsSummaryUrlParams(
-    `${process.env.MFA_API_URL}/memberships/summary`,
+    `${process.env.MFA_API_URL}/memberships/summary/dues`,
     params
   );
 
   const res = await fetch(url);
 
-  const summary: ApiResponse<GetMembershipsSummaryResponse> = await res.json();
+  const summary: ApiResponse<GetMembershipDueTotalsResponse> = await res.json();
 
   if (!summary.data) return null;
 

@@ -43,10 +43,4 @@ public class MembershipService: IMembershipService {
 
         await _membershipRepository.UpdateMembership(membership, req);
     }
-
-    public async Task<GetMembershipsSummaryResponse?> GetMembershipsSummary(GetMembershipsSummaryRequest req) {
-        var summary = await _membershipRepository.GetMembershipsSummary(req);
-
-        return summary;
-    }
 }

@@ -94,14 +94,14 @@ public class MembershipRepository: IMembershipRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<GetMembershipsSummaryResponse?> GetMembershipsSummary(GetMembershipsSummaryRequest req) {
+    public async Task<GetMembershipDueTotalsResponse?> GetMembershipDueTotals(GetMembershipDueTotalsRequest req) {
         var query = _context.Memberships
             .AsNoTracking()
             .AsQueryable()
             .Include(m => m.Dues)
             .Where(m => m.StartDate.Year <= req.DueYear)
             .GroupBy(m => true)
-            .Select((g) => new GetMembershipsSummaryResponse {
+            .Select((g) => new GetMembershipDueTotalsResponse {
                 TotalDues = g.Sum(m => m.MembershipType == MembershipType.Single
                     ? MfaConstants.SingleMembershipCost
                     : (m.MembershipType == MembershipType.Family
@@ -111,12 +111,20 @@ public class MembershipRepository: IMembershipRepository
                 TotalDuesPaid = g.Sum(m => m.Dues.Where(d => d.Year == req.DueYear).Count() == 0
                     ? 0
                     : m.Dues.First().AmountPaid),
-                TotalCount = g.Count(),
-                MembershipTypeCounts = new GetMembershipsSummaryResponse.MembershipTypeCountsDto {
-                    Single = g.Count(m => m.MembershipType == MembershipType.Single),
+            });
+
+        return await query.SingleOrDefaultAsync();
+    }
+
+    public async Task<GetMembershipTypeCountsResponse?> GetMembershipTypeCounts() {
+        var query = _context.Memberships
+            .AsNoTracking()
+            .AsQueryable()
+            .GroupBy(m => true)
+            .Select(g => new GetMembershipTypeCountsResponse {
+                Single = g.Count(m => m.MembershipType == MembershipType.Single),
                     Family = g.Count(m => m.MembershipType == MembershipType.Family),
                     Honorary = g.Count(m => m.MembershipType == MembershipType.Honorary),
-                },
             });
 
         return await query.SingleOrDefaultAsync();

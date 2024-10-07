@@ -15,8 +15,7 @@ import {
 } from '@/components/ui/chart';
 
 interface MembershipTypePieChartProps {
-  totalCount: number;
-  membershipTypeCounts: {
+  counts: {
     single: number;
     family: number;
     honorary: number;
@@ -24,10 +23,11 @@ interface MembershipTypePieChartProps {
 }
 
 export function MembershipTypePieChart({
-  totalCount,
-  membershipTypeCounts,
+  counts,
 }: MembershipTypePieChartProps) {
-  const { single, family, honorary } = membershipTypeCounts;
+  const { single, family, honorary } = counts;
+
+  const totalCount = single + family + honorary;
 
   const data = [
     {
