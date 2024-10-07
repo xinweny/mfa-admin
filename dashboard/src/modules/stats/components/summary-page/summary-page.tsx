@@ -1,6 +1,6 @@
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 
-import { NumberSummaryCards } from '../number-summary-cards';
+import { MemberSummaryCards } from '../member-summary-cards';
 import { DuesChart } from '../dues-chart';
 import { MembershipTypeChart } from '../membership-type-chart';
 
@@ -13,7 +13,7 @@ export function SummaryPage({
 }: SummaryPageProps) {
   return (
     <DashboardContent>
-      <NumberSummaryCards />
+      <MemberSummaryCards />
       <div className="grid grid-cols-3 gap-4">
         <DuesChart searchParams={searchParams} />
         <MembershipTypeChart searchParams={searchParams} />

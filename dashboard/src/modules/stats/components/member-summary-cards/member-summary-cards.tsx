@@ -3,7 +3,7 @@ import { GetMembersCountsResponse } from '../../types';
 
 import { NumberCard } from '../number-card';
 
-export async function NumberSummaryCards() {
+export async function MemberSummaryCards() {
   const res = await fetch(`${process.env.MFA_API_URL}/members/summary/counts`);
 
   const summary: ApiResponse<GetMembersCountsResponse> = await res.json();
