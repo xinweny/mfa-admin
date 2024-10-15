@@ -6,7 +6,7 @@ import {
 import { createSearchParamsCache } from 'nuqs/server';
 
 const parsers = {
-  joinedFrom: parseAsIsoDateTime.withDefault(new Date(new Date().getFullYear(), 1, 1)),
+  joinedFrom: parseAsIsoDateTime.withDefault(new Date(new Date().getFullYear(), 0, 1)),
   joinedTo: parseAsIsoDateTime.withDefault(new Date()),
 };
 

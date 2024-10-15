@@ -13,6 +13,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+import { JoinedDateRangeSelect } from './joined-date-range-select';
+
 interface MembersJoinedDateChartProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
@@ -29,9 +31,7 @@ export async function MembersJoinedDateChart({
 
   const res = await fetch(url);
 
-  const summary: ApiResponse<GetMembersByDateResponse> = await res.json();
-
-  console.log(summary);
+  const summary: ApiResponse<GetMembersByDateResponse[]> = await res.json();
 
   if (!summary.data) return null;
 
@@ -39,6 +39,7 @@ export async function MembersJoinedDateChart({
     <Card className="bg-secondary">
       <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">
         <CardTitle>Members</CardTitle>
+        <JoinedDateRangeSelect />
       </CardHeader>
       <CardContent className="p-4">
       </CardContent>

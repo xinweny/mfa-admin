@@ -70,6 +70,7 @@ public static class MemberMapper {
             Id = member.Id,
             FirstName = member.FirstName,
             LastName = member.LastName,
+            JoinedDate = member.JoinedDate,
             MembershipId = member.MembershipId,
             Membership = membership != null
                 ? new GetMembersByDateResponse.MembershipDto {

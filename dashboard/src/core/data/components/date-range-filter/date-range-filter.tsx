@@ -16,7 +16,7 @@ import { Calendar } from '@/components/ui/calendar';
 
 interface DateRangeFilterProps {
   date: DateRange;
-  onChange: (e: any) => void;
+  onChange: (e?: DateRange) => void;
 }
 
 export function DateRangeFilter({
