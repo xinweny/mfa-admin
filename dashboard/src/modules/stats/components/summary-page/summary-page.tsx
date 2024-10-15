@@ -3,6 +3,7 @@ import { DashboardContent } from '@/modules/dashboard/components/dashboard-conte
 import { MemberSummaryCards } from '../member-summary-cards';
 import { DuesChart } from '../dues-chart';
 import { MembershipTypeChart } from '../membership-type-chart';
+import { MembersJoinedDateChart } from '../members-joined-date-chart';
 
 interface SummaryPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -16,7 +17,8 @@ export function SummaryPage({
       <MemberSummaryCards />
       <div className="grid grid-cols-3 gap-4">
         <DuesChart searchParams={searchParams} />
-        <MembershipTypeChart searchParams={searchParams} />
+        <MembershipTypeChart />
+        <MembersJoinedDateChart searchParams={searchParams} />
       </div>
     </DashboardContent>
   );

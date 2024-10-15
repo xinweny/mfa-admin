@@ -27,7 +27,7 @@ public class MemberSummaryController: ControllerBase {
     }
 
     [HttpGet("joined")]
-    public async Task<IActionResult> GetMembersByDate(GetMembersByDateRequest req) {
+    public async Task<IActionResult> GetMembersByDateAsync([FromQuery] GetMembersByDateRequest req) {
         var members = await _memberSummaryService.GetMembersByDate(req);
 
         return Ok(new ApiResponse<List<GetMembersByDateResponse>> {

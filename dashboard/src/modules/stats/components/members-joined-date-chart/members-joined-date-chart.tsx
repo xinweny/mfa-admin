@@ -31,6 +31,8 @@ export async function MembersJoinedDateChart({
 
   const summary: ApiResponse<GetMembersByDateResponse> = await res.json();
 
+  console.log(summary);
+
   if (!summary.data) return null;
 
   return (
