@@ -12,4 +12,6 @@ public interface IMemberRepository {
     Task DeleteMember(MemberModel member);
 
     Task<GetMembersCountsResponse?> GetMembersCounts();
+
+    Task<IEnumerable<MemberModel>> GetMembersByDate(GetMembersByDateRequest req);
 }
