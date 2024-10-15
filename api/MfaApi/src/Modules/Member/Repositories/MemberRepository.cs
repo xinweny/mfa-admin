@@ -131,4 +131,18 @@ public class MemberRepository: IMemberRepository {
 
         return await query.SingleOrDefaultAsync();
     }
+
+    public async Task<IEnumerable<MemberModel>> GetMembersByDate(GetMembersByDateRequest req) {
+        var query = _context.Members
+            .AsNoTracking()
+            .AsQueryable();
+
+        query = query.Include(m => m.Membership);
+
+        query = query.Where(m => m.JoinedDate >= DateOnly.FromDateTime(req.JoinedFrom));
+
+        query = query.Where(m => m.JoinedDate <= DateOnly.FromDateTime(req.JoinedTo));
+
+        return await query.ToListAsync();
+    }
 }

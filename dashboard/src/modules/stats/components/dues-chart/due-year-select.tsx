@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetMembershipsSummaryUrlParams } from '@/modules/stats/state';
+import { useGetMembershipDuesUrlParams } from '@/modules/stats/state';
 
 import { mfaFoundingYear } from '@/core/constants';
 
@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 
 export function DueYearSelect() {
-  const [{ dueYear }, setParams] = useGetMembershipsSummaryUrlParams();
+  const [{ dueYear }, setParams] = useGetMembershipDuesUrlParams();
 
   return (
     <Select

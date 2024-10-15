@@ -2,8 +2,8 @@ import { ApiResponse } from '@/core/api/types';
 import { GetMembershipDueTotalsResponse } from '../../types';
 
 import {
-  getMembershipsSummaryUrlParams,
-  serializeGetMembershipsSummaryUrlParams,
+  getMembershipDuesUrlParams,
+  serializeGetMembershipDuesUrlParams,
 } from '../../state';
 
 import {
@@ -23,9 +23,9 @@ interface DuesChartProps {
 export async function DuesChart({
   searchParams,
 }: DuesChartProps) {
-  const params = getMembershipsSummaryUrlParams.parse(searchParams);
+  const params = getMembershipDuesUrlParams.parse(searchParams);
 
-  const url = serializeGetMembershipsSummaryUrlParams(
+  const url = serializeGetMembershipDuesUrlParams(
     `${process.env.MFA_API_URL}/memberships/summary/dues`,
     params
   );

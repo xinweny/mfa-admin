@@ -62,4 +62,21 @@ public static class MemberMapper {
                 : null,
         };
     }
+
+    public static GetMembersByDateResponse ToGetMembersByDateResponse(this MemberModel member) {
+        var membership = member.Membership;
+
+        return new GetMembersByDateResponse {
+            Id = member.Id,
+            FirstName = member.FirstName,
+            LastName = member.LastName,
+            MembershipId = member.MembershipId,
+            Membership = membership != null
+                ? new GetMembersByDateResponse.MembershipDto {
+                    Id = membership.Id,
+                    MembershipType = membership.MembershipType,
+                }
+                : null,
+        };
+    }
 }

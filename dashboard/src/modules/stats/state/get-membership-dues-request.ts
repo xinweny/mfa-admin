@@ -9,13 +9,13 @@ const parsers = {
   dueYear: parseAsInteger.withDefault(new Date().getFullYear()),
 };
 
-export const useGetMembershipsSummaryUrlParams = () => {
+export const useGetMembershipDuesUrlParams = () => {
   return useQueryStates(
     parsers,
     { shallow: false }
   );
 };
 
-export const getMembershipsSummaryUrlParams = createSearchParamsCache(parsers);
+export const getMembershipDuesUrlParams = createSearchParamsCache(parsers);
 
-export const serializeGetMembershipsSummaryUrlParams = createSerializer(parsers);
+export const serializeGetMembershipDuesUrlParams = createSerializer(parsers);

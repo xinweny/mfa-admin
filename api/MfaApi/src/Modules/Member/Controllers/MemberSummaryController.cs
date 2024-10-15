@@ -25,4 +25,13 @@ public class MemberSummaryController: ControllerBase {
             Data = counts,
         });
     }
+
+    [HttpGet("joined")]
+    public async Task<IActionResult> GetMembersByDate(GetMembersByDateRequest req) {
+        var members = await _memberSummaryService.GetMembersByDate(req);
+
+        return Ok(new ApiResponse<List<GetMembersByDateResponse>> {
+            Data = members,
+        });
+    }
 }
