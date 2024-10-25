@@ -18,7 +18,9 @@ export function SummaryPage({
       <div className="grid grid-cols-3 gap-4">
         <DuesChart searchParams={searchParams} />
         <MembershipTypeChart />
-        <MembersJoinedDateChart searchParams={searchParams} />
+        <div className="col-span-3">
+          <MembersJoinedDateChart searchParams={searchParams} />
+        </div>
       </div>
     </DashboardContent>
   );

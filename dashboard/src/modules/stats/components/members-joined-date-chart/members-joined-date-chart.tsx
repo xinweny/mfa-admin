@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/card';
 
 import { JoinedDateRangeSelect } from './joined-date-range-select';
+import { MembersJoinedDateLineChart } from './members-joined-date-line-chart';
 
 interface MembersJoinedDateChartProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -38,10 +39,17 @@ export async function MembersJoinedDateChart({
   return (
     <Card className="bg-secondary">
       <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">
-        <CardTitle>Members</CardTitle>
+        <CardTitle>New Member Trends</CardTitle>
         <JoinedDateRangeSelect />
       </CardHeader>
       <CardContent className="p-4">
+        <MembersJoinedDateLineChart
+          members={summary.data}
+          dateRange={{
+            from: params.joinedFrom,
+            to: params.joinedTo,
+          }}
+        />
       </CardContent>
     </Card>
   )
