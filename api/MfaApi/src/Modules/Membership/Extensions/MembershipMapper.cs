@@ -50,6 +50,7 @@ public static class MembershipMapper {
         MembershipModel membership = new MembershipModel {
             MembershipType = req.MembershipType,
             StartDate = DateOnly.FromDateTime(req.StartDate),
+            IsArchived = false,
         };
 
         var addressDto = req.Address;

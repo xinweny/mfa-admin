@@ -22,5 +22,9 @@ public class MembershipConfiguration : IEntityTypeConfiguration<MembershipModel>
             .HasOne(membership => membership.Address)
             .WithOne(address => address.Membership)
             .HasForeignKey<MembershipModel>(membership => membership.AddressId);
+
+        builder
+            .Property(membership => membership.IsArchived)
+            .HasDefaultValue(false);
     }
 }

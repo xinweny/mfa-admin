@@ -1,7 +1,5 @@
 using Bogus;
 
-using MfaApi.Core.Constants;
-
 namespace MfaApi.Modules.Membership;
 
 public class MembershipFaker: Faker<MembershipModel> {

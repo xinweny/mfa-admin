@@ -20,6 +20,8 @@ public class MembershipModel {
     public DateTime CreatedAt { get; set; }
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
+    [Column("is_archived"), Required]
+    public required bool IsArchived { get; set; }
 
     [Column("address_id"), ForeignKey(nameof(Address))]
     public Guid? AddressId { get; set; }
