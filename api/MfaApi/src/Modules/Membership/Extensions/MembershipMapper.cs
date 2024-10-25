@@ -19,6 +19,7 @@ public static class MembershipMapper {
             StartDate = membership.StartDate,
             CreatedAt = membership.CreatedAt,
             UpdatedAt = membership.UpdatedAt,
+            IsActive = membership.IsActive,
         };
     }
 
@@ -43,6 +44,7 @@ public static class MembershipMapper {
                 PaymentMethod = d.PaymentMethod,
                 PaymentDate = d.PaymentDate,
             }).FirstOrDefault(),
+            IsActive = membership.IsActive,
         };
     }
 
@@ -50,7 +52,7 @@ public static class MembershipMapper {
         MembershipModel membership = new MembershipModel {
             MembershipType = req.MembershipType,
             StartDate = DateOnly.FromDateTime(req.StartDate),
-            IsArchived = false,
+            IsActive = true,
         };
 
         var addressDto = req.Address;

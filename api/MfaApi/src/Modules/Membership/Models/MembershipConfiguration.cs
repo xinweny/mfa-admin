@@ -24,7 +24,7 @@ public class MembershipConfiguration : IEntityTypeConfiguration<MembershipModel>
             .HasForeignKey<MembershipModel>(membership => membership.AddressId);
 
         builder
-            .Property(membership => membership.IsArchived)
-            .HasDefaultValue(false);
+            .Property(membership => membership.IsActive)
+            .HasDefaultValue(true);
     }
 }

@@ -7,11 +7,11 @@ import { FormInputDate } from '@/core/form/components/form-input-date';
 import { FormInputSwitch } from '@/core/form/components/form-input-switch';
 
 interface MembershipFormFieldsProps {
-  withArchived?: boolean;
+  withActive?: boolean;
 }
 
 export function MembershipFormFields({
-  withArchived = false,
+  withActive = false,
 }: MembershipFormFieldsProps) {
   return (
     <FormSectionContent>
@@ -45,14 +45,14 @@ export function MembershipFormFields({
         )}
         className="flex-grow"
       />
-      {withArchived && (
+      {withActive && (
         <DashboardFormField
-          name="isArchived"
+          name="isActive"
           render={(field) => (
             <FormInputSwitch
               value={field.value as boolean}
-              label="Archived"
-              description="Archived memberships will be hidden from searches and statistics by default."
+              label="Activate membership"
+              description="Inactive memberships will be excluded from searches and statistics by default."
               onCheckedChange={field.onChange}
             />
           )}

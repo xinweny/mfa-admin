@@ -29,7 +29,7 @@ export function UpdateMembershipForm({
     defaultValues: {
       membershipType: membership.membershipType,
       startDate: new Date(membership.startDate),
-      isArchived: membership.isArchived,
+      isActive: membership.isActive,
     },
     resolver: updateMembershipSchemaResolver,
   });
@@ -55,7 +55,7 @@ export function UpdateMembershipForm({
     <DashboardForm form={form} onSubmit={onSubmit} submitLabel="Update Membership">
       <FormSection>
         <FormSectionHeader>Membership</FormSectionHeader>
-        <MembershipFormFields withArchived />
+        <MembershipFormFields withActive />
       </FormSection>
     </DashboardForm>
   )

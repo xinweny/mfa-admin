@@ -12,5 +12,5 @@ export interface GetMembershipResponse {
   addressId: string | null;
   address: Address | null;
   startDate: string;
-  isArchived: boolean;
+  isActive: boolean;
 }

@@ -4,6 +4,7 @@ using FluentValidation;
 using MfaApi.Database;
 using MfaApi.Core.Sort;
 using MfaApi.Core.Constants;
+using System.Diagnostics;
 
 namespace MfaApi.Modules.Membership;
 
@@ -52,8 +53,10 @@ public class MembershipRepository: IMembershipRepository
             .Include(m => m.Members)
             .Include(m => m.Dues.Where(d => d.Year == req.YearPaid));
 
-        if (!req.ShowArchived) {
-            query = query.Where(m => !m.IsArchived);
+        if (req.IsInactive != null) {
+            query = query.Where(m => (bool) req.IsInactive
+                ? !m.IsActive
+                : m.IsActive);
         }
         
         if (!string.IsNullOrEmpty(req.Query)) {
@@ -91,7 +94,7 @@ public class MembershipRepository: IMembershipRepository
         _context.Memberships.Entry(membership).CurrentValues.SetValues(new {
             req.MembershipType,
             StartDate = DateOnly.FromDateTime(req.StartDate),
-            req.IsArchived,
+            req.IsActive,
         });
 
         _validator.ValidateAndThrow(membership);
@@ -104,6 +107,7 @@ public class MembershipRepository: IMembershipRepository
             .AsNoTracking()
             .AsQueryable()
             .Include(m => m.Dues)
+            .Where(m => m.IsActive)
             .Where(m => m.StartDate.Year <= req.DueYear)
             .GroupBy(m => true)
             .Select((g) => new GetMembershipDueTotalsResponse {
@@ -125,6 +129,7 @@ public class MembershipRepository: IMembershipRepository
         var query = _context.Memberships
             .AsNoTracking()
             .AsQueryable()
+            .Where(m => m.IsActive)
             .GroupBy(m => true)
             .Select(g => new GetMembershipTypeCountsResponse {
                 Single = g.Count(m => m.MembershipType == MembershipType.Single),

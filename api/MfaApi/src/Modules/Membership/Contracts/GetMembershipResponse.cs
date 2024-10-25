@@ -11,6 +11,7 @@ public record GetMembershipResponse {
     public required DateOnly StartDate { get; set; }
     public required DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+    public required bool IsActive { get; set; }
 
     public class MemberDto {
         public required Guid Id { get; set; }

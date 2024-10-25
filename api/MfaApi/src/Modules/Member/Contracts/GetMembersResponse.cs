@@ -18,5 +18,6 @@ public class GetMembersResponse {
         public required MembershipType MembershipType { get; set; }
         public Guid? AddressId { get; set; }
         public AddressDto? Address { get; set; }
+        public required bool IsActive { get; set; }
     }
 }

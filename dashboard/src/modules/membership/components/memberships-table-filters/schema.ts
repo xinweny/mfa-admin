@@ -27,6 +27,7 @@ export const getMembershipsSchema = z.object({
     from: z.optional(z.coerce.date()),
     to: z.optional(z.coerce.date()),
   }),
+  isInactive: z.optional(z.boolean()),
 });
 
 export type GetMembershipsSchema = z.infer<typeof getMembershipsSchema>;

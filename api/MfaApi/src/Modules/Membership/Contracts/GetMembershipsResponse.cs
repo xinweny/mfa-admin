@@ -13,6 +13,7 @@ public record GetMembershipsResponse {
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public DueDto? Due { get; set; }
+    public bool IsActive { get; set; }
 
     public class MemberDto {
         public required Guid Id { get; set; }

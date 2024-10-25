@@ -58,6 +58,7 @@ public static class MemberMapper {
                     MembershipType = membership.MembershipType,
                     AddressId = membership.AddressId,
                     Address = membership.Address?.ToAddressDto(),
+                    IsActive = membership.IsActive,
                 }
                 : null,
         };

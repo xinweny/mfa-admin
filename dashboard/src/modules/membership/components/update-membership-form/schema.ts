@@ -1,12 +1,11 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { MembershipType } from '../../types';
+import { membershipSchema } from '../membership-form-fields';
 
 export const updateMembershipSchema = z.object({
-  membershipType: z.nativeEnum(MembershipType),
-  startDate: z.date(),
-  isArchived: z.boolean(),
+  ...membershipSchema.shape,
+  isActive: z.boolean(),
 });
 
 export type UpdateMembershipSchema = z.infer<typeof updateMembershipSchema>;

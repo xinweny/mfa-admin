@@ -22,6 +22,7 @@ const parsers = {
   sortStartDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   sinceFrom: parseAsIsoDateTime,
   sinceTo: parseAsIsoDateTime,
+  isInactive: parseAsBoolean,
   ...paginationParsers,
 };
 

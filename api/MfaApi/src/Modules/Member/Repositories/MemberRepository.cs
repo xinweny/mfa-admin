@@ -45,8 +45,10 @@ public class MemberRepository: IMemberRepository {
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null);
 
-        if (!req.ShowArchived) {
-            query = query.Where(m => !m.Membership!.IsArchived);
+        if (req.IsInactive != null) {
+            query = query.Where(m => (bool) req.IsInactive
+                ? !m.Membership!.IsActive
+                : m.Membership!.IsActive);
         }
         
         if (!string.IsNullOrEmpty(req.Query)) {
@@ -125,6 +127,7 @@ public class MemberRepository: IMemberRepository {
             .AsQueryable()
             .Include(m => m.Membership)
                 .ThenInclude(m => m != null ? m.Address : null)
+            .Where(m => m.Membership!.IsActive)
             .GroupBy(m => true)
             .Select(g => new GetMembersCountsResponse {
                 TotalCount = g.Count(),
@@ -142,6 +145,8 @@ public class MemberRepository: IMemberRepository {
             .AsQueryable();
 
         query = query.Include(m => m.Membership);
+
+        query = query.Where(m => m.Membership!.IsActive);
 
         query = query.Where(m => m.JoinedDate >= DateOnly.FromDateTime(req.JoinedFrom));
 

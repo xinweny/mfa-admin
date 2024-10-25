@@ -38,6 +38,7 @@ export function MembershipsTableFilters() {
         from: params.sinceFrom || undefined,
         to: params.sinceFrom || undefined,
       },
+      isInactive: params.isInactive || undefined,
     },
     resolver: getMembershipsSchemaResolver,
   });
@@ -53,6 +54,7 @@ export function MembershipsTableFilters() {
       hasPaid: hasPaid !== undefined ? hasPaid : null,
       sinceFrom: data.startDateRange.from || null,
       sinceTo: data.startDateRange.to || null,
+      isInactive: data.isInactive !== undefined ? data.isInactive : null,
     });
   };
 
@@ -122,6 +124,7 @@ export function MembershipsTableFilters() {
         membershipType: MembershipTypeInputValues.All,
         hasPaid: HasPaidInputValues.All,
         startDateRange: {},
+        isInactive: undefined,
       }}
     />
   );
