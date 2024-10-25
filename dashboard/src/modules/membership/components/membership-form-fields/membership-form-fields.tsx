@@ -4,8 +4,15 @@ import { FormSectionContent } from '@/core/form/components/form-section';
 import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
 import { FormInputSelect } from '@/core/form/components/form-input-select';
 import { FormInputDate } from '@/core/form/components/form-input-date';
+import { FormInputSwitch } from '@/core/form/components/form-input-switch';
 
-export function MembershipFormFields() {
+interface MembershipFormFieldsProps {
+  withArchived?: boolean;
+}
+
+export function MembershipFormFields({
+  withArchived = false,
+}: MembershipFormFieldsProps) {
   return (
     <FormSectionContent>
       <DashboardFormField
@@ -38,6 +45,20 @@ export function MembershipFormFields() {
         )}
         className="flex-grow"
       />
+      {withArchived && (
+        <DashboardFormField
+          name="isArchived"
+          render={(field) => (
+            <FormInputSwitch
+              value={field.value as boolean}
+              label="Archived"
+              description="Archived memberships will be hidden from searches and statistics by default."
+              onCheckedChange={field.onChange}
+            />
+          )}
+          className="flex-grow"
+        />
+      )}
     </FormSectionContent>
   );
 }

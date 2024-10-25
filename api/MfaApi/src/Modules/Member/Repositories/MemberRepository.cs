@@ -44,6 +44,10 @@ public class MemberRepository: IMemberRepository {
         query = query
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null);
+
+        if (!req.ShowArchived) {
+            query = query.Where(m => !m.Membership!.IsArchived);
+        }
         
         if (!string.IsNullOrEmpty(req.Query)) {
             query = query.Where(m => EF.Functions.ILike(m.FirstName + m.LastName, $"%{req.Query.Replace(" ", "")}%"));

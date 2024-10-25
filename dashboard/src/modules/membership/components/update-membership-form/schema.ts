@@ -6,6 +6,7 @@ import { MembershipType } from '../../types';
 export const updateMembershipSchema = z.object({
   membershipType: z.nativeEnum(MembershipType),
   startDate: z.date(),
+  isArchived: z.boolean(),
 });
 
 export type UpdateMembershipSchema = z.infer<typeof updateMembershipSchema>;

@@ -20,7 +20,7 @@ import {
 interface DashboardFormFieldProps<T extends FieldValues> {
   name: Path<T>;
   render: (field: ControllerRenderProps<T, Path<T>>) => ReactElement<any, string | JSXElementConstructor<any>>;
-  label: string;
+  label?: string;
   description?: string;
   className?: string;
 }
@@ -40,7 +40,9 @@ export function DashboardFormField<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className={cn('flex flex-col', className)}>
-          <FormLabel className="font-semibold">{label}</FormLabel>
+          {label && (
+            <FormLabel className="font-semibold">{label}</FormLabel>
+          )}
           {description && (
             <FormDescription>{description}</FormDescription>
           )}

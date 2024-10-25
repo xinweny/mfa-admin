@@ -51,6 +51,10 @@ public class MembershipRepository: IMembershipRepository
             .Include(m => m.Address)
             .Include(m => m.Members)
             .Include(m => m.Dues.Where(d => d.Year == req.YearPaid));
+
+        if (!req.ShowArchived) {
+            query = query.Where(m => !m.IsArchived);
+        }
         
         if (!string.IsNullOrEmpty(req.Query)) {
             query = query.Where(m => m.Members
@@ -87,6 +91,7 @@ public class MembershipRepository: IMembershipRepository
         _context.Memberships.Entry(membership).CurrentValues.SetValues(new {
             req.MembershipType,
             StartDate = DateOnly.FromDateTime(req.StartDate),
+            req.IsArchived,
         });
 
         _validator.ValidateAndThrow(membership);
