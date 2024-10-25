@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { BooleanBadge } from '@/core/ui/components/boolean-badge';
 
 interface PaidStatusCellProps {
   startDate: Date;
@@ -35,16 +36,11 @@ export function PaidStatusCell({
 
   const hasPaid = !!due;
 
-  const badge = <Badge
-    className={cn(
-      'text-white',
-      hasPaid
-        ? 'bg-green-800 hover:bg-green-700'
-        : 'bg-red-800 hover:bg-red-700'
-    )}
-  >
-    {hasPaid ? 'Paid' : 'Unpaid'}
-  </Badge>;
+  const badge = <BooleanBadge
+    value={hasPaid}
+    trueLabel="Paid"
+    falseLabel="Unpaid"
+  />
 
   if (!hasPaid) return badge;
 

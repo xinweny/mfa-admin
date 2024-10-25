@@ -51,7 +51,7 @@ export function MembershipFormFields({
           render={(field) => (
             <FormInputSwitch
               value={field.value as boolean}
-              label="Activate membership"
+              label={`${field.value ? 'Active' : 'Inactive'} membership`}
               description="Inactive memberships will be excluded from searches and statistics by default."
               onCheckedChange={field.onChange}
             />

@@ -11,5 +11,5 @@ public class GetMembershipsRequest: PaginationRequest {
     public bool? HasPaid { get; set; }
     public DateTime? SinceFrom { get; set; }
     public DateTime? SinceTo { get; set; }
-    public bool? IsInactive { get; set; }
+    public bool? IsActive { get; set; }
 }

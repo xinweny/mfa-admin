@@ -10,6 +10,7 @@ import {
   GetMembershipsSchema,
   HasPaidInputValues,
   MembershipTypeInputValues,
+  IsActiveInputValues,
 } from './schema';
 
 import { mfaFoundingYear } from '@/core/constants';
@@ -38,7 +39,9 @@ export function MembershipsTableFilters() {
         from: params.sinceFrom || undefined,
         to: params.sinceFrom || undefined,
       },
-      isInactive: params.isInactive || undefined,
+      isActive: params.isActive === null
+        ? IsActiveInputValues.All
+        : params.isActive ? IsActiveInputValues.Active : IsActiveInputValues.Inactive,
     },
     resolver: getMembershipsSchemaResolver,
   });
@@ -46,6 +49,7 @@ export function MembershipsTableFilters() {
   const handleSubmit = (data: GetMembershipsSchema) => {
     const membershipType = membershipTypeValues.find(m => m.inputValue === data.membershipType)?.value;
     const hasPaid = hasPaidValues.find(p => p.inputValue === data.hasPaid)?.value;
+    const isActive = isActiveValues.find(a => a.inputValue === data.isActive)?.value;
 
     setParams({
       query: data.query || null,
@@ -54,7 +58,7 @@ export function MembershipsTableFilters() {
       hasPaid: hasPaid !== undefined ? hasPaid : null,
       sinceFrom: data.startDateRange.from || null,
       sinceTo: data.startDateRange.to || null,
-      isInactive: data.isInactive !== undefined ? data.isInactive : null,
+      isActive: isActive !== undefined ? isActive : null,
     });
   };
 
@@ -117,6 +121,17 @@ export function MembershipsTableFilters() {
             />
           ),
         },
+        {
+          label: 'Activity',
+          name: 'isActive',
+          render: ({ field }) => (
+            <SelectFilter
+              value={field.value as string}
+              onChange={field.onChange}
+              options={isActiveValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+            />
+          ),
+        },
       ]}
       reset={{
         query: '',
@@ -124,7 +139,7 @@ export function MembershipsTableFilters() {
         membershipType: MembershipTypeInputValues.All,
         hasPaid: HasPaidInputValues.All,
         startDateRange: {},
-        isInactive: undefined,
+        isActive: IsActiveInputValues.All,
       }}
     />
   );
@@ -168,6 +183,24 @@ const hasPaidValues = [
     inputValue: HasPaidInputValues.NotPaid,
     value: false,
     label: 'Unpaid',
+  },
+];
+
+const isActiveValues = [
+  {
+    inputValue: IsActiveInputValues.All,
+    value: null,
+    label: 'All',
+  },
+  {
+    inputValue: IsActiveInputValues.Active,
+    value: true,
+    label: 'Active',
+  },
+  {
+    inputValue: IsActiveInputValues.Inactive,
+    value: false,
+    label: 'Inactive',
   },
 ];
 

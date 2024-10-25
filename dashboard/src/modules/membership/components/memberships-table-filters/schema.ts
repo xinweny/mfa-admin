@@ -11,9 +11,15 @@ export enum MembershipTypeInputValues {
 }
 
 export enum HasPaidInputValues {
-  All = 'null',
-  Paid = 'true',
-  NotPaid = 'false',
+  All = 'all',
+  Paid = 'paid',
+  NotPaid = 'not_paid',
+}
+
+export enum IsActiveInputValues {
+  All = 'all',
+  Active = 'active',
+  Inactive = 'inactive'
 }
 
 export const getMembershipsSchema = z.object({
@@ -27,7 +33,7 @@ export const getMembershipsSchema = z.object({
     from: z.optional(z.coerce.date()),
     to: z.optional(z.coerce.date()),
   }),
-  isInactive: z.optional(z.boolean()),
+  isActive: z.nativeEnum(IsActiveInputValues),
 });
 
 export type GetMembershipsSchema = z.infer<typeof getMembershipsSchema>;

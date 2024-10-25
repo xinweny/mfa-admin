@@ -53,10 +53,10 @@ public class MembershipRepository: IMembershipRepository
             .Include(m => m.Members)
             .Include(m => m.Dues.Where(d => d.Year == req.YearPaid));
 
-        if (req.IsInactive != null) {
-            query = query.Where(m => (bool) req.IsInactive
-                ? !m.IsActive
-                : m.IsActive);
+        if (req.IsActive != null) {
+            query = query.Where(m => (bool) req.IsActive
+                ? m.IsActive
+                : !m.IsActive);
         }
         
         if (!string.IsNullOrEmpty(req.Query)) {
