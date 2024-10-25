@@ -11,5 +11,5 @@ public class GetMembersRequest: PaginationRequest {
     public SortOrder? SortFirstName { get; set; }
     public SortOrder? SortLastName { get; set; }
     public SortOrder? SortJoinedDate { get; set; }
-    public bool? IsInactive { get; set; }
+    public bool? IsActive { get; set; }
 }

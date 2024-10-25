@@ -17,6 +17,7 @@ const parsers = {
   joinedFrom: parseAsIsoDateTime,
   joinedTo: parseAsIsoDateTime,
   isMississaugaResident: parseAsBoolean,
+  isActive: parseAsBoolean,
   sortFirstName: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   sortLastName: parseAsNumberLiteral(Object.values(SortOrder) as number[]),
   sortJoinedDate: parseAsNumberLiteral(Object.values(SortOrder) as number[]),

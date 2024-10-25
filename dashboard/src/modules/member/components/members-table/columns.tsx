@@ -12,6 +12,7 @@ import { DataTableSortButton } from '@/core/data/components/data-table-sort-butt
 import { MemberRowDropdownMenu } from './member-row-dropdown-menu';
 import { MembershipTypeCell } from './membership-type-cell';
 import { MississaugaResidentCell } from './mississauga-resident-cell';
+import { StatusCell } from './status-cell';
 import { MemberPageLink } from './member-page-link';
 
 export interface MemberColumns {
@@ -24,6 +25,7 @@ export interface MemberColumns {
   membership: {
     id: string;
     membershipType: MembershipType;
+    isActive: boolean;
   };
   joinedDate: Date | null;
 }
@@ -92,6 +94,13 @@ export const columns: ColumnDef<MemberColumns>[] = [
       />
     ),
     cell: ({ row: { original: { joinedDate } } }) => joinedDate && format(joinedDate, 'dd/LL/yyyy'),
+  },
+  {
+    accessorKey: 'isActive',
+    header: 'Status',
+    cell: ({ row: { original: { membership: { isActive } } } }) => (
+      <StatusCell isActive={isActive}  />
+    ),
   },
   {
     id: 'id',

@@ -45,10 +45,10 @@ public class MemberRepository: IMemberRepository {
             .Include(m => m.Membership)
             .ThenInclude(m => m != null ? m.Address : null);
 
-        if (req.IsInactive != null) {
-            query = query.Where(m => (bool) req.IsInactive
-                ? !m.Membership!.IsActive
-                : m.Membership!.IsActive);
+        if (req.IsActive != null) {
+            query = query.Where(m => (bool) req.IsActive
+                ? m.Membership!.IsActive
+                : !m.Membership!.IsActive);
         }
         
         if (!string.IsNullOrEmpty(req.Query)) {

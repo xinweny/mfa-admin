@@ -23,6 +23,7 @@ export function MembersTable({
       membership: {
         id: m.membershipId,
         membershipType: m.membership.membershipType,
+        isActive: m.membership.isActive,
       },
       address: m.membership.address,
       joinedDate: m.joinedDate ? new Date(m.joinedDate) : null,

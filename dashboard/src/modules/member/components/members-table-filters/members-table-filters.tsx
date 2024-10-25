@@ -11,6 +11,9 @@ import {
 
 import { useGetMembersUrlParams } from '../../state';
 
+import { IsActiveInputValues } from '@/modules/membership/components/memberships-table-filters/schema';
+import { isActiveValues } from '@/modules/membership/components/memberships-table-filters';
+
 import { DataTableFiltersForm } from '@/core/data/components/data-table-filters-form';
 import { SelectFilter } from '@/core/data/components/select-filter';
 import { DateRangeFilter } from '@/core/data/components/date-range-filter';
@@ -31,18 +34,23 @@ export function MembershipsTableFilters() {
         from: params.joinedFrom || undefined,
         to: params.joinedTo || undefined,
       },
+      isActive: params.isActive === null
+        ? IsActiveInputValues.All
+        : params.isActive ? IsActiveInputValues.Active : IsActiveInputValues.Inactive,
     },
     resolver: getMembersSchemaResolver,
   });
 
   const handleSubmit = (data: GetMembersSchema) => {
     const isMississaugaResident = isMississaugaResidentValues.find(r => r.inputValue === data.isMississaugaResident)?.value;
+    const isActive = isActiveValues.find(a => a.inputValue === data.isActive)?.value;
 
     setParams({
       query: data.query || null,
       isMississaugaResident: isMississaugaResident !== undefined ? isMississaugaResident : null,
       joinedFrom: data.joinedDateRange.from || null,
       joinedTo: data.joinedDateRange.to || null,
+      isActive: isActive !== undefined ? isActive : null,
     });
   };
 
@@ -83,11 +91,23 @@ export function MembershipsTableFilters() {
             />
           ),
         },
+        {
+          label: 'Status',
+          name: 'isActive',
+          render: ({ field }) => (
+            <SelectFilter
+              value={field.value as string}
+              onChange={field.onChange}
+              options={isActiveValues.map(({ inputValue, label }) => ({ value: inputValue, label }))}
+            />
+          ),
+        },
       ]}
       reset={{
         query: '',
         isMississaugaResident: IsMississaugaResidentInputValues.All,
         joinedDateRange: {},
+        isActive: IsActiveInputValues.All,
       }}
     />
   );

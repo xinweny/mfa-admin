@@ -186,7 +186,7 @@ const hasPaidValues = [
   },
 ];
 
-const isActiveValues = [
+export const isActiveValues = [
   {
     inputValue: IsActiveInputValues.All,
     value: null,

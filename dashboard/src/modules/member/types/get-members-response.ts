@@ -14,5 +14,6 @@ export interface GetMembersResponse {
     membershipType: MembershipType;
     addressId: string | null;
     address: Address | null;
+    isActive: boolean;
   };
 }
