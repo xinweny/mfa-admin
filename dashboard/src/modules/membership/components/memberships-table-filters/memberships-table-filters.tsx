@@ -111,7 +111,7 @@ export function MembershipsTableFilters() {
           ),
         },
         {
-          label: 'Paid Status',
+          label: 'Paid',
           name: 'hasPaid',
           render: ({ field }) => (
             <SelectFilter
@@ -122,7 +122,7 @@ export function MembershipsTableFilters() {
           ),
         },
         {
-          label: 'Activity',
+          label: 'Status',
           name: 'isActive',
           render: ({ field }) => (
             <SelectFilter

@@ -14,6 +14,7 @@ import { PaidStatusCell } from './paid-status-cell';
 import { MembersCell } from './members-cell';
 import { MembershipTypeCell } from './membership-type-cell';
 import { YearPaidHeader } from './year-paid-header';
+import { StatusCell } from './status-cell';
 import { MembershipRowDropdownMenu } from './membership-row-dropdown-menu';
 
 export interface MembershipColumns {
@@ -33,6 +34,7 @@ export interface MembershipColumns {
     amountPaid: number;
     paymentMethod: PaymentMethod;
   } | null;
+  isActive: boolean;
 }
 
 export const columns: ColumnDef<MembershipColumns>[] = [
@@ -75,6 +77,13 @@ export const columns: ColumnDef<MembershipColumns>[] = [
     header: () => <YearPaidHeader />,
     cell: ({ row: { original: { due, startDate } } }) => (
       <PaidStatusCell due={due} startDate={startDate}  />
+    ),
+  },
+  {
+    accessorKey: 'isActive',
+    header: 'Status',
+    cell: ({ row: { original: { isActive } } }) => (
+      <StatusCell isActive={isActive}  />
     ),
   },
   {

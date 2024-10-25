@@ -1,18 +1,16 @@
 import { format } from 'date-fns';
 
-import { cn } from '@/lib/cn';
-
 import { PaymentMethod, paymentMethodLabels } from '@/modules/due/types';
 
 import { useGetMembershipsUrlParams } from '@/modules/membership/state';
 
-import { Badge } from '@/components/ui/badge';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+
 import { BooleanBadge } from '@/core/ui/components/boolean-badge';
 
 interface PaidStatusCellProps {

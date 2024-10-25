@@ -26,6 +26,7 @@ export function MembershipsTable({
           paymentDate: m.due.paymentDate ? new Date(m.due.paymentDate) : null,
         }
         : null,
+      isActive: m.isActive,
     };
   });
 

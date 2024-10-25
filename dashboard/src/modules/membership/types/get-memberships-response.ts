@@ -22,4 +22,5 @@ export interface GetMembershipsResponse {
   startDate: string;
   createdAt: string;
   updatedAt: string | null;
+  isActive: boolean;
 }
