@@ -39,7 +39,7 @@ export async function MembersJoinedDateChart({
   return (
     <Card className="bg-secondary h-96 flex flex-col">
       <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">
-        <CardTitle>New Member Trends</CardTitle>
+        <CardTitle>New Members</CardTitle>
         <JoinedDateRangeSelect />
       </CardHeader>
       <CardContent className="p-4 flex-shrink">

@@ -7,7 +7,6 @@ import {
   YAxis,
   Line,
   Tooltip,
-  CartesianGrid,
 } from 'recharts';
 import { eachDayOfInterval, isSameDay } from 'date-fns';
 
@@ -43,7 +42,7 @@ export function MembersJoinedDateLineChart({
     };
   });
   return (
-    <ChartContainer config={{}}>
+    <ChartContainer config={{}} className="max-h-[250px] w-full">
       <LineChart data={data}>
         <YAxis dataKey="count" />
         <Tooltip content={<MemberCountTooltip />} />
@@ -54,7 +53,6 @@ export function MembersJoinedDateLineChart({
           dataKey="count"
           dot={false}
         />
-        <CartesianGrid />
       </LineChart>
     </ChartContainer>
   );
