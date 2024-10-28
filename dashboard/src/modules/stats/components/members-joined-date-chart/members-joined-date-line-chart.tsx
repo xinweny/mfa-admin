@@ -1,18 +1,20 @@
 'use client';
 
+import { useTheme } from 'next-themes';
+
 import {
   LineChart,
-  XAxis,
   YAxis,
   Line,
   Tooltip,
   CartesianGrid,
 } from 'recharts';
-import { eachDayOfInterval, isSameDay, format } from 'date-fns';
+import { eachDayOfInterval, isSameDay } from 'date-fns';
 
 import { ChartContainer } from '@/components/ui/chart';
 
 import { GetMembersByDateResponse } from '../../types';
+import { MemberCountTooltip } from './member-count-tooltip';
 
 interface MembersJoinedDateLineChartProps {
   members: GetMembersByDateResponse[];
@@ -26,6 +28,8 @@ export function MembersJoinedDateLineChart({
   members,
   dateRange: { from, to },
 }: MembersJoinedDateLineChartProps) {
+  const {theme} = useTheme();
+
   const data = eachDayOfInterval({
     start: from,
     end: to,
@@ -41,10 +45,15 @@ export function MembersJoinedDateLineChart({
   return (
     <ChartContainer config={{}}>
       <LineChart data={data}>
-        <XAxis dataKey="date" angle={-45} tickFormatter={(v: Date) => format(v, 'dd-LL-yyyy')} />
         <YAxis dataKey="count" />
-        <Tooltip />
-        <Line type="linear" stroke="black" activeDot={{ r: 8 }} />
+        <Tooltip content={<MemberCountTooltip />} />
+        <Line
+          type="linear"
+          stroke={theme == 'dark' ? 'white' : 'black'}
+          strokeWidth={2}
+          dataKey="count"
+          dot={false}
+        />
         <CartesianGrid />
       </LineChart>
     </ChartContainer>

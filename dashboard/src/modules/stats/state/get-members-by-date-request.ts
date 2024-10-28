@@ -3,10 +3,12 @@ import {
   createSerializer,
   parseAsIsoDateTime,
 } from 'nuqs';
+import { subDays } from 'date-fns';
+
 import { createSearchParamsCache } from 'nuqs/server';
 
 const parsers = {
-  joinedFrom: parseAsIsoDateTime.withDefault(new Date(new Date().getFullYear(), 0, 1)),
+  joinedFrom: parseAsIsoDateTime.withDefault(subDays(new Date(), 30)),
   joinedTo: parseAsIsoDateTime.withDefault(new Date()),
 };
 

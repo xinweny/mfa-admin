@@ -1,22 +1,22 @@
-import { GetMembersByDateResponse } from '../../types';
+import { TooltipProps } from 'recharts';
 
-interface MemberCountTooltipProps {
-  isActive?: boolean;
-  payload?: {
-    date: Date;
-    count: number;
-    members: GetMembersByDateResponse[];
-  }[];
-}
+import { format } from 'date-fns';
+
+interface MemberCountTooltipProps extends TooltipProps<any, string> {}
 
 export function MemberCountTooltip({
-  isActive = false,
+  active = false,
   payload = [],
+
 }: MemberCountTooltipProps) {
-  if (!isActive || payload.length == 0) return null;
+  if (!active || payload.length == 0) return null;
+
+  const data = payload[0].payload;
 
   return (
-    <div>
+    <div className="bg-primary-foreground rounded-sm p-2 flex flex-col">
+      <span className="font-semibold">{format(data.date, 'd LLL yyyy')}</span>
+      <span><span className="font-bold">{data.members.length}</span> members</span>
     </div>
   );
 }

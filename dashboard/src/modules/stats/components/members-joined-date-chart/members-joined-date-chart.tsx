@@ -37,12 +37,12 @@ export async function MembersJoinedDateChart({
   if (!summary.data) return null;
 
   return (
-    <Card className="bg-secondary">
+    <Card className="bg-secondary h-96 flex flex-col">
       <CardHeader className="flex flex-row justify-between items-center p-4 space-y-0">
         <CardTitle>New Member Trends</CardTitle>
         <JoinedDateRangeSelect />
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-shrink">
         <MembersJoinedDateLineChart
           members={summary.data}
           dateRange={{
