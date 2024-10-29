@@ -41,6 +41,7 @@ export function UpdateMemberForm({
       await updateMember(member.id, membershipId, data);
 
       toast.success('Member details updated successfully.');
+      form.reset(data);
     } catch (err) {
       handleError(err);
     }
