@@ -35,9 +35,8 @@ export const columns: ColumnDef<DueColumns>[] = [
   {
     accessorKey: 'membership',
     header: 'Membership',
-    cell: ({ row: { original: { id, membership } } }) => (membership && (
+    cell: ({ row: { original: { membership } } }) => (membership && (
       <MembershipTypeCell
-        id={id}
         membershipType={membership.membershipType}
       />
     )),

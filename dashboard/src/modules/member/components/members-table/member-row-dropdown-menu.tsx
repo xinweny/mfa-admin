@@ -1,11 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { IdCard } from 'lucide-react';
+import { IdCard, Edit3 } from 'lucide-react';
 
 import { RowDropdownMenu } from '@/core/data/components/row-dropdown-menu';
 import { CopyIdDropdownMenuItem } from '@/core/data/components/copy-id-dropdown-menu-item';
-import { RowDropdownMenuItem } from '@/core/data/components/row-dropdown-menu-item';
+import { LinkDropdownMenuItem } from '@/core/data/components/link-dropdown-menu-item';
+import { UpdateMembershipTabs } from '@/modules/membership/state';
 
 interface MemberRowDropdownMenuProps {
   memberId: string;
@@ -16,8 +16,6 @@ export function MemberRowDropdownMenu({
   memberId,
   membershipId,
 }: MemberRowDropdownMenuProps) {
-  const router = useRouter();
-
   return (
     <RowDropdownMenu>
       <CopyIdDropdownMenuItem
@@ -25,12 +23,15 @@ export function MemberRowDropdownMenu({
         label="Copy Member ID"
         message="Member ID copied."
       />
-      <RowDropdownMenuItem
+      <LinkDropdownMenuItem
+        href={`/dashboard/memberships/${membershipId}`}
         icon={IdCard}
         label="View Membership"
-        onClick={() => {
-          router.push(`/dashboard/memberships/${membershipId}`)
-        }}
+      />
+      <LinkDropdownMenuItem
+        href={`/dashboard/memberships/edit?id=${membershipId}&tab=${UpdateMembershipTabs.Members}`}
+        icon={Edit3}
+        label="Edit Details"
       />
     </RowDropdownMenu>
   );
