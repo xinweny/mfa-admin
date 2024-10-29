@@ -11,7 +11,7 @@ public class DueService : IDueService
     }
 
     public async Task CreateDues(CreateDuesRequest req) {
-        await _dueRepository.CreateDues(req.MembershipId, req.ToDues());
+        await _dueRepository.CreateDues(req.ToDues());
     }
 
     public async Task DeleteDue(Guid id) {

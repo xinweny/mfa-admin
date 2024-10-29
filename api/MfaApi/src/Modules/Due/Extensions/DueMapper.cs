@@ -3,7 +3,7 @@ namespace MfaApi.Modules.Due;
 public static class DueMapper {
     public static ICollection<DueModel> ToDues(this CreateDuesRequest req) {
         return req.Dues.Select(d => new DueModel {
-            MembershipId = req.MembershipId,
+            MembershipId = d.MembershipId,
             AmountPaid = d.AmountPaid,
             Year = d.Year,
             PaymentMethod = d.PaymentMethod,

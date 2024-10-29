@@ -17,17 +17,12 @@ public class DueRepository : IDueRepository
         _validator = validator;
     }
 
-    public async Task CreateDues(Guid membershipId, IEnumerable<DueModel> dues) {
-        var membership = await _context.Memberships
-            .Include(m => m.Dues)
-            .Where(m => m.Id == membershipId)
-            .FirstOrDefaultAsync()
-            ?? throw new KeyNotFoundException("Associated membership not found.");
-
+    public async Task CreateDues(IEnumerable<DueModel> dues) {
         foreach (DueModel due in dues) {
             _validator.ValidateAndThrow(due);
-            membership.Dues.Add(due);
         }
+
+        _context.Dues.AddRange(dues);
 
         await _context.SaveChangesAsync();
     }
