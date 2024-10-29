@@ -1,5 +1,3 @@
-import { Trash2Icon } from 'lucide-react';
-
 import {
   Dialog,
   DialogContent,
@@ -12,6 +10,10 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
+import { handleError } from '@/core/api/utils';
+
+import { deleteMember } from '../../actions';
+
 interface DeleteDropdownMenuItemProps {
   member: {
     id: string;
@@ -23,8 +25,12 @@ interface DeleteDropdownMenuItemProps {
 export function DeleteMemberButton({
   member,
 }: DeleteDropdownMenuItemProps) {
-  const onDelete = () => {
-
+  const onDelete = async () => {
+    try {
+      await deleteMember(member.id);
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return (
