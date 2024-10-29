@@ -23,7 +23,7 @@ export function UpdateMembersForm({
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold">Members</h2>
-      <Accordion type="single" collapsible>
+      <Accordion type="multiple" defaultValue={members.map(member => member.id)}>
         {members.map(member => (
           <AccordionItem value={member.id} key={member.id}>
             <AccordionTrigger>
