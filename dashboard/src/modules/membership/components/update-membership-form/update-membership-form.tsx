@@ -58,5 +58,5 @@ export function UpdateMembershipForm({
         <MembershipFormFields withActive />
       </FormSection>
     </DashboardForm>
-  )
+  );
 }

@@ -104,9 +104,10 @@ export const columns: ColumnDef<MemberColumns>[] = [
   },
   {
     id: 'id',
-    cell: ({ row: { original: { id } } }) => (
+    cell: ({ row: { original: { id, membership } } }) => (
       <MemberRowDropdownMenu
         memberId={id}
+        membershipId={membership.id}
       />
     ),
   },

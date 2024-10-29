@@ -52,7 +52,7 @@ export function MembershipFormFields({
             <FormInputSwitch
               value={field.value as boolean}
               label={`${field.value ? 'Active' : 'Inactive'} membership`}
-              description="Inactive memberships will be excluded from searches and statistics by default."
+              description="Inactive memberships will be excluded from calculations and statistics by default."
               onCheckedChange={field.onChange}
             />
           )}

@@ -8,7 +8,10 @@ export interface GetMembershipResponse {
     id: string;
     firstName: string;
     lastName: string;
-  }[] | null;
+    email: string;
+    phoneNumber?: string;
+    joinedDate: string;
+  }[];
   addressId: string | null;
   address: Address | null;
   startDate: string;

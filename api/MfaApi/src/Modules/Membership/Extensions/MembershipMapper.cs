@@ -12,7 +12,10 @@ public static class MembershipMapper {
             Members = membership.Members?.Select(m => new GetMembershipResponse.MemberDto {
                 Id = m.Id,
                 FirstName = m.FirstName,
-                LastName = m.LastName
+                LastName = m.LastName,
+                Email = m.Email,
+                PhoneNumber = m.PhoneNumber,
+                JoinedDate = m.JoinedDate,
             }).ToList(),
             AddressId = membership.AddressId,
             Address = membership.Address?.ToAddressDto(),

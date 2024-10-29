@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { parse, isPossibleNumber } from 'libphonenumber-js';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const memberSchema = z.object({
   firstName: z.string().min(1),
@@ -14,3 +15,5 @@ export const memberSchema = z.object({
 });
 
 export type MemberSchema = z.infer<typeof memberSchema>;
+
+export const memberSchemaResolver = zodResolver(memberSchema);

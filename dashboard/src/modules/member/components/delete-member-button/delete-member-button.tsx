@@ -12,45 +12,45 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-import { RowDropdownMenuItem } from '../row-dropdown-menu-item';
-
 interface DeleteDropdownMenuItemProps {
-  triggerLabel: string;
-  dialogTitle: string;
-  onConfirm: () => void;
-  cancelLabel?: string;
-  confirmLabel?: string;
+  member: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
 }
 
-export function DeleteDropdownMenuItem({
-  triggerLabel,
-  dialogTitle,
-  onConfirm,
-  cancelLabel = 'Cancel',
-  confirmLabel = 'Delete',
+export function DeleteMemberButton({
+  member,
 }: DeleteDropdownMenuItemProps) {
+  const onDelete = () => {
+
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <RowDropdownMenuItem
-          icon={Trash2Icon}
-          label={triggerLabel}
-          className="text-destructive focus:bg-destructive"
-        />
+        <Button
+          className="w-full"
+          variant="destructive"
+        >
+          Delete Member
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogTitle>Delete Member</DialogTitle>
+          <DialogDescription>{`Are you sure you want to delete ${member.firstName} ${member.lastName}? This action cannot be undone.`}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="secondary">{cancelLabel}</Button>
+            <Button variant="secondary">Cancel</Button>
           </DialogClose>
           <Button
             variant="destructive"
-            onClick={onConfirm}
+            onClick={onDelete}
           >
-            {confirmLabel}
+            {`Delete ${member.firstName} ${member.lastName}`}
           </Button>
         </DialogFooter>
       </DialogContent>

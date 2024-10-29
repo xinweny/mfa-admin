@@ -10,6 +10,7 @@ import { UpdateMembershipForm } from '../update-membership-form';
 import { BackButton } from '@/modules/dashboard/components/back-button';
 import { DashboardTabs } from '@/modules/dashboard/components/dashboard-tabs';
 import { UpsertAddressForm } from '@/modules/address/components/upsert-address-form';
+import { UpdateMembersForm } from '@/modules/member/components/update-members-form';
 
 interface UpdateMembershipPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -47,6 +48,14 @@ export async function UpdateMembershipPage({
             value: 'membership',
             label: 'Membership',
             component: <UpdateMembershipForm membership={membership.data} />,
+          },
+          {
+            value: 'members',
+            label: 'Members',
+            component: <UpdateMembersForm
+              members={membership.data.members}
+              membershipId={membership.data!.id}
+            />,
           },
           {
             value: 'address',

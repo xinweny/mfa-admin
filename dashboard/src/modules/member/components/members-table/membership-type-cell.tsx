@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
 
 import { Badge } from '@/components/ui/badge';
@@ -14,10 +12,8 @@ export function MembershipTypeCell({
   membershipType,
 }: MembershipTypeCellProps) {
   return (
-    <Link href={`/dashboard/memberships/${id}`}>
-      <Badge>
-        {membershipTypeLabels[membershipType]}
-      </Badge>
-    </Link>
+    <Badge>
+      {membershipTypeLabels[membershipType]}
+    </Badge>
   );
 }

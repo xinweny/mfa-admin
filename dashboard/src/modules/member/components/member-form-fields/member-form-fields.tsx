@@ -10,18 +10,20 @@ interface MemberFormFieldsProps {
 export function MemberFormFields({
   name,
 }: MemberFormFieldsProps) {
+  const prefix = name ? `${name}.` : '';
+
   return (
     <>
       <div className="flex items-center gap-2">
         <DashboardFormField
-          name={`${name ? `${name}.` : ''}firstName`}
+          name={`${prefix}firstName`}
           label="First Name"
           render={(field) => (
             <Input placeholder="Seizan" {...field} />
           )}
         />
         <DashboardFormField
-          name={`${name ? `${name}.` : ''}lastName`}
+          name={`${prefix}lastName`}
           label="Last Name"
           render={(field) => (
             <Input placeholder="Suginomori" {...field} />
@@ -29,21 +31,21 @@ export function MemberFormFields({
         />
       </div>
       <DashboardFormField
-        name={`${name ? `${name}.` : ''}email`}
+        name={`${prefix}email`}
         label="Email"
         render={(field) => (
           <Input type="email" placeholder="example@gmail.com" {...field} />
         )}
       />
       <DashboardFormField
-        name={`${name ? `${name}.` : ''}phoneNumber`}
+        name={`${prefix}phoneNumber`}
         label="Phone Number"
         render={(field) => (
           <Input max={10} placeholder="0123456789" {...field} />
         )}
       />
       <DashboardFormField
-        name={`${name ? `${name}.` : ''}joinedDate`}
+        name={`${prefix}joinedDate`}
         label="Joined Date"
         render={(field) => (
           <FormInputDate
