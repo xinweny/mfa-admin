@@ -6,11 +6,8 @@ import { GetMembershipResponse } from '../../types';
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { DashboardContentHeader, DashboardContentTitle } from '@/modules/dashboard/components/dashboard-content-header';
 
-import { UpdateMembershipForm } from '../update-membership-form';
 import { BackButton } from '@/modules/dashboard/components/back-button';
-import { DashboardTabs } from '@/modules/dashboard/components/dashboard-tabs';
-import { UpsertAddressForm } from '@/modules/address/components/upsert-address-form';
-import { UpdateMembersForm } from '@/modules/member/components/update-members-form';
+import { UpdateMembershipTabs } from './update-membership-tabs';
 
 interface UpdateMembershipPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -41,32 +38,7 @@ export async function UpdateMembershipPage({
         />
         <BackButton href={`/dashboard/memberships/${membership.data.id}`} />
       </DashboardContentHeader>
-      <DashboardTabs
-        defaultValue="membership"
-        tabs={[
-          {
-            value: 'membership',
-            label: 'Membership',
-            component: <UpdateMembershipForm membership={membership.data} />,
-          },
-          {
-            value: 'members',
-            label: 'Members',
-            component: <UpdateMembersForm
-              members={membership.data.members}
-              membershipId={membership.data!.id}
-            />,
-          },
-          {
-            value: 'address',
-            label: 'Address',
-            component: <UpsertAddressForm
-              membershipId={membership.data.id}
-              address={membership.data.address}
-            />,
-          },
-        ]}
-      />
+      <UpdateMembershipTabs membership={membership.data} />
     </DashboardContent>
   );
 }

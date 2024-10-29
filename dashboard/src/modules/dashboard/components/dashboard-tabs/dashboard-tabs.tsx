@@ -15,6 +15,7 @@ interface DashboardTabsProps {
     value: string;
     label: string;
     component: React.ReactNode;
+    onClick?: () => void;
   }[];
   classNames?: {
     tabsList?: string;
@@ -31,11 +32,12 @@ export function DashboardTabs({
   return (
     <Tabs defaultValue={defaultValue}>
       <TabsList className={cn('w-full flex-wrap h-auto mb-4', classNames?.tabsList)}>
-        {tabs.map(({ value, label }) => (
+        {tabs.map(({ value, label, onClick }) => (
           <TabsTrigger
             key={value}
             className={cn('flex-grow', classNames?.tabsTrigger)}
             value={value}
+            onClick={onClick}
           >
             {label}
           </TabsTrigger>

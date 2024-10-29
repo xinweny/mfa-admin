@@ -13,6 +13,7 @@ import {
 } from '@/modules/dashboard/components/dashboard-content-header';
 import { DataTableContainer } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
+import { CreateEntityLinkButton } from '@/modules/dashboard/components/create-entity-link-button';
 
 import { DuesTable } from '../dues-table';
 import { DuesTableFilters } from '../dues-table-filters';
@@ -36,6 +37,10 @@ export async function DuesPage({
     <DashboardContent>
       <DashboardContentHeader>
         <DashboardContentTitle title="Dues" />
+        <CreateEntityLinkButton
+          path="dues/new"
+          label="Create Receipts"
+        />
       </DashboardContentHeader>
       <DataTableContainer>
         <DuesTableFilters />

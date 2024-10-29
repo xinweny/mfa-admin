@@ -8,9 +8,10 @@ import { PaymentMethod } from '../../types';
 
 import { DataTableSortButton } from '@/core/data/components/data-table-sort-button';
 
-import { DueRowDropdownMenu } from './components/due-row-dropdown-menu';
-import { MembershipCell } from './components/membership-cell';
-import { PaymentMethodCell } from './components/payment-method-cell';
+import { DueRowDropdownMenu } from './due-row-dropdown-menu';
+import { MembersCell } from './members-cell';
+import { PaymentMethodCell } from './payment-method-cell';
+import { MembershipTypeCell } from './membership-type-cell';
 
 export interface DueColumns {
   id: string;
@@ -35,9 +36,18 @@ export const columns: ColumnDef<DueColumns>[] = [
     accessorKey: 'membership',
     header: 'Membership',
     cell: ({ row: { original: { id, membership } } }) => (membership && (
-      <MembershipCell
+      <MembershipTypeCell
         id={id}
         membershipType={membership.membershipType}
+      />
+    )),
+  },
+  {
+    accessorKey: 'members',
+    header: 'Members',
+    cell: ({ row: { original: { id, membership } } }) => (membership && (
+      <MembersCell
+        id={id}
         members={membership.members}
       />
     )),
