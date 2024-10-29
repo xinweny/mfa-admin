@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 export enum ExchangeTypeInputValues {
   All = 'all',
@@ -13,7 +13,7 @@ export const getExchangesSchema = z.object({
   query: z.optional(z.string()),
   year: z.optional(z
     .coerce.number().int()
-    .gte(mfaFoundingYear)),
+    .gte(MFA_FOUNDING_YEAR)),
   exchangeType: z.nativeEnum(ExchangeTypeInputValues),
 });
 

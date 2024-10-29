@@ -13,7 +13,7 @@ import {
   IsActiveInputValues,
 } from './schema';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { useGetMembershipsUrlParams } from '../../state';
 
@@ -104,7 +104,7 @@ export function MembershipsTableFilters() {
           name: 'yearPaid',
           render: ({ field }) => (
             <NumberInputFilter
-              min={mfaFoundingYear}
+              min={MFA_FOUNDING_YEAR}
               {...field}
               value={field.value as number}
             />

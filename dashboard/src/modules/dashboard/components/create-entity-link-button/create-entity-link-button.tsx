@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { PlusIcon } from 'lucide-react';
 
+import { cn } from '@/lib/cn';
+
 import { buttonVariants } from '@/components/ui/button';
 
 interface CreateEntityLinkButtonProps {
@@ -15,9 +17,9 @@ export function CreateEntityLinkButton({
   return (
     <Link
       href={`/dashboard/${path}`}
-      className={buttonVariants({ variant: 'default' })}
+      className={cn(buttonVariants({ variant: 'default' }), 'gap-1')}
     >
-      <PlusIcon />
+      <PlusIcon width={16} />
       <span>{label}</span>
     </Link>
   );

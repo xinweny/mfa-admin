@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { cn } from '@/lib/cn';
 
@@ -53,7 +53,7 @@ export function DateRangeFilter({
           selected={date}
           onSelect={onChange}
           numberOfMonths={1}
-          fromYear={mfaFoundingYear}
+          fromYear={MFA_FOUNDING_YEAR}
           toYear={new Date().getFullYear()}
         />
       </PopoverContent>

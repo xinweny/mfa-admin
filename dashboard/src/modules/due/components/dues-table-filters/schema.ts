@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { PaymentMethod } from '../../types';
 
@@ -14,7 +14,7 @@ export enum MembershipTypeInputValues {
 export const getDuesSchema = z.object({
   year: z.optional(z
     .coerce.number().int()
-    .gte(mfaFoundingYear)),
+    .gte(MFA_FOUNDING_YEAR)),
   membershipType: z.nativeEnum(MembershipTypeInputValues),
   paymentMethods: z.array(z.nativeEnum(PaymentMethod)),
   paymentDateRange: z.object({

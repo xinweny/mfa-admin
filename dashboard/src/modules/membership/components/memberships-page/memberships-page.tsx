@@ -36,7 +36,7 @@ export async function MembershipsPage({
         <DashboardContentTitle title="Memberships" />
         <CreateEntityLinkButton
           path="memberships/new"
-          label="Membership"
+          label="New Membership"
         />
       </DashboardContentHeader>
       <DataTableContainer>

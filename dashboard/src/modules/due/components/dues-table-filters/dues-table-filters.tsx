@@ -9,7 +9,7 @@ import {
   MembershipTypeInputValues,
 } from './schema';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
 import { PaymentMethod, paymentMethodLabels } from '../../types';
@@ -60,7 +60,7 @@ export function DuesTableFilters() {
           name: 'year',
           render: ({ field }) => (
             <NumberInputFilter
-              min={mfaFoundingYear}
+              min={MFA_FOUNDING_YEAR}
               {...field}
               value={field.value as number}
             />

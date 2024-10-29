@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 export enum MembershipTypeInputValues {
   All = 'all',
@@ -26,7 +26,7 @@ export const getMembershipsSchema = z.object({
   query: z.optional(z.string()),
   yearPaid: z
     .coerce.number().int()
-    .gte(mfaFoundingYear),
+    .gte(MFA_FOUNDING_YEAR),
   membershipType: z.nativeEnum(MembershipTypeInputValues),
   hasPaid: z.nativeEnum(HasPaidInputValues),
   startDateRange: z.object({

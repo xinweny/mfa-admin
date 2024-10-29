@@ -3,7 +3,7 @@ import { SelectSingleEventHandler } from 'react-day-picker';
 
 import { cn } from '@/lib/cn';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import {
   Popover,
@@ -25,7 +25,7 @@ interface FormInputDateProps {
 export function FormInputDate({
   value,
   onChange,
-  fromYear = mfaFoundingYear,
+  fromYear = MFA_FOUNDING_YEAR,
   toYear = new Date().getFullYear(),
 }: FormInputDateProps) {
   return (

@@ -2,7 +2,7 @@
 
 import { useGetMembershipDuesUrlParams } from '@/modules/stats/state';
 
-import { mfaFoundingYear } from '@/core/constants';
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import {
   Select,
@@ -30,8 +30,8 @@ export function DueYearSelect() {
       </SelectTrigger>
       <SelectContent>
         {Array.from(
-          { length: new Date().getFullYear() - mfaFoundingYear + 1 },
-          (_, i) => mfaFoundingYear + i
+          { length: new Date().getFullYear() - MFA_FOUNDING_YEAR + 1 },
+          (_, i) => MFA_FOUNDING_YEAR + i
         ).map(year => (
           <SelectItem
             key={year}
