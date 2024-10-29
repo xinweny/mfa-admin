@@ -23,7 +23,7 @@ export function MembershipRowDropdownMenu({
       <LinkDropdownMenuItem
         href={`/dashboard/memberships/edit?id=${membershipId}`}
         icon={Edit3Icon}
-        label="Edit Membership"
+        label="Manage Membership"
       />
     </RowDropdownMenu>
   );

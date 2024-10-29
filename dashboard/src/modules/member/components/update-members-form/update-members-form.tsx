@@ -1,5 +1,7 @@
 'use client';
 
+import { GetMembershipResponse, MembershipType } from '@/modules/membership/types';
+
 import {
   Accordion,
   AccordionItem,
@@ -7,22 +9,32 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { GetMembershipResponse } from '@/modules/membership/types';
-import { UpdateMemberForm } from './update-member-form';
 import { FormSectionHeader } from '@/core/form/components/form-section';
+
+import { UpdateMemberForm } from './update-member-form';
+import { AddMemberButton } from '../add-member-button';
 
 interface UpdateMembersFormProps {
   members: GetMembershipResponse['members'];
   membershipId: string;
+  membershipType: MembershipType;
 }
 
 export function UpdateMembersForm({
   members,
   membershipId,
+  membershipType,
 }: UpdateMembersFormProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl font-semibold">Members</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Members</h2>
+        <AddMemberButton
+          membershipType={membershipType}
+          membershipId={membershipId}
+          numMembers={members.length}
+        />
+      </div>
       <Accordion type="multiple" defaultValue={members.map(member => member.id)}>
         {members.map(member => (
           <AccordionItem value={member.id} key={member.id}>

@@ -30,7 +30,7 @@ export async function UpdateMembershipPage({
     <DashboardContent>
       <DashboardContentHeader>
         <DashboardContentTitle
-          title="Edit Membership"
+          title="Manage Membership"
           description={membership.data.members
             ? membership.data.members.map(m => `${m.firstName} ${m.lastName}`).join(', ')
             : undefined

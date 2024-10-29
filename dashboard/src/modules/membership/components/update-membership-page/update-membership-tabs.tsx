@@ -37,6 +37,7 @@ export function UpdateMembershipTabs({
           component: <UpdateMembersForm
             members={membership.members}
             membershipId={membership.id}
+            membershipType={membership.membershipType}
           />,
           onClick: () => { setTab(Tabs.Members) },
         },
