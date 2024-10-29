@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache';
 
 import { ErrorResponse } from '@/core/api/types';
-import { CreateMemberRequest } from '../types';
 
 export const deleteMember = async (memberId: string) => {
   const res = await fetch(
@@ -17,6 +16,8 @@ export const deleteMember = async (memberId: string) => {
   );
   
   const data = await res.json();
+
+  console.log(data);
 
   if (!res.ok) throw new ErrorResponse(data);
 

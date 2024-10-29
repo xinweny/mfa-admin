@@ -15,13 +15,13 @@ public class MemberConfiguration: IEntityTypeConfiguration<MemberModel>
         builder
             .HasMany(member => member.BoardPositions)
             .WithOne(boardPosition => boardPosition.Member)
-            .OnDelete(DeleteBehavior.Restrict)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasForeignKey(boardPosition => boardPosition.MemberId);
         
         builder
             .HasMany(member => member.Exchanges)
             .WithOne(exchange => exchange.Member)
-            .OnDelete(DeleteBehavior.Restrict)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasForeignKey(host => host.MemberId);
     }
 }

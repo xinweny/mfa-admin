@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 import { handleError } from '@/core/api/utils';
 
@@ -17,6 +18,8 @@ interface AddMemberFormProps {
 export function AddMemberForm({
   membershipId,
 }: AddMemberFormProps) {
+  const router = useRouter();
+
   const form = useForm<MemberSchema>({
     defaultValues: {
       firstName: undefined,
@@ -37,6 +40,7 @@ export function AddMemberForm({
 
       toast.success('Member details updated successfully.');
       form.reset(data);
+      router.refresh();
     } catch (err) {
       handleError(err);
     }

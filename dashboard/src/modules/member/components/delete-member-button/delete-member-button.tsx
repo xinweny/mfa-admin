@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 import {
   Dialog,
   DialogContent,
@@ -28,6 +30,8 @@ export function DeleteMemberButton({
   const onDelete = async () => {
     try {
       await deleteMember(member.id);
+
+      toast.success('Member deleted successfully.');
     } catch (err) {
       handleError(err);
     }
@@ -46,7 +50,7 @@ export function DeleteMemberButton({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete Member</DialogTitle>
-          <DialogDescription>{`Are you sure you want to delete ${member.firstName} ${member.lastName}? This action cannot be undone.`}</DialogDescription>
+          <DialogDescription>{`Are you sure you want to delete ${member.firstName} ${member.lastName}? This will remove all associated hosting/delegation history and board positions.`}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>

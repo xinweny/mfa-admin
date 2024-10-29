@@ -124,7 +124,7 @@ public class MemberRepository: IMemberRepository {
         var membership = member.Membership
             ?? throw new KeyNotFoundException("Membership not found.");
 
-        membership.Members?.Remove(member);
+        _context.Members.Remove(member);
 
         _membershipValidator.ValidateAndThrow(membership);
 
