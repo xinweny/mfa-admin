@@ -1,12 +1,18 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
+
+import { CreateDuesSchema } from './schema';
 
 import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection, FormSectionContent } from '@/core/form/components/form-section';
+import { FormSection } from '@/core/form/components/form-section';
 
 export function CreateDuesForm() {
-  const form = useForm();
+  const form = useForm<CreateDuesSchema>();
+  const { fields } = useFieldArray<CreateDuesSchema>({
+    control: form.control,
+    name: 'dues',
+  });
 
   const onSubmit = async () => {
 
@@ -15,7 +21,7 @@ export function CreateDuesForm() {
   return (
     <DashboardForm form={form} onSubmit={onSubmit}>
       <FormSection>
-        a
+        
       </FormSection>
     </DashboardForm>
   );
