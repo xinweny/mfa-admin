@@ -37,7 +37,7 @@ public static class MemberMapper {
             PhoneNumber = req.PhoneNumber,
             Email = req.Email,
             MembershipId = req.MembershipId,
-            JoinedDate = req.JoinedDate,
+            JoinedDate = req.JoinedDate != null ? DateOnly.FromDateTime((DateTime) req.JoinedDate) : null,
         };
     }
 
