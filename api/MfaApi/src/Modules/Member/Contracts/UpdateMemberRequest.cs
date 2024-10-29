@@ -5,5 +5,5 @@ public class UpdateMemberRequest {
     public string? LastName { get; set; }
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
-    public DateOnly? JoinedDate { get; set; }
+    public DateTime? JoinedDate { get; set; }
 }

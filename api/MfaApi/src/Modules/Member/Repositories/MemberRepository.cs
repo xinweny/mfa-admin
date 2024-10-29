@@ -103,7 +103,17 @@ public class MemberRepository: IMemberRepository {
     public async Task UpdateMember(MemberModel member, UpdateMemberRequest req) {
         member.UpdatedAt = DateTime.UtcNow;
 
-        _context.Members.Entry(member).CurrentValues.SetValues(req);
+        _context.Members.Entry(member).CurrentValues.SetValues(new {
+            req.FirstName,
+            req.LastName,
+            req.Email,
+            req.PhoneNumber,
+            JoinedDate = (DateOnly?) (
+                req.JoinedDate != null
+                    ? DateOnly.FromDateTime((DateTime) req.JoinedDate)
+                    : null
+            ),
+        });
 
         _memberValidator.ValidateAndThrow(member);
         

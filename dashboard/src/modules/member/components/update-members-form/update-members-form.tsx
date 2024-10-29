@@ -20,13 +20,12 @@ export function UpdateMembersForm({
   members,
   membershipId,
 }: UpdateMembersFormProps) {
-
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold">Members</h2>
       <Accordion type="single" collapsible>
         {members.map(member => (
-          <AccordionItem value={member.id}>
+          <AccordionItem value={member.id} key={member.id}>
             <AccordionTrigger>
               <FormSectionHeader>{`${member.firstName} ${member.lastName}`}</FormSectionHeader>
             </AccordionTrigger>

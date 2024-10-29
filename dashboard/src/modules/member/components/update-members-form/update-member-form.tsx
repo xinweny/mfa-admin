@@ -14,6 +14,8 @@ import { MemberFormFields } from '../member-form-fields';
 import { DeleteMemberButton } from '../delete-member-button';
 import { GetMembershipResponse } from '@/modules/membership/types';
 
+import { updateMember } from '../../actions';
+
 interface UpdateMemberFormProps {
   member: GetMembershipResponse['members'][0];
   membershipId: string;
@@ -35,6 +37,13 @@ export function UpdateMemberForm({
   });
 
   const onSubmit = async (data: MemberSchema) => {
+    try {
+      await updateMember(member.id, membershipId, data);
+
+      toast.success('Member details updated successfully.');
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return (
