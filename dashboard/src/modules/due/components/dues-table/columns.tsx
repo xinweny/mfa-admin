@@ -85,9 +85,10 @@ export const columns: ColumnDef<DueColumns>[] = [
   },
   {
     id: 'id',
-    cell: ({ row: { original: { id } } }) => (
+    cell: ({ row: { original: { id, membershipId } } }) => (
       <DueRowDropdownMenu
         dueId={id}
+        membershipId={membershipId}
       />
     ),
   },
