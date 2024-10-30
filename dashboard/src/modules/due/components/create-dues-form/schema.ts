@@ -1,13 +1,18 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useFormContext } from 'react-hook-form';
 
 import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { PaymentMethod } from '../../types';
+import { MembershipType } from '@/modules/membership/types';
 
 export const createDuesSchema = z.object({
   dues: z.array(z.object({
-    membershipId: z.string(),
+    membership: z.object({
+      id: z.string(),
+      membershipType: z.nativeEnum(MembershipType),
+    }),
     amountPaid: z.number(),
     paymentMethod: z.nativeEnum(PaymentMethod),
     year: z.number().min(MFA_FOUNDING_YEAR),
@@ -16,7 +21,7 @@ export const createDuesSchema = z.object({
   }))
     .min(1)
     .superRefine((items, ctx) => {
-      const uniqueCount = new Set(items.map(i => `${i.membershipId},${i.year}`)).size;
+      const uniqueCount = new Set(items.map(i => `${i.membership.id},${i.year}`)).size;
 
       return items.length === uniqueCount;
     }),
@@ -25,3 +30,5 @@ export const createDuesSchema = z.object({
 export type CreateDuesSchema = z.infer<typeof createDuesSchema>;
 
 export const createDuesSchemaResolver = zodResolver(createDuesSchema);
+
+export const useCreateDuesFormContext = () => useFormContext<CreateDuesSchema>();

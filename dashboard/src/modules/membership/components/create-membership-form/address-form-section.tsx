@@ -1,7 +1,7 @@
-import { useFormContext, useFieldArray } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 
-import { CreateMembershipSchema } from './schema';
+import { useCreateMembershipFormContext } from './schema';
 
 import {
   FormSection,
@@ -13,7 +13,7 @@ import { AddressFormFields } from '@/modules/address/components/address-form-fie
 import { Province } from '@/modules/address/types';
 
 export function AddressFormSection() {
-  const { control } = useFormContext<CreateMembershipSchema>();
+  const { control } = useCreateMembershipFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'address',

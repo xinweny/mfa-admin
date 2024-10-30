@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
 import useSWR from 'swr';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
@@ -10,7 +9,7 @@ import { cn } from '@/lib/cn';
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipsResponse } from '@/modules/membership/types';
 
-import { CreateDuesSchema } from './schema';
+import { useCreateDuesFormContext } from './schema';
 
 import { serializeGetMembershipsUrlParams } from '@/modules/membership/state';
 
@@ -32,7 +31,7 @@ import {
 interface MembershipSearchInputProps {
   index: number;
   value: string | undefined;
-  onSelect: (id: string) => void;
+  onSelect: (v: any) => void;
 }
 
 export function MembershipSearchInput({
@@ -43,25 +42,30 @@ export function MembershipSearchInput({
   const [open, setOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
 
-  const { watch, resetField } = useFormContext<CreateDuesSchema>();
+  const { watch, resetField } = useCreateDuesFormContext();
   const year = watch(`dues.${index}.year`) as  number | undefined;
 
   useEffect(() => {
     setQuery('');
-    resetField(`dues.${index}.membershipId`);
+    resetField(`dues.${index}.membership`);
   }, [year]);
 
   const params = {
     query: query ? query : undefined,
     yearPaid: year,
     hasPaid: false,
+    isActive: true,
   };
 
-  const { data } = useSWR(year && query
+  const { data, isLoading } = useSWR(year && open
     ? `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships${serializeGetMembershipsUrlParams(params)}`
     : null,
     async (url: string) => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       const data = await res.json();
 
@@ -97,14 +101,14 @@ export function MembershipSearchInput({
             placeholder="Search memberships"
           />
           <CommandList>
-            <CommandEmpty>No membership found.</CommandEmpty>
+            <CommandEmpty>{isLoading ? 'Loading...' : 'No membership found.'}</CommandEmpty>
             <CommandGroup>
-              {memberships.map(({ id, members }) => (
+              {memberships.map(({ id, members, membershipType }) => (
                 <CommandItem
                   key={id}
                   value={id}
-                  onSelect={v => {
-                    onSelect(v);
+                  onSelect={() => {
+                    onSelect({ id, membershipType });
                     setOpen(false);
                   }}
                 >

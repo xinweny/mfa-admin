@@ -1,9 +1,9 @@
-import { useFormContext, useFieldArray } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
 import { XIcon } from 'lucide-react';
 
 import { MembershipType } from '../../types';
 
-import { CreateMembershipSchema } from './schema';
+import { useCreateMembershipFormContext } from './schema';
 
 import {
   Card,
@@ -22,7 +22,7 @@ import { MemberFormFields } from '@/modules/member/components/member-form-fields
 
 
 export function MembersFormSection() {
-  const { control, watch } = useFormContext<CreateMembershipSchema>();
+  const { control, watch } = useCreateMembershipFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'members',

@@ -3,8 +3,6 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { ListPlusIcon } from 'lucide-react';
 
-import { PaymentMethod } from '../../types';
-
 import { CreateDuesSchema, createDuesSchemaResolver } from './schema';
 
 import {
@@ -25,7 +23,7 @@ export function CreateDuesForm() {
   const form = useForm<CreateDuesSchema>({
     defaultValues: {
       dues: [{
-        membershipId: undefined,
+        membership: undefined,
         year: new Date().getFullYear(),
         amountPaid: undefined,
         paymentMethod: undefined,
@@ -74,7 +72,7 @@ export function CreateDuesForm() {
           className="gap-2"
           onClick={() => {
             append({
-              membershipId: '',
+              membership: undefined as any,
               year: new Date().getFullYear(),
               amountPaid: 0,
               paymentMethod: undefined as any,
