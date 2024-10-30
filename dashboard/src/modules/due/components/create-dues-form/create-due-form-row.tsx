@@ -64,6 +64,7 @@ export function CreateDueFormRow({
             onChange={value => {
               field.onChange(+value);
             }}
+            placeholder="Select method"
           />
         )}
       />
@@ -74,6 +75,7 @@ export function CreateDueFormRow({
             type="date"
             value={field.value ? format(field.value, 'yyyy-LL-dd') : undefined}
             onChange={field.onChange}
+            className="w-auto"
           />
         )}
       />
