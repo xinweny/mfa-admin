@@ -55,6 +55,9 @@ export function CreateDueFormRow({
           />
         )}
       />
+      <TableCell>
+        <AmountPaidDisplay index={index} />
+      </TableCell>
       <TableCellField
         name={`${prefix}.paymentMethod`}
         render={(field) => (
@@ -79,9 +82,6 @@ export function CreateDueFormRow({
           />
         )}
       />
-      <TableCell>
-        <AmountPaidDisplay index={index} />
-      </TableCell>
       <TableCell>
         <Button
           type="button"

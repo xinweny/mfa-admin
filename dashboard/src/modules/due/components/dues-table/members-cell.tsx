@@ -1,3 +1,5 @@
+import { formatMembersNames } from '@/modules/member/utils';
+
 interface MembersCellProps {
   id: string;
   members: {
@@ -14,7 +16,7 @@ export function MembersCell({
   return (
     <ul>
       {members.map(m => (
-        <li key={m.id}>{`${m.firstName} ${m.lastName.toUpperCase()}`}</li>
+        <li key={m.id}>{formatMembersNames(members)}</li>
       ))}
     </ul>
   );

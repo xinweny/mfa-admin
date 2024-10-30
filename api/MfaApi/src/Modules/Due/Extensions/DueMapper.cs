@@ -7,7 +7,7 @@ public static class DueMapper {
             AmountPaid = d.AmountPaid,
             Year = d.Year,
             PaymentMethod = d.PaymentMethod,
-            PaymentDate = d.PaymentDate,
+            PaymentDate = DateOnly.FromDateTime(d.PaymentDate),
         }).ToList();
     }
 

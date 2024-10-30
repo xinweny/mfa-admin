@@ -1,12 +1,13 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 import { ErrorResponse } from '@/core/api/types';
 
-export const deleteMember = async (memberId: string) => {
+export const deleteDue = async (dueId: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/${memberId}`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues/${dueId}`,
     {
       method: 'DELETE',
       headers: {
@@ -20,5 +21,7 @@ export const deleteMember = async (memberId: string) => {
   if (!res.ok) throw new ErrorResponse(data);
 
   revalidatePath('/dashboard/memberships');
-  revalidatePath('/dashboard/members');
+  revalidatePath('/dashboard/dues');
+
+  redirect('/dashboard/dues');
 };

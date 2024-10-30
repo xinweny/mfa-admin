@@ -2,6 +2,8 @@
 
 import { GetMembershipResponse, MembershipType } from '@/modules/membership/types';
 
+import { formatMembersNames } from '../../utils';
+
 import {
   Accordion,
   AccordionItem,
@@ -39,7 +41,7 @@ export function UpdateMembersForm({
         {members.map(member => (
           <AccordionItem value={member.id} key={member.id}>
             <AccordionTrigger>
-              <FormSectionHeader>{`${member.firstName} ${member.lastName}`}</FormSectionHeader>
+              <FormSectionHeader>{formatMembersNames(members)}</FormSectionHeader>
             </AccordionTrigger>
             <AccordionContent>
               <UpdateMemberForm

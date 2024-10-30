@@ -62,7 +62,10 @@ export const columns: ColumnDef<DueColumns>[] = [
   },
   {
     accessorKey: 'amountPaid',
-    header: 'Amount ($)',
+    header: 'Amount',
+    cell: ({ row: { original: { amountPaid } } }) => (
+      <span>{`$${amountPaid}.00`}</span>
+    )
   },
   {
     accessorKey: 'paymentMethod',

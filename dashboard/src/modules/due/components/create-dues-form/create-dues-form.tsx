@@ -5,6 +5,8 @@ import { ListPlusIcon } from 'lucide-react';
 
 import { CreateDuesSchema, createDuesSchemaResolver } from './schema';
 
+import { handleError } from '@/core/api/utils';
+
 import {
   Table,
   TableHeader,
@@ -16,8 +18,9 @@ import { Button } from '@/components/ui/button';
 
 import { DashboardForm } from '@/core/form/components/dashboard-form';
 import { FormSection } from '@/core/form/components/form-section';
-
 import { CreateDueFormRow } from './create-due-form-row';
+
+import { createDues } from '../../actions';
 
 export function CreateDuesForm() {
   const form = useForm<CreateDuesSchema>({
@@ -31,10 +34,24 @@ export function CreateDuesForm() {
     name: 'dues',
   });
 
-  const onSubmit = async () => {
-    form.reset({
-      dues: [initialFields],
-    });
+  const onSubmit = async (data: CreateDuesSchema) => {
+    try {
+      await createDues({
+        dues: data.dues.map(d => ({
+          membershipId: d.membership.id,
+          year: d.year,
+          amountPaid: d.amountPaid,
+          paymentMethod: d.paymentMethod,
+          paymentDate: d.paymentDate,
+        })),
+      });
+
+      form.reset({
+        dues: [initialFields],
+      });
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return (
@@ -46,9 +63,9 @@ export function CreateDuesForm() {
               <TableHead></TableHead>
               <TableHead>Year</TableHead>
               <TableHead>Membership</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead>Payment Date</TableHead>
               <TableHead>Amount</TableHead>
+              <TableHead>Payment Method</TableHead>
+              <TableHead>Payment Date</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>

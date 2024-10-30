@@ -1,14 +1,17 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
+import { CreateDuesRequest } from '../types';
 import { ErrorResponse } from '@/core/api/types';
 
-export const deleteMember = async (memberId: string) => {
+export const createDues = async (req: CreateDuesRequest) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/${memberId}`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues`,
     {
-      method: 'DELETE',
+      method: 'POST',
+      body: JSON.stringify(req),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -20,5 +23,7 @@ export const deleteMember = async (memberId: string) => {
   if (!res.ok) throw new ErrorResponse(data);
 
   revalidatePath('/dashboard/memberships');
-  revalidatePath('/dashboard/members');
+  revalidatePath('/dashboard/dues');
+
+  redirect(`/dashboard/dues`);
 };

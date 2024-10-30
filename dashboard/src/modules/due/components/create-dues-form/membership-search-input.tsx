@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
+import { formatMembersNames } from '@/modules/member/utils';
 
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipsResponse, MembershipType } from '@/modules/membership/types';
@@ -93,7 +94,7 @@ export function MembershipSearchInput({
           <span className="w-auto overflow-hidden flex-auto text-ellipsis">
             {
             value
-              ? memberships.find(m => m.id === value?.id)?.members.map(m => `${m.firstName} ${m.lastName}`).join(', ')
+              ? formatMembersNames(memberships.find(m => m.id === value?.id)?.members || [])
               : 'Select membership'
             }
           </span>
@@ -127,7 +128,7 @@ export function MembershipSearchInput({
                       value?.id === id ? 'opacity-100' : 'opacity-0'
                     )}
                   />
-                  {members.map(m => `${m.firstName} ${m.lastName}`).join(', ')}
+                  {formatMembersNames(members)}
                 </CommandItem>
               ))}
             </CommandGroup>
