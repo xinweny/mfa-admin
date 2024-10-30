@@ -1,6 +1,7 @@
 'use client';
 
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
 
 import { PaymentMethod, paymentMethodLabels } from '../../types';
 
@@ -19,7 +20,7 @@ interface DeleteDueDialogProps {
     lastName: string;
   }[];
   paymentMethod: PaymentMethod;
-  paymentDate: Date;
+  paymentDate?: Date;
 }
 
 export function DeleteDueDialog({
@@ -42,7 +43,7 @@ export function DeleteDueDialog({
   return (
     <ConfirmationDialog
       title="Delete Receipt"
-      description={`Are you sure you want to delete the ${year} ${paymentMethodLabels[paymentMethod]} payment from ${formatMembersNames(members)}?`}
+      description={`Are you sure you want to delete the ${year} ${paymentMethodLabels[paymentMethod]} payment from ${formatMembersNames(members)}${paymentDate ? ` on ${format(paymentDate, 'dd/LL/yyyy')}` : ''}?`}
       onConfirm={onDelete}
     />
   );

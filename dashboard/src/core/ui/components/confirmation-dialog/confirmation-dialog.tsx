@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 
 interface ConfirmationDialogProps {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   onConfirm: () => void;
   cancelLabel?: string;
   confirmLabel?: string;

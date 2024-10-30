@@ -88,10 +88,14 @@ export const columns: ColumnDef<DueColumns>[] = [
   },
   {
     id: 'id',
-    cell: ({ row: { original: { id, membershipId } } }) => (
+    cell: ({ row: { original: o } }) => (
       <DueRowDropdownMenu
-        dueId={id}
-        membershipId={membershipId}
+        dueId={o.id}
+        membershipId={o.membershipId}
+        year={o.year}
+        members={o.membership?.members || []}
+        paymentMethod={o.paymentMethod}
+        paymentDate={o.paymentDate || undefined}
       />
     ),
   },
