@@ -10,7 +10,7 @@ import {
 interface FormInputSelectProps {
   value: string;
   options: {
-    value: string;
+    value: any;
     label: string;
   }[];
   onChange: (value: string) => void;
