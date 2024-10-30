@@ -18,8 +18,6 @@ export function AmountPaidDisplay({
 
   const membershipType = watch(`dues.${index}.membership.membershipType`);
 
-  console.log(watch());
-
   useEffect(() => {
     if (membershipType === undefined) return;
 
