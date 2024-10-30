@@ -22,13 +22,7 @@ import { CreateDueFormRow } from './create-due-form-row';
 export function CreateDuesForm() {
   const form = useForm<CreateDuesSchema>({
     defaultValues: {
-      dues: [{
-        membership: undefined,
-        year: new Date().getFullYear(),
-        amountPaid: undefined,
-        paymentMethod: undefined,
-        paymentDate: new Date(),
-      }],
+      dues: [initialFields],
     },
     resolver: createDuesSchemaResolver,
   });
@@ -38,7 +32,9 @@ export function CreateDuesForm() {
   });
 
   const onSubmit = async () => {
-
+    form.reset({
+      dues: [initialFields],
+    });
   };
 
   return (
@@ -71,13 +67,7 @@ export function CreateDuesForm() {
           variant="secondary"
           className="gap-2"
           onClick={() => {
-            append({
-              membership: undefined as any,
-              year: new Date().getFullYear(),
-              amountPaid: 0,
-              paymentMethod: undefined as any,
-              paymentDate: new Date(),
-            });
+            append(initialFields);
           }}
         >
           <ListPlusIcon />
@@ -87,3 +77,11 @@ export function CreateDuesForm() {
     </DashboardForm>
   );
 }
+
+const initialFields = {
+  membership: undefined as any,
+  year: undefined as any,
+  amountPaid: undefined as any,
+  paymentMethod: undefined as any,
+  paymentDate: undefined as any,
+};

@@ -1,3 +1,3 @@
 export const MFA_FOUNDING_YEAR = 1993;
 export const SINGLE_MEMBERSHIP_COST = 20;
-export const FAMILY_MEMBERSHIP_COST = 20;
+export const FAMILY_MEMBERSHIP_COST = 30;

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
@@ -7,7 +7,7 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 import { ApiResponse } from '@/core/api/types';
-import { GetMembershipsResponse } from '@/modules/membership/types';
+import { GetMembershipsResponse, MembershipType } from '@/modules/membership/types';
 
 import { useCreateDuesFormContext } from './schema';
 
@@ -30,7 +30,10 @@ import {
 
 interface MembershipSearchInputProps {
   index: number;
-  value: string | undefined;
+  value: {
+    id: string;
+    membershipType: MembershipType;
+  } | undefined;
   onSelect: (v: any) => void;
 }
 
@@ -42,12 +45,13 @@ export function MembershipSearchInput({
   const [open, setOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
 
-  const { watch, resetField } = useCreateDuesFormContext();
-  const year = watch(`dues.${index}.year`) as  number | undefined;
+  const { watch, setValue } = useCreateDuesFormContext();
+
+  const year = watch(`dues.${index}.year`);
 
   useEffect(() => {
     setQuery('');
-    resetField(`dues.${index}.membership`);
+    setValue(`dues.${index}.membership`, undefined as any);
   }, [year]);
 
   const params = {
@@ -55,9 +59,10 @@ export function MembershipSearchInput({
     yearPaid: year,
     hasPaid: false,
     isActive: true,
+    sinceTo: new Date(year, 1, 1),
   };
 
-  const { data, isLoading } = useSWR(year && open
+  const { data, isLoading } = useSWR(year
     ? `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships${serializeGetMembershipsUrlParams(params)}`
     : null,
     async (url: string) => {
@@ -82,16 +87,20 @@ export function MembershipSearchInput({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="text-left w-full justify-between"
           disabled={!year}
         >
-          {value
-            ? memberships.find(m => m.id === value)?.members.map(m => `${m.firstName} ${m.lastName}`).join(', ')
-            : 'Select membership'}
+          <span className="w-auto overflow-hidden flex-auto text-ellipsis">
+            {
+            value
+              ? memberships.find(m => m.id === value?.id)?.members.map(m => `${m.firstName} ${m.lastName}`).join(', ')
+              : 'Select membership'
+            }
+          </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0">
         <Command>
           <CommandInput
             value={query}
@@ -115,7 +124,7 @@ export function MembershipSearchInput({
                   <Check
                     className={cn(
                       'mr-2 h-4 w-4',
-                      value === id ? 'opacity-100' : 'opacity-0'
+                      value?.id === id ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                   {members.map(m => `${m.firstName} ${m.lastName}`).join(', ')}

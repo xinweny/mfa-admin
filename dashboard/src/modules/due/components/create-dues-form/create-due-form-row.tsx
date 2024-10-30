@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 
 import { PaymentMethod, paymentMethodLabels } from '../../types';
 
+import { MFA_FOUNDING_YEAR } from '@/core/constants';
+
 import { TableRow, TableCell } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +16,7 @@ import { TableCellField } from '@/core/form/components/table-cell-field';
 import { FormInputSelect } from '@/core/form/components/form-input-select';
 
 import { MembershipSearchInput } from './membership-search-input';
+import { AmountPaidDisplay } from './amount-paid-display';
 
 interface CreateDueFormRowProps {
   index: number;
@@ -36,11 +39,14 @@ export function CreateDueFormRow({
             type="number"
             value={field.value}
             onChange={field.onChange}
+            className="w-auto"
+            min={MFA_FOUNDING_YEAR}
+            max={new Date().getFullYear() + 1}
           />
         )}
       />
       <TableCellField
-        name={`${prefix}.membershipId`}
+        name={`${prefix}.membership`}
         render={(field) => (
           <MembershipSearchInput
             index={index}
@@ -66,13 +72,13 @@ export function CreateDueFormRow({
         render={(field) => (
           <Input
             type="date"
-            value={format(field.value, 'yyyy-LL-dd')}
+            value={field.value ? format(field.value, 'yyyy-LL-dd') : undefined}
             onChange={field.onChange}
           />
         )}
       />
       <TableCell>
-        <span className="font-semibold">{`$${0}.00`}</span>
+        <AmountPaidDisplay index={index} />
       </TableCell>
       <TableCell>
         <Button
