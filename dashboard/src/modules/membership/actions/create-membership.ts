@@ -8,7 +8,7 @@ import { ErrorResponse } from '@/core/api/types';
 
 export const createMembership = async (req: CreateMembershipRequest) => {
   const res = await fetch(
-    `${process.env.MFA_API_URL}/memberships`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships`,
     {
       method: 'POST',
       body: JSON.stringify(req),

@@ -26,7 +26,7 @@ export async function DuesPage({
   searchParams,
 }: DuesPageProps) {
   const url = serializeGetDuesUrlParams(
-    `${process.env.MFA_API_URL}/dues`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues`,
     getDuesUrlParams.parse(searchParams)
   );
 

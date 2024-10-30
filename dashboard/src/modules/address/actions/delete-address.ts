@@ -6,7 +6,7 @@ import { ErrorResponse } from '@/core/api/types';
 
 export const deleteAddress = async (membershipId: string) => {
   const res = await fetch(
-    `${process.env.MFA_API_URL}/memberships/${membershipId}/address`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/${membershipId}/address`,
     {
       method: 'DELETE',
     }

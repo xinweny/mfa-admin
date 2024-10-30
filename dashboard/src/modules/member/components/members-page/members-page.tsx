@@ -24,7 +24,7 @@ export async function MembersPage({
   searchParams,
 }: MembersPageProps) {
   const url = serializeGetMembersUrlParams(
-    `${process.env.MFA_API_URL}/members`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members`,
     getMembersUrlParams.parse(searchParams)
   );
 

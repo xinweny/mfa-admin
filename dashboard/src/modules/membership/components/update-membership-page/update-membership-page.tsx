@@ -20,7 +20,7 @@ export async function UpdateMembershipPage({
 
   if (!id) redirect('/dashboard/memberships');
 
-  const res = await fetch(`${process.env.MFA_API_URL}/memberships/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/${id}`);
 
   const membership: ApiResponse<GetMembershipResponse> = await res.json();
 

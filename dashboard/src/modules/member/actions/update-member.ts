@@ -11,7 +11,7 @@ export const updateMember = async (
   req: UpdateMemberRequest
 ) => {
   const res = await fetch(
-    `${process.env.MFA_API_URL}/members/${id}`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/${id}`,
     {
       method: 'PUT',
       body: JSON.stringify(req),

@@ -7,7 +7,7 @@ import { ErrorResponse } from '@/core/api/types';
 
 export const updateMembership = async (id: string, req: UpdateMembershipRequest) => {
   const res = await fetch(
-    `${process.env.MFA_API_URL}/memberships/${id}`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/${id}`,
     {
       method: 'PUT',
       body: JSON.stringify(req),

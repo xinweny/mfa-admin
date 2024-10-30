@@ -2,6 +2,7 @@
 
 import { UseFieldArrayRemove } from 'react-hook-form';
 import { XIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
 import { PaymentMethod, paymentMethodLabels } from '../../types';
 
@@ -10,8 +11,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { TableCellField } from '@/core/form/components/table-cell-field';
-import { FormInputDate } from '@/core/form/components/form-input-date';
 import { FormInputSelect } from '@/core/form/components/form-input-select';
+
+import { MembershipSearchInput } from './membership-search-input';
 
 interface CreateDueFormRowProps {
   index: number;
@@ -28,18 +30,22 @@ export function CreateDueFormRow({
     <TableRow>
       <TableCell>{index + 1}</TableCell>
       <TableCellField
-        name={`${prefix}.membershipId`}
-        render={(field) => (
-          <></>
-        )}
-      />
-      <TableCellField
         name={`${prefix}.year`}
         render={(field) => (
           <Input
             type="number"
             value={field.value}
             onChange={field.onChange}
+          />
+        )}
+      />
+      <TableCellField
+        name={`${prefix}.membershipId`}
+        render={(field) => (
+          <MembershipSearchInput
+            index={index}
+            value={field.value}
+            onSelect={field.onChange}
           />
         )}
       />
@@ -58,8 +64,9 @@ export function CreateDueFormRow({
       <TableCellField
         name={`${prefix}.paymentDate`}
         render={(field) => (
-          <FormInputDate
-            value={field.value}
+          <Input
+            type="date"
+            value={format(field.value, 'yyyy-LL-dd')}
             onChange={field.onChange}
           />
         )}

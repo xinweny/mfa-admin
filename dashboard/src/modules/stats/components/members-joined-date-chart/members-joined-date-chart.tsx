@@ -26,7 +26,7 @@ export async function MembersJoinedDateChart({
   const params = getMembersByDateUrlParams.parse(searchParams);
 
   const url = serializeGetMembersByDateUrlParams(
-    `${process.env.MFA_API_URL}/members/summary/joined`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/summary/joined`,
     params
   );
 

@@ -22,7 +22,7 @@ export async function MembershipsPage({
   searchParams,
 }: MembershipsPageProps) {
   const url = serializeGetMembershipsUrlParams(
-    `${process.env.MFA_API_URL}/memberships`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships`,
     getMembershipsUrlParams.parse(searchParams)
   );
 

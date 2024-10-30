@@ -24,7 +24,7 @@ export async function ExchangesPage({
   searchParams,
 }: ExchangesPageProps) {
   const url = serializeGetExchangesUrlParams(
-    `${process.env.MFA_API_URL}/exchanges`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/exchanges`,
     getExchangesUrlParams.parse(searchParams)
   );
 

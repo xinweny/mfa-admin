@@ -9,7 +9,7 @@ export const createMember = async (
   req: CreateMemberRequest
 ) => {
   const res = await fetch(
-    `${process.env.MFA_API_URL}/members`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members`,
     {
       method: 'POST',
       body: JSON.stringify(req),

@@ -26,7 +26,7 @@ export async function DuesChart({
   const params = getMembershipDuesUrlParams.parse(searchParams);
 
   const url = serializeGetMembershipDuesUrlParams(
-    `${process.env.MFA_API_URL}/memberships/summary/dues`,
+    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/summary/dues`,
     params
   );
 

@@ -4,7 +4,7 @@ import { GetMembersCountsResponse } from '../../types';
 import { NumberCard } from '../number-card';
 
 export async function MemberSummaryCards() {
-  const res = await fetch(`${process.env.MFA_API_URL}/members/summary/counts`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_MFA_API_URL}/members/summary/counts`);
 
   const summary: ApiResponse<GetMembersCountsResponse> = await res.json();
 

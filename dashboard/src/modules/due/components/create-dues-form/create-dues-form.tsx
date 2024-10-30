@@ -50,8 +50,8 @@ export function CreateDuesForm() {
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
-              <TableHead>Membership</TableHead>
               <TableHead>Year</TableHead>
+              <TableHead>Membership</TableHead>
               <TableHead>Method</TableHead>
               <TableHead>Payment Date</TableHead>
               <TableHead>Amount</TableHead>
