@@ -9,14 +9,30 @@ namespace MfaApi;
 
 public class Startup {
     public IConfiguration Configuration { get; }
+    private IWebHostEnvironment Environment { get; }
 
-    public Startup(IConfiguration configuration) {
+    public Startup(IConfiguration configuration, IWebHostEnvironment env) {
         Configuration = configuration;
+        Environment = env;
     }
 
     public void ConfigureServices(IServiceCollection services) {
         services.AddDbContext<MfaDbContext>(options => {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
+        });
+
+        services.AddCors(options => {
+            if (Environment.IsDevelopment()) {
+                options.AddDefaultPolicy(policy => {
+                    policy
+                        .WithOrigins("http://localhost:3000", "https://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            } else {
+                options.AddDefaultPolicy(policy => {
+                });
+            }
         });
 
         services.AddControllers();
@@ -37,11 +53,8 @@ public class Startup {
         services.AddMfaApiModules(Configuration);
     }
 
-    public void Configure(
-        IApplicationBuilder app,
-        IWebHostEnvironment env
-    ) {
-        if (env.IsDevelopment()) {
+    public void Configure(IApplicationBuilder app) {
+        if (Environment.IsDevelopment()) {
             app.UseDeveloperExceptionPage();
 
             app.UseSwagger();
@@ -58,11 +71,12 @@ public class Startup {
         app.UseHttpsRedirection();
         
         app.UseRouting();
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseMiddleware<IPWhitelistMiddleware>();
         app.UseEndpoints(endpoints => {
-            if (env.IsDevelopment()) {
+            if (Environment.IsDevelopment()) {
                 endpoints.MapControllers().AllowAnonymous();
             } else {
                 endpoints.MapControllers();
