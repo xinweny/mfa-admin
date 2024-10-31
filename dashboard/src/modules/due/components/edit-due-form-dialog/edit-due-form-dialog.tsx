@@ -1,6 +1,8 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 import { PaymentMethod, paymentMethodOptions } from '../../types';
 import { MembershipType } from '@/modules/membership/types';
@@ -8,6 +10,7 @@ import { MembershipType } from '@/modules/membership/types';
 import { UpdateDueSchema, updateDueSchemaResolver } from './schema';
 
 import { formatHtmlDateString } from '@/core/ui/utils';
+import { handleError } from '@/core/api/utils';
 
 import { DialogContent } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -17,6 +20,8 @@ import { DashboardFormField } from '@/core/form/components/dashboard-form-field'
 import { FormInputSelect } from '@/core/form/components/form-input-select';
 import { formatMemberNames } from '@/modules/member/utils';
 import { MembershipTypeBadge } from '@/modules/membership/components/membership-type-badge';
+
+import { updateDue } from '../../actions';
 
 interface EditDueFormDialogProps {
   due: {
@@ -42,6 +47,8 @@ export function EditDueFormDialog({
   members,
   membershipType,
 }: EditDueFormDialogProps) {
+  const router = useRouter();
+
   const form = useForm<UpdateDueSchema>({
     defaultValues: {
       year,
@@ -52,7 +59,14 @@ export function EditDueFormDialog({
   });
 
   const onSubmit = async (data: UpdateDueSchema) => {
-    
+    try {
+      await updateDue(id, data);
+
+      toast.success(`Receipt ${id} updated successfully.`);
+      router.refresh();
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return (
