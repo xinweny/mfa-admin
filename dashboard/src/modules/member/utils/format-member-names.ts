@@ -2,5 +2,5 @@ export const formatMemberNames = (members: {
   firstName: string;
   lastName: string;
 }[]) => {
-  return members.map(m => `${m.firstName} ${m.lastName}`).join(', ');
+  return members.map(m => `${m.firstName} ${m.lastName.toUpperCase()}`).join(', ');
 };

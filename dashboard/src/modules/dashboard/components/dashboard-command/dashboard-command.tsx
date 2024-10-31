@@ -1,18 +1,25 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { UserPlusIcon, CircleDollarSignIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import {
   CommandDialog,
   CommandInput,
   CommandList,
   CommandEmpty,
+  CommandGroup,
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
+import { DashboardCommandItem } from './dashboard-command-item';
+
 export function DashboardCommand() {
-  const [open, setOpen] = useState(false)
+  const router = useRouter();
+
+  const [open, setOpen] = useState(false);
  
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -20,12 +27,12 @@ export function DashboardCommand() {
         e.preventDefault();
         setOpen((open) => !open);
       }
-    }
+    };
 
     document.addEventListener('keydown', down);
 
     return () => document.removeEventListener('keydown', down);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -48,6 +55,22 @@ export function DashboardCommand() {
         />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Suggestions">
+            <DashboardCommandItem
+              icon={UserPlusIcon}
+              label="New Membership"
+              onClick={() => {
+                router.push('/dashboard/memberships/new');
+              }}
+            />
+            <DashboardCommandItem
+              icon={CircleDollarSignIcon}
+              label="Create Due Receipts"
+              onClick={() => {
+                router.push('/dashboard/dues/new');
+              }}
+            />
+          </CommandGroup>
         </CommandList>
       </CommandDialog>
     </>
