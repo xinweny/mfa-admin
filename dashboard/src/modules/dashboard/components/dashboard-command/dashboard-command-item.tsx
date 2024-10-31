@@ -5,20 +5,25 @@ import { CommandItem } from '@/components/ui/command';
 interface DashboardCommandItemProps {
   icon: LucideIcon;
   label: string;
-  onClick: () => void;
+  onSelect: () => void;
+  setOpen: (isOpen: boolean) => void;
 }
 
 export function DashboardCommandItem({
   icon,
   label,
-  onClick,
+  onSelect,
+  setOpen,
 }: DashboardCommandItemProps) {
   const Icon = icon;
 
   return (
     <CommandItem
       className="flex items-center gap-2 hover:cursor-pointer"
-      onClick={onClick}
+      onSelect={() => {
+        onSelect();
+        setOpen(false);
+      }}
     >
       <Icon />
       <span className="text-sm font-medium">{label}</span>

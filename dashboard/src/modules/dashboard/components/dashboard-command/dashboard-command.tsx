@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { DialogTitle } from '@/components/ui/dialog';
 
 import { DashboardCommandItem } from './dashboard-command-item';
 
@@ -50,6 +51,7 @@ export function DashboardCommand() {
         </Badge>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
+        <DialogTitle className="Command" hidden />
         <CommandInput
           placeholder="Type a command or search"
         />
@@ -59,16 +61,18 @@ export function DashboardCommand() {
             <DashboardCommandItem
               icon={UserPlusIcon}
               label="New Membership"
-              onClick={() => {
+              onSelect={() => {
                 router.push('/dashboard/memberships/new');
               }}
+              setOpen={setOpen}
             />
             <DashboardCommandItem
               icon={CircleDollarSignIcon}
               label="Create Due Receipts"
-              onClick={() => {
+              onSelect={() => {
                 router.push('/dashboard/dues/new');
               }}
+              setOpen={setOpen}
             />
           </CommandGroup>
         </CommandList>
