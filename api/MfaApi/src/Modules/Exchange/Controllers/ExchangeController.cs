@@ -6,9 +6,9 @@ using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Exchange;
 
+[Authorize]
 [ApiController]
 [Route("api/exchanges")]
-[Authorize]
 
 public class ExchangeController: ControllerBase {
     private readonly IExchangeService _exchangeService;

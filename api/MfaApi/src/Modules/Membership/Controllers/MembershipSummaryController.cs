@@ -5,9 +5,9 @@ using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Membership;
 
+[Authorize]
 [ApiController]
 [Route("api/memberships/summary")]
-[Authorize]
 
 public class MembershipSummaryController: ControllerBase {
     private readonly IMembershipSummaryService _membershipSummaryService;

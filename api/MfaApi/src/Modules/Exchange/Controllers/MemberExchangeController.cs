@@ -5,9 +5,9 @@ using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Exchange;
 
+[Authorize]
 [ApiController]
 [Route("api/members/{memberId}/exchanges")]
-[Authorize]
 
 public class MemberExchangeController: ControllerBase {
     private readonly IExchangeService _exchangeService;

@@ -5,9 +5,9 @@ using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.BoardMember;
 
+[Authorize]
 [ApiController]
 [Route("api/board")]
-[Authorize]
 
 public class BoardMemberController: ControllerBase {
     private readonly IBoardMemberService _boardMemberService;

@@ -6,9 +6,9 @@ using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Member;
 
+[Authorize]
 [ApiController]
 [Route("api/members")]
-[Authorize]
 
 public class MemberController: ControllerBase {
     private readonly IMemberService _memberService;

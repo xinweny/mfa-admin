@@ -6,9 +6,9 @@ using MfaApi.Core.Pagination;
 
 namespace MfaApi.Modules.Due;
 
+[Authorize]
 [ApiController]
 [Route("api/dues")]
-[Authorize]
 
 public class DueController: ControllerBase {
     private readonly IDueService _dueService;

@@ -5,9 +5,9 @@ using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Address;
 
+[Authorize]
 [ApiController]
 [Route("api/memberships/{membershipId}/address")]
-[Authorize]
 
 public class MembershipAddressController: ControllerBase {
     private readonly IAddressService _addressService;

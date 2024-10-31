@@ -5,9 +5,9 @@ using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Due;
 
+[Authorize]
 [ApiController]
 [Route("api/memberships/{membershipId}/dues")]
-[Authorize]
 
 public class MembershipDueController: ControllerBase {
     private readonly IDueService _dueService;
