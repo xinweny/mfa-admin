@@ -18,7 +18,6 @@ public class MemberSummaryController: ControllerBase {
 
     [HttpGet("counts")]
     public async Task<IActionResult> GetMembersCountsAsync() {
-
         var counts = await _memberSummaryService.GetMembersCounts();
         
         return Ok(new ApiResponse<GetMembersCountsResponse> {
