@@ -72,15 +72,18 @@ public class Startup {
         
         app.UseRouting();
         app.UseCors();
+
         app.UseAuthentication();
         app.UseAuthorization();
+        
         app.UseMiddleware<IPWhitelistMiddleware>();
         app.UseEndpoints(endpoints => {
-            if (Environment.IsDevelopment()) {
-                endpoints.MapControllers().AllowAnonymous();
-            } else {
-                endpoints.MapControllers();
-            }
+            endpoints.MapControllers();
+            // if (Environment.IsDevelopment()) {
+            //     endpoints.MapControllers().AllowAnonymous();
+            // } else {
+            //     endpoints.MapControllers();
+            // }
         });
     }
 }
