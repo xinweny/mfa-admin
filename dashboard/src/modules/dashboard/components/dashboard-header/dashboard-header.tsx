@@ -1,3 +1,5 @@
+import { UserDropdownMenu } from '@/modules/auth/components/user-dropdown-menu';
+
 import { DashboardCommand } from '../dashboard-command';
 import { ThemeSwitch } from '../theme-switch';
 
@@ -5,7 +7,10 @@ export function DashboardHeader() {
   return (
     <header className="p-2 w-full flex justify-between items-center border-b">
       <DashboardCommand />
-      <ThemeSwitch />
+      <div className="flex items-center gap-2">
+        <ThemeSwitch />
+        <UserDropdownMenu />
+      </div>
     </header>
   );
 }
