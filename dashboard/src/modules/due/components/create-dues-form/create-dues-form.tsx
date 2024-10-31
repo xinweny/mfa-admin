@@ -25,7 +25,7 @@ import { createDues } from '../../actions';
 export function CreateDuesForm() {
   const form = useForm<CreateDuesSchema>({
     defaultValues: {
-      dues: [initialFields],
+      dues: [],
     },
     resolver: createDuesSchemaResolver,
   });
@@ -47,7 +47,7 @@ export function CreateDuesForm() {
       });
 
       form.reset({
-        dues: [initialFields],
+        dues: [],
       });
     } catch (err) {
       handleError(err);
@@ -84,7 +84,13 @@ export function CreateDuesForm() {
           variant="secondary"
           className="gap-2"
           onClick={() => {
-            append(initialFields);
+            append({
+              membership: undefined as any,
+              year: undefined as any,
+              amountPaid: undefined as any,
+              paymentMethod: undefined as any,
+              paymentDate: undefined as any,
+            });
           }}
         >
           <ListPlusIcon />
@@ -94,11 +100,3 @@ export function CreateDuesForm() {
     </DashboardForm>
   );
 }
-
-const initialFields = {
-  membership: undefined as any,
-  year: undefined as any,
-  amountPaid: undefined as any,
-  paymentMethod: undefined as any,
-  paymentDate: undefined as any,
-};
