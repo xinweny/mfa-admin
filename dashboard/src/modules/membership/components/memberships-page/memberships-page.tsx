@@ -2,6 +2,8 @@ import { serializeGetMembershipsUrlParams, getMembershipsUrlParams } from '../..
 
 import { GetMembershipsResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { MembershipsTable } from '../memberships-table';
 import {
@@ -22,11 +24,11 @@ export async function MembershipsPage({
   searchParams,
 }: MembershipsPageProps) {
   const url = serializeGetMembershipsUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships`,
+    'memberships',
     getMembershipsUrlParams.parse(searchParams)
   );
 
-  const res = await fetch(url);
+  const res = await mfaApiFetch(url);
   
   const memberships: ApiResponse<GetMembershipsResponse> = await res.json();
 
