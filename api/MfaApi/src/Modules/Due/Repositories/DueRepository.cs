@@ -92,7 +92,14 @@ public class DueRepository : IDueRepository
     }
 
     public async Task UpdateDue(DueModel due, UpdateDueRequest req) {
-        _context.Dues.Entry(due).CurrentValues.SetValues(req);
+        _context.Dues.Entry(due).CurrentValues.SetValues(new {
+            req.AmountPaid,
+            req.Year,
+            req.PaymentMethod,
+            PaymentDate = (DateOnly?) (req.PaymentDate != null
+                ? DateOnly.FromDateTime((DateTime) req.PaymentDate)
+                : null),
+        });
 
         _validator.ValidateAndThrow(due);
 
