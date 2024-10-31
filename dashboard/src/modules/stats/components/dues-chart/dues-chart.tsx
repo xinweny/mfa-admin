@@ -1,6 +1,8 @@
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipDueTotalsResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import {
   getMembershipDuesUrlParams,
   serializeGetMembershipDuesUrlParams,
@@ -26,11 +28,11 @@ export async function DuesChart({
   const params = getMembershipDuesUrlParams.parse(searchParams);
 
   const url = serializeGetMembershipDuesUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/summary/dues`,
+    'memberships/summary/dues',
     params
   );
 
-  const res = await fetch(url);
+  const res = await mfaApiFetch(url);
 
   const summary: ApiResponse<GetMembershipDueTotalsResponse> = await res.json();
 

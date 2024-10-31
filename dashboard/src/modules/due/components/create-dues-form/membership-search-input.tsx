@@ -5,7 +5,9 @@ import useSWR from 'swr';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
+
 import { formatMemberNames } from '@/modules/member/utils';
+import { mfaApiFetch } from '@/core/api/utils';
 
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipsResponse, MembershipType } from '@/modules/membership/types';
@@ -64,14 +66,10 @@ export function MembershipSearchInput({
   };
 
   const { data, isLoading } = useSWR(year
-    ? `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships${serializeGetMembershipsUrlParams(params)}`
+    ? `memberships${serializeGetMembershipsUrlParams(params)}`
     : null,
     async (url: string) => {
-      const res = await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await mfaApiFetch(url);
 
       const data = await res.json();
 

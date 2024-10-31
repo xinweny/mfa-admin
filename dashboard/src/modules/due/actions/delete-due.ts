@@ -5,14 +5,14 @@ import { redirect } from 'next/navigation';
 
 import { ErrorResponse } from '@/core/api/types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 export const deleteDue = async (dueId: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues/${dueId}`,
+  const res = await mfaApiFetch(
+    `dues/${dueId}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: undefined,
     }
   );
   

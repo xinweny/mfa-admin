@@ -2,20 +2,19 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { ErrorResponse } from '@/core/api/types';
 import { CreateMemberRequest } from '../types';
 
 export const createMember = async (
   req: CreateMemberRequest
 ) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members`,
+  const res = await mfaApiFetch(
+    'members',
     {
       method: 'POST',
-      body: JSON.stringify(req),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: req,
     }
   );
   

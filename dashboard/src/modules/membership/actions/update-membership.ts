@@ -5,15 +5,14 @@ import { revalidatePath } from 'next/cache';
 import { UpdateMembershipRequest } from '../types';
 import { ErrorResponse } from '@/core/api/types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 export const updateMembership = async (id: string, req: UpdateMembershipRequest) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/${id}`,
+  const res = await mfaApiFetch(
+    `memberships/${id}`,
     {
       method: 'PUT',
-      body: JSON.stringify(req),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: req,
     }
   );
   

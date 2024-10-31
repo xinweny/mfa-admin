@@ -1,4 +1,4 @@
-import { UserDropdownMenu } from '@/modules/auth/components/user-dropdown-menu';
+import { UserDropdownMenu } from '@/core/auth/components/user-dropdown-menu';
 
 import { DashboardCommand } from '../dashboard-command';
 import { ThemeSwitch } from '../theme-switch';

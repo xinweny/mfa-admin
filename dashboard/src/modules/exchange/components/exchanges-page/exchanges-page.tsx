@@ -6,6 +6,8 @@ import {
 import { ApiResponse } from '@/core/api/types';
 import { GetExchangesResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import {
   DashboardContentHeader,
@@ -24,12 +26,13 @@ export async function ExchangesPage({
   searchParams,
 }: ExchangesPageProps) {
   const url = serializeGetExchangesUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/exchanges`,
+    'exchanges',
     getExchangesUrlParams.parse(searchParams)
   );
+  
+  const res = await mfaApiFetch(url);
 
-  const exchanges: ApiResponse<GetExchangesResponse> = await fetch(url)
-    .then(data => data.json());
+  const exchanges: ApiResponse<GetExchangesResponse> = await res.json();
 
   return (
     <DashboardContent>

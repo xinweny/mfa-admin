@@ -6,6 +6,8 @@ import {
 import { ApiResponse } from '@/core/api/types';
 import { GetMembersResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import {
   DashboardContentHeader,
@@ -24,12 +26,13 @@ export async function MembersPage({
   searchParams,
 }: MembersPageProps) {
   const url = serializeGetMembersUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members`,
+    'members',
     getMembersUrlParams.parse(searchParams)
   );
 
-  const members: ApiResponse<GetMembersResponse> = await fetch(url)
-    .then(data => data.json());
+  const res = await mfaApiFetch(url);
+
+  const members: ApiResponse<GetMembersResponse> = await res.json();
 
   return (
     <DashboardContent>

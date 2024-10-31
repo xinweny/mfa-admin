@@ -1,6 +1,8 @@
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipTypeCountsResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import {
   Card,
   CardHeader,
@@ -10,7 +12,7 @@ import {
 import { MembershipTypePieChart } from './membership-type-pie-chart';
 
 export async function MembershipTypeChart() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/summary/membership-types`);
+  const res = await mfaApiFetch('memberships/summary/membership-types');
 
   const summary: ApiResponse<GetMembershipTypeCountsResponse> = await res.json();
 

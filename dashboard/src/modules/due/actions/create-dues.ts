@@ -6,15 +6,14 @@ import { redirect } from 'next/navigation';
 import { CreateDuesRequest } from '../types';
 import { ErrorResponse } from '@/core/api/types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 export const createDues = async (req: CreateDuesRequest) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues`,
+  const res = await mfaApiFetch(
+    'dues',
     {
       method: 'POST',
-      body: JSON.stringify(req),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: req,
     }
   );
   

@@ -6,6 +6,8 @@ import {
 import { ApiResponse } from '@/core/api/types';
 import { GetDuesResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import {
   DashboardContentHeader,
@@ -26,12 +28,13 @@ export async function DuesPage({
   searchParams,
 }: DuesPageProps) {
   const url = serializeGetDuesUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/dues`,
+    'dues',
     getDuesUrlParams.parse(searchParams)
   );
 
-  const dues: ApiResponse<GetDuesResponse> = await fetch(url)
-    .then(data => data.json());
+  const res = await mfaApiFetch(url);
+
+  const dues: ApiResponse<GetDuesResponse> = await res.json();
 
   return (
     <DashboardContent>

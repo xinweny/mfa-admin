@@ -1,10 +1,12 @@
 import { ApiResponse } from '@/core/api/types';
 import { GetMembersCountsResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { NumberCard } from '../number-card';
 
 export async function MemberSummaryCards() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_MFA_API_URL}/members/summary/counts`);
+  const res = await mfaApiFetch('members/summary/counts');
 
   const summary: ApiResponse<GetMembersCountsResponse> = await res.json();
 

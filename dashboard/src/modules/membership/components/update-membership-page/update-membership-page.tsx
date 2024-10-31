@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import { formatMemberNames } from '@/modules/member/utils';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
@@ -22,7 +24,7 @@ export async function UpdateMembershipPage({
 
   if (!id) redirect('/dashboard/memberships');
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_MFA_API_URL}/memberships/${id}`);
+  const res = await mfaApiFetch(`memberships/${id}`);
 
   const membership: ApiResponse<GetMembershipResponse> = await res.json();
 

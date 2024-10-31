@@ -6,6 +6,8 @@ import {
 import { ApiResponse } from '@/core/api/types';
 import { GetMembersByDateResponse } from '../../types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 import {
   Card,
   CardHeader,
@@ -26,11 +28,11 @@ export async function MembersJoinedDateChart({
   const params = getMembersByDateUrlParams.parse(searchParams);
 
   const url = serializeGetMembersByDateUrlParams(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/summary/joined`,
+    'members/summary/joined',
     params
   );
 
-  const res = await fetch(url);
+  const res = await mfaApiFetch(url);
 
   const summary: ApiResponse<GetMembersByDateResponse[]> = await res.json();
 

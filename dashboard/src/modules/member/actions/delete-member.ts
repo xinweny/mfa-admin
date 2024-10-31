@@ -4,14 +4,14 @@ import { revalidatePath } from 'next/cache';
 
 import { ErrorResponse } from '@/core/api/types';
 
+import { mfaApiFetch } from '@/core/api/utils';
+
 export const deleteMember = async (memberId: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MFA_API_URL}/members/${memberId}`,
+  const res = await mfaApiFetch(
+    `members/${memberId}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      body: undefined,
     }
   );
   
