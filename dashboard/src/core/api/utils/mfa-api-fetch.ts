@@ -1,4 +1,4 @@
-import { getAccessToken } from '@/modules/auth/utils';
+import { getAccessToken } from '@/modules/auth/actions';
 
 interface MfaApiRequestInit extends RequestInit {
   body: any;
