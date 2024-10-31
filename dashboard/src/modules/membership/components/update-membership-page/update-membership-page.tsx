@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { ApiResponse } from '@/core/api/types';
 import { GetMembershipResponse } from '../../types';
 
-import { formatMembersNames } from '@/modules/member/utils';
+import { formatMemberNames } from '@/modules/member/utils';
 
 import { DashboardContent } from '@/modules/dashboard/components/dashboard-content';
 import { DashboardContentHeader, DashboardContentTitle } from '@/modules/dashboard/components/dashboard-content-header';
@@ -34,7 +34,7 @@ export async function UpdateMembershipPage({
         <DashboardContentTitle
           title="Manage Membership"
           description={membership.data.members
-            ? formatMembersNames(membership.data.members)
+            ? formatMemberNames(membership.data.members)
             : undefined
           }
         />

@@ -1,6 +1,6 @@
-import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
+import { MembershipType } from '@/modules/membership/types';
 
-import { Badge } from '@/components/ui/badge';
+import { MembershipTypeBadge } from '@/modules/membership/components/membership-type-badge';
 
 interface MembershipTypeCellProps {
   id: string;
@@ -12,8 +12,6 @@ export function MembershipTypeCell({
   membershipType,
 }: MembershipTypeCellProps) {
   return (
-    <Badge>
-      {membershipTypeLabels[membershipType]}
-    </Badge>
+    <MembershipTypeBadge membershipType={membershipType} />
   );
 }

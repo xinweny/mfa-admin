@@ -15,7 +15,7 @@ export const createDuesSchema = z.object({
     }),
     amountPaid: z.number(),
     paymentMethod: z.nativeEnum(PaymentMethod),
-    year: z.coerce.number().min(MFA_FOUNDING_YEAR),
+    year: z.coerce.number().gte(MFA_FOUNDING_YEAR),
     paymentDate: z.coerce.date()
       .max(new Date()),
   }))

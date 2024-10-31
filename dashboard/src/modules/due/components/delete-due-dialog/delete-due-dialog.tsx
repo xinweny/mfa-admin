@@ -6,29 +6,33 @@ import { format } from 'date-fns';
 import { PaymentMethod, paymentMethodLabels } from '../../types';
 
 import { handleError } from '@/core/api/utils';
-import { formatMembersNames } from '@/modules/member/utils';
+import { formatMemberNames } from '@/modules/member/utils';
 
-import { ConfirmationDialog } from '@/core/ui/components/confirmation-dialog';
+import { AlertDialog } from '@/core/ui/components/alert-dialog';
 
 import { deleteDue } from '../../actions';
 
 interface DeleteDueDialogProps {
-  id: string;
-  year: number;
+  due: {
+    id: string;
+    paymentMethod: PaymentMethod;
+    paymentDate?: Date;
+    year: number;
+  };
   members: {
     firstName: string;
     lastName: string;
   }[];
-  paymentMethod: PaymentMethod;
-  paymentDate?: Date;
 }
 
 export function DeleteDueDialog({
-  id,
-  year,
   members,
-  paymentMethod,
-  paymentDate,
+  due: {
+    id,
+    year,
+    paymentMethod,
+    paymentDate,
+  }
 }: DeleteDueDialogProps) {
   const onDelete = async () => {
     try {
@@ -41,9 +45,9 @@ export function DeleteDueDialog({
   };
 
   return (
-    <ConfirmationDialog
+    <AlertDialog
       title="Delete Receipt"
-      description={`Are you sure you want to delete the ${year} ${paymentMethodLabels[paymentMethod]} payment from ${formatMembersNames(members)}${paymentDate ? ` on ${format(paymentDate, 'dd/LL/yyyy')}` : ''}?`}
+      description={`Are you sure you want to delete the ${year} ${paymentMethodLabels[paymentMethod]} payment from ${formatMemberNames(members)}${paymentDate ? ` on ${format(paymentDate, 'dd/LL/yyyy')}` : ''}?`}
       onConfirm={onDelete}
     />
   );

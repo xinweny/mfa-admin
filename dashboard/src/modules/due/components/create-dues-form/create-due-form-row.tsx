@@ -4,9 +4,11 @@ import { UseFieldArrayRemove } from 'react-hook-form';
 import { XIcon } from 'lucide-react';
 import { format } from 'date-fns';
 
-import { PaymentMethod, paymentMethodLabels } from '../../types';
+import { paymentMethodOptions } from '../../types';
 
 import { MFA_FOUNDING_YEAR } from '@/core/constants';
+
+import { formatHtmlDateString } from '@/core/ui/utils';
 
 import { TableRow, TableCell } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -76,7 +78,7 @@ export function CreateDueFormRow({
         render={(field) => (
           <Input
             type="date"
-            value={field.value ? format(field.value, 'yyyy-LL-dd') : undefined}
+            value={formatHtmlDateString(field.value)}
             onChange={field.onChange}
             className="w-auto"
           />
@@ -96,18 +98,3 @@ export function CreateDueFormRow({
     </TableRow>
   );
 }
-
-const paymentMethodOptions = [
-  {
-    value: PaymentMethod.Cash,
-    label: paymentMethodLabels[PaymentMethod.Cash],
-  },
-  {
-    value: PaymentMethod.EFT,
-    label: paymentMethodLabels[PaymentMethod.EFT],
-  },
-  {
-    value: PaymentMethod.Cheque,
-    label: paymentMethodLabels[PaymentMethod.Cheque],
-  },
-];

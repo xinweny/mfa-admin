@@ -1,4 +1,4 @@
-export const formatMembersNames = (members: {
+export const formatMemberNames = (members: {
   firstName: string;
   lastName: string;
 }[]) => {

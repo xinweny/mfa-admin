@@ -1,8 +1,8 @@
 namespace MfaApi.Modules.Due;
 
 public class UpdateDueRequest {
-    public int? AmountPaid { get; set; }
-    public int? Year { get; set; }
-    public PaymentMethod? PaymentMethod { get; set; }
-    public DateTime? PaymentDate { get; set; }
+    public int AmountPaid { get; set; }
+    public int Year { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
+    public DateTime PaymentDate { get; set; }
 }

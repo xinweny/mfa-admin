@@ -12,7 +12,10 @@ import {
 import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
 import { MembershipType, membershipTypeLabels } from '@/modules/membership/types';
-import { PaymentMethod, paymentMethodLabels } from '../../types';
+import {
+  PaymentMethod,
+  paymentMethodOptions,
+} from '../../types';
 
 import { useGetDuesUrlParams } from '../../state';
 
@@ -124,20 +127,5 @@ const membershipTypeValues = [
     inputValue: MembershipTypeInputValues.Family,
     value: MembershipType.Family,
     label: membershipTypeLabels[MembershipType.Family],
-  },
-];
-
-const paymentMethodOptions = [
-  {
-    value: PaymentMethod.Cash,
-    label: paymentMethodLabels[PaymentMethod.Cash],
-  },
-  {
-    value: PaymentMethod.EFT,
-    label: paymentMethodLabels[PaymentMethod.EFT],
-  },
-  {
-    value: PaymentMethod.Cheque,
-    label: paymentMethodLabels[PaymentMethod.Cheque],
   },
 ];

@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-interface ConfirmationDialogProps {
+interface AlertDialogProps {
   title: string;
   description?: React.ReactNode;
   onConfirm: () => void;
@@ -16,13 +16,13 @@ interface ConfirmationDialogProps {
   confirmLabel?: string;
 }
 
-export function ConfirmationDialog({
+export function AlertDialog({
   title,
   onConfirm,
   cancelLabel = 'Cancel',
   confirmLabel = 'Confirm',
   description,
-}: ConfirmationDialogProps) {
+}: AlertDialogProps) {
   return (
     <DialogContent>
       <DialogHeader>

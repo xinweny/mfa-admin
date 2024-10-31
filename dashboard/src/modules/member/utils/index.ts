@@ -1,1 +1,1 @@
-export * from './format-members-names';
+export * from './format-member-names';
