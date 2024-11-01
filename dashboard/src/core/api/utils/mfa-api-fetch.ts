@@ -7,7 +7,7 @@ interface MfaApiRequestInit extends RequestInit {
 export const mfaApiFetch = async (path: string, req?: MfaApiRequestInit) => {
   const accessToken = await getAccessToken();
 
-  return await fetch(
+  const res = await fetch(
     `${process.env.NEXT_PUBLIC_MFA_API_URL}/${path}`,
     req
       ? {
@@ -16,9 +16,11 @@ export const mfaApiFetch = async (path: string, req?: MfaApiRequestInit) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
-        ...req.headers,
+        ...req?.headers,
       },
     }
       : undefined
   );
+
+  return res;
 };

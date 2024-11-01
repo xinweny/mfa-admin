@@ -21,6 +21,8 @@ public class Startup {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
         });
 
+        services.AddControllers();
+
         services.AddCors(options => {
             if (Environment.IsDevelopment()) {
                 options.AddDefaultPolicy(policy => {
@@ -34,8 +36,6 @@ public class Startup {
                 });
             }
         });
-
-        services.AddControllers();
 
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
         services.AddProblemDetails();
@@ -68,8 +68,8 @@ public class Startup {
 
         app.UseStatusCodePages();
         app.UseExceptionHandler();
+
         app.UseHttpsRedirection();
-        
         app.UseRouting();
         app.UseCors();
 
@@ -77,13 +77,9 @@ public class Startup {
         app.UseAuthorization();
         
         app.UseMiddleware<IPWhitelistMiddleware>();
+
         app.UseEndpoints(endpoints => {
             endpoints.MapControllers();
-            // if (Environment.IsDevelopment()) {
-            //     endpoints.MapControllers().AllowAnonymous();
-            // } else {
-            //     endpoints.MapControllers();
-            // }
         });
     }
 }
