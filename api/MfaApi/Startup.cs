@@ -21,8 +21,6 @@ public class Startup {
             options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
         });
 
-        services.AddControllers();
-
         services.AddCors(options => {
             if (Environment.IsDevelopment()) {
                 options.AddDefaultPolicy(policy => {
@@ -49,6 +47,8 @@ public class Startup {
                 Description = "An ASP.NET Core Web API for managing members and memberships of the Mississauga Friendship Association."
             });
         });
+
+        services.AddControllers();
 
         services.AddMfaApiModules(Configuration);
     }

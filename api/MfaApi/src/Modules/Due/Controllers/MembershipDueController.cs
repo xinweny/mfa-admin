@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Due;
 
-[Authorize]
 [ApiController]
 [Route("api/memberships/{membershipId}/dues")]
 

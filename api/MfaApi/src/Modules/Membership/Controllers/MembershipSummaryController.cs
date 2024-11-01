@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Membership;
 
-[Authorize]
 [ApiController]
 [Route("api/memberships/summary")]
 

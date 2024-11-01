@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
 
 namespace MfaApi.Modules.Exchange;
 
-[Authorize]
 [ApiController]
 [Route("api/members/{memberId}/exchanges")]
 
