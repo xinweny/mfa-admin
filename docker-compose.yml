@@ -1,7 +1,6 @@
 services:
   mfa-membership-database:
     image: postgres
-    container_name: mfa-membership-database
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     ports:
@@ -12,7 +11,6 @@ services:
       - POSTGRES_DB=
   mfa-api:
     image: mfa/api
-    container_name: mfa-api
     build: ./api/MfaApi
     ports:
       - 8000:8080
@@ -25,7 +23,6 @@ services:
       - AUTHO_AUDIENCE=
   mfa-admin-dashboard:
     image: mfa/admin-dashboard
-    container_name: mfa-admin-dashboard
     build: ./dashboard
     ports:
       - 3000:80
