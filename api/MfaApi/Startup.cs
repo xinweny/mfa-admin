@@ -18,7 +18,7 @@ public class Startup {
 
     public void ConfigureServices(IServiceCollection services) {
         services.AddDbContext<MfaDbContext>(options => {
-            options.UseNpgsql(Configuration.GetConnectionString("postgresdb"));
+            options.UseNpgsql(Configuration["ConnectionStrings:postgresdb"]);
         });
 
         services.AddCors(options => {

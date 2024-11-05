@@ -13,41 +13,43 @@ services:
       - postgres_db
   api:
     image: mfa/api
-    build: ./api/MfaApi
-    ports:
-      - 8000:8080
-    links:
-      - db
-    environment:
-      ASPNETCORE_ENVIRONMENT: /run/secrets/aspnetcore_environment
-      PGSQL_CONNECTION_STRING: Server=db;Port=5432;Database=${/run/secrets/postgres_db};Trusted_Connection=True;
-      AUTH0_AUTHORITY: /run/secrets/auth0_authority
-      AUTHO_AUDIENCE: /run/secrets/auth0_audience
-    secrets:
+    build:
+      context: ./api/MfaApi
+      args:
+        ASPNETCORE_ENVIRONMENT: /run/secrets/aspnetcore_environment
+        PGSQL_CONNECTION_STRING: Server=db;Port=5432;Database=$(/run/secrets/postgres_db);Trusted_Connection=True;
+        AUTH0_AUTHORITY: /run/secrets/auth0_authority
+        AUTHO_AUDIENCE: /run/secrets/auth0_audience
+      secrets:
       - aspnetcore_environment
       - postgres_db
       - auth0_authority
       - auth0_audience
+    ports:
+      - 8000:8080
+    links:
+      - db      
   dashboard:
     image: mfa/admin-dashboard
-    build: ./dashboard
+    build:
+      context: ./dashboard
+      args:
+        NEXT_PUBLIC_MFA_API_URL: http://api:8080/api
+        AUTH0_BASE_URL: /run/secrets/auth0_base_url
+        AUTH0_ISSUER_BASE_URL: /run/secrets/auth0_issuer_base_url
+        AUTH0_CLIENT_ID: /run/secrets/auth0_client_id
+        AUTH0_CLIENT_SECRET: /run/secrets/auth0_client_secret
+        AUTH0_AUDIENCE: /run/secrets/auth0_audience
+      secrets:
+        - auth0_base_url
+        - auth0_issuer_base_url
+        - auth0_client_id
+        - auth0_client_secret
+        - auth0_audience
     ports:
       - 3000:3000
     links:
       - api
-    environment:
-      NEXT_PUBLIC_MFA_API_URL: http://api:8080/api
-      AUTH0_BASE_URL: /run/secrets/auth0_base_url
-      AUTH0_ISSUER_BASE_URL: /run/secrets/auth0_issuer_base_url
-      AUTH0_CLIENT_ID: /run/secrets/auth0_client_id
-      AUTH0_CLIENT_SECRET: /run/secrets/auth0_client_secret
-      AUTH0_AUDIENCE: /run/secrets/auth0_audience
-    secrets:
-      - auth0_base_url
-      - auth0_issuer_base_url
-      - auth0_client_id
-      - auth0_client_secret
-      - auth0_audience
 secrets:
   postgres_password:
     environment: POSTGRES_PASSWORD
