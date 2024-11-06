@@ -17,5 +17,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /src
 COPY --from=build /src/out ./
 
+EXPOSE 8080
+
 # Start the application
-ENTRYPOINT ["dotnet", "MfaApi.dll"]
+ENTRYPOINT dotnet MfaApi.dll -e ConnectionStrings__postgresdb=$PGSQL_CONNECTION_STRING Auth0__Authority=$AUTH0_AUTHORITY Auth0__Audience=$AUTH0_AUDIENCE
