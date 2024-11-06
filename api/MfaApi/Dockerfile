@@ -11,9 +11,9 @@ RUN dotnet restore
 COPY . .
 
 # Apply migrations
-RUN dotnet tool install --global dotnet-ef
+RUN dotnet tool install --global dotnet-ef --version 6.0.25
 ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet ef database update --connection $PGSQL_CONNECTION_STRING
+RUN dotnet ef database update
 
 # Publish the application
 RUN dotnet publish -c Release -o out
