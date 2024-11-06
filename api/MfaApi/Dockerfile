@@ -13,7 +13,7 @@ COPY . .
 # Apply migrations
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet ef database update --connection $PGSQL_CONNECTION_STRING --assembly
+RUN dotnet ef database update
 
 # Publish the application
 RUN dotnet publish -c Release -o out

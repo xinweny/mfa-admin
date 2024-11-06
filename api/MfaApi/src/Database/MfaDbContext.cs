@@ -28,6 +28,13 @@ public class MfaDbContext: DbContext {
     public required DbSet<ExchangeModel> Exchanges { get; set; }
     public required DbSet<UserModel> Users { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING"));
+        }
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.ApplyConfiguration(new MembershipConfiguration());
         modelBuilder.ApplyConfiguration(new MemberConfiguration());
