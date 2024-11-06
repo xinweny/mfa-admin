@@ -9,9 +9,11 @@ WORKDIR /src
 COPY MfaApi.csproj ./
 RUN dotnet restore
 COPY . .
+
+# Apply migrations
 RUN dotnet tool install --global dotnet-ef
-RUN /root/.dotnet/tools/dotnet-ef migrations add InitialMigration --project MfaApi.csproj -v
-RUN /root/.dotnet/tools/dotnet-ef database update
+ENV PATH=$PATH:/root/.dotnet/tools
+RUN dotnet-ef database update
 
 # Publish the application
 RUN dotnet publish -c Release -o out
