@@ -1,17 +1,20 @@
 services:
   db:
     image: postgres
+    restart: always
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: mfa
       POSTGRES_USER: mfa
+      POSTGRES_PASSWORD: mfa
       POSTGRES_DB: mfa
-    ports:
-      - 5432:5432
+    expose:
+      - 5432
   api:
     image: mfa/api
     build: ./api/MfaApi
+    restart: always
+    command: sh -c "cd ./api/MfaApi && dotnet watch"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__postgresdb: Server=db;Port=5432;Database=mfa;TrustServerCertificate=true;
@@ -21,13 +24,20 @@ services:
       - auth0_authority
       - auth0_audience
     ports:
-      - 8000:8080
-    depends_on:
-      - db   
+      - 8080:8080
+    develop:
+      watch:
+        - action: rebuild
+          path: ./api/MfaApi
   dashboard:
     image: mfa/admin-dashboard
-    build: ./dashboard
+    build:
+      context: ./dashboard
+      target: builder
+    restart: always
+    command: sh -c "cd ./dashboard && npm run dev"
     environment:
+      NODE_ENV: development
       NEXT_PUBLIC_MFA_API_URL: http://api:8080/api
       AUTH0_BASE_URL: http://dashboard:3000
       AUTH0_ISSUER_BASE_URL: /run/secrets/auth0_authority
@@ -39,6 +49,10 @@ services:
       - auth0_client_id
       - auth0_client_secret
       - auth0_audience
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
     ports:
       - 3000:3000
     depends_on:
