@@ -6,8 +6,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy the project files and restore dependencies
-COPY . ./
+COPY MfaApi.csproj ./
 RUN dotnet restore
+COPY . .
+RUN dotnet tool install --global dotnet-ef
+RUN /root/.dotnet/tools/dotnet-ef migrations add InitialMigration --project MfaApi.csproj -v
+RUN /root/.dotnet/tools/dotnet-ef database update
 
 # Publish the application
 RUN dotnet publish -c Release -o out
