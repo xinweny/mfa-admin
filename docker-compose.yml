@@ -6,6 +6,8 @@ services:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: mfa
+      POSTGRES_USER: mfa
+      POSTGRES_PASSWORD: mfa
     ports:
       - 5432:5432
   api:
@@ -13,7 +15,7 @@ services:
     build:
       context: ./api/MfaApi
       args:
-        PGSQL_CONNECTION_STRING: Server=db;Port=5432;Database=mfa;Trust Server Certificate=true;
+        PGSQL_CONNECTION_STRING: Host=db;Port=5432;Database=mfa;Username=mfa;Password=mfa;Trust Server Certificate=true;
         AUTH0_AUTHORITY: /run/secrets/auth0_authority
         AUTH0_AUDIENCE: /run/secrets/auth0_audience
         MFA_CLIENT_URL: http://dashboard:3000
