@@ -3,7 +3,7 @@ services:
     image: postgres
     restart: always
     volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
+      - /var/lib/postgresql/data
     environment:
       POSTGRES_DB: mfa
       POSTGRES_USER: mfa
@@ -31,8 +31,8 @@ services:
       - db
   dashboard:
     image: mfa/admin-dashboard
-    build: ./dashboard
-    command: npm run dev
+    build:
+      context: ./dashboard
     restart: always
     environment:
       NODE_ENV: development
@@ -48,7 +48,7 @@ services:
       - auth0_client_secret
       - auth0_audience
     volumes:
-      - .:/app
+      - ./dashboard:/app
       - /app/node_modules
       - /app/.next
     ports:
