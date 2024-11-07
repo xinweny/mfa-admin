@@ -6,22 +6,27 @@ services:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: mfa
-    ports:
-      - 5433:5432
+    expose:
+      - 5432
   api:
     image: mfa/api
-    build: ./api/MfaApi
+    build:
+      context: ./api/MfaApi
+      args:
+        PGSQL_CONNECTION_STRING: Host=db;Port=5432;Database=mfa;TrustServerCertificate=true;
+        AUTH0_AUTHORITY: /run/secrets/auth0_authority
+        AUTH0_AUDIENCE: /run/secrets/auth0_audience
+        MFA_CLIENT_URL: http://dashboard:3000
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      PGSQL_CONNECTION_STRING: Host=db;Port=5432;Database=mfa;TrustServerCertificate=true;
-      AUTH0_AUTHORITY: /run/secrets/auth0_authority
-      Auth0_AUDIENCE: /run/secrets/auth0_audience
     secrets:
       - auth0_authority
       - auth0_audience
     ports:
       - 8080:8080
+    depends_on:
+      - db
   dashboard:
     image: mfa/admin-dashboard
     build: ./dashboard
@@ -49,14 +54,6 @@ services:
       - 3000:3000
     depends_on:
       - api
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /app/src
-        - action: rebuild
-          path: package.json
-          target: /app
 secrets:
   auth0_authority:
     environment: AUTH0_AUTHORITY

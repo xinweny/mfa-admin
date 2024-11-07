@@ -29,8 +29,7 @@ public class MfaDbContext: DbContext {
     public required DbSet<UserModel> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        if (!optionsBuilder.IsConfigured)
-        {
+        if (!optionsBuilder.IsConfigured) {
             optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING"));
         }
     }

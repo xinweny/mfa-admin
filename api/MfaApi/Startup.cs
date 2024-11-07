@@ -22,17 +22,10 @@ public class Startup {
         });
 
         services.AddCors(options => {
-            if (Environment.IsDevelopment()) {
-                options.AddDefaultPolicy(policy => {
-                    policy
-                        .WithOrigins("http://localhost:3000", "https://localhost:3000")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                });
-            } else {
-                options.AddDefaultPolicy(policy => {
-                });
-            }
+            options.AddDefaultPolicy(policy => {
+                policy 
+                    .WithOrigins(Configuration["MfaClientUrl"]!);
+            });
         });
 
         services.AddExceptionHandler<ExceptionHandlerMiddleware>();
