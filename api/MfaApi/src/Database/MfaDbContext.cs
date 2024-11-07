@@ -32,8 +32,8 @@ public class MfaDbContext: DbContext {
         modelBuilder.ApplyConfiguration(new MembershipConfiguration());
         modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
-        // if (_env.IsDevelopment()) {
-        //     modelBuilder.Seed();
-        // }
+        if (_env.IsDevelopment()) {
+            modelBuilder.Seed();
+        }
     }
 }
