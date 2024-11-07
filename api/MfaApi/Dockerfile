@@ -18,7 +18,7 @@ RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 ARG PGSQL_CONNECTION_STRING
-RUN dotnet ef database update $PGSQL_CONNECTION_STRING
+RUN dotnet ef database update --connection=$PGSQL_CONNECTION_STRING
 
 # Build the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
