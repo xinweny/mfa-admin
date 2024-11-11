@@ -2,9 +2,9 @@
 
 import { PaginationMetadata } from '@/core/api/types';
 
-import { PaginationInfo } from './components/pagination-info';
-import { PaginationLimitSelect } from './components/pagination-limit-select';
-import { PaginationNav } from './components/pagination-nav/pagination-nav';
+import { PaginationInfo } from './pagination-info';
+import { PaginationLimitSelect } from './pagination-limit-select';
+import { PaginationNav } from './pagination-nav';
 
 interface DataTablePaginationProps {
   pagination: PaginationMetadata | null;
