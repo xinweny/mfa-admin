@@ -13,7 +13,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 
-import { DataTableFilter } from './components/data-table-filter';
+import { DataTableFilter } from './data-table-filter';
 
 interface DataTableFiltersFormProps<T extends FieldValues> {
   form: UseFormReturn<T, any, undefined>;
