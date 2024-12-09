@@ -32,7 +32,7 @@ export function DashboardForm<T extends FieldValues>({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {children}
-        <div className={"flex gap-2 mt-2"}>
+        <div className="flex gap-2 mt-2">
           {reset && (
             <Button
               type="button"
@@ -45,7 +45,7 @@ export function DashboardForm<T extends FieldValues>({
           )}
           <Button
             type="submit"
-            className={"flex-grow"}
+            className="flex-grow"
             disabled={!form.formState.isDirty || form.formState.isSubmitting}
           >
             {submitLabel}
@@ -53,5 +53,5 @@ export function DashboardForm<T extends FieldValues>({
         </div>
       </form>
     </Form>
-  )
+  );
 }

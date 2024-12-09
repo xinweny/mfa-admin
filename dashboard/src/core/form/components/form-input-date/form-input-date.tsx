@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { SelectSingleEventHandler } from 'react-day-picker';
+import { CalendarIcon } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 
@@ -11,9 +11,7 @@ import {
   PopoverContent,
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-
 
 interface FormInputDateProps {
   value: Date | undefined;
