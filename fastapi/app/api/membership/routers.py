@@ -1,3 +1,3 @@
 from fastapi import APIRouter
 
-member_router = APIRouter()
+membership_router = APIRouter()

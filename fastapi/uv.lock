@@ -288,7 +288,6 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
     { name = "sqlalchemy" },
-    { name = "uvicorn", extra = ["standard"] },
 ]
 
 [package.dev-dependencies]
@@ -304,7 +303,6 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.7.1" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "sqlalchemy", specifier = ">=2.0.37" },
-    { name = "uvicorn", extras = ["standard"], specifier = ">=0.34.0" },
 ]
 
 [package.metadata.requires-dev]
