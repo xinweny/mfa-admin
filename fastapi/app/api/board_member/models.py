@@ -1,5 +1,4 @@
 from datetime import date
-from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import ForeignKey
@@ -15,7 +14,7 @@ class BoardMember(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True)
     
     start_date: Mapped[date]
-    end_date: Mapped[Optional[date]]
+    end_date: Mapped[date | None]
     board_position: Mapped[BoardPosition]
     
     member_id: Mapped[UUID] = mapped_column(ForeignKey('members.id'))

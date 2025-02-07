@@ -1,5 +1,4 @@
 from datetime import date
-from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import ForeignKey
@@ -17,7 +16,7 @@ class Due(Base):
     year: Mapped[int]
     payment_method: Mapped[PaymentMethod]
     amount_paid: Mapped[int] = mapped_column(min=20)
-    payment_date: Mapped[Optional[date]]
+    payment_date: Mapped[date | None]
     
     membership_id: Mapped[UUID] = mapped_column(ForeignKey('memberships.id'))
     membership: Mapped[Membership] = relationship(Membership, back_populates='children')

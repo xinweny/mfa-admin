@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import ForeignKey, DateTime
@@ -18,12 +17,12 @@ class Member(Base):
     first_name: Mapped[str]
     last_name: Mapped[str]
     email: Mapped[str]
-    phone_number: Mapped[Optional[str]]
-    joined_date: Mapped[Optional[date]]
+    phone_number: Mapped[str | None]
+    joined_date: Mapped[date | None]
     
     # pylint: disable=not-callable
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    updated_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), onupdate=datetime.now)
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), onupdate=datetime.now)
     
     membership_id: Mapped[UUID] = mapped_column(ForeignKey('memberships.id'))
     membership: Mapped[Membership] = relationship(Membership, back_populates='children')

@@ -1,4 +1,3 @@
-from typing import Optional
 from uuid import UUID
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -13,7 +12,7 @@ class Address(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True)
     
     line1: Mapped[str]
-    line2: Mapped[Optional[str]]
+    line2: Mapped[str | None]
     city: Mapped[str]
     postal_code: Mapped[str]
     province: Mapped[Province]
