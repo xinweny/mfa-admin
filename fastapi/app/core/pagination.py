@@ -2,14 +2,13 @@ from typing import TypeVar
 from math import ceil
 from fastapi import Depends
 from sqlalchemy import func, select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, DeclarativeBase
 from sqlalchemy.sql.expression import Select
-from sqlalchemy.ext.declarative import DeclarativeMeta
 from pydantic import BaseModel, Field
 
 from app.database import get_db
 
-M = TypeVar('M', bound=DeclarativeMeta)
+M = TypeVar('M', bound=DeclarativeBase)
 
 class PaginationRequest(BaseModel):
     page: int = Field(1, ge=1)
@@ -40,7 +39,7 @@ def get_pagination_metadata(
         page_size=limit,
     )
     
-def paginate(
+def paginate_query(
     query: Select[tuple[M]],
     params: PaginationRequest = Depends(),
 ) -> Select[tuple[M]]:
