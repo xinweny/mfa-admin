@@ -21,15 +21,15 @@ class PaginationMetadata(BaseModel):
     total_count: int
     page_size: int | None
 
-def paginate(
+def get_pagination_metadata(
     query: Select[tuple[M]],
     params: PaginationRequest = Depends(),
     db: Session = Depends(get_db),
-):
+) -> PaginationMetadata:
     page = params.page
     limit = params.limit
     
-    total_count = int(db.execute(select(func.count).select_from(query.subquery())).scalar_one())
+    total_count = int(db.execute(select(func.count).select_from(query.subquery())).scalar_one()) or 0
     
     total_pages = ceil(total_count / limit) if limit is not None else 1
   
@@ -39,3 +39,14 @@ def paginate(
         total_count=total_count,
         page_size=limit,
     )
+    
+def paginate(
+    query: Select[tuple[M]],
+    params: PaginationRequest = Depends(),
+) -> Select[tuple[M]]:
+    offset = None if params.limit is None else ((params.page - 1) * params.limit)
+    
+    paginated_query = query.offset(offset).limit(params.limit)
+    
+  
+    return paginated_query
