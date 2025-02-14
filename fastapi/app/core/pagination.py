@@ -1,12 +1,9 @@
 from typing import TypeVar
 from math import ceil
-from fastapi import Depends
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session, DeclarativeBase
 from sqlalchemy.sql.expression import Select
 from pydantic import BaseModel, Field
-
-from app.database import get_db
 
 M = TypeVar('M', bound=DeclarativeBase)
 
@@ -22,8 +19,8 @@ class PaginationMetadata(BaseModel):
 
 def get_pagination_metadata(
     query: Select[tuple[M]],
-    params: PaginationRequest = Depends(),
-    db: Session = Depends(get_db),
+    params: PaginationRequest,
+    db: Session,
 ) -> PaginationMetadata:
     page = params.page
     limit = params.limit
@@ -39,9 +36,9 @@ def get_pagination_metadata(
         page_size=limit,
     )
     
-def paginate_query(
+def paginate(
     query: Select[tuple[M]],
-    params: PaginationRequest = Depends(),
+    params: PaginationRequest,
 ) -> Select[tuple[M]]:
     offset = None if params.limit is None else ((params.page - 1) * params.limit)
     

@@ -11,7 +11,7 @@ class SortOrder(Enum):
     ASC = 1
     DESC = 2
 
-def sort_query(
+def order_by(
     query: Select[tuple[M]],
     sort_order: Dict[Union[str, Column], SortOrder | None]
 ) -> Select[tuple[M]]:
