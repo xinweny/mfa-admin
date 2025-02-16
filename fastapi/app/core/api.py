@@ -1,13 +1,16 @@
 from typing import TypeVar, Generic
-from sqlalchemy.orm import DeclarativeBase
+from dataclasses import dataclass
+from pydantic import BaseModel
 
 from app.core.pagination import PaginationMetadata
 
-T = TypeVar('T', bound=DeclarativeBase)
+T = TypeVar('T', bound=BaseModel)
 
+@dataclass
 class ApiResponse(Generic[T]):
     data: T | tuple[T, ...] | None = None
 
+@dataclass
 class ApiPaginatedResponse(Generic[T]):
     data: tuple[T, ...] = tuple()
     current_page: int | None = None
@@ -15,9 +18,13 @@ class ApiPaginatedResponse(Generic[T]):
     total_count: int | None = None
     page_size: int | None = None
 
-    def __init__(self, pagination: PaginationMetadata | None):
-        super().__init__()
-
+    def __init__(
+        self,
+        pagination: PaginationMetadata | None,
+        data: tuple[T, ...] = tuple(),
+    ):
+        self.data = data
+        
         if pagination:
             self.current_page = pagination.current_page
             self.total_pages = pagination.total_pages
