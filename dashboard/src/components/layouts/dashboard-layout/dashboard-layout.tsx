@@ -1,8 +1,8 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import { redirect } from 'next/navigation';
 
-import { DashboardHeader } from '../dashboard-header';
-import { DashboardNavbar } from '../dashboard-navbar';
+import { DashboardHeader } from '@/modules/dashboard/components/dashboard-header';
+import { DashboardNavbar } from '@/modules/dashboard/components/dashboard-navbar';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

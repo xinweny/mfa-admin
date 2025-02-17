@@ -1,3 +1,3 @@
-import { DashboardLayout } from '@/modules/dashboard/components/dashboard-layout';
+import { DashboardLayout } from '@/components/layouts/dashboard-layout';
 
 export default DashboardLayout;
