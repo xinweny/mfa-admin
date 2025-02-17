@@ -30,4 +30,4 @@ ARG MFA_CLIENT_URL
 ENV MFA_CLIENT_URL=$MFA_CLIENT_URL
 
 # Start the application
-ENTRYPOINT dotnet MfaApi.dll -e ConnectionStrings__postgresdb="$PGSQL_CONNECTION_STRING" Auth0__Authority=$AUTH0_AUTHORITY Auth0__Audience=$AUTH0_AUDIENCE ClientUrl=$CLIENT_URL
+ENTRYPOINT dotnet MfaApi.dll -e ConnectionStrings__postgresdb=$PGSQL_CONNECTION_STRING Auth0__Authority=$AUTH0_AUTHORITY Auth0__Audience=$AUTH0_AUDIENCE ClientUrl=$CLIENT_URL
