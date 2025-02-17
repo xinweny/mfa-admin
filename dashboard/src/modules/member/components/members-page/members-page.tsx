@@ -13,10 +13,11 @@ import {
   DashboardContentHeader,
   DashboardContentTitle,
 } from '@/modules/dashboard/components/dashboard-content-header';
-import { DataTableContainer } from '@/core/data/components/data-table-container';
+import { DataTableContainer, DataTableMenu } from '@/core/data/components/data-table-container';
 import { DataTablePagination } from '@/core/data/components/data-table-pagination';
 import { MembersTable } from '../members-table/members-table';
 import { MembershipsTableFilters } from '../members-table-filters';
+import { ExportMembersCsvButton } from '../export-members-csv-button';
 
 interface MembersPageProps {
   searchParams: Record<string, string | string[] | undefined>;
@@ -32,7 +33,9 @@ export async function MembersPage({
 
   const res = await mfaApiFetch(url);
 
-  const members: ApiResponse<GetMembersResponse> = await res.json();
+  const data: ApiResponse<GetMembersResponse> = await res.json();
+
+  const members = (data.data || []) as GetMembersResponse[];
 
   return (
     <DashboardContent>
@@ -40,12 +43,13 @@ export async function MembersPage({
         <DashboardContentTitle title="Members" />
       </DashboardContentHeader>
       <DataTableContainer>
-        <MembershipsTableFilters />
-        <MembersTable
-          members={(members.data || []) as GetMembersResponse[]}
-        />
+        <DataTableMenu>
+          <MembershipsTableFilters />
+          <ExportMembersCsvButton members={members} />
+        </DataTableMenu>
+        <MembersTable members={members} />
         <DataTablePagination
-          pagination={members.metadata?.pagination || null}
+          pagination={data.metadata?.pagination || null}
         />
       </DataTableContainer>
     </DashboardContent>

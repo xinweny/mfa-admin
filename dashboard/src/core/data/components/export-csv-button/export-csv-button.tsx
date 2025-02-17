@@ -18,14 +18,13 @@ export function ExportCsvButton({
 }: ExportCsvButtonProps) {
   return (
     <Button
-    t
       onClick={() => {
         const csvString = convertToCsv(csv);
     
         downloadFile({
           data: csvString,
           type: 'text/csv',
-          fileName: `${Date.now()}_${fileName}.csv`,
+          fileName: `${Date.now()}_mfa_${fileName}.csv`,
         });
       }}
       className="flex items-center gap-2"
