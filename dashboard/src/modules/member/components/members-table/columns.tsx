@@ -13,7 +13,6 @@ import { MemberRowDropdownMenu } from './member-row-dropdown-menu';
 import { MembershipTypeCell } from './membership-type-cell';
 import { MississaugaResidentCell } from './mississauga-resident-cell';
 import { StatusCell } from './status-cell';
-import { MemberPageLink } from './member-page-link';
 
 export interface MemberColumns {
   id: string;
@@ -39,9 +38,6 @@ export const columns: ColumnDef<MemberColumns>[] = [
         label="First Name"
       />
     ),
-    cell: ({ row: { original: { id, firstName } } }) => (
-      <MemberPageLink memberId={id}>{firstName}</MemberPageLink>
-    ),
   },
   {
     accessorKey: 'lastName',
@@ -50,9 +46,6 @@ export const columns: ColumnDef<MemberColumns>[] = [
         name="sortLastName"
         label="Last Name"
       />
-    ),
-    cell: ({ row: { original: { id, lastName } } }) => (
-      <MemberPageLink memberId={id}>{lastName}</MemberPageLink>
     ),
   },
   {

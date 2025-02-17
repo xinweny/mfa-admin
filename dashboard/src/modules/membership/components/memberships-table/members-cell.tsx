@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 interface MembersCellProps {
   members: {
     id: string;
@@ -16,9 +14,7 @@ export function MembersCell({
       {members
         .map(member => (
           <li key={member.id} className="text-medium">
-            <Link href={`/dashboard/members/${member.id}`}>
-              {`${member.firstName} ${member.lastName.toUpperCase()}`}
-            </Link>
+            {`${member.firstName} ${member.lastName.toUpperCase()}`}
           </li>
         ))}
     </ul>
