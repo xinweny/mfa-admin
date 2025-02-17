@@ -23,7 +23,7 @@ async def list_memberships(
     params: ListMembershipsRequest = Depends(),
     pagination: PaginationRequest = Depends()
 ):
-    query = list_memberships_query(params=params, db=db)
+    query = list_memberships_query(params=params)
 
     query, pagination_metadata = paginate(
         params=pagination,
