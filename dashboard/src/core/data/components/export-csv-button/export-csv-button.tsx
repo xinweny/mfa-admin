@@ -1,6 +1,6 @@
-import {
-  FileSpreadsheetIcon,
-} from 'lucide-react';
+'use client';
+
+import { FileSpreadsheetIcon } from 'lucide-react';
 
 import { downloadFile } from '@/utils/download-file';
 import { convertToCsv } from '@/utils/convert-to-csv';
@@ -18,6 +18,7 @@ export function ExportCsvButton({
 }: ExportCsvButtonProps) {
   return (
     <Button
+    t
       onClick={() => {
         const csvString = convertToCsv(csv);
     
@@ -28,6 +29,7 @@ export function ExportCsvButton({
         });
       }}
       className="flex items-center gap-2"
+      disabled={csv.length === 0}
     >
       <FileSpreadsheetIcon />
       <span>Export to CSV</span>

@@ -39,6 +39,11 @@ export interface MembershipColumns {
 
 export const columns: ColumnDef<MembershipColumns>[] = [
   {
+    accessorKey: 'members',
+    header: 'Members',
+    cell: ({ row: { original: { members } } }) => <MembersCell members={members} />,
+  },
+  {
     accessorKey: 'membershipType',
     header: 'Type',
     cell: ({ row: { original: { membershipType, id } } }) => (
@@ -47,11 +52,6 @@ export const columns: ColumnDef<MembershipColumns>[] = [
         membershipType={membershipType}
       />
     ),
-  },
-  {
-    accessorKey: 'members',
-    header: 'Members',
-    cell: ({ row: { original: { members } } }) => <MembersCell members={members} />,
   },
   {
     accessorKey: 'address',
