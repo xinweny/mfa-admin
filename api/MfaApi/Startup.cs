@@ -24,7 +24,7 @@ public class Startup {
         services.AddCors(options => {
             options.AddDefaultPolicy(policy => {
                 policy 
-                    .WithOrigins(Configuration["MfaClientUrl"]!);
+                    .WithOrigins(Configuration["ClientUrl"]!);
             });
         });
 
