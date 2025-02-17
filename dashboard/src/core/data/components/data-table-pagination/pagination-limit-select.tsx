@@ -1,6 +1,6 @@
 'use client';
 
-import { usePaginationUrlParams } from '@/core/data/state';
+import { usePaginationUrlParams } from '@/core/data/hooks';
 
 import {
   Select,

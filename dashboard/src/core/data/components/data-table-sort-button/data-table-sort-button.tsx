@@ -7,7 +7,7 @@ import {
 
 import { SortOrder } from '@/types/sort-order';
 
-import { useSortUrlParam } from '../../state';
+import { useSortUrlParam } from '../../hooks';
 
 interface DataTableSortButtonProps {
   name: string;
