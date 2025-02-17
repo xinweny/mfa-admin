@@ -16,7 +16,7 @@ import { handleError } from '@/core/api/utils';
 import {
   DashboardForm,
   DashboardFormTitle,
-} from '@/core/form/components/dashboard-form';
+} from '@/components/form/dashboard-form';
 
 import { MembersFormSection } from './members-form-section';
 import { AddressFormSection } from './address-form-section';

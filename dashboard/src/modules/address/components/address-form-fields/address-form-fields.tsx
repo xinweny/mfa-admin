@@ -1,9 +1,9 @@
 import { Input } from '@/components/ui/input';
 
-import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
-import { FormInputSelect } from '@/core/form/components/form-input-select';
+import { DashboardFormField } from '@/components/form/dashboard-form-field';
+import { FormInputSelect } from '@/components/form/form-input-select';
 import { provinceLabels } from '../../types';
-import { FormSectionContent } from '@/core/form/components/form-section';
+import { FormSectionContent } from '@/components/form/form-section';
 
 interface AddressFormFieldsProps {
   name?: string;

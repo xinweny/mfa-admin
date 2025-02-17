@@ -8,7 +8,7 @@ import { PaymentMethod, paymentMethodLabels } from '../../types';
 import { handleError } from '@/core/api/utils';
 import { formatMemberNames } from '@/modules/member/utils';
 
-import { AlertDialog } from '@/core/ui/components/alert-dialog';
+import { AlertDialog } from '@/components/ui/alert-dialog';
 
 import { deleteDue } from '../../actions';
 

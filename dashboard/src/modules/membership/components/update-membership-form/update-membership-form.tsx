@@ -14,8 +14,8 @@ import { handleError } from '@/core/api/utils';
 
 import { updateMembership } from '../../actions';
 
-import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
+import { DashboardForm } from '@/components/form/dashboard-form';
+import { FormSection, FormSectionHeader } from '@/components/form/form-section';
 import { MembershipFormFields } from '../membership-form-fields';
 
 interface UpdateMembershipFormProps {

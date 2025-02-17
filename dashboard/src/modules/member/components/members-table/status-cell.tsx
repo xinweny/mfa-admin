@@ -1,4 +1,4 @@
-import { BooleanBadge } from '@/core/ui/components/boolean-badge';
+import { BooleanBadge } from '@/components/ui/boolean-badge';
 
 interface StatusCellProps {
   isActive: boolean;

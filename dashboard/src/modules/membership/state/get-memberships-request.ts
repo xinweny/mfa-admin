@@ -12,7 +12,7 @@ import { createSearchParamsCache } from 'nuqs/server';
 import { SortOrder } from '@/types';
 import { MembershipType } from '../types';
 
-import { paginationParsers } from '@/core/data/state';
+import { paginationParsers } from '@/core/data/hooks';
 
 const parsers = {
   yearPaid: parseAsInteger.withDefault(new Date().getFullYear()),

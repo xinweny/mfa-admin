@@ -10,7 +10,7 @@ import { createSearchParamsCache } from 'nuqs/server';
 
 import { SortOrder } from '@/types';
 
-import { paginationParsers } from '@/core/data/state';
+import { paginationParsers } from '@/core/data/hooks';
 
 const parsers = {
   query: parseAsString,

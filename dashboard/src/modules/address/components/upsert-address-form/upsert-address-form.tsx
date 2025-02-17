@@ -10,8 +10,8 @@ import { Address } from '../../types';
 
 import { handleError } from '@/core/api/utils';
 
-import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
+import { DashboardForm } from '@/components/form/dashboard-form';
+import { FormSection, FormSectionHeader } from '@/components/form/form-section';
 
 import { createAddress, updateAddress } from '../../actions';
 

@@ -9,15 +9,15 @@ import { MembershipType } from '@/modules/membership/types';
 
 import { UpdateDueSchema, updateDueSchemaResolver } from './schema';
 
-import { formatHtmlDateString } from '@/core/ui/utils';
+import { formatHtmlDateString } from '@/utils';
 import { handleError } from '@/core/api/utils';
 
 import { DialogContent } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 
-import { DashboardForm, DashboardFormTitle } from '@/core/form/components/dashboard-form';
-import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
-import { FormInputSelect } from '@/core/form/components/form-input-select';
+import { DashboardForm, DashboardFormTitle } from '@/components/form/dashboard-form';
+import { DashboardFormField } from '@/components/form/dashboard-form-field';
+import { FormInputSelect } from '@/components/form/form-input-select';
 import { formatMemberNames } from '@/modules/member/utils';
 import { MembershipTypeBadge } from '@/modules/membership/components/membership-type-badge';
 

@@ -1,4 +1,4 @@
-import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
+import { FormSection, FormSectionHeader } from '@/components/form/form-section';
 
 import { MembershipFormFields } from '../membership-form-fields';
 

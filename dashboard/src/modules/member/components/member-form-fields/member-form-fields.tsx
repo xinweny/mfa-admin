@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input';
 
-import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
-import { FormInputDate } from '@/core/form/components/form-input-date';
+import { DashboardFormField } from '@/components/form/dashboard-form-field';
+import { FormInputDate } from '@/components/form/form-input-date';
 
 interface MemberFormFieldsProps {
   name?: string;

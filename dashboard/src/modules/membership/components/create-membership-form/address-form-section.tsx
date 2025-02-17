@@ -7,7 +7,7 @@ import {
   FormSection,
   FormSectionHeader,
   FormSectionHeaderButton,
-} from '@/core/form/components/form-section';
+} from '@/components/form/form-section';
 
 import { AddressFormFields } from '@/modules/address/components/address-form-fields';
 import { Province } from '@/modules/address/types';

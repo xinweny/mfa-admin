@@ -7,8 +7,8 @@ import { MemberSchema, memberSchemaResolver } from '../member-form-fields';
 
 import { handleError } from '@/core/api/utils';
 
-import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection } from '@/core/form/components/form-section';
+import { DashboardForm } from '@/components/form/dashboard-form';
+import { FormSection } from '@/components/form/form-section';
 
 import { MemberFormFields } from '../member-form-fields';
 import { DeleteMemberButton } from '../delete-member-button';

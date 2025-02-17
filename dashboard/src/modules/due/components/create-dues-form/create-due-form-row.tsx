@@ -8,14 +8,14 @@ import { paymentMethodOptions } from '../../types';
 
 import { MFA_FOUNDING_YEAR } from '@/core/constants';
 
-import { formatHtmlDateString } from '@/core/ui/utils';
+import { formatHtmlDateString } from '@/utils';
 
 import { TableRow, TableCell } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-import { TableCellField } from '@/core/form/components/table-cell-field';
-import { FormInputSelect } from '@/core/form/components/form-input-select';
+import { TableCellField } from '@/components/form/table-cell-field';
+import { FormInputSelect } from '@/components/form/form-input-select';
 
 import { MembershipSearchInput } from './membership-search-input';
 import { AmountPaidDisplay } from './amount-paid-display';

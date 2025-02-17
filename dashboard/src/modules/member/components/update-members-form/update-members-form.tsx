@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { FormSectionHeader } from '@/core/form/components/form-section';
+import { FormSectionHeader } from '@/components/form/form-section';
 
 import { UpdateMemberForm } from './update-member-form';
 import { AddMemberButton } from '../add-member-button';

@@ -12,7 +12,7 @@ import { SortOrder } from '@/types';
 import { PaymentMethod } from '../types';
 import { MembershipType } from '@/modules/membership/types';
 
-import { paginationParsers } from '@/core/data/state';
+import { paginationParsers } from '@/core/data/hooks';
 
 const parsers = {
   year: parseAsInteger.withDefault(new Date().getFullYear()),

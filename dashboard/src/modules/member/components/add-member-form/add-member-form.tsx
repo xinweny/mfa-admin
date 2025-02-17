@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation';
 
 import { handleError } from '@/core/api/utils';
 
-import { DashboardForm } from '@/core/form/components/dashboard-form';
+import { DashboardForm } from '@/components/form/dashboard-form';
 import { MemberFormFields, MemberSchema, memberSchemaResolver } from '../member-form-fields';
-import { FormSection, FormSectionHeader } from '@/core/form/components/form-section';
+import { FormSection, FormSectionHeader } from '@/components/form/form-section';
 import { createMember } from '../../actions';
 
 interface AddMemberFormProps {

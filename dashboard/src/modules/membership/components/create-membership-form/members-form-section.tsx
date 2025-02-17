@@ -16,7 +16,7 @@ import {
   FormSectionHeader,
   FormSectionContent,
   FormSectionHeaderButton,
-} from '@/core/form/components/form-section';
+} from '@/components/form/form-section';
 
 import { MemberFormFields } from '@/modules/member/components/member-form-fields';
 

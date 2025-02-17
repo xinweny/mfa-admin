@@ -16,8 +16,8 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 
-import { DashboardForm } from '@/core/form/components/dashboard-form';
-import { FormSection } from '@/core/form/components/form-section';
+import { DashboardForm } from '@/components/form/dashboard-form';
+import { FormSection } from '@/components/form/form-section';
 import { CreateDueFormRow } from './create-due-form-row';
 
 import { createDues } from '../../actions';

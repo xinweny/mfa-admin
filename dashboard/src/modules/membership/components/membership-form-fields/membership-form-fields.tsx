@@ -1,10 +1,10 @@
 import { membershipTypeLabels } from '../../types';
 
-import { FormSectionContent } from '@/core/form/components/form-section';
-import { DashboardFormField } from '@/core/form/components/dashboard-form-field';
-import { FormInputSelect } from '@/core/form/components/form-input-select';
-import { FormInputDate } from '@/core/form/components/form-input-date';
-import { FormInputSwitch } from '@/core/form/components/form-input-switch';
+import { FormSectionContent } from '@/components/form/form-section';
+import { DashboardFormField } from '@/components/form/dashboard-form-field';
+import { FormInputSelect } from '@/components/form/form-input-select';
+import { FormInputDate } from '@/components/form/form-input-date';
+import { FormInputSwitch } from '@/components/form/form-input-switch';
 
 interface MembershipFormFieldsProps {
   withActive?: boolean;
