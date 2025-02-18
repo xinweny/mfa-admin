@@ -9,9 +9,7 @@ using Exchange;
 using BoardMember;
 
 public static class MfaApiModules {
-    public static void AddMfaApiModules(this IServiceCollection services, IConfiguration Configuration) {
-        services.AddAuthModule(Configuration);
-        
+    public static void AddMfaApiModules(this IServiceCollection services) {        
         services.AddAddressModule();
         services.AddDueModule();
         services.AddMembershipModule();

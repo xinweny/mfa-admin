@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using MfaApi.Database;
 using MfaApi.Middleware;
 using MfaApi.Modules;
+using MfaApi.Modules.Auth;
 
 namespace MfaApi;
 
@@ -41,9 +42,11 @@ public class Startup {
             });
         });
 
-        services.AddControllers();
+        services.AddAuthModule(Configuration);
 
-        services.AddMfaApiModules(Configuration);
+        services.AddControllers();
+        
+        services.AddMfaApiModules();
     }
 
     public void Configure(IApplicationBuilder app) {
@@ -70,7 +73,9 @@ public class Startup {
         app.UseAuthorization();
         
         app.UseEndpoints(endpoints => {
-            endpoints.MapControllers();
+            endpoints
+                .MapControllers()
+                .RequireAuthorization();
         });
     }
 }
