@@ -9,8 +9,8 @@ public static class AuthModule {
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
             .AddJwtBearer(options => {
-                options.Authority = Configuration.GetValue<string>("AUTH0_AUTHORITY") ?? Configuration["Auth0:Authority"];
-                options.Audience = Configuration.GetValue<string>("AUTH0_AUDIENCE")?? Configuration["Auth0:Audience"];
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:Audience"];
             });
 
         services.AddAuthorization();

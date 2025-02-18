@@ -20,10 +20,5 @@ COPY --from=build /src/out ./
 
 EXPOSE 8080
 
-ENV PGSQL_CONNECTION_STRING=""
-ENV AUTH0_AUTHORITY=""
-ENV AUTH0_AUDIENCE=""
-ENV MFA_CLIENT_URL=""
-
 # Start the application
 ENTRYPOINT ["dotnet", "MfaApi.dll"]
