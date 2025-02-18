@@ -67,12 +67,16 @@ public class Startup {
         app.UseCors();
 
         app.UseAuthentication();
-        app.UseAuthorization();
+            app.UseAuthorization();
         
-        app.UseMiddleware<IPWhitelistMiddleware>();
-
         app.UseEndpoints(endpoints => {
-            endpoints.MapControllers();
+            if (Environment.IsDevelopment()) {
+                endpoints.MapControllers();
+            } else {
+                endpoints
+                    .MapControllers()
+                    .RequireAuthorization();
+            }
         });
     }
 }

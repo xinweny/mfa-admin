@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using MfaApi.Core.Contracts;
 using MfaApi.Core.Pagination;
@@ -7,6 +8,7 @@ namespace MfaApi.Modules.Member;
 
 [ApiController]
 [Route("api/members")]
+[Authorize]
 
 public class MemberController: ControllerBase {
     private readonly IMemberService _memberService;
