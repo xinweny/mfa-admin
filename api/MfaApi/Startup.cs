@@ -67,16 +67,10 @@ public class Startup {
         app.UseCors();
 
         app.UseAuthentication();
-            app.UseAuthorization();
+        app.UseAuthorization();
         
         app.UseEndpoints(endpoints => {
-            if (Environment.IsDevelopment()) {
-                endpoints.MapControllers();
-            } else {
-                endpoints
-                    .MapControllers()
-                    .RequireAuthorization();
-            }
+            endpoints.MapControllers();
         });
     }
 }
