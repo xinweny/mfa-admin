@@ -25,7 +25,5 @@ export const updateMember = async (
   if (!res.ok) throw new ErrorResponse(data);
 
   revalidatePath('/dashboard/memberships');
-  revalidatePath(`/dashboard/memberships/${membershipId}`);
   revalidatePath('/dashboard/members');
-  revalidatePath(`/dashboard/members/${id}`);
 };

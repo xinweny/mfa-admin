@@ -22,5 +22,4 @@ export const createMembership = async (req: CreateMembershipRequest) => {
   if (!res.ok) throw new ErrorResponse(data);
 
   revalidatePath('/dashboard/memberships');
-  redirect(`/dashboard/memberships/${data.data.id}`);
 };

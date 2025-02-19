@@ -21,5 +21,4 @@ export const updateMembership = async (id: string, req: UpdateMembershipRequest)
   if (!res.ok) throw new ErrorResponse(data);
 
   revalidatePath('/dashboard/memberships');
-  revalidatePath(`/dashboard/memberships/${id}`);
 };
